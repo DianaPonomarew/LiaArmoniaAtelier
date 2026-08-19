@@ -1676,7 +1676,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border-color:#cfc5ba;
 }
 
-/* Visual Atelier repositioning */
+/* Wedding Atelier repositioning */
 .visual-atelier{
   --ink:#efe5d4;
   --paper:#070706;
@@ -1841,7 +1841,31 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   color:rgba(239,229,212,.58);
 }
 .visual-atelier .cover-dragon{
-  background-image:url('assets/world-dragon-lobby.jpg');
+  background-image:none;
+}
+.visual-atelier .video-cover{
+  overflow:hidden;
+}
+.visual-atelier .video-cover video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.58) contrast(1.04) saturate(.86);
+  transform:scale(1.02);
+  transition:transform 1.2s ease, filter 1.2s ease;
+  z-index:0;
+}
+.visual-atelier .video-cover:hover video{
+  transform:scale(1.06);
+  filter:brightness(.72) contrast(1.05) saturate(.92);
+}
+.visual-atelier .video-cover span,
+.visual-atelier .video-cover b,
+.visual-atelier .video-cover small{
+  position:relative;
+  z-index:2;
 }
 .visual-atelier .atelier-page{
   padding:150px 5vw 180px;
@@ -1896,6 +1920,213 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
 .visual-atelier .inquiries-minimal a{
   color:#efe5d4;
   border-bottom-color:rgba(239,229,212,.28);
+}
+.visual-atelier .inquiry-atelier{
+  display:block;
+  min-height:100vh;
+  padding:130px 5vw 150px;
+  background:#070706;
+  color:#efe5d4;
+}
+.visual-atelier .inquiry-atelier h2{
+  max-width:920px;
+  margin:24px 0 18px;
+  font-family:var(--display);
+  font-size:clamp(48px,7vw,112px);
+  font-weight:300;
+  line-height:.86;
+  color:#efe5d4;
+}
+.visual-atelier .inquiry-lede{
+  max-width:560px;
+  margin:0 0 70px;
+  color:rgba(239,229,212,.62);
+  font-size:15px;
+  line-height:1.8;
+}
+.inquiry-columns{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  background:rgba(239,229,212,.14);
+  border:1px solid rgba(239,229,212,.14);
+  align-items:start;
+}
+.inquiry-panel{
+  background:#0d0c0b;
+  color:#efe5d4;
+}
+.inquiry-panel summary{
+  position:relative;
+  min-height:330px;
+  padding:34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  list-style:none;
+  cursor:pointer;
+}
+.inquiry-panel summary::-webkit-details-marker{
+  display:none;
+}
+.inquiry-panel summary::after{
+  content:"Discover";
+  display:block;
+  margin-top:34px;
+  padding-top:18px;
+  border-top:1px solid rgba(239,229,212,.16);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+  color:rgba(239,229,212,.52);
+}
+.inquiry-panel[open] summary::after{
+  content:"Close";
+}
+.inquiry-panel summary span{
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+  color:rgba(239,229,212,.54);
+}
+.inquiry-panel summary h3{
+  margin:54px 0 14px;
+  font-family:var(--display);
+  font-size:clamp(38px,4vw,62px);
+  font-weight:300;
+  line-height:.88;
+  color:#efe5d4;
+}
+.inquiry-panel summary p{
+  max-width:320px;
+  margin:0;
+  color:rgba(239,229,212,.6);
+  line-height:1.7;
+}
+.atelier-inquiry-form{
+  padding:0 34px 34px;
+  background:#0d0c0b;
+  color:#efe5d4;
+}
+.atelier-inquiry-form label,
+.atelier-inquiry-form legend{
+  display:block;
+  margin-top:18px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:9px;
+  color:rgba(239,229,212,.58);
+}
+.atelier-inquiry-form input,
+.atelier-inquiry-form select,
+.atelier-inquiry-form textarea{
+  width:100%;
+  margin-top:9px;
+  border:0;
+  border-bottom:1px solid rgba(239,229,212,.22);
+  border-radius:0;
+  background:transparent;
+  color:#efe5d4;
+  padding:12px 0;
+  font:300 14px/1.6 var(--sans);
+  outline:none;
+}
+.atelier-inquiry-form select option{
+  color:#090807;
+}
+.atelier-inquiry-form textarea{
+  min-height:116px;
+  border:1px solid rgba(239,229,212,.16);
+  padding:14px;
+  resize:vertical;
+}
+.atelier-inquiry-form input:focus,
+.atelier-inquiry-form select:focus,
+.atelier-inquiry-form textarea:focus{
+  border-color:rgba(239,229,212,.72);
+}
+.atelier-inquiry-form fieldset{
+  margin:22px 0 0;
+  padding:0;
+  border:0;
+}
+.style-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.style-options label{
+  margin:0;
+}
+.style-options input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+.style-options span{
+  display:inline-flex;
+  align-items:center;
+  min-height:32px;
+  border:1px solid rgba(239,229,212,.18);
+  padding:8px 11px;
+  color:rgba(239,229,212,.64);
+  text-transform:none;
+  letter-spacing:0;
+  font-size:12px;
+  line-height:1;
+  cursor:pointer;
+}
+.style-options input:checked+span{
+  background:#efe5d4;
+  color:#070706;
+  border-color:#efe5d4;
+}
+.atelier-inquiry-form .agree{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  text-transform:none;
+  letter-spacing:0;
+  font-size:12px;
+  line-height:1.55;
+  color:rgba(239,229,212,.58);
+}
+.atelier-inquiry-form .agree input{
+  width:auto;
+  margin:2px 0 0;
+}
+.atelier-inquiry-form button{
+  margin-top:26px;
+  width:100%;
+  border:1px solid rgba(239,229,212,.28);
+  background:#efe5d4;
+  color:#070706;
+  padding:15px 18px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:10px;
+  cursor:pointer;
+}
+.form-status{
+  display:block;
+  min-height:18px;
+  margin-top:14px;
+  font-style:normal;
+  color:rgba(239,229,212,.55);
+  font-size:12px;
+}
+.hidden-field{
+  display:none!important;
+}
+.inquiry-location{
+  display:block;
+  margin-top:54px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+  color:rgba(239,229,212,.48);
 }
 .visual-atelier footer{
   background:#070706;
@@ -1993,9 +2224,20 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   }
   .visual-atelier .atelier-page,
   .visual-atelier .worlds-page,
-  .visual-atelier .inquiries-minimal{
+  .visual-atelier .inquiries-minimal,
+  .visual-atelier .inquiry-atelier{
     padding-left:5vw;
     padding-right:5vw;
+  }
+  .inquiry-columns{
+    grid-template-columns:1fr;
+  }
+  .inquiry-panel summary{
+    min-height:250px;
+    padding:28px 22px;
+  }
+  .atelier-inquiry-form{
+    padding:0 22px 28px;
   }
   .visual-atelier footer{
     grid-template-columns:1fr;
@@ -2069,7 +2311,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   }
 }
 
-/* Dark editorial pages for the Visual Atelier direction */
+/* Dark editorial pages for the Wedding Atelier direction */
 .legal-page,
 .journal-detail{
   --display:"Cormorant Garamond",serif;
@@ -2150,6 +2392,14 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
 .journal-detail .detail-grid img{
   background:#12100e;
 }
+.journal-detail .detail-grid video{
+  width:100%;
+  height:min(90vh,920px);
+  object-fit:cover;
+  display:block;
+  background:#070706;
+  filter:saturate(.84) contrast(1.06) brightness(.86);
+}
 .journal-detail footer{
   background:#070706;
   border-top:1px solid rgba(239,229,212,.12);
@@ -2184,5 +2434,173 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   .journal-detail .detail-grid{
     grid-template-columns:1fr;
     gap:10px;
+  }
+}
+
+/* Final inquiry accordions */
+.visual-atelier .inquiry-columns{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:0!important;
+  align-items:start!important;
+  background:transparent!important;
+  border:1px solid rgba(239,229,212,.18)!important;
+  box-shadow:0 24px 90px rgba(0,0,0,.28)!important;
+  position:relative!important;
+  margin-bottom:0!important;
+}
+.visual-atelier .inquiry-panel{
+  display:contents!important;
+  background:#080807!important;
+  color:#efe5d4!important;
+  border:0!important;
+}
+.visual-atelier .inquiry-panel summary{
+  order:1!important;
+  min-height:352px!important;
+  height:100%!important;
+  padding:40px 42px 38px!important;
+  display:grid!important;
+  grid-template-rows:auto 1fr auto auto!important;
+  align-items:start!important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(239,229,212,.08),transparent 34%),
+    linear-gradient(145deg,rgba(239,229,212,.035),rgba(239,229,212,.012) 42%,rgba(7,7,6,.94)),
+    #0b0a09!important;
+  color:#efe5d4!important;
+  list-style:none!important;
+  cursor:pointer!important;
+  outline:none!important;
+  border-right:1px solid rgba(239,229,212,.16)!important;
+  transition:background .35s ease, color .35s ease;
+}
+.visual-atelier .inquiry-panel:nth-of-type(3) summary{
+  border-right:0!important;
+}
+.visual-atelier .inquiry-panel summary:hover{
+  background:
+    radial-gradient(circle at 18% 0%,rgba(239,229,212,.13),transparent 36%),
+    linear-gradient(145deg,rgba(239,229,212,.055),rgba(239,229,212,.018) 42%,rgba(7,7,6,.92)),
+    #0b0a09!important;
+}
+.visual-atelier .inquiry-panel summary::-webkit-details-marker,
+.visual-atelier .inquiry-panel summary::marker{
+  display:none!important;
+  content:""!important;
+}
+.visual-atelier .inquiry-panel summary span,
+.visual-atelier .inquiry-panel summary h3,
+.visual-atelier .inquiry-panel summary p{
+  color:inherit!important;
+}
+.visual-atelier .inquiry-panel summary span{
+  display:block!important;
+  font-family:var(--sans)!important;
+  text-transform:uppercase!important;
+  letter-spacing:.26em!important;
+  font-size:10px!important;
+  line-height:1.45!important;
+  color:rgba(225,199,163,.9)!important;
+}
+.visual-atelier .inquiry-panel summary h3{
+  align-self:end!important;
+  margin:74px 0 16px!important;
+  font-family:var(--display)!important;
+  font-size:clamp(38px,3.6vw,58px)!important;
+  font-weight:300!important;
+  line-height:.9!important;
+  color:#efe5d4!important;
+  text-shadow:0 1px 18px rgba(0,0,0,.28)!important;
+}
+.visual-atelier .inquiry-panel summary p{
+  max-width:330px!important;
+  min-height:74px!important;
+  margin:0!important;
+  font-family:var(--sans)!important;
+  font-size:13px!important;
+  line-height:1.7!important;
+  color:rgba(239,229,212,.74)!important;
+}
+.visual-atelier .inquiry-panel summary::after{
+  content:"Discover"!important;
+  display:block!important;
+  margin-top:30px!important;
+  padding-top:18px!important;
+  border-top:1px solid rgba(239,229,212,.2)!important;
+  font-family:var(--sans)!important;
+  text-transform:uppercase!important;
+  letter-spacing:.24em!important;
+  font-size:10px!important;
+  color:#efe5d4!important;
+}
+.visual-atelier .inquiry-panel[open] summary{
+  min-height:352px!important;
+  border-bottom:1px solid rgba(239,229,212,.14)!important;
+  background:
+    linear-gradient(145deg,rgba(239,229,212,.075),rgba(7,7,6,.93)),
+    #0b0a09!important;
+}
+.visual-atelier .inquiry-panel[open] summary::after{
+  content:"Close"!important;
+  color:rgba(239,229,212,.58)!important;
+}
+.visual-atelier .inquiry-panel .atelier-inquiry-form{
+  order:2!important;
+  grid-column:1/-1!important;
+  width:100%!important;
+  display:none!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:24px 58px!important;
+  max-width:980px!important;
+  margin:74px auto 0!important;
+  padding:0 0 8px!important;
+  background:transparent!important;
+  color:#efe5d4!important;
+}
+.visual-atelier .inquiry-panel[open] .atelier-inquiry-form{
+  display:grid!important;
+}
+.visual-atelier .inquiry-panel .atelier-inquiry-form label,
+.visual-atelier .inquiry-panel .atelier-inquiry-form legend{
+  color:rgba(239,229,212,.7)!important;
+}
+.visual-atelier .inquiry-panel .atelier-inquiry-form .wide,
+.visual-atelier .inquiry-panel .atelier-inquiry-form fieldset,
+.visual-atelier .inquiry-panel .atelier-inquiry-form .agree,
+.visual-atelier .inquiry-panel .atelier-inquiry-form button,
+.visual-atelier .inquiry-panel .atelier-inquiry-form .form-status{
+  grid-column:1/-1!important;
+}
+
+@media(max-width:850px){
+  .visual-atelier .inquiry-columns{
+    grid-template-columns:1fr!important;
+  }
+  .visual-atelier .inquiry-panel{
+    border-right:0!important;
+    border-bottom:1px solid rgba(239,229,212,.16)!important;
+  }
+  .visual-atelier .inquiry-panel summary{
+    order:0!important;
+    min-height:230px!important;
+    padding:28px 22px!important;
+    border-right:0!important;
+  }
+  .visual-atelier .inquiry-panel summary h3{
+    margin-top:44px!important;
+  }
+  .visual-atelier .inquiry-panel summary p{
+    min-height:0!important;
+  }
+  .visual-atelier .inquiry-panel .atelier-inquiry-form{
+    position:static!important;
+    grid-column:auto!important;
+    width:auto!important;
+    display:none!important;
+    margin:0!important;
+    padding:0 22px 30px!important;
+  }
+  .visual-atelier .inquiry-panel[open] .atelier-inquiry-form{
+    display:block!important;
   }
 }

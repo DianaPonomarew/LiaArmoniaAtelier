@@ -54,3 +54,27 @@ if (venuePanorama) {
   showRoom(0);
   restartRoomFilm();
 }
+
+document.querySelectorAll('.atelier-inquiry-form').forEach(form => {
+  form.addEventListener('submit', event => {
+    const status = form.querySelector('.form-status');
+    const styleOptions = form.querySelectorAll('input[name="style"]');
+    if (styleOptions.length && ![...styleOptions].some(option => option.checked)) {
+      event.preventDefault();
+      if (status) status.textContent = 'Please choose at least one style direction.';
+      return;
+    }
+    const button = form.querySelector('button[type="submit"]');
+    if (button) button.textContent = 'Sending...';
+    if (status) status.textContent = 'Your note is being sent.';
+  });
+});
+
+document.querySelectorAll('.inquiry-panel').forEach(panel => {
+  panel.addEventListener('toggle', () => {
+    if (!panel.open) return;
+    document.querySelectorAll('.inquiry-panel[open]').forEach(openPanel => {
+      if (openPanel !== panel) openPanel.open = false;
+    });
+  });
+});

@@ -1,6 +1,6 @@
-# Lia Armonia - Visual Atelier Website
+﻿# Lia Armonia - Wedding Atelier Website
 
-Launch-ready static website for LIA ARMONIA | Visual Atelier.
+Launch-ready static website for LIA ARMONIA | Wedding Atelier.
 
 ## Included
 
@@ -8,6 +8,7 @@ Launch-ready static website for LIA ARMONIA | Visual Atelier.
 - Worlds section with cinematic hotel and brand world entries
 - Atelier section with concise positioning and commission starting points
 - Minimal inquiries section using `atelier@liaarmonia.com`
+- Netlify-ready inquiries for couples, venues and vendors
 - World detail pages with optimized image galleries and supplied video assets
 - Contact, Privacy and Terms pages
 - Optimized image assets, favicon and SEO page titles
@@ -22,4 +23,5 @@ Launch-ready static website for LIA ARMONIA | Visual Atelier.
 
 ## Direction
 
-The site is intentionally not a shop, package menu or planner funnel. It presents LIA ARMONIA as a private visual atelier for hotels, brands and private celebrations. Scope, pricing, timing and deliverables are handled privately after fit is clear.
+The site is intentionally not a shop, package menu or planner funnel. It presents LIA ARMONIA as a private Wedding Atelier for cinematic wedding worlds. Couple, venue and vendor inquiries are filtered separately. Scope, timing and deliverables are handled privately after fit is clear.
+
