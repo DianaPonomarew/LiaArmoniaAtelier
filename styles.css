@@ -2604,3 +2604,74 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
     display:block!important;
   }
 }
+
+/* Mobile editorial polish */
+@media(max-width:850px){
+  .visual-atelier .worlds-page{
+    padding-top:104px!important;
+    padding-bottom:128px!important;
+  }
+  .visual-atelier .worlds-grid{
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+    background:transparent!important;
+    border:0!important;
+  }
+  .visual-atelier .journal-cover{
+    min-height:470px!important;
+    padding:30px 28px!important;
+    border:1px solid rgba(239,229,212,.14)!important;
+  }
+  .visual-atelier .journal-cover span{
+    font-size:10px!important;
+    letter-spacing:.24em!important;
+    color:rgba(239,229,212,.72)!important;
+  }
+  .visual-atelier .journal-cover b{
+    max-width:280px!important;
+    font-size:clamp(38px,12vw,54px)!important;
+    line-height:.92!important;
+  }
+  .visual-atelier .journal-cover small{
+    max-width:270px!important;
+    font-size:9px!important;
+    letter-spacing:.17em!important;
+    color:rgba(239,229,212,.66)!important;
+  }
+  .visual-atelier .video-cover video{
+    filter:brightness(.62) contrast(1.05) saturate(.88)!important;
+  }
+  .visual-atelier .gallery-hero-copy p{
+    max-width:320px!important;
+  }
+  .visual-atelier .atelier-statement>p{
+    font-size:clamp(36px,11vw,58px)!important;
+    line-height:.92!important;
+  }
+  .visual-atelier .atelier-body{
+    font-size:14px!important;
+    line-height:1.85!important;
+    margin-bottom:54px!important;
+  }
+  .visual-atelier .atelier-steps{
+    gap:14px!important;
+    background:transparent!important;
+  }
+  .visual-atelier .atelier-steps article{
+    border:1px solid rgba(239,229,212,.14)!important;
+  }
+  .visual-atelier .inquiry-atelier h2{
+    font-size:clamp(42px,13vw,68px)!important;
+    line-height:.9!important;
+  }
+  .visual-atelier .inquiry-lede{
+    margin-bottom:44px!important;
+    font-size:14px!important;
+  }
+}
+
+@media(max-width:520px){
+  .visual-atelier .journal-cover{
+    min-height:430px!important;
+  }
+}
