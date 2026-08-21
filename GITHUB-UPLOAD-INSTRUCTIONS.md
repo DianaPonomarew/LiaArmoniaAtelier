@@ -16,5 +16,5 @@ Instagram is linked to:
 
 - https://www.instagram.com/lia_armonia/
 
-Current public direction: LIA ARMONIA | Wedding Atelier. Cinematic worlds for weddings worth publishing. Based in Orange County, California â€” available worldwide.
+Current public direction: LIA ARMONIA | Wedding Atelier. Cinematic worlds for weddings worth publishing. Based in Orange County, California - available worldwide.
 

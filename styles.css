@@ -2126,7 +2126,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   text-transform:uppercase;
   letter-spacing:.18em;
   font-size:10px;
-  color:rgba(239,229,212,.48);
+  color:rgba(239,229,212,.78);
 }
 .visual-atelier footer{
   background:#070706;
@@ -2673,5 +2673,255 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
 @media(max-width:520px){
   .visual-atelier .journal-cover{
     min-height:430px!important;
+  }
+}
+
+/* Final luxury polish: consistent type, clearer mobile media, icons and calmer detail pages */
+.visual-atelier{
+  --display:"Cormorant Garamond", Georgia, serif;
+  --sans:"Inter", Arial, sans-serif;
+}
+.visual-atelier body,
+.visual-atelier .atelier-body,
+.visual-atelier .atelier-steps p,
+.visual-atelier .inquiry-lede,
+.visual-atelier .inquiry-panel summary p,
+.visual-atelier .atelier-inquiry-form input,
+.visual-atelier .atelier-inquiry-form select,
+.visual-atelier .atelier-inquiry-form textarea,
+.legal-page .legal-copy p,
+.legal-page .legal-aside,
+.journal-detail p{
+  font-family:var(--sans)!important;
+  font-weight:300!important;
+}
+.visual-atelier .kicker,
+.visual-atelier .eyebrow,
+.visual-atelier .navlinks,
+.visual-atelier .journal-cover span,
+.visual-atelier .journal-cover small,
+.visual-atelier .atelier-statement small,
+.visual-atelier .inquiry-panel summary span,
+.visual-atelier .inquiry-panel summary::after,
+.visual-atelier .atelier-inquiry-form label,
+.visual-atelier .atelier-inquiry-form legend,
+.visual-atelier footer>div:last-child,
+.journal-detail nav a,
+.journal-detail .eyebrow{
+  font-family:var(--sans)!important;
+  font-weight:400!important;
+  letter-spacing:.22em!important;
+}
+.visual-atelier .gallery-hero-copy h1,
+.visual-atelier .journal-cover b,
+.visual-atelier .atelier-statement>p,
+.visual-atelier .atelier-steps h3,
+.visual-atelier .inquiry-atelier h2,
+.visual-atelier .inquiry-panel summary h3,
+.visual-atelier footer>p,
+.legal-page .legal-hero h1,
+.legal-page .legal-copy h2,
+.journal-detail h1,
+.world-title h1{
+  font-family:var(--display)!important;
+  font-weight:300!important;
+}
+.contact-icon{
+  width:14px;
+  height:14px;
+  display:inline-block;
+  flex:0 0 auto;
+  background:currentColor;
+  opacity:.86;
+  vertical-align:-2px;
+}
+.mail-icon,
+.visual-atelier a[href^="mailto:"]::before,
+.legal-page a[href^="mailto:"]::before,
+.journal-detail a[href^="mailto:"]::before{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.instagram-icon,
+.visual-atelier a[href*="instagram.com"]::before,
+.legal-page a[href*="instagram.com"]::before{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='20' x='2' y='2' rx='5' ry='5'/%3E%3Cpath d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/%3E%3Cline x1='17.5' x2='17.51' y1='6.5' y2='6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='20' x='2' y='2' rx='5' ry='5'/%3E%3Cpath d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/%3E%3Cline x1='17.5' x2='17.51' y1='6.5' y2='6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.visual-atelier a[href^="mailto:"]::before,
+.visual-atelier a[href*="instagram.com"]::before,
+.legal-page a[href^="mailto:"]::before,
+.legal-page a[href*="instagram.com"]::before,
+.journal-detail a[href^="mailto:"]::before{
+  content:"";
+  width:13px;
+  height:13px;
+  display:inline-block;
+  background:currentColor;
+  margin-right:8px;
+  vertical-align:-2px;
+}
+.icon-link,
+.footer-icon-link,
+.legal-aside a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.icon-link::before,
+.footer-icon-link::before{
+  content:none!important;
+}
+.legal-page .legal-aside{
+  color:rgba(239,229,212,.72)!important;
+  line-height:2.05!important;
+}
+.visual-atelier footer{
+  position:relative!important;
+  z-index:5!important;
+  align-items:center!important;
+}
+.visual-atelier footer>p,
+.visual-atelier footer>div,
+.visual-atelier footer a{
+  color:rgba(239,229,212,.82)!important;
+}
+.visual-atelier footer>p strong{
+  color:#efe5d4!important;
+}
+.visual-atelier .venue-panorama{
+  filter:saturate(.86) contrast(1.02) brightness(.86)!important;
+}
+.visual-atelier .veil{
+  background:linear-gradient(90deg,rgba(7,7,6,.76),rgba(7,7,6,.38) 50%,rgba(7,7,6,.04)),linear-gradient(0deg,rgba(7,7,6,.48),rgba(7,7,6,.04) 58%)!important;
+}
+.visual-atelier .journal-cover::before{
+  background:linear-gradient(180deg,rgba(7,7,6,.02),rgba(7,7,6,.64))!important;
+}
+.visual-atelier .video-cover video{
+  filter:brightness(.74) contrast(1.04) saturate(.9)!important;
+}
+.journal-detail .detail-video-hero{
+  width:min(1120px,90vw)!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:126px auto 78px!important;
+  position:relative!important;
+  display:block!important;
+  overflow:hidden!important;
+  background:#070706!important;
+}
+.journal-detail .detail-video-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(7,7,6,.03),rgba(7,7,6,.58));
+  pointer-events:none;
+}
+.journal-detail .detail-video-hero video{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:78vh!important;
+  aspect-ratio:16/10!important;
+  object-fit:cover!important;
+  filter:brightness(.88) contrast(1.04) saturate(.9)!important;
+}
+.journal-detail .detail-video-hero>div{
+  position:absolute!important;
+  left:36px!important;
+  right:36px!important;
+  bottom:32px!important;
+  z-index:2!important;
+}
+.world-title{
+  padding:126px 5vw 34px!important;
+}
+.world-title h1{
+  font-size:clamp(54px,8vw,112px)!important;
+}
+.world-video{
+  width:min(1120px,90vw)!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0 auto 76px!important;
+  background:#070706!important;
+}
+.world-video video,
+.world-video img{
+  width:100%!important;
+  height:auto!important;
+  max-height:78vh!important;
+  aspect-ratio:16/10!important;
+  object-fit:cover!important;
+  filter:brightness(.88) contrast(1.04) saturate(.9)!important;
+}
+.journal-detail .detail-grid img{
+  filter:brightness(.96) contrast(1.02) saturate(.92)!important;
+}
+@media(max-width:850px){
+  .visual-atelier .venue-panorama{
+    filter:saturate(.92) contrast(1.03) brightness(.95)!important;
+    background-position:50% center!important;
+  }
+  .visual-atelier .veil{
+    background:linear-gradient(90deg,rgba(7,7,6,.68),rgba(7,7,6,.34) 56%,rgba(7,7,6,.08)),linear-gradient(0deg,rgba(7,7,6,.46),rgba(7,7,6,.04) 58%)!important;
+  }
+  .visual-atelier .journal-cover{
+    min-height:450px!important;
+    margin-bottom:18px!important;
+  }
+  .visual-atelier .video-cover video{
+    filter:brightness(.84) contrast(1.04) saturate(.92)!important;
+  }
+  .visual-atelier .journal-cover::before{
+    background:linear-gradient(180deg,rgba(7,7,6,.02),rgba(7,7,6,.56))!important;
+  }
+  .journal-detail .detail-video-hero,
+  .world-video{
+    width:90vw!important;
+    margin:96px auto 54px!important;
+  }
+  .journal-detail .detail-video-hero video,
+  .world-video video,
+  .world-video img{
+    max-height:none!important;
+    aspect-ratio:4/5!important;
+  }
+  .journal-detail .detail-video-hero>div{
+    left:22px!important;
+    right:22px!important;
+    bottom:22px!important;
+  }
+  .journal-detail h1,
+  .world-title h1{
+    font-size:clamp(44px,13vw,72px)!important;
+  }
+  .visual-atelier footer{
+    margin-top:0!important;
+    padding-top:54px!important;
+  }
+  .visual-atelier .gallery-hero-copy{
+    bottom:28vh!important;
+    max-width:340px!important;
+  }
+  .visual-atelier .gallery-hero-copy h1{
+    font-size:clamp(48px,16vw,72px)!important;
+    letter-spacing:.12em!important;
+  }
+  .visual-atelier .gallery-hero-copy small{
+    max-width:300px!important;
+    white-space:normal!important;
+    line-height:1.9!important;
+    color:rgba(239,229,212,.78)!important;
+  }
+  .visual-atelier .room-hotspots{
+    bottom:3.2vh!important;
+  }
+  .visual-atelier .inquiry-atelier{
+    padding-bottom:92px!important;
+  }
+  .visual-atelier .inquiry-panel[open] .atelier-inquiry-form{
+    padding-bottom:42px!important;
   }
 }
