@@ -78,6 +78,7 @@ const conciergePrev = document.querySelector('[data-concierge-prev]');
 const conciergeNext = document.querySelector('[data-concierge-next]');
 const conciergeSubmit = document.querySelector('[data-concierge-submit]');
 const conciergeForm = document.querySelector('.one-question-concierge');
+const conciergeActions = document.querySelector('.concierge-actions');
 let conciergeIndex = 0;
 
 function selectedValues(name) {
@@ -159,6 +160,7 @@ function setConciergeStep(index) {
   if (conciergePrev) conciergePrev.style.visibility = conciergeIndex === 0 ? 'hidden' : 'visible';
   if (conciergeNext) conciergeNext.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'none' : 'inline-flex';
   if (conciergeSubmit) conciergeSubmit.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'inline-flex' : 'none';
+  conciergeActions?.classList.toggle('is-final-step', conciergeIndex === conciergeQuestions.length - 1);
 }
 
 function canLeaveConciergeStep() {
@@ -234,11 +236,12 @@ conciergeForm?.addEventListener('change', event => {
   if (target.name === 'environments' || target.name === 'support') updatePricingGuidance();
 });
 conciergeForm?.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!canLeaveConciergeStep()) return;
   const invalidGroupIndex = conciergeQuestions.findIndex(question => {
     return [...question.querySelectorAll('[data-required-group]')].some(group => !group.querySelector('input:checked'));
   });
   if (invalidGroupIndex >= 0) {
-    event.preventDefault();
     setConciergeStep(invalidGroupIndex);
     canLeaveConciergeStep();
     return;
@@ -260,6 +263,42 @@ conciergeForm?.addEventListener('submit', event => {
     conciergeSubmit.disabled = true;
     conciergeSubmit.textContent = 'Sending request...';
   }
+  const formData = new FormData(conciergeForm);
+  const payload = {};
+  formData.forEach((value, key) => {
+    if (payload[key]) {
+      payload[key] = Array.isArray(payload[key]) ? [...payload[key], value] : [payload[key], value];
+    } else {
+      payload[key] = value;
+    }
+  });
+  payload.form_name = 'private-design-consultation';
+  fetch('/api/private-design-consultation', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+    .then(response => {
+      if (!response.ok) throw new Error('Submission failed');
+      return response.json().catch(() => ({}));
+    })
+    .then(result => {
+      const confirmedInquiryId = result.inquiryId || inquiryId;
+      conciergeForm.classList.add('is-submitted');
+      const success = conciergeForm.querySelector('[data-concierge-success]');
+      const reference = conciergeForm.querySelector('[data-success-reference]');
+      if (reference) reference.textContent = `Inquiry reference: ${confirmedInquiryId}`;
+      if (success) success.hidden = false;
+      success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    })
+    .catch(() => {
+      if (conciergeSubmit) {
+        conciergeSubmit.disabled = false;
+        conciergeSubmit.textContent = 'Try again';
+      }
+      const note = conciergeForm.querySelector('.concierge-submit-note');
+      if (note) note.textContent = 'The request could not be sent. Please email atelier@liaarmonia.com and include your answers.';
+    });
 });
 updatePricingGuidance();
 setConciergeStep(0);

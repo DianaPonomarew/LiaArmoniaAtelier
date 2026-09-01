@@ -45,7 +45,7 @@
       <button type="button" data-concierge-step="2">03 Design</button>
       <button type="button" data-concierge-step="3">04 Consultation</button>
     </div>
-    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="/private-inquiry-received.html" method="POST" data-netlify="true" netlify-honeypot="website">
+    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="/api/private-design-consultation" method="POST">
       <input type="hidden" name="form-name" value="private-design-consultation">
       <input type="hidden" name="subject" value="NEW PRIVATE DESIGN INQUIRY">
       <input type="hidden" name="inquiry_id" value="" data-inquiry-id>
@@ -193,7 +193,13 @@
         <button type="button" data-concierge-next>Continue</button>
         <button type="submit" data-concierge-submit>Send consultation request</button>
       </div>
-      <p class="wide">Your complete inquiry is stored before the studio notification is sent. Diana reviews every submission personally and will confirm your requested time or suggest an alternative by email.</p>
+      <div class="concierge-success wide" data-concierge-success hidden>
+        <span>Request submitted</span>
+        <h3>Your private design inquiry has been received.</h3>
+        <p>Diana will review your answers personally and reply from atelier@liaarmonia.com with either a confirmation for your requested consultation time or a refined alternative.</p>
+        <small data-success-reference></small>
+      </div>
+      <p class="wide concierge-submit-note">Your complete inquiry is sent privately to the atelier. Diana reviews every submission personally and will confirm your requested time or suggest an alternative by email.</p>
     </form>
   </section>
 </section>
