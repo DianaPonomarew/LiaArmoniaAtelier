@@ -11481,101 +11481,126 @@ html,body{
 
 
 /* ============================================================
-   MOBILE HOMEPAGE — three targeted corrections
-   1. Room tabs removed on phones
-   2. Hero image shown whole instead of cropped to a band
-   3. The two calls to action given the treatment from the mockup
-   Navigation, copy and section order stay exactly as they are.
+   MOBILE HOMEPAGE
+   ------------------------------------------------------------
+   Earlier attempts lost the cascade: .visual-atelier .room-hotspots
+   and .funnel-mode .venue-panorama are two-class selectors carrying
+   !important, so single-class overrides never applied. Everything
+   below is scoped to body.funnel-mode.visual-atelier so it outranks
+   them. Desktop is untouched.
    ============================================================ */
 @media (max-width:860px){
 
-  /* 1 — VISION / SPACE / WALKTHROUGH / PRODUCTION off on phones.
-        They were cut off at the right edge and sat on top of the image. */
-  .room-hotspots{display:none!important;}
-
-  /* 2 — The hero was a cropped horizontal slice. The container now carries
-        the image's own 2:3 proportion, so nothing is cut away. */
-  header.hero{
-    display:block!important;
-    min-height:0!important;
-    height:auto!important;
+  /* 1 — Room tabs off */
+  html body.funnel-mode.visual-atelier .room-hotspots,
+  html body.visual-atelier .room-hotspots{
+    display:none!important;
   }
-  .hero-film{
+
+  /* 2 — Hero collapses to the image's own height. .hero was locked to
+        100svh with min-height:720px, which is exactly the black gap. */
+  html body.funnel-mode.visual-atelier header.hero,
+  html body.visual-atelier header.hero{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  html body.funnel-mode.visual-atelier .hero-film{
     position:relative!important;
+    inset:auto!important;
     width:100%!important;
     aspect-ratio:1023/1537!important;
     height:auto!important;
     min-height:0!important;
-    inset:auto!important;
+    overflow:hidden!important;
   }
-  .venue-panorama{
+  /* .funnel-mode .venue-panorama used inset:-5% -8% and
+     background-size:auto 118% — that is what cropped the picture. */
+  html body.funnel-mode.visual-atelier .venue-panorama{
     position:absolute!important;
     inset:0!important;
     width:100%!important;
     height:100%!important;
     background-size:cover!important;
     background-position:center center!important;
+    filter:none!important;
   }
-  .film-light,.film-grids,.veil{
+  html body.funnel-mode.visual-atelier .venue-panorama::after{
+    background:none!important;
+  }
+  html body.funnel-mode.visual-atelier .film-light,
+  html body.funnel-mode.visual-atelier .film-grids{
+    display:none!important;
+  }
+  html body.funnel-mode.visual-atelier .veil{
     position:absolute!important;
     inset:0!important;
-  }
-  .veil{
-    background:linear-gradient(180deg,rgba(7,7,6,.55) 0%,rgba(7,7,6,0) 22%,rgba(7,7,6,0) 74%,rgba(7,7,6,.92) 100%)!important;
-  }
-  .hero-copy.gallery-hero-copy{
-    position:relative!important;
-    inset:auto!important;
-    padding:36px 22px 52px!important;
-    max-width:none!important;
-    transform:none!important;
+    background:linear-gradient(180deg,rgba(7,7,6,.5) 0%,rgba(7,7,6,0) 20%,rgba(7,7,6,0) 72%,rgba(7,7,6,.9) 100%)!important;
   }
 
-  /* 3 — Calls to action: one filled invitation, one quiet alternative. */
-  .visual-atelier .gallery-hero-copy .launch-hero-actions{
+  /* Copy sits directly under the image, no reserved space */
+  html body.funnel-mode.visual-atelier .hero-copy.gallery-hero-copy{
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    width:auto!important;
+    max-width:none!important;
+    transform:none!important;
+    margin:0!important;
+    padding:32px 22px 48px!important;
+  }
+  html body.funnel-mode.visual-atelier .gallery-hero-copy h1{
+    font-size:clamp(40px,11.4vw,54px)!important;
+    letter-spacing:.06em!important;
+    line-height:1.02!important;
+    margin:16px 0 14px!important;
+  }
+
+  /* 3 — Calls to action */
+  html body.funnel-mode.visual-atelier .launch-hero-actions{
     display:flex!important;
     flex-direction:column!important;
     align-items:stretch!important;
-    gap:20px!important;
-    margin-top:34px!important;
+    gap:18px!important;
+    margin-top:30px!important;
   }
-  .visual-atelier .gallery-hero-copy .launch-hero-actions .enter-worlds{
+  html body.funnel-mode.visual-atelier .launch-hero-actions .enter-worlds{
     display:flex!important;
     align-items:center!important;
     justify-content:center!important;
-    gap:14px!important;
     min-height:62px!important;
-    padding:0 24px!important;
+    padding:0 22px!important;
+    margin:0!important;
     border:0!important;
     background:#f0ddc6!important;
     color:#0b0a09!important;
     font:500 11px/1 var(--sans)!important;
-    letter-spacing:.22em!important;
+    letter-spacing:.2em!important;
     text-transform:uppercase!important;
-    text-align:center!important;
   }
-  .visual-atelier .gallery-hero-copy .launch-hero-actions>a:last-child{
-    display:flex!important;
+  html body.funnel-mode.visual-atelier .launch-hero-actions>a:last-child{
+    display:inline-flex!important;
     align-items:center!important;
     justify-content:center!important;
     gap:12px!important;
     align-self:center!important;
-    padding:0 4px 12px!important;
+    margin:0!important;
+    padding:0 2px 11px!important;
     border:0!important;
     border-bottom:1px solid rgba(239,229,212,.28)!important;
     background:transparent!important;
     color:rgba(239,229,212,.72)!important;
     font:500 10.5px/1 var(--sans)!important;
-    letter-spacing:.22em!important;
+    letter-spacing:.2em!important;
     text-transform:uppercase!important;
   }
-  /* Arrow drawn in CSS so the markup stays untouched */
-  .visual-atelier .gallery-hero-copy .launch-hero-actions>a:last-child::after{
+  html body.funnel-mode.visual-atelier .launch-hero-actions>a:last-child::after{
     content:"";
     width:20px;
     height:1px;
     background:currentColor;
-    position:relative;
     opacity:.75;
   }
 }
