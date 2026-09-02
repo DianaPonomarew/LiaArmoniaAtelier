@@ -11479,3 +11479,103 @@ html,body{
   .wedding-design-page .concierge-question>p{font-size:17px!important;}
 }
 
+
+/* ============================================================
+   MOBILE HOMEPAGE — three targeted corrections
+   1. Room tabs removed on phones
+   2. Hero image shown whole instead of cropped to a band
+   3. The two calls to action given the treatment from the mockup
+   Navigation, copy and section order stay exactly as they are.
+   ============================================================ */
+@media (max-width:860px){
+
+  /* 1 — VISION / SPACE / WALKTHROUGH / PRODUCTION off on phones.
+        They were cut off at the right edge and sat on top of the image. */
+  .room-hotspots{display:none!important;}
+
+  /* 2 — The hero was a cropped horizontal slice. The container now carries
+        the image's own 2:3 proportion, so nothing is cut away. */
+  header.hero{
+    display:block!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+  .hero-film{
+    position:relative!important;
+    width:100%!important;
+    aspect-ratio:1023/1537!important;
+    height:auto!important;
+    min-height:0!important;
+    inset:auto!important;
+  }
+  .venue-panorama{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    background-size:cover!important;
+    background-position:center center!important;
+  }
+  .film-light,.film-grids,.veil{
+    position:absolute!important;
+    inset:0!important;
+  }
+  .veil{
+    background:linear-gradient(180deg,rgba(7,7,6,.55) 0%,rgba(7,7,6,0) 22%,rgba(7,7,6,0) 74%,rgba(7,7,6,.92) 100%)!important;
+  }
+  .hero-copy.gallery-hero-copy{
+    position:relative!important;
+    inset:auto!important;
+    padding:36px 22px 52px!important;
+    max-width:none!important;
+    transform:none!important;
+  }
+
+  /* 3 — Calls to action: one filled invitation, one quiet alternative. */
+  .visual-atelier .gallery-hero-copy .launch-hero-actions{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:20px!important;
+    margin-top:34px!important;
+  }
+  .visual-atelier .gallery-hero-copy .launch-hero-actions .enter-worlds{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:14px!important;
+    min-height:62px!important;
+    padding:0 24px!important;
+    border:0!important;
+    background:#f0ddc6!important;
+    color:#0b0a09!important;
+    font:500 11px/1 var(--sans)!important;
+    letter-spacing:.22em!important;
+    text-transform:uppercase!important;
+    text-align:center!important;
+  }
+  .visual-atelier .gallery-hero-copy .launch-hero-actions>a:last-child{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:12px!important;
+    align-self:center!important;
+    padding:0 4px 12px!important;
+    border:0!important;
+    border-bottom:1px solid rgba(239,229,212,.28)!important;
+    background:transparent!important;
+    color:rgba(239,229,212,.72)!important;
+    font:500 10.5px/1 var(--sans)!important;
+    letter-spacing:.22em!important;
+    text-transform:uppercase!important;
+  }
+  /* Arrow drawn in CSS so the markup stays untouched */
+  .visual-atelier .gallery-hero-copy .launch-hero-actions>a:last-child::after{
+    content:"";
+    width:20px;
+    height:1px;
+    background:currentColor;
+    position:relative;
+    opacity:.75;
+  }
+}
