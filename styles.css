@@ -11585,3 +11585,285 @@ html,body{
   .wedding-design-page .concierge-actions button{font-size:16px!important;}
   .wedding-design-page .concierge-question>p{font-size:17px!important;}
 }
+
+/* ============================================================
+   MOBILE HOMEPAGE — an authored composition, not a reflow
+   ------------------------------------------------------------
+   The desktop homepage is a single full-bleed hero. Squeezed
+   into a phone it became a cropped image, a stack of tracked
+   capitals and a footer — nothing to scan, nothing to enter.
+   Below 860px the desktop hero is replaced by a purpose-built
+   editorial sequence: image, direction, quiet reveals, worlds,
+   approach, invitation.
+   ============================================================ */
+
+.m-home{display:none;}
+
+@media (max-width:860px){
+
+  header.hero{display:none!important;}
+  .m-home{
+    display:block;
+    background:#070706;
+  }
+
+  /* ---------- Hero ---------- */
+  .m-hero{
+    position:relative;
+    min-height:86svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    overflow:hidden;
+  }
+  .m-hero-image{
+    position:absolute;
+    inset:0;
+    background:url('assets/lia-atelier-colonnade.jpg') center 38%/cover no-repeat;
+    transform:scale(1.06);
+    animation:mHeroDrift 22s ease-out forwards;
+  }
+  @keyframes mHeroDrift{to{transform:scale(1);}}
+  .m-hero-veil{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg,rgba(7,7,6,.72) 0%,rgba(7,7,6,0) 26%),
+      linear-gradient(0deg,rgba(7,7,6,.94) 6%,rgba(7,7,6,.42) 34%,rgba(7,7,6,0) 62%);
+  }
+  .m-hero-copy{
+    position:relative;
+    padding:0 24px 78px;
+  }
+  .m-eyebrow{
+    display:block;
+    margin-bottom:16px;
+    color:rgba(239,229,212,.5);
+    font:500 9.5px/1 var(--sans);
+    letter-spacing:.34em;
+    text-transform:uppercase;
+  }
+  .m-hero-copy h1{
+    margin:0 0 18px;
+    color:#f6efe4;
+    font:300 clamp(46px,13.4vw,62px)/.96 var(--display);
+    letter-spacing:.005em;
+    text-transform:none;
+  }
+  .m-hero-copy p{
+    margin:0;
+    max-width:26ch;
+    color:rgba(239,229,212,.62);
+    font:400 16px/1.6 var(--display);
+  }
+  /* A hairline that breathes, instead of a scroll icon */
+  .m-scroll{
+    position:absolute;
+    left:24px;
+    bottom:34px;
+    width:52px;
+    height:1px;
+    background:rgba(239,229,212,.34);
+    transform-origin:left;
+    animation:mScroll 3.4s ease-in-out infinite;
+  }
+  @keyframes mScroll{
+    0%,100%{transform:scaleX(.35);opacity:.4;}
+    50%{transform:scaleX(1);opacity:.9;}
+  }
+
+  /* ---------- Actions ---------- */
+  .m-actions{
+    padding:34px 24px 46px;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .m-cta,
+  .m-cta-quiet{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:24px 0;
+    border-bottom:1px solid rgba(239,229,212,.16);
+    color:#f6efe4;
+    font:400 19px/1.2 var(--display);
+    letter-spacing:.005em;
+    text-decoration:none;
+    text-transform:none;
+    transition:color .35s ease,padding-left .45s cubic-bezier(.2,.7,.25,1);
+  }
+  .m-cta{
+    border-top:1px solid rgba(239,229,212,.16);
+  }
+  .m-cta-quiet{color:rgba(239,229,212,.56);}
+  .m-cta i,
+  .m-cta-quiet i,
+  .m-world-all i{
+    flex:0 0 auto;
+    width:22px;
+    height:1px;
+    background:currentColor;
+    position:relative;
+    opacity:.6;
+    transition:width .45s cubic-bezier(.2,.7,.25,1),opacity .35s ease;
+  }
+  .m-cta i::after,
+  .m-cta-quiet i::after,
+  .m-world-all i::after{
+    content:"";
+    position:absolute;
+    right:0;
+    top:-3px;
+    width:7px;
+    height:7px;
+    border-top:1px solid currentColor;
+    border-right:1px solid currentColor;
+    transform:rotate(45deg);
+  }
+  .m-cta:active i,.m-cta-quiet:active i{width:34px;opacity:1;}
+
+  /* ---------- Sections ---------- */
+  .m-section{padding:46px 24px 52px;}
+  .m-label{
+    margin:0 0 6px;
+    color:rgba(216,186,145,.6);
+    font:500 9.5px/1 var(--sans)!important;
+    letter-spacing:.34em!important;
+    text-transform:uppercase!important;
+  }
+
+  /* ---------- Quiet reveal list ---------- */
+  .m-reveal-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .m-reveal-list li{
+    border-bottom:1px solid rgba(239,229,212,.12);
+  }
+  .m-reveal-list button{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:26px 0 24px;
+    border:0;
+    background:none;
+    color:rgba(239,229,212,.9);
+    font:400 21px/1.25 var(--display);
+    letter-spacing:.005em;
+    text-align:left;
+    text-transform:none;
+    cursor:pointer;
+    transition:color .35s ease;
+  }
+  .m-num{
+    color:rgba(216,186,145,.45);
+    font:500 9.5px/1 var(--sans);
+    letter-spacing:.22em;
+    transform:translateY(-6px);
+  }
+  /* A thin chevron, not a plus */
+  .m-reveal-list button i{
+    margin-left:auto;
+    width:8px;
+    height:8px;
+    border-right:1px solid rgba(216,186,145,.6);
+    border-bottom:1px solid rgba(216,186,145,.6);
+    transform:rotate(45deg) translateY(-2px);
+    transition:transform .45s cubic-bezier(.2,.7,.25,1),border-color .35s ease;
+  }
+  .m-reveal-list li.is-open button{color:#f0ddc6;}
+  .m-reveal-list li.is-open button i{
+    transform:rotate(225deg) translateY(-2px);
+    border-color:#f0ddc6;
+  }
+  .m-reveal-list li>div{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .55s cubic-bezier(.2,.7,.25,1);
+  }
+  .m-reveal-list li>div p{
+    margin:0 0 28px;
+    max-width:40ch;
+    color:rgba(239,229,212,.56);
+    font:400 15.5px/1.75 var(--sans);
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity .5s ease .08s,transform .5s ease .08s;
+  }
+  .m-reveal-list li.is-open>div p{opacity:1;transform:none;}
+
+  /* ---------- Selected worlds ---------- */
+  .m-worlds{padding:12px 0 52px;}
+  .m-worlds .m-label{padding:0 24px;margin-bottom:22px;}
+  .m-world{
+    display:block;
+    position:relative;
+    margin-bottom:10px;
+    text-decoration:none;
+  }
+  .m-world img{
+    display:block;
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+  }
+  .m-world-cap{
+    position:absolute;
+    left:24px;
+    bottom:22px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    text-shadow:0 2px 24px rgba(0,0,0,.7);
+  }
+  .m-world-cap b{
+    color:#f6efe4;
+    font:300 25px/1.1 var(--display);
+    letter-spacing:.005em;
+  }
+  .m-world-cap em{
+    color:rgba(239,229,212,.62);
+    font:500 9px/1 var(--sans);
+    font-style:normal;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+  }
+  .m-world-all{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:22px 24px 0;
+    padding:20px 0;
+    border-top:1px solid rgba(239,229,212,.16);
+    color:rgba(239,229,212,.75);
+    font:400 17px/1 var(--display);
+    text-decoration:none;
+  }
+
+  /* ---------- Closing invitation ---------- */
+  .m-close{
+    padding:60px 24px 74px;
+    border-top:1px solid rgba(239,229,212,.1);
+  }
+  .m-close-line{
+    margin:14px 0 26px;
+    max-width:24ch;
+    color:#f6efe4;
+    font:300 27px/1.24 var(--display);
+  }
+
+  /* ---------- Footer, pared back ---------- */
+  footer{padding:38px 24px calc(40px + env(safe-area-inset-bottom))!important;}
+  footer p strong{font-size:15px!important;letter-spacing:.16em!important;}
+  footer div{gap:16px 22px!important;flex-wrap:wrap!important;}
+  footer a{font-size:10px!important;letter-spacing:.18em!important;}
+
+  @media (prefers-reduced-motion:reduce){
+    .m-hero-image,.m-scroll{animation:none!important;}
+    .m-reveal-list li>div,.m-reveal-list li>div p{transition:none!important;}
+  }
+}

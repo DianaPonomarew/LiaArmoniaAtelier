@@ -724,3 +724,48 @@ document.addEventListener('keydown', event => {
     });
   });
 })();
+
+/* ============================================================
+   Mobile reveal lists — one open at a time, quietly
+   ============================================================ */
+(function initMobileReveals(){
+  const items = [...document.querySelectorAll('[data-reveal]')];
+  if (!items.length) return;
+
+  items.forEach(item => {
+    const button = item.querySelector('button');
+    const panel = item.querySelector('div');
+    if (!button || !panel) return;
+
+    button.setAttribute('aria-expanded', 'false');
+
+    const setOpen = open => {
+      item.classList.toggle('is-open', open);
+      button.setAttribute('aria-expanded', String(open));
+      panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+    };
+
+    button.addEventListener('click', () => {
+      const willOpen = !item.classList.contains('is-open');
+      // Collapsing the siblings keeps the page short and the rhythm calm.
+      items.forEach(other => {
+        if (other === item) return;
+        other.classList.remove('is-open');
+        other.querySelector('button')?.setAttribute('aria-expanded', 'false');
+        const p = other.querySelector('div');
+        if (p) p.style.maxHeight = '0px';
+      });
+      setOpen(willOpen);
+    });
+
+    setOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    items.forEach(item => {
+      if (!item.classList.contains('is-open')) return;
+      const panel = item.querySelector('div');
+      if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+    });
+  });
+})();
