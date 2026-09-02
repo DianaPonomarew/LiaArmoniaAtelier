@@ -11196,3 +11196,392 @@ footer p,
   line-height:1.75!important;
   max-width:var(--measure)!important;
 }
+
+/* ============================================================
+   MOBILE — purpose-built, not a shrunk desktop
+   ============================================================ */
+
+/* --- BUG FIX -----------------------------------------------------------
+   app.js hid the submit button with an inline style:display:none, but the
+   rule above declares display:inline-flex!important, and !important beats
+   an inline style. Both buttons rendered on top of each other. The script
+   now toggles the hidden property; honour it explicitly.               */
+.wedding-design-page .concierge-actions button[hidden],
+.concierge-actions button[hidden]{
+  display:none!important;
+}
+
+/* Never let a CTA leave the document flow */
+.wedding-design-page .concierge-actions{
+  position:static!important;
+}
+
+/* Single final confirmation */
+.wedding-design-page .final-confirm{
+  align-items:flex-start!important;
+  padding:18px 20px!important;
+  border:1px solid rgba(239,229,212,.16)!important;
+  background:rgba(239,229,212,.03)!important;
+}
+.wedding-design-page .final-confirm.needs-attention{
+  border-color:#e5b8a4!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-submit]:disabled{
+  opacity:.42!important;
+  cursor:not-allowed!important;
+}
+
+/* --- Mobile navigation ------------------------------------------------ */
+.nav-toggle{display:none;}
+
+@media (max-width:860px){
+  .nav,.gallery-nav{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    padding:16px 20px!important;
+    gap:12px!important;
+  }
+  .nav-toggle{
+    display:flex!important;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    width:44px;
+    height:44px;
+    padding:0;
+    border:0;
+    background:none;
+    cursor:pointer;
+    flex:0 0 auto;
+  }
+  .nav-toggle span{
+    display:block;
+    width:24px;
+    height:1px;
+    margin-left:auto;
+    background:#f0ddc6;
+    transition:transform .35s ease,opacity .35s ease;
+  }
+  body.nav-open .nav-toggle span:first-child{transform:translateY(3.5px) rotate(45deg);}
+  body.nav-open .nav-toggle span:last-child{transform:translateY(-3.5px) rotate(-45deg);}
+
+  .navlinks{
+    position:fixed!important;
+    inset:0!important;
+    z-index:8000!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    gap:6px!important;
+    padding:0 32px!important;
+    background:#070706!important;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-8px);
+    transition:opacity .4s ease,transform .4s ease;
+  }
+  body.nav-open .navlinks{
+    opacity:1;
+    pointer-events:auto;
+    transform:none;
+  }
+  .navlinks a{
+    padding:16px 0!important;
+    font:300 clamp(28px,7.5vw,38px)/1.15 var(--display)!important;
+    letter-spacing:.01em!important;
+    text-transform:none!important;
+    color:#f6efe4!important;
+  }
+  body.nav-open{overflow:hidden;}
+  .brand{z-index:8100;position:relative;}
+  body.nav-open .brand b{opacity:0;}
+}
+
+/* --- Homepage hero, portrait ------------------------------------------ */
+@media (max-width:860px){
+  .gallery-hero,.launch-hero,.split-hero{
+    display:block!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+  .venue-panorama,.gallery-hero-visual{
+    position:relative!important;
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:4/5!important;
+    min-height:0!important;
+    background-size:cover!important;
+    background-position:center!important;
+  }
+  .gallery-hero-copy{
+    padding:clamp(30px,7vw,44px) 20px clamp(44px,10vw,64px)!important;
+    max-width:none!important;
+  }
+  .visual-atelier .gallery-hero-copy h1{
+    font-size:clamp(40px,11.5vw,58px)!important;
+    letter-spacing:.05em!important;
+    line-height:1.02!important;
+  }
+  .visual-atelier .gallery-hero-copy>p{
+    font-size:16px!important;
+    max-width:32ch!important;
+  }
+
+  /* Room tabs were cut off at the right edge. Make the overflow explicit
+     and swipeable, with the edge fading so it reads as scrollable.      */
+  .venue-switch,.room-switch,.walkthrough-tabs{
+    position:absolute!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    display:flex!important;
+    overflow-x:auto!important;
+    scroll-snap-type:x mandatory!important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .venue-switch::-webkit-scrollbar,
+  .room-switch::-webkit-scrollbar{display:none;}
+  .venue-switch>*,.room-switch>*{
+    flex:0 0 auto!important;
+    scroll-snap-align:start;
+    min-width:38vw!important;
+    padding:16px 18px!important;
+    font-size:10px!important;
+    letter-spacing:.16em!important;
+  }
+}
+
+/* --- Concierge on a phone --------------------------------------------- */
+@media (max-width:860px){
+  .private-client-shell,.concierge-shell,.one-question-shell{
+    display:block!important;
+    padding:0 18px!important;
+  }
+  .wedding-design-page .concierge-question{
+    min-height:0!important;
+    padding:26px 20px 30px!important;
+  }
+  .wedding-design-page .concierge-question h3{
+    font-size:clamp(26px,7.4vw,34px)!important;
+  }
+  .wedding-design-page .answer-chips{
+    grid-template-columns:1fr!important;
+  }
+  .wedding-design-page .answer-chips span{
+    min-height:60px!important;
+    justify-content:space-between!important;
+    padding:0 18px!important;
+  }
+  /* Chapter rail scrolls instead of wrapping into a broken grid */
+  .wedding-design-page .concierge-progress{
+    display:flex!important;
+    overflow-x:auto!important;
+    gap:8px!important;
+    padding-bottom:6px!important;
+    scrollbar-width:none;
+  }
+  .wedding-design-page .concierge-progress::-webkit-scrollbar{display:none;}
+  .wedding-design-page .concierge-progress button{
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+  }
+  /* Safe area for the phone's home indicator and browser chrome */
+  .wedding-design-page .concierge-actions{
+    padding-bottom:calc(18px + env(safe-area-inset-bottom))!important;
+  }
+}
+
+/* --- No horizontal overflow, anywhere --------------------------------- */
+html,body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+@media (max-width:860px){
+  img,video,iframe,table{max-width:100%!important;height:auto!important;}
+  *{word-break:normal;overflow-wrap:anywhere;}
+}
+
+/* ============================================================
+   COLLAPSIBLE SECTIONS
+   Long passages become a line you tap. The page reads as a list
+   of questions; the answer appears only when asked for.
+   ============================================================ */
+[data-collapse]{
+  border-bottom:1px solid rgba(239,229,212,.12);
+}
+[data-collapse]:first-of-type{
+  border-top:1px solid rgba(239,229,212,.12);
+}
+.collapse-trigger{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  width:100%;
+  padding:clamp(22px,2.6vw,30px) 0;
+  border:0;
+  background:none;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+  transition:opacity .3s ease;
+}
+.collapse-trigger:hover{opacity:.72;}
+.collapse-trigger>h2,
+.collapse-trigger>h3,
+.collapse-trigger>h4,
+.collapse-trigger>.collapse-title{
+  margin:0!important;
+  font:300 clamp(21px,2.3vw,29px)/1.25 var(--display)!important;
+  letter-spacing:0!important;
+  color:#f6efe4!important;
+  text-transform:none!important;
+}
+.collapse-mark{
+  position:relative;
+  flex:0 0 auto;
+  width:15px;
+  height:15px;
+}
+.collapse-mark::before,
+.collapse-mark::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:7px;
+  width:15px;
+  height:1px;
+  background:#d8ba91;
+  transition:transform .38s cubic-bezier(.2,.7,.25,1);
+}
+.collapse-mark::after{transform:rotate(90deg);}
+[data-collapse].is-open .collapse-mark::after{transform:rotate(0deg);}
+
+.collapse-panel{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .5s cubic-bezier(.2,.7,.25,1),opacity .4s ease;
+  opacity:0;
+}
+[data-collapse].is-open .collapse-panel{opacity:1;}
+.collapse-panel>*:first-child{margin-top:0;}
+.collapse-panel>*:last-child{margin-bottom:clamp(24px,3vw,34px);}
+.collapse-panel p,
+.collapse-panel li{
+  font-size:var(--t-body)!important;
+  line-height:var(--lh-body)!important;
+  max-width:var(--measure)!important;
+  color:rgba(239,229,212,.7)!important;
+}
+@media (prefers-reduced-motion:reduce){
+  .collapse-panel{transition:none;}
+}
+@media (max-width:860px){
+  .collapse-trigger{padding:20px 0;gap:16px;}
+  .collapse-trigger>h2,.collapse-trigger>h3,.collapse-trigger>h4{
+    font-size:19px!important;
+  }
+}
+
+/* ============================================================
+   CONCIERGE TYPOGRAPHY — editorial, not interface
+   ------------------------------------------------------------
+   The questionnaire was set in tracked Inter capitals: the visual
+   language of dashboards and checkout flows. The markup already
+   carries natural sentence case ("Names", "Under 25", "Continue")
+   — only CSS was shouting it. Switched to the display serif at a
+   readable size, with tracking near zero. The one exception is
+   the step counter, where small tracked caps still read as a
+   quiet index rather than as UI chrome.
+   ============================================================ */
+
+/* Field labels */
+.wedding-design-page .private-chat-form label,
+.wedding-design-page .private-chat-form .field-label{
+  font:400 15px/1.4 var(--display)!important;
+  letter-spacing:.005em!important;
+  text-transform:none!important;
+  color:rgba(239,229,212,.62)!important;
+  margin-bottom:10px!important;
+}
+
+/* Answers the client types */
+.wedding-design-page .private-chat-form input,
+.wedding-design-page .private-chat-form select,
+.wedding-design-page .private-chat-form textarea{
+  font:400 18px/1.5 var(--display)!important;
+  letter-spacing:.005em!important;
+  color:#f6efe4!important;
+  padding:16px 18px!important;
+}
+.wedding-design-page .private-chat-form input::placeholder,
+.wedding-design-page .private-chat-form textarea::placeholder{
+  font-family:var(--display)!important;
+  font-style:italic!important;
+  color:rgba(239,229,212,.3)!important;
+  letter-spacing:0!important;
+}
+
+/* Answer chips read as choices, not as button labels */
+.wedding-design-page .answer-chips span{
+  font:400 17px/1.35 var(--display)!important;
+  letter-spacing:.005em!important;
+  text-transform:none!important;
+  padding:0 20px!important;
+}
+
+/* Consent line */
+.wedding-design-page .private-chat-form .check,
+.wedding-design-page .final-confirm{
+  font:400 15px/1.65 var(--display)!important;
+  letter-spacing:.005em!important;
+  text-transform:none!important;
+}
+
+/* Chapter rail */
+.wedding-design-page .concierge-progress button{
+  font:400 15px/1.3 var(--display)!important;
+  letter-spacing:.01em!important;
+  text-transform:none!important;
+}
+
+/* Actions — a served invitation, not a submit control */
+.wedding-design-page .concierge-actions button{
+  font:400 16px/1.2 var(--display)!important;
+  letter-spacing:.03em!important;
+  text-transform:none!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-prev]{
+  font-style:italic!important;
+  letter-spacing:.01em!important;
+}
+
+/* The single place tracked caps still belong: the quiet step index */
+.wedding-design-page .question-count{
+  font:500 10px/1.4 var(--sans)!important;
+  letter-spacing:.3em!important;
+  text-transform:uppercase!important;
+  color:rgba(216,186,145,.55)!important;
+}
+
+/* Question text: slightly more air now that everything shares one voice */
+.wedding-design-page .concierge-question>p{
+  font-family:var(--display)!important;
+  font-size:19px!important;
+  line-height:1.6!important;
+  color:rgba(239,229,212,.6)!important;
+}
+
+@media (max-width:860px){
+  .wedding-design-page .private-chat-form input,
+  .wedding-design-page .private-chat-form select,
+  .wedding-design-page .private-chat-form textarea{
+    font-size:18px!important;
+  }
+  .wedding-design-page .answer-chips span{font-size:16px!important;}
+  .wedding-design-page .concierge-actions button{font-size:16px!important;}
+  .wedding-design-page .concierge-question>p{font-size:17px!important;}
+}

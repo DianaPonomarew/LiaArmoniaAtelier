@@ -119,6 +119,13 @@ const conciergeSteps = [...document.querySelectorAll('[data-concierge-step]')];
 const conciergePrev = document.querySelector('[data-concierge-prev]');
 const conciergeNext = document.querySelector('[data-concierge-next]');
 const conciergeSubmit = document.querySelector('[data-concierge-submit]');
+const finalConfirm = document.querySelector('.final-confirm input[type="checkbox"]');
+
+function syncFinalConfirm() {
+  if (!conciergeSubmit || !finalConfirm) return;
+  conciergeSubmit.disabled = !finalConfirm.checked;
+}
+finalConfirm?.addEventListener('change', syncFinalConfirm);
 const conciergeForm = document.querySelector('.one-question-concierge');
 const conciergeActions = document.querySelector('.concierge-actions');
 let conciergeIndex = 0;
@@ -200,8 +207,10 @@ function setConciergeStep(index) {
     step.classList.toggle('active', stepIndex === activeChapter);
   });
   if (conciergePrev) conciergePrev.style.visibility = conciergeIndex === 0 ? 'hidden' : 'visible';
-  if (conciergeNext) conciergeNext.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'none' : 'inline-flex';
-  if (conciergeSubmit) conciergeSubmit.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'inline-flex' : 'none';
+  const isFinalStep = conciergeIndex === conciergeQuestions.length - 1;
+  if (conciergeNext) conciergeNext.hidden = isFinalStep;
+  if (conciergeSubmit) conciergeSubmit.hidden = !isFinalStep;
+  if (isFinalStep) syncFinalConfirm();
   conciergeActions?.classList.toggle('is-final-step', conciergeIndex === conciergeQuestions.length - 1);
   const rail = document.querySelector('[data-concierge-rail]');
   if (rail) {
@@ -313,6 +322,10 @@ document.addEventListener('keydown', event => {
 
 conciergeForm?.addEventListener('submit', event => {
   event.preventDefault();
+  if (finalConfirm && !finalConfirm.checked) {
+    finalConfirm.closest('.check')?.classList.add('needs-attention');
+    return;
+  }
   if (!canLeaveConciergeStep()) return;
   const invalidGroupIndex = conciergeQuestions.findIndex(question => {
     return [...question.querySelectorAll('[data-required-group]')].some(group => !group.querySelector('input:checked'));
@@ -645,3 +658,69 @@ document.querySelectorAll('.video-cover video').forEach(video => {
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && invitationFlow?.classList.contains('is-open')) closeInvitationFlow();
 });
+
+
+/* ============================================================
+   Mobile navigation
+   ============================================================ */
+(function initMobileNav(){
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const links = document.querySelector('[data-navlinks]');
+  if (!toggle || !links) return;
+
+  const close = () => {
+    document.body.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = !document.body.classList.contains('nav-open');
+    document.body.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 860) close(); });
+})();
+
+/* ============================================================
+   Collapsible sections — click a heading to reveal its text.
+   Any element marked data-collapse becomes an accordion whose
+   first heading is the trigger and whose remaining children are
+   the panel. Open by default on the first item of each group.
+   ============================================================ */
+(function initCollapsibles(){
+  document.querySelectorAll('[data-collapse]').forEach((block, index) => {
+    const heading = block.querySelector('h2, h3, h4, .collapse-title');
+    if (!heading) return;
+
+    const panel = document.createElement('div');
+    panel.className = 'collapse-panel';
+    while (heading.nextSibling) panel.appendChild(heading.nextSibling);
+    block.appendChild(panel);
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'collapse-trigger';
+    button.setAttribute('aria-expanded', 'false');
+    heading.parentNode.insertBefore(button, heading);
+    button.appendChild(heading);
+
+    const mark = document.createElement('span');
+    mark.className = 'collapse-mark';
+    mark.setAttribute('aria-hidden', 'true');
+    button.appendChild(mark);
+
+    const setOpen = open => {
+      block.classList.toggle('is-open', open);
+      button.setAttribute('aria-expanded', String(open));
+      panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+    };
+
+    button.addEventListener('click', () => setOpen(!block.classList.contains('is-open')));
+    setOpen(index === 0 && block.hasAttribute('data-collapse-open'));
+    window.addEventListener('resize', () => {
+      if (block.classList.contains('is-open')) panel.style.maxHeight = panel.scrollHeight + 'px';
+    });
+  });
+})();
