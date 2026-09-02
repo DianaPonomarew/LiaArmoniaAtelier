@@ -11604,3 +11604,72 @@ html,body{
     opacity:.75;
   }
 }
+
+/* ============================================================
+   MOBILE HERO — neutralising the 850px treatment
+   ------------------------------------------------------------
+   An earlier @media(max-width:850px) block builds a split layout:
+     .visual-atelier .venue-panorama { height:50svh }   <- half image
+     .visual-atelier .hero::before   { inset:50svh 0 0 0 }  <- black slab
+     .visual-atelier .gallery-hero-copy { position absolute at 50svh }
+     .visual-atelier .hero { min-height:max(100svh,820px) }
+   Overriding the image alone was not enough — the two pseudo-elements
+   and the absolute copy stayed. All four are neutralised here.
+   ============================================================ */
+@media (max-width:860px){
+
+  html body.visual-atelier .hero::before,
+  html body.visual-atelier .hero::after,
+  html body.funnel-mode.visual-atelier .hero::before,
+  html body.funnel-mode.visual-atelier .hero::after{
+    content:none!important;
+    display:none!important;
+  }
+
+  html body.visual-atelier .hero,
+  html body.funnel-mode.visual-atelier .hero{
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    display:block!important;
+  }
+
+  html body.visual-atelier .hero-film,
+  html body.funnel-mode.visual-atelier .hero-film{
+    position:relative!important;
+    inset:auto!important;
+    top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:1023/1537!important;
+    overflow:hidden!important;
+    transform:none!important;
+  }
+
+  html body.visual-atelier .venue-panorama,
+  html body.funnel-mode.visual-atelier .venue-panorama{
+    position:absolute!important;
+    inset:0!important;
+    top:0!important;left:0!important;right:0!important;bottom:0!important;
+    width:100%!important;
+    height:100%!important;
+    background-size:cover!important;
+    background-position:center center!important;
+    filter:none!important;
+    transform:none!important;
+  }
+
+  html body.visual-atelier .gallery-hero-copy,
+  html body.funnel-mode.visual-atelier .gallery-hero-copy{
+    position:relative!important;
+    top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+    width:auto!important;
+    max-width:none!important;
+    transform:none!important;
+    margin:0!important;
+    padding:32px 22px 48px!important;
+  }
+}
