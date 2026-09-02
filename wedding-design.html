@@ -3,11 +3,26 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wedding Design — LIA ARMONÍA</title>
+<link rel="canonical" href="https://liaarmonia.com/wedding-design.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIA ARMONÍA">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://liaarmonia.com/wedding-design.html">
+<meta property="og:title" content="Wedding Design — LIA ARMONÍA">
+<meta property="og:description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
+<meta property="og:image" content="https://liaarmonia.com/assets/hero-clean.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wedding Design — LIA ARMONÍA">
+<meta name="twitter:description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
+<meta name="twitter:image" content="https://liaarmonia.com/assets/hero-clean.jpg">
+<meta name="theme-color" content="#070706">
 <meta name="description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=venue-details">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20260902b">
 </head>
 <body class="funnel-mode visual-atelier wedding-design-page">
 <div class="grain"></div>
@@ -45,7 +60,7 @@
       <button type="button" data-concierge-step="2">03 Design</button>
       <button type="button" data-concierge-step="3">04 Consultation</button>
     </div>
-    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="/api/private-design-consultation" method="POST">
+    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="https://formsubmit.co/atelier@liaarmonia.com" method="POST">
       <input type="hidden" name="form-name" value="private-design-consultation">
       <input type="hidden" name="subject" value="NEW PRIVATE DESIGN INQUIRY">
       <input type="hidden" name="inquiry_id" value="" data-inquiry-id>
@@ -192,6 +207,7 @@
         <button type="button" data-concierge-prev>Back</button>
         <button type="button" data-concierge-next>Continue</button>
         <button type="submit" data-concierge-submit>Send consultation request</button>
+        <div class="concierge-rail" aria-hidden="true"><span data-concierge-rail></span></div>
       </div>
       <div class="concierge-success wide" data-concierge-success hidden>
         <span>Request submitted</span>
@@ -204,6 +220,18 @@
   </section>
 </section>
 </main>
+<div class="concierge-modal" data-concierge-modal hidden role="dialog" aria-modal="true" aria-labelledby="conciergeModalTitle">
+  <div class="concierge-modal-backdrop" data-concierge-modal-close></div>
+  <div class="concierge-modal-panel" role="document">
+    <button class="concierge-modal-dismiss" type="button" data-concierge-modal-close aria-label="Close">&times;</button>
+    <span class="concierge-modal-eyebrow">Request received</span>
+    <h3 id="conciergeModalTitle">Thank you.</h3>
+    <p>Your private design inquiry has reached the atelier. Diana reviews every request personally and will be in touch with you shortly by email — either confirming your preferred consultation time or proposing a refined alternative.</p>
+    <p class="concierge-modal-secondary">A confirmation has been sent to your email address. If it does not arrive, please check your spam folder or write to <a href="mailto:atelier@liaarmonia.com">atelier@liaarmonia.com</a>.</p>
+    <small data-concierge-modal-reference></small>
+    <button class="concierge-modal-button" type="button" data-concierge-modal-close>Close</button>
+  </div>
+</div>
 <footer><div class="brand"><span>LA</span><b>Lia Armonía</b></div><p><strong>LIA ARMONÍA</strong><br><em>Wedding Design Atelier</em></p><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a class="footer-icon-link" href="mailto:atelier@liaarmonia.com" aria-label="Email"><span class="contact-icon mail-icon"></span>Email</a><a class="footer-icon-link" href="https://www.instagram.com/lia_armonia/" target="_blank" rel="noopener" aria-label="Instagram"><span class="contact-icon instagram-icon"></span>Instagram</a></div></footer>
-<script src="app.js"></script>
+<script src="app.js?v=20260902b"></script>
 </body></html>

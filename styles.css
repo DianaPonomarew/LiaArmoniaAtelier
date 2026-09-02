@@ -3899,7 +3899,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   inset:0;
   background:
     linear-gradient(90deg,rgba(7,7,6,.02),rgba(7,7,6,.08) 70%,rgba(7,7,6,.18)),
-    url('assets/invitation-curved-panels.png') center/cover;
+    url('assets/invitation-curved-panels.jpg') center/cover;
   filter:saturate(.94) contrast(1.02) brightness(.98);
   transform:scale(1.01);
 }
@@ -4126,7 +4126,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border-radius:30px;
   background:
     linear-gradient(180deg,rgba(7,7,6,.12),rgba(7,7,6,.56)),
-    url('assets/invitation-curved-panels.png') 56% center/360% auto;
+    url('assets/invitation-curved-panels.jpg') 56% center/360% auto;
   box-shadow:0 28px 80px rgba(0,0,0,.44);
   text-align:center;
   font-family:var(--display);
@@ -4267,7 +4267,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border-radius:24px;
   background:
     linear-gradient(180deg,rgba(7,7,6,.16),rgba(7,7,6,.6)),
-    url('assets/invitation-curved-panels.png') 56% center/360% auto;
+    url('assets/invitation-curved-panels.jpg') 56% center/360% auto;
   box-shadow:0 22px 60px rgba(0,0,0,.4);
   text-align:center;
   font-family:var(--display);
@@ -4275,7 +4275,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
 .invitation-final-step{
   background:
     linear-gradient(180deg,rgba(7,7,6,.2),rgba(7,7,6,.84)),
-    url('assets/invitation-atelier-experience.png') 89% center/260% auto;
+    url('assets/invitation-atelier-experience.jpg') 89% center/260% auto;
 }
 @keyframes invitationReveal{
   from{opacity:0;transform:translateY(18px)}
@@ -4414,7 +4414,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border:0;
   background:
     linear-gradient(90deg,rgba(8,8,7,.96),rgba(8,8,7,.72)),
-    url('assets/invitation-atelier-experience.png') right center/auto 112% no-repeat;
+    url('assets/invitation-atelier-experience.jpg') right center/auto 112% no-repeat;
 }
 .invitation-page .invitation-flow .invitation-step.active{
   display:block;
@@ -4812,7 +4812,7 @@ body.invitation-flow-open{
   border-radius:42px;
   background:
     linear-gradient(180deg,rgba(7,7,6,.12),rgba(7,7,6,.64)),
-    url('assets/invitation-curved-panels.png') 53% center/335% auto;
+    url('assets/invitation-curved-panels.jpg') 53% center/335% auto;
   box-shadow:0 24px 90px rgba(0,0,0,.66);
   text-align:center;
   font-family:var(--display);
@@ -6945,7 +6945,7 @@ body.invitation-flow-open{
   margin:0 auto 28px!important;
   background:
     linear-gradient(180deg,rgba(7,7,6,.04),rgba(7,7,6,.48)),
-    url('assets/invitation-curved-panels.png') 53% center/330% auto!important;
+    url('assets/invitation-curved-panels.jpg') 53% center/330% auto!important;
 }
 .invitation-builder-preview .builder-phone b,
 .invitation-phone b{
@@ -8063,7 +8063,7 @@ body.invitation-flow-open{
   width:min(200px,62%)!important;
   height:min(370px,45vh)!important;
   margin:0 auto 26px!important;
-  background:linear-gradient(180deg,rgba(7,7,6,.05),rgba(7,7,6,.52)),url('assets/invitation-curved-panels.png') 53% center/330% auto!important;
+  background:linear-gradient(180deg,rgba(7,7,6,.05),rgba(7,7,6,.52)),url('assets/invitation-curved-panels.jpg') 53% center/330% auto!important;
 }
 .invitation-page .invitation-builder-preview .builder-phone b,
 .invitation-page .invitation-phone b{
@@ -8281,6 +8281,9 @@ body.invitation-flow-open{
   margin-top:34px!important;
 }
 .wedding-design-page .concierge-actions button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
   min-width:min(260px,100%)!important;
   min-height:56px!important;
   padding:0 24px!important;
@@ -8305,11 +8308,11 @@ body.invitation-flow-open{
   grid-column:2!important;
   justify-self:center!important;
 }
-.wedding-design-page .concierge-actions button:last-child{
-  background:#f0ddc6!important;
-  color:#070706!important;
-  border-color:#f0ddc6!important;
-}
+/* Removed: .concierge-actions button:last-child primary styling.
+   It targeted DOM position, so whenever a button was display:none the cream
+   treatment landed on the hidden element and the visible "Continue" button
+   rendered as a plain outline. Primary styling is now assigned by role
+   ([data-concierge-next] / [data-concierge-submit]) further down this file. */
 .wedding-design-page .concierge-success{
   margin-top:28px;
   padding:clamp(30px,4vw,52px);
@@ -9396,7 +9399,7 @@ body.invitation-flow-open{
   margin:0 auto 24px!important;
   border:1px solid rgba(239,229,212,.52)!important;
   border-radius:28px!important;
-  background:linear-gradient(180deg,rgba(7,7,6,.06),rgba(7,7,6,.48)),url('assets/invitation-curved-panels.png') 50% center/320% auto!important;
+  background:linear-gradient(180deg,rgba(7,7,6,.06),rgba(7,7,6,.48)),url('assets/invitation-curved-panels.jpg') 50% center/320% auto!important;
 }
 .invitation-page .invitation-builder-preview .builder-phone b,
 .invitation-page .invitation-phone b{
@@ -10588,4 +10591,608 @@ body.invitation-page .builder-phone::after{
   .coming-soon-copy h1{font-size:clamp(50px,18vw,72px)}
   .coming-soon-visual{min-height:54vh}
   .launch-success-shell>div{align-items:flex-start;flex-direction:column}
+}
+
+/* ============================================================
+   Private Design Concierge — confirmation modal
+   ============================================================ */
+.concierge-modal{
+  position:fixed;
+  inset:0;
+  z-index:9000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.concierge-modal[hidden]{
+  display:none!important;
+}
+.concierge-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(4,4,3,.86);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  animation:conciergeModalFade .5s ease both;
+}
+.concierge-modal-panel{
+  position:relative;
+  width:min(620px,100%);
+  max-height:88vh;
+  overflow-y:auto;
+  padding:clamp(34px,5vw,60px);
+  border:1px solid rgba(239,229,212,.22);
+  background:linear-gradient(155deg,#141110,#0a0908 62%);
+  box-shadow:0 40px 120px rgba(0,0,0,.7);
+  text-align:left;
+  animation:conciergeModalRise .62s cubic-bezier(.2,.7,.25,1) both;
+}
+.concierge-modal-eyebrow{
+  display:block;
+  color:#d8ba91;
+  font:700 10px/1.4 var(--sans,Arial,sans-serif);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+}
+.concierge-modal-panel h3{
+  margin:20px 0 18px;
+  color:#f7efe3;
+  font:300 clamp(40px,6vw,64px)/.98 var(--display,Georgia,serif);
+  letter-spacing:-.01em;
+}
+.concierge-modal-panel p{
+  margin:0 0 16px;
+  color:rgba(239,229,212,.72);
+  font:300 15px/1.8 var(--sans,Arial,sans-serif);
+}
+.concierge-modal-secondary{
+  font-size:13.5px!important;
+  color:rgba(239,229,212,.5)!important;
+}
+.concierge-modal-secondary a{
+  color:#d8ba91;
+  text-decoration:none;
+  border-bottom:1px solid rgba(216,186,145,.4);
+}
+.concierge-modal-panel small{
+  display:block;
+  margin-top:22px;
+  padding-top:20px;
+  border-top:1px solid rgba(239,229,212,.14);
+  color:#d8ba91;
+  font:700 10px/1.4 var(--sans,Arial,sans-serif);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.concierge-modal-button{
+  margin-top:30px;
+  padding:15px 40px;
+  border:1px solid #f0ddc6;
+  background:#f0ddc6;
+  color:#070706;
+  font:700 10px/1 var(--sans,Arial,sans-serif);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .3s ease,color .3s ease;
+}
+.concierge-modal-button:hover{
+  background:transparent;
+  color:#f0ddc6;
+}
+.concierge-modal-dismiss{
+  position:absolute;
+  top:16px;
+  right:18px;
+  width:40px;
+  height:40px;
+  border:0;
+  background:none;
+  color:rgba(239,229,212,.45);
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+  transition:color .3s ease;
+}
+.concierge-modal-dismiss:hover{
+  color:#f0ddc6;
+}
+body.concierge-modal-open{
+  overflow:hidden;
+}
+@keyframes conciergeModalFade{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes conciergeModalRise{
+  from{opacity:0;transform:translateY(26px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .concierge-modal-backdrop,
+  .concierge-modal-panel{animation:none}
+}
+@media (max-width:560px){
+  .concierge-modal{padding:16px}
+  .concierge-modal-button{width:100%}
+}
+
+/* ============================================================
+   Concierge action bar — stable centering + real button hierarchy
+   Replaces the earlier :last-child / auto-placement approach, which
+   broke whenever a button was display:none (the primary styling
+   landed on the hidden element and the row lost its centre).
+   ============================================================ */
+.wedding-design-page .concierge-actions{
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+  gap:16px!important;
+  margin-top:26px!important;
+}
+/* Explicit columns: the centre stays the centre even when a button is hidden. */
+.wedding-design-page .concierge-actions [data-concierge-prev]{
+  grid-column:1!important;
+  justify-self:start!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-next],
+.wedding-design-page .concierge-actions [data-concierge-submit]{
+  grid-column:2!important;
+  justify-self:center!important;
+}
+.wedding-design-page .concierge-actions.is-final-step [data-concierge-submit]{
+  grid-column:2!important;
+  justify-self:center!important;
+}
+
+/* Base button reset for the row */
+.wedding-design-page .concierge-actions button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:12px!important;
+  min-height:58px!important;
+  padding:0 34px!important;
+  border:1px solid rgba(239,229,212,.24)!important;
+  background:transparent!important;
+  color:#f6efe4!important;
+  font:700 10px/1 var(--sans)!important;
+  letter-spacing:.26em!important;
+  text-transform:uppercase!important;
+  cursor:pointer!important;
+  transition:background .28s ease,color .28s ease,border-color .28s ease,transform .28s ease,opacity .28s ease!important;
+}
+
+/* Primary CTA — targeted by role, not by DOM position */
+.wedding-design-page .concierge-actions [data-concierge-next],
+.wedding-design-page .concierge-actions [data-concierge-submit]{
+  min-width:clamp(240px,26vw,320px)!important;
+  border-color:#f0ddc6!important;
+  background:#f0ddc6!important;
+  color:#070706!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-next]:hover,
+.wedding-design-page .concierge-actions [data-concierge-submit]:hover{
+  background:transparent!important;
+  color:#f0ddc6!important;
+  transform:translateY(-2px)!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-submit]{
+  min-width:clamp(280px,30vw,380px)!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-submit]:disabled{
+  opacity:.5!important;
+  cursor:progress!important;
+  transform:none!important;
+  background:#f0ddc6!important;
+  color:#070706!important;
+}
+
+/* Secondary — quiet, narrow, clearly subordinate */
+.wedding-design-page .concierge-actions [data-concierge-prev]{
+  min-width:0!important;
+  min-height:58px!important;
+  padding:0 22px!important;
+  border-color:transparent!important;
+  color:rgba(239,229,212,.5)!important;
+  letter-spacing:.22em!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-prev]::before{
+  content:"\2190";
+  font-size:14px;
+  letter-spacing:0;
+  opacity:.7;
+}
+.wedding-design-page .concierge-actions [data-concierge-prev]:hover{
+  color:#f0ddc6!important;
+  border-color:rgba(239,229,212,.2)!important;
+}
+.wedding-design-page .concierge-actions button:focus-visible{
+  outline:2px solid #f0ddc6!important;
+  outline-offset:3px!important;
+}
+
+/* Chapter progress rail under the action bar */
+.wedding-design-page .concierge-rail{
+  grid-column:1/-1;
+  margin-top:22px;
+  height:2px;
+  background:rgba(239,229,212,.12);
+  overflow:hidden;
+}
+.wedding-design-page .concierge-rail span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,rgba(216,186,145,.5),#f0ddc6);
+  transition:width .5s cubic-bezier(.2,.7,.25,1);
+}
+
+@media(max-width:720px){
+  .wedding-design-page .concierge-actions{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  .wedding-design-page .concierge-actions [data-concierge-prev]{
+    grid-column:1!important;
+    grid-row:2!important;
+    justify-self:center!important;
+    width:auto!important;
+  }
+  .wedding-design-page .concierge-actions [data-concierge-next],
+  .wedding-design-page .concierge-actions [data-concierge-submit]{
+    grid-column:1!important;
+    grid-row:1!important;
+    justify-self:stretch!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .wedding-design-page .concierge-rail{grid-row:3;}
+}
+
+/* ------------------------------------------------------------
+   Site-wide accessibility + polish
+   ------------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid #f0ddc6;
+  outline-offset:3px;
+}
+html{
+  scroll-behavior:smooth;
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+img,video{
+  max-width:100%;
+}
+::selection{
+  background:#f0ddc6;
+  color:#070706;
+}
+
+/* ============================================================
+   Fixes from live screenshots — 20260902b
+   ============================================================ */
+
+/* --- Homepage hero: the two CTAs sat on different baselines -------------
+   .visual-atelier .enter-worlds (earlier in this file) forces
+   margin-top:30px!important, which pushed the first link down while the
+   second stayed put, and gave the two links different underline offsets.
+   Neutralise it inside the hero action row only.                        */
+.visual-atelier .gallery-hero-copy .launch-hero-actions{
+  display:flex!important;
+  align-items:flex-end!important;
+  flex-wrap:wrap!important;
+  gap:clamp(20px,2.4vw,34px)!important;
+  margin-top:34px!important;
+}
+.visual-atelier .gallery-hero-copy .launch-hero-actions>a,
+.visual-atelier .gallery-hero-copy .launch-hero-actions .enter-worlds{
+  margin:0!important;
+  min-height:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  padding:0 0 10px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(246,239,228,.32)!important;
+  background:transparent!important;
+  color:rgba(246,239,228,.78)!important;
+  font:500 10px/1 var(--sans)!important;
+  letter-spacing:.2em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+  transition:color .3s ease,border-color .3s ease!important;
+}
+/* Primary of the two reads brighter, not bigger */
+.visual-atelier .gallery-hero-copy .launch-hero-actions .enter-worlds{
+  color:#f6efe4!important;
+  border-bottom-color:rgba(246,239,228,.75)!important;
+}
+.visual-atelier .gallery-hero-copy .launch-hero-actions>a:hover{
+  color:#f0ddc6!important;
+  border-bottom-color:#f0ddc6!important;
+}
+@media(max-width:640px){
+  .visual-atelier .gallery-hero-copy .launch-hero-actions{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:16px!important;
+  }
+}
+
+/* --- Concierge action bar: force the label to sit inside its box -------- */
+.wedding-design-page .concierge-actions button{
+  box-sizing:border-box!important;
+  height:auto!important;
+  line-height:1.1!important;
+  padding-top:20px!important;
+  padding-bottom:20px!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+.wedding-design-page .concierge-actions [data-concierge-prev]{
+  padding-top:18px!important;
+  padding-bottom:18px!important;
+}
+
+/* --- Decorative diamond overlapped the input field --------------------- */
+.wedding-design-page .concierge-question::after{
+  right:clamp(10px,1.6vw,22px)!important;
+  bottom:clamp(10px,1.6vw,22px)!important;
+  width:84px!important;
+  height:84px!important;
+  border-color:rgba(216,186,145,.07)!important;
+  z-index:0!important;
+}
+.wedding-design-page .concierge-question>*{
+  position:relative;
+  z-index:1;
+}
+
+/* --- The standing note under the form read like a confirmation ---------
+   It is now hidden by default and only revealed by app.js when a
+   submission actually fails, as an error message.                       */
+.wedding-design-page .concierge-submit-note{
+  display:none!important;
+}
+.wedding-design-page .concierge-submit-note.is-visible{
+  display:block!important;
+  margin-top:18px!important;
+  color:#e5b8a4!important;
+  font:400 13px/1.7 var(--sans)!important;
+}
+
+/* ============================================================
+   TYPOGRAPHIC REFINEMENT — 20260902b
+   ------------------------------------------------------------
+   Findings from auditing the stylesheet:
+
+   • 158 declarations at 10px and 43 at 11px. Tracked micro-caps
+     are correct for this register, but they were also carrying
+     text meant to be read, not scanned.
+   • Roughly twenty distinct body sizes (8,9,10,11,12,13,14,15,
+     16,17,18,20,22…) with no relationship between them.
+   • Forty-plus separate clamp() display sizes.
+   • Body copy at 12–13px against display type up to 72px — a
+     ratio of nearly 6:1, which reads as two unrelated designs.
+
+   The fix is a modular scale (≈1.25) tied to one set of tokens,
+   applied where text is read rather than scanned.
+   ============================================================ */
+
+:root{
+  /* Micro — tracked capitals, for labels and eyebrows only */
+  --t-micro:11px;
+  --t-micro-track:.24em;
+  /* Reading sizes */
+  --t-small:13.5px;
+  --t-body:15.5px;
+  --t-lead:18px;
+  /* Display steps */
+  --t-h3:clamp(30px,2.9vw,44px);
+  --t-h2:clamp(38px,3.8vw,58px);
+  --t-h1:clamp(48px,5.4vw,84px);
+  /* Vertical rhythm */
+  --lh-body:1.75;
+  --lh-lead:1.65;
+  --lh-display:1.04;
+  /* Measure — keeps lines under ~72 characters */
+  --measure:64ch;
+  --measure-tight:52ch;
+}
+
+/* --- Reading text ------------------------------------------------------
+   Only paragraphs inside prose contexts. Labels, chips, nav and buttons
+   keep their tracked micro-caps.                                        */
+.wedding-design-page .concierge-question>p,
+.wedding-design-page .private-client-intro p,
+.launch-success-shell>p,
+.simple-inquiry-copy>p{
+  font-size:var(--t-body)!important;
+  line-height:var(--lh-body)!important;
+  letter-spacing:0!important;
+  max-width:var(--measure)!important;
+  text-transform:none!important;
+}
+
+/* Long explanatory copy was set at 12px — the hardest text on the site
+   to read, and the text that most needs reading.                       */
+.wedding-design-page .concierge-guidance p,
+.wedding-design-page .private-chat-form>p:not(.concierge-submit-note){
+  font-size:var(--t-small)!important;
+  line-height:1.7!important;
+  max-width:var(--measure)!important;
+}
+
+/* --- Concierge question card ------------------------------------------
+   The headline ran to 72px against 15px body and wrapped to three lines,
+   and the card was locked to 620px tall, which left the large empty gap
+   above the action bar.                                                 */
+.wedding-design-page .concierge-question{
+  min-height:clamp(340px,42vh,460px)!important;
+  padding:clamp(30px,3.4vw,48px)!important;
+}
+.wedding-design-page .concierge-question h3{
+  font-size:var(--t-h3)!important;
+  line-height:1.08!important;
+  letter-spacing:0!important;
+  max-width:var(--measure-tight)!important;
+  margin:0 0 14px!important;
+}
+.wedding-design-page .concierge-question>p{
+  margin:0 0 28px!important;
+}
+.wedding-design-page .question-count{
+  font-size:var(--t-micro)!important;
+  letter-spacing:var(--t-micro-track)!important;
+  margin:0 0 20px!important;
+  opacity:.75;
+}
+
+/* Field labels and inputs: the label was the same size as the value,
+   so the two competed. The value now leads.                            */
+.wedding-design-page .private-chat-form label{
+  font-size:10.5px!important;
+  letter-spacing:.2em!important;
+}
+.wedding-design-page .private-chat-form input,
+.wedding-design-page .private-chat-form select,
+.wedding-design-page .private-chat-form textarea{
+  font-size:16px!important;      /* 16px also stops iOS zooming on focus */
+  line-height:1.5!important;
+  min-height:56px!important;
+}
+.wedding-design-page .private-chat-form .check{
+  font-size:var(--t-small)!important;
+  line-height:1.6!important;
+  gap:12px!important;
+  max-width:var(--measure)!important;
+}
+
+/* Answer chips were 10px caps at .22em — legible as labels, but these
+   are choices people read. Slightly larger, slightly less tracked.     */
+.wedding-design-page .answer-chips span{
+  font-size:11px!important;
+  letter-spacing:.16em!important;
+  min-height:58px!important;
+}
+.wedding-design-page .answer-chips{
+  gap:10px!important;
+}
+
+/* Chapter rail */
+.wedding-design-page .concierge-progress button{
+  font-size:10.5px!important;
+  letter-spacing:.18em!important;
+}
+
+/* --- Homepage hero ----------------------------------------------------
+   .18em tracking on a 98px display face opens gaps between letters at
+   large sizes. Tracking should shrink as size grows, not stay fixed.   */
+.visual-atelier .gallery-hero-copy h1{
+  font-size:var(--t-h1)!important;
+  line-height:var(--lh-display)!important;
+  letter-spacing:.1em!important;
+}
+.visual-atelier .gallery-hero-copy .eyebrow,
+.visual-atelier .gallery-hero-copy .kicker{
+  font-size:var(--t-micro)!important;
+  letter-spacing:var(--t-micro-track)!important;
+  line-height:1.8!important;
+}
+.visual-atelier .gallery-hero-copy>p{
+  font-size:var(--t-lead)!important;
+  line-height:var(--lh-lead)!important;
+  max-width:38ch!important;
+  letter-spacing:0!important;
+}
+
+/* --- Navigation -------------------------------------------------------
+   Links sat at 11px untracked while the wordmark used .32em, so the two
+   halves of the bar read as different typefaces.                       */
+.navlinks{
+  font-size:10.5px!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  gap:clamp(22px,2.6vw,38px)!important;
+}
+
+/* --- Global guardrails ------------------------------------------------ */
+.eyebrow,.kicker{
+  font-size:var(--t-micro)!important;
+  letter-spacing:var(--t-micro-track)!important;
+}
+/* Hyphenation and orphan control for the long serif headlines */
+h1,h2,h3{
+  text-wrap:balance;
+}
+p{
+  text-wrap:pretty;
+}
+
+/* ============================================================
+   SPACING & ALIGNMENT — 20260902b
+   A single spacing scale, so vertical gaps stop being arbitrary.
+   ============================================================ */
+:root{
+  --s-1:8px;
+  --s-2:14px;
+  --s-3:22px;
+  --s-4:34px;
+  --s-5:clamp(44px,5vw,68px);
+  --s-6:clamp(68px,8vw,104px);
+}
+
+/* Concierge column: card, actions and progress rail now sit on one rhythm */
+.wedding-design-page .concierge-progress{
+  margin-bottom:var(--s-3)!important;
+  gap:var(--s-1)!important;
+}
+.wedding-design-page .concierge-actions{
+  margin-top:var(--s-3)!important;
+  gap:var(--s-2)!important;
+}
+.wedding-design-page .concierge-rail{
+  margin-top:var(--s-3)!important;
+}
+
+/* Success modal: match the refined scale */
+.concierge-modal-panel h3{
+  font:300 clamp(34px,3.6vw,50px)/1.06 var(--display)!important;
+  letter-spacing:0!important;
+}
+.concierge-modal-panel p{
+  font-size:var(--t-body)!important;
+  line-height:var(--lh-body)!important;
+  max-width:52ch!important;
+}
+.concierge-modal-secondary{
+  font-size:var(--t-small)!important;
+}
+.concierge-modal-eyebrow,
+.concierge-modal-panel small{
+  font-size:var(--t-micro)!important;
+  letter-spacing:var(--t-micro-track)!important;
+}
+
+/* Footer and legal pages were the smallest text on the site */
+footer p,
+.privacy-shell p,
+.terms-shell p{
+  font-size:var(--t-small)!important;
+  line-height:1.75!important;
+  max-width:var(--measure)!important;
 }

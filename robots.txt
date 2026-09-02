@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thankyou.html
+Disallow: /inquiry-received.html
+Disallow: /private-inquiry-received.html
+Disallow: /collaboration-received.html
+
+Sitemap: https://liaarmonia.com/sitemap.xml

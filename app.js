@@ -1,3 +1,5 @@
+const ATELIER_INBOX = 'atelier@liaarmonia.com';
+
 const hero = document.querySelector('.hero');
 const venuePanorama = document.querySelector('.venue-panorama');
 const roomButtons = [...document.querySelectorAll('.room-hotspots button')];
@@ -7,7 +9,7 @@ let roomTimer;
 let roomMoveTimer;
 
 const rooms = [
-  { name: 'Vision', x: '50%', position: '50% 50%', image: "url('assets/lia-hero-vision-1000115928.png')" },
+  { name: 'Vision', x: '50%', position: '50% 50%', image: "url('assets/lia-hero-vision-1000115928.jpg')" },
   { name: 'Space', x: '50%', position: '50% 50%', image: "url('assets/lia-stone-arch.jpg')" },
   { name: 'Walkthrough', x: '50%', position: '50% 48%', image: "url('assets/journal-veil-dinner-01.jpg')" },
   { name: 'Production', x: '50%', position: '50% 55%', image: "url('assets/concept-detail.jpg')" }
@@ -49,6 +51,7 @@ if (venuePanorama) {
 }
 
 document.querySelectorAll('.atelier-inquiry-form').forEach(form => {
+  const successPage = form.dataset.successPage || 'thankyou.html';
   form.addEventListener('submit', event => {
     const status = form.querySelector('.form-status');
     const styleOptions = form.querySelectorAll('input[name="style"]');
@@ -57,9 +60,48 @@ document.querySelectorAll('.atelier-inquiry-form').forEach(form => {
       if (status) status.textContent = 'Please choose at least one style direction.';
       return;
     }
+
+    event.preventDefault();
     const button = form.querySelector('button[type="submit"]');
-    if (button) button.textContent = 'Sending...';
+    if (button) { button.disabled = true; button.textContent = 'Sending...'; }
     if (status) status.textContent = 'Your note is being sent.';
+
+    const payload = {};
+    new FormData(form).forEach((value, key) => {
+      if (payload[key]) {
+        payload[key] = Array.isArray(payload[key]) ? [...payload[key], value] : [payload[key], value];
+      } else {
+        payload[key] = value;
+      }
+    });
+
+    // Honeypot: a filled hidden field means a bot. Pretend success, send nothing.
+    if (String(payload.website || '').trim()) {
+      window.location.href = successPage;
+      return;
+    }
+    delete payload.website;
+
+    payload._subject = payload.subject || `NEW INQUIRY - ${payload.name || payload.company || payload.email || 'Lia Armonia'}`;
+    payload._replyto = payload.email || '';
+    payload._template = 'table';
+    payload._captcha = 'false';
+    delete payload.subject;
+
+    fetch(`https://formsubmit.co/ajax/${ATELIER_INBOX}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(async response => {
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || String(result.success) !== 'true') throw new Error('failed');
+        window.location.href = successPage;
+      })
+      .catch(() => {
+        if (button) { button.disabled = false; button.textContent = 'Try again'; }
+        if (status) status.textContent = `Could not send. Please email ${ATELIER_INBOX} directly.`;
+      });
   });
 });
 
@@ -161,6 +203,11 @@ function setConciergeStep(index) {
   if (conciergeNext) conciergeNext.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'none' : 'inline-flex';
   if (conciergeSubmit) conciergeSubmit.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'inline-flex' : 'none';
   conciergeActions?.classList.toggle('is-final-step', conciergeIndex === conciergeQuestions.length - 1);
+  const rail = document.querySelector('[data-concierge-rail]');
+  if (rail) {
+    const progress = ((conciergeIndex + 1) / conciergeQuestions.length) * 100;
+    rail.style.width = `${progress}%`;
+  }
 }
 
 function canLeaveConciergeStep() {
@@ -235,6 +282,35 @@ conciergeForm?.addEventListener('change', event => {
   }
   if (target.name === 'environments' || target.name === 'support') updatePricingGuidance();
 });
+/* ---------------------------------- Concierge confirmation modal --------- */
+const conciergeModal = document.querySelector('[data-concierge-modal]');
+let conciergeModalReturnFocus = null;
+
+function closeConciergeModal() {
+  if (!conciergeModal || conciergeModal.hidden) return;
+  conciergeModal.hidden = true;
+  document.body.classList.remove('concierge-modal-open');
+  conciergeModalReturnFocus?.focus?.();
+  conciergeModalReturnFocus = null;
+}
+
+function openConciergeModal(inquiryId) {
+  if (!conciergeModal) return;
+  const reference = conciergeModal.querySelector('[data-concierge-modal-reference]');
+  if (reference) reference.textContent = inquiryId ? `Inquiry reference: ${inquiryId}` : '';
+  conciergeModalReturnFocus = document.activeElement;
+  conciergeModal.hidden = false;
+  document.body.classList.add('concierge-modal-open');
+  conciergeModal.querySelector('.concierge-modal-button')?.focus();
+}
+
+conciergeModal?.querySelectorAll('[data-concierge-modal-close]').forEach(node => {
+  node.addEventListener('click', closeConciergeModal);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeConciergeModal();
+});
+
 conciergeForm?.addEventListener('submit', event => {
   event.preventDefault();
   if (!canLeaveConciergeStep()) return;
@@ -259,6 +335,8 @@ conciergeForm?.addEventListener('submit', event => {
   if (timestampField) timestampField.value = submittedAt;
   localStorage.setItem('lia-last-inquiry-id', inquiryId);
   localStorage.setItem('lia-last-inquiry-name', conciergeForm.elements.names?.value || '');
+  const submitNote = conciergeForm.querySelector('.concierge-submit-note');
+  submitNote?.classList.remove('is-visible');
   if (conciergeSubmit) {
     conciergeSubmit.disabled = true;
     conciergeSubmit.textContent = 'Sending request...';
@@ -272,23 +350,37 @@ conciergeForm?.addEventListener('submit', event => {
       payload[key] = value;
     }
   });
-  payload.form_name = 'private-design-consultation';
-  fetch('/api/private-design-consultation', {
+  // --- Delivery -----------------------------------------------------------
+  // FormSubmit forwards the submission straight to the atelier inbox.
+  // No account, no API key, no server code. The very first submission
+  // triggers a one-time confirmation email that must be clicked once.
+  payload._subject = `NEW PRIVATE DESIGN INQUIRY - ${payload.names || 'Private client'} - ${inquiryId}`;
+  payload._replyto = payload.email || '';
+  payload._template = 'table';
+  payload._captcha = 'false';
+  delete payload.website;
+  delete payload['form-name'];
+  delete payload.subject;
+
+  fetch(`https://formsubmit.co/ajax/${ATELIER_INBOX}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(payload)
   })
-    .then(response => {
-      if (!response.ok) throw new Error('Submission failed');
-      return response.json().catch(() => ({}));
+    .then(async response => {
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || String(result.success) !== 'true') {
+        throw new Error(result.message || 'Submission failed');
+      }
+      return result;
     })
-    .then(result => {
-      const confirmedInquiryId = result.inquiryId || inquiryId;
+    .then(() => {
       conciergeForm.classList.add('is-submitted');
       const success = conciergeForm.querySelector('[data-concierge-success]');
       const reference = conciergeForm.querySelector('[data-success-reference]');
-      if (reference) reference.textContent = `Inquiry reference: ${confirmedInquiryId}`;
+      if (reference) reference.textContent = `Inquiry reference: ${inquiryId}`;
       if (success) success.hidden = false;
+      openConciergeModal(inquiryId);
       success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     })
     .catch(() => {
@@ -297,7 +389,10 @@ conciergeForm?.addEventListener('submit', event => {
         conciergeSubmit.textContent = 'Try again';
       }
       const note = conciergeForm.querySelector('.concierge-submit-note');
-      if (note) note.textContent = 'The request could not be sent. Please email atelier@liaarmonia.com and include your answers.';
+      if (note) {
+        note.textContent = `The request could not be sent. Please email ${ATELIER_INBOX} directly and include your answers.`;
+        note.classList.add('is-visible');
+      }
     });
 });
 updatePricingGuidance();

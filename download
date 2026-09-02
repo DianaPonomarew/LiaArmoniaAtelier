@@ -1,0 +1,29 @@
+# ---- Secrets: never commit these ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---- Dependencies & build output ----
+node_modules/
+dist/
+build/
+.cache/
+
+# ---- Host tooling ----
+.vercel/
+.netlify/
+
+# ---- OS / editor noise ----
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ---- Logs ----
+*.log
+npm-debug.log*

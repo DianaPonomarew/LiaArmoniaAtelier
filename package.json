@@ -1,1 +1,6 @@
-{"name":"lia-armonia-visual-atelier","version":"3.0.0","private":true,"type":"module"}
+{
+  "name": "lia-armonia-visual-atelier",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module"
+}
