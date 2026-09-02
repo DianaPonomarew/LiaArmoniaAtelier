@@ -3899,7 +3899,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   inset:0;
   background:
     linear-gradient(90deg,rgba(7,7,6,.02),rgba(7,7,6,.08) 70%,rgba(7,7,6,.18)),
-    url('assets/invitation-curved-panels.jpg') center/cover;
+    url('assets/invitation-curved-panels.png') center/cover;
   filter:saturate(.94) contrast(1.02) brightness(.98);
   transform:scale(1.01);
 }
@@ -4126,7 +4126,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border-radius:30px;
   background:
     linear-gradient(180deg,rgba(7,7,6,.12),rgba(7,7,6,.56)),
-    url('assets/invitation-curved-panels.jpg') 56% center/360% auto;
+    url('assets/invitation-curved-panels.png') 56% center/360% auto;
   box-shadow:0 28px 80px rgba(0,0,0,.44);
   text-align:center;
   font-family:var(--display);
@@ -4267,7 +4267,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border-radius:24px;
   background:
     linear-gradient(180deg,rgba(7,7,6,.16),rgba(7,7,6,.6)),
-    url('assets/invitation-curved-panels.jpg') 56% center/360% auto;
+    url('assets/invitation-curved-panels.png') 56% center/360% auto;
   box-shadow:0 22px 60px rgba(0,0,0,.4);
   text-align:center;
   font-family:var(--display);
@@ -4275,7 +4275,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
 .invitation-final-step{
   background:
     linear-gradient(180deg,rgba(7,7,6,.2),rgba(7,7,6,.84)),
-    url('assets/invitation-atelier-experience.jpg') 89% center/260% auto;
+    url('assets/invitation-atelier-experience.png') 89% center/260% auto;
 }
 @keyframes invitationReveal{
   from{opacity:0;transform:translateY(18px)}
@@ -4414,7 +4414,7 @@ footer>div:last-child{display:flex;gap:22px;font-size:11px;text-transform:upperc
   border:0;
   background:
     linear-gradient(90deg,rgba(8,8,7,.96),rgba(8,8,7,.72)),
-    url('assets/invitation-atelier-experience.jpg') right center/auto 112% no-repeat;
+    url('assets/invitation-atelier-experience.png') right center/auto 112% no-repeat;
 }
 .invitation-page .invitation-flow .invitation-step.active{
   display:block;
@@ -4812,7 +4812,7 @@ body.invitation-flow-open{
   border-radius:42px;
   background:
     linear-gradient(180deg,rgba(7,7,6,.12),rgba(7,7,6,.64)),
-    url('assets/invitation-curved-panels.jpg') 53% center/335% auto;
+    url('assets/invitation-curved-panels.png') 53% center/335% auto;
   box-shadow:0 24px 90px rgba(0,0,0,.66);
   text-align:center;
   font-family:var(--display);
@@ -6945,7 +6945,7 @@ body.invitation-flow-open{
   margin:0 auto 28px!important;
   background:
     linear-gradient(180deg,rgba(7,7,6,.04),rgba(7,7,6,.48)),
-    url('assets/invitation-curved-panels.jpg') 53% center/330% auto!important;
+    url('assets/invitation-curved-panels.png') 53% center/330% auto!important;
 }
 .invitation-builder-preview .builder-phone b,
 .invitation-phone b{
@@ -8063,7 +8063,7 @@ body.invitation-flow-open{
   width:min(200px,62%)!important;
   height:min(370px,45vh)!important;
   margin:0 auto 26px!important;
-  background:linear-gradient(180deg,rgba(7,7,6,.05),rgba(7,7,6,.52)),url('assets/invitation-curved-panels.jpg') 53% center/330% auto!important;
+  background:linear-gradient(180deg,rgba(7,7,6,.05),rgba(7,7,6,.52)),url('assets/invitation-curved-panels.png') 53% center/330% auto!important;
 }
 .invitation-page .invitation-builder-preview .builder-phone b,
 .invitation-page .invitation-phone b{
@@ -9399,7 +9399,7 @@ body.invitation-flow-open{
   margin:0 auto 24px!important;
   border:1px solid rgba(239,229,212,.52)!important;
   border-radius:28px!important;
-  background:linear-gradient(180deg,rgba(7,7,6,.06),rgba(7,7,6,.48)),url('assets/invitation-curved-panels.jpg') 50% center/320% auto!important;
+  background:linear-gradient(180deg,rgba(7,7,6,.06),rgba(7,7,6,.48)),url('assets/invitation-curved-panels.png') 50% center/320% auto!important;
 }
 .invitation-page .invitation-builder-preview .builder-phone b,
 .invitation-page .invitation-phone b{

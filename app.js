@@ -9,7 +9,7 @@ let roomTimer;
 let roomMoveTimer;
 
 const rooms = [
-  { name: 'Vision', x: '50%', position: '50% 50%', image: "url('assets/lia-hero-vision-1000115928.jpg')" },
+  { name: 'Vision', x: '50%', position: '50% 50%', image: "url('assets/lia-hero-vision-1000115928.png')" },
   { name: 'Space', x: '50%', position: '50% 50%', image: "url('assets/lia-stone-arch.jpg')" },
   { name: 'Walkthrough', x: '50%', position: '50% 48%', image: "url('assets/journal-veil-dinner-01.jpg')" },
   { name: 'Production', x: '50%', position: '50% 55%', image: "url('assets/concept-detail.jpg')" }
