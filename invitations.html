@@ -1,44 +1,376 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Digital Invitation Atelier — LIA ARMONÍA</title>
+<meta name="description" content="Cinematic digital wedding invitations by Lia Armonía.">
 <link rel="canonical" href="https://liaarmonia.com/invitations.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="LIA ARMONÍA">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://liaarmonia.com/invitations.html">
-<meta property="og:title" content="Digital Invitation Atelier — LIA ARMONÍA">
-<meta property="og:description" content="Interactive digital invitations by Lia Armonia. Coming soon.">
-<meta property="og:image" content="https://liaarmonia.com/assets/hero-clean.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Digital Invitation Atelier — LIA ARMONÍA">
-<meta name="twitter:description" content="Interactive digital invitations by Lia Armonia. Coming soon.">
-<meta name="twitter:image" content="https://liaarmonia.com/assets/hero-clean.jpg">
-<meta name="theme-color" content="#070706">
-<meta name="description" content="Interactive digital invitations by Lia Armonia. Coming soon.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20260902k">
+
+<style>
+:root{
+  --ink:#f4efe8;
+  --deep:#080807;
+  --warm:#d6c3ad;
+  --smoke:#aaa29a;
+  --line:rgba(255,255,255,.15);
+}
+html{scroll-behavior:smooth}
+body.digital-atelier-preview{
+  background:
+    radial-gradient(circle at 76% 18%, rgba(148,121,99,.18), transparent 30%),
+    radial-gradient(circle at 18% 80%, rgba(89,73,62,.12), transparent 28%),
+    var(--deep);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+.digital-atelier-preview .grain{opacity:.27;mix-blend-mode:soft-light}
+.digital-atelier-preview .nav{
+  background:linear-gradient(to bottom,rgba(8,8,7,.86),rgba(8,8,7,0));
+}
+.digital-atelier-preview .nav a,
+.digital-atelier-preview .brand{color:var(--ink)}
+.da-main{overflow:hidden}
+.da-hero{
+  min-height:100svh;
+  position:relative;
+  padding:138px 5vw 70px;
+  display:grid;
+  grid-template-columns:minmax(300px,.82fr) minmax(500px,1.18fr);
+  gap:4vw;
+  align-items:center;
+}
+.da-copy{position:relative;z-index:4;max-width:780px}
+.da-eyebrow{
+  font:500 10px/1 Inter,sans-serif;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:#bdb5ad;display:flex;align-items:center;gap:14px;margin:0 0 24px;
+}
+.da-eyebrow:before{content:"";width:42px;height:1px;background:#bdb5ad}
+.da-copy h1{
+  margin:0;
+  font:300 clamp(70px,9.3vw,154px)/.72 "Cormorant Garamond",serif;
+  letter-spacing:-.065em;
+}
+.da-copy h1 em{display:block;font-weight:300;color:var(--warm)}
+.da-lead{
+  width:min(100%,560px);
+  margin:36px 0 0;
+  color:#bdb5ad;
+  font:300 clamp(15px,1.2vw,19px)/1.7 Inter,sans-serif;
+}
+.da-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.da-action{
+  min-height:50px;padding:0 22px;
+  display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;border:1px solid rgba(255,255,255,.36);
+  color:var(--ink);
+  font:500 9px/1 Inter,sans-serif;
+  text-transform:uppercase;letter-spacing:.2em;
+  transition:.28s ease;
+}
+.da-action.primary{background:var(--ink);color:#0a0908;border-color:var(--ink)}
+.da-action:hover{transform:translateY(-2px);background:#fff;color:#080807}
+.da-action.disabled{pointer-events:none;opacity:.42}
+.da-visual{
+  height:min(78vh,840px);
+  min-height:590px;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.da-halo{
+  position:absolute;width:min(47vw,720px);aspect-ratio:1;border-radius:50%;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 0 0 70px rgba(255,255,255,.018),
+    0 0 0 140px rgba(255,255,255,.012);
+}
+.da-glass{
+  position:absolute;border:1px solid rgba(255,255,255,.19);
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.018));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 34px 90px rgba(0,0,0,.24);
+  backdrop-filter:blur(7px);
+}
+.da-glass.a{width:68%;height:72%;border-radius:50% 50% 44% 44%/14% 14% 8% 8%;transform:rotate(-7deg) translate(-8%,1%)}
+.da-glass.b{width:61%;height:68%;border-radius:50% 50% 42% 42%/14% 14% 7% 7%;transform:rotate(8deg) translate(10%,3%)}
+.da-visual img{
+  width:min(88%,880px);
+  max-height:90%;
+  object-fit:contain;
+  position:relative;z-index:3;
+  filter:drop-shadow(0 45px 65px rgba(0,0,0,.34));
+  animation:float 8s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-13px)}}
+.da-vertical-note{
+  position:absolute;right:0;bottom:8%;z-index:5;
+  writing-mode:vertical-rl;
+  font:500 9px/1 Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#938d86;
+}
+.da-scroll{
+  position:absolute;left:5vw;bottom:28px;
+  font:500 8px/1 Inter,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#88817a;
+}
+.da-scroll:after{content:"";display:inline-block;width:64px;height:1px;background:#77716b;margin:0 0 3px 12px}
+
+.da-statement{
+  padding:150px 5vw 130px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:.35fr 1.65fr;gap:7vw;
+}
+.da-statement-label{font:500 9px/1.4 Inter,sans-serif;letter-spacing:.23em;text-transform:uppercase;color:#8f8983}
+.da-statement blockquote{
+  max-width:1180px;margin:0;
+  font:300 clamp(44px,6.4vw,98px)/.92 "Cormorant Garamond",serif;
+  letter-spacing:-.043em;
+}
+.da-statement blockquote em{color:var(--warm);font-weight:300}
+
+.da-edition{
+  padding:145px 5vw;
+  display:grid;grid-template-columns:.72fr 1.28fr;gap:6vw;
+  align-items:start;
+}
+.da-edition-info{position:sticky;top:125px}
+.da-no{font:500 9px/1 Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#958e86}
+.da-edition h2{
+  font:300 clamp(54px,7vw,105px)/.8 "Cormorant Garamond",serif;
+  letter-spacing:-.055em;margin:21px 0 30px;
+}
+.da-edition h2 em{font-weight:300;color:var(--warm)}
+.da-edition-info>p{
+  max-width:470px;color:#a9a29b;
+  font:300 14px/1.75 Inter,sans-serif;margin:0;
+}
+.da-specs{margin:34px 0 0;border-top:1px solid var(--line)}
+.da-spec{display:grid;grid-template-columns:1fr auto;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);font:400 9px/1.4 Inter,sans-serif;text-transform:uppercase;letter-spacing:.16em;color:#908a83}
+.da-spec span:last-child{color:#d5cfc8;text-align:right}
+.da-stage{position:relative}
+.da-stage-frame{
+  min-height:820px;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,255,255,.16),transparent 36%),
+    linear-gradient(145deg,#2a2724,#171614 58%,#26221e);
+  border:1px solid rgba(255,255,255,.1);
+  overflow:hidden;
+  position:relative;
+}
+.da-stage-frame:before{
+  content:"";position:absolute;inset:4%;border:1px solid rgba(255,255,255,.07);border-radius:50%;
+}
+.da-stage-frame img{width:min(82%,840px);position:relative;z-index:2;filter:drop-shadow(0 44px 55px rgba(0,0,0,.4))}
+.da-stage-caption{
+  display:flex;justify-content:space-between;gap:20px;padding:17px 1px 0;
+  font:500 8px/1.4 Inter,sans-serif;text-transform:uppercase;letter-spacing:.19em;color:#7f7973;
+}
+
+.da-process{
+  background:#eee9e1;color:#161411;
+  padding:145px 5vw;
+}
+.da-process-top{display:grid;grid-template-columns:1fr .9fr;gap:8vw;align-items:end;margin-bottom:80px}
+.da-process h2{
+  font:300 clamp(62px,8vw,120px)/.76 "Cormorant Garamond",serif;
+  letter-spacing:-.058em;margin:0;
+}
+.da-process-top p{max-width:560px;font:300 16px/1.7 Inter,sans-serif;color:#5c5751;margin:0}
+.da-steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(20,17,14,.18)}
+.da-step{min-height:250px;padding:25px 28px 0 0;border-right:1px solid rgba(20,17,14,.14)}
+.da-step:not(:first-child){padding-left:28px}
+.da-step:last-child{border-right:0}
+.da-step small{font:500 8px/1 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7b756f}
+.da-step h3{font:300 31px/1 "Cormorant Garamond",serif;margin:58px 0 12px}
+.da-step p{font:300 12px/1.65 Inter,sans-serif;color:#68625c;margin:0;max-width:230px}
+
+.da-collection{padding:145px 5vw 160px}
+.da-collection-head{
+  display:flex;justify-content:space-between;gap:30px;align-items:end;
+  padding-bottom:34px;border-bottom:1px solid var(--line)
+}
+.da-collection h2{font:300 clamp(52px,6.7vw,94px)/.82 "Cormorant Garamond",serif;letter-spacing:-.05em;margin:0}
+.da-collection-head p{max-width:430px;color:#99928b;font:300 13px/1.7 Inter,sans-serif;margin:0}
+.da-grid{display:grid;grid-template-columns:1.45fr .775fr .775fr;gap:17px;padding-top:18px}
+.da-card{position:relative}
+.da-card-art{
+  min-height:620px;background:#171614;border:1px solid rgba(255,255,255,.09);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative
+}
+.da-card.small .da-card-art{min-height:620px;background:#10100f}
+.da-card-art img{width:82%;position:relative;z-index:2}
+.da-card.small .da-card-art:after{
+  content:"PRIVATE DEVELOPMENT";
+  color:#494540;letter-spacing:.24em;font:500 8px/1 Inter,sans-serif;
+}
+.da-card-meta{display:flex;justify-content:space-between;gap:20px;margin-top:16px}
+.da-card h3{font:300 33px/1 "Cormorant Garamond",serif;margin:0}
+.da-card-meta span{font:500 8px/1.4 Inter,sans-serif;text-transform:uppercase;letter-spacing:.17em;color:#7f7973;text-align:right}
+
+.da-preview-bar{
+  margin:0 5vw 120px;border:1px solid rgba(255,255,255,.14);
+  display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;padding:18px 20px;
+}
+.da-preview-dot{width:7px;height:7px;background:#d6c3ad;border-radius:50%;box-shadow:0 0 14px rgba(214,195,173,.7)}
+.da-preview-bar p{margin:0;font:400 10px/1.5 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#aaa39b}
+.da-preview-bar strong{font:500 9px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#e5ded6}
+
+.digital-atelier-preview footer{border-top:1px solid var(--line);color:var(--ink)}
+.digital-atelier-preview footer a{color:var(--ink)}
+
+@media(max-width:980px){
+  .da-hero{grid-template-columns:1fr;padding-top:120px;gap:15px}
+  .da-copy h1{font-size:clamp(66px,17vw,110px)}
+  .da-visual{min-height:440px;height:52vh}
+  .da-halo{width:78vw}
+  .da-statement,.da-edition,.da-process-top{grid-template-columns:1fr}
+  .da-edition-info{position:static}
+  .da-stage-frame{min-height:600px}
+  .da-steps{grid-template-columns:1fr 1fr}
+  .da-step:nth-child(2){border-right:0}
+  .da-grid{grid-template-columns:1fr}
+  .da-card-art,.da-card.small .da-card-art{min-height:540px}
+}
+@media(max-width:620px){
+  .da-hero{padding-left:20px;padding-right:20px}
+  .da-statement,.da-edition,.da-process,.da-collection{padding-left:20px;padding-right:20px}
+  .da-statement{padding-top:100px;padding-bottom:100px}
+  .da-stage-frame{min-height:470px}
+  .da-steps{grid-template-columns:1fr}
+  .da-step,.da-step:not(:first-child){border-right:0;border-bottom:1px solid rgba(20,17,14,.14);padding:24px 0}
+  .da-preview-bar{margin-left:20px;margin-right:20px;grid-template-columns:auto 1fr}
+  .da-preview-bar strong{grid-column:2}
+}
+</style>
 </head>
-<body class="funnel-mode visual-atelier coming-soon-page">
+
+<body class="funnel-mode visual-atelier digital-atelier-preview">
 <div class="grain"></div>
-<nav class="nav gallery-nav"><a class="brand" href="index.html"><span>LA</span><b>L I A&nbsp;&nbsp;A R M O N Í A</b></a><div class="navlinks"><a href="designs.html">Designs</a><a href="atelier.html">Atelier</a><a href="services.html">Services</a><a href="inquiries.html">Inquiries</a></div></nav>
-<main class="coming-soon-shell">
-  <section class="coming-soon-copy">
-    <p class="eyebrow">Digital Invitation Atelier</p>
-    <h1>A new way<br>to invite.</h1>
-    <p>Interactive digital invitations designed as complete Lia Armonía worlds, personalized with your celebration, imagery, film, sound and guest response experience.</p>
-    <span>Coming Soon</span>
+
+<nav class="nav gallery-nav">
+  <a class="brand" href="index.html"><span>LA</span><b>L I A&nbsp;&nbsp;A R M O N Í A</b></a>
+  <div class="navlinks">
+    <a href="designs.html">Designs</a>
+    <a href="atelier.html">Atelier</a>
+    <a href="services.html">Services</a>
+    <a href="inquiries.html">Inquiries</a>
+  </div>
+</nav>
+
+<main class="da-main">
+  <section class="da-hero">
+    <div class="da-copy">
+      <p class="da-eyebrow">Digital Invitation Atelier · First Collection</p>
+      <h1>The invitation<br><em>becomes the world.</em></h1>
+      <p class="da-lead">Cinematic digital invitations composed as immersive Lia Armonía experiences. Designed by the atelier. Personalised by you. Published instantly.</p>
+      <div class="da-actions">
+        <a class="da-action primary" href="#glass-01">Enter Glass No. 01</a>
+        <span class="da-action disabled">Purchase opens at launch</span>
+      </div>
+    </div>
+
+    <figure class="da-visual" aria-label="Glass Invitation preview">
+      <div class="da-halo"></div>
+      <div class="da-glass a"></div>
+      <div class="da-glass b"></div>
+      <img src="assets/invitation-curved-panels.png" alt="Lia Armonía Glass Invitation">
+      <figcaption class="da-vertical-note">Invitation · Film · Guest Experience</figcaption>
+    </figure>
+
+    <div class="da-scroll">Discover the collection</div>
   </section>
-  <figure class="coming-soon-visual">
-    <img src="assets/invitation-curved-panels.png" alt="Lia Armonia digital invitation concept">
-    <figcaption>Digital · Cinematic · Personal</figcaption>
-  </figure>
+
+  <section class="da-statement">
+    <div class="da-statement-label">The Lia Armonía approach</div>
+    <blockquote>Not a template.<br>Not digital stationery.<br><em>A first entrance into the celebration.</em></blockquote>
+  </section>
+
+  <section class="da-edition" id="glass-01">
+    <aside class="da-edition-info">
+      <div class="da-no">Collection I · Edition 01</div>
+      <h2>Glass<br><em>No. 01</em></h2>
+      <p>A sculptural invitation built around translucent surfaces, layered typography and controlled movement. The visual language stays intact while the celebration details become entirely yours.</p>
+
+      <div class="da-specs">
+        <div class="da-spec"><span>Format</span><span>Responsive digital invitation</span></div>
+        <div class="da-spec"><span>Personalisation</span><span>Names · Date · Venue · Copy · Imagery</span></div>
+        <div class="da-spec"><span>Delivery</span><span>Private invitation link</span></div>
+        <div class="da-spec"><span>Experience</span><span>Mobile + Desktop</span></div>
+      </div>
+
+      <div class="da-actions">
+        <span class="da-action primary disabled">Purchase Edition</span>
+        <span class="da-action disabled">Live Demo Next</span>
+      </div>
+    </aside>
+
+    <div class="da-stage">
+      <div class="da-stage-frame">
+        <img src="assets/invitation-curved-panels.png" alt="Glass No. 01 invitation preview">
+      </div>
+      <div class="da-stage-caption">
+        <span>Preview build · No checkout enabled</span>
+        <span>LIA / DIGITAL 001</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="da-process">
+    <div class="da-process-top">
+      <h2>From choice<br>to invitation.</h2>
+      <p>The finished atelier will run without manual studio fulfilment. A couple chooses an edition, purchases securely, personalises the content and publishes the invitation themselves.</p>
+    </div>
+    <div class="da-steps">
+      <article class="da-step"><small>01 · Choose</small><h3>Select an edition.</h3><p>Enter a curated Lia Armonía world rather than starting from a blank template.</p></article>
+      <article class="da-step"><small>02 · Purchase</small><h3>Secure the design.</h3><p>One time checkout through Stripe. Access is created automatically after payment.</p></article>
+      <article class="da-step"><small>03 · Personalise</small><h3>Make it yours.</h3><p>Add names, date, venue, text and imagery while the art direction remains protected.</p></article>
+      <article class="da-step"><small>04 · Publish</small><h3>Invite beautifully.</h3><p>Preview the finished experience and publish a private shareable invitation link.</p></article>
+    </div>
+  </section>
+
+  <section class="da-collection">
+    <div class="da-collection-head">
+      <h2>Collection I.</h2>
+      <p>One finished experience first. Additional invitation worlds will be released only after Glass No. 01 is flawless from purchase through publication.</p>
+    </div>
+    <div class="da-grid">
+      <article class="da-card">
+        <div class="da-card-art"><img src="assets/invitation-curved-panels.png" alt="Glass No. 01"></div>
+        <div class="da-card-meta"><h3>Glass No. 01</h3><span>First Release<br>In Development</span></div>
+      </article>
+      <article class="da-card small">
+        <div class="da-card-art"></div>
+        <div class="da-card-meta"><h3>No. 02</h3><span>Private<br>Development</span></div>
+      </article>
+      <article class="da-card small">
+        <div class="da-card-art"></div>
+        <div class="da-card-meta"><h3>No. 03</h3><span>Private<br>Development</span></div>
+      </article>
+    </div>
+  </section>
+
+  <aside class="da-preview-bar">
+    <span class="da-preview-dot"></span>
+    <p>Private build branch · Checkout and fulfilment are intentionally disabled.</p>
+    <strong>Preview only</strong>
+  </aside>
 </main>
-<footer><div class="brand"><span>LA</span><b>Lia Armonía</b></div><p><strong>LIA ARMONÍA</strong><br><em>Wedding Design Atelier</em></p><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a class="footer-icon-link" href="mailto:atelier@liaarmonia.com" aria-label="Email"><span class="contact-icon mail-icon"></span>Email</a><a class="footer-icon-link" href="https://www.instagram.com/lia_armonia/" target="_blank" rel="noopener" aria-label="Instagram"><span class="contact-icon instagram-icon"></span>Instagram</a></div></footer>
+
+<footer>
+  <div class="brand"><span>LA</span><b>Lia Armonía</b></div>
+  <p><strong>LIA ARMONÍA</strong><br><em>Wedding Design Atelier</em></p>
+  <div>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="contact.html">Contact</a>
+    <a class="footer-icon-link" href="mailto:atelier@liaarmonia.com" aria-label="Email"><span class="contact-icon mail-icon"></span>Email</a>
+    <a class="footer-icon-link" href="https://www.instagram.com/lia_armonia/" target="_blank" rel="noopener" aria-label="Instagram"><span class="contact-icon instagram-icon"></span>Instagram</a>
+  </div>
+</footer>
 </body>
 </html>
