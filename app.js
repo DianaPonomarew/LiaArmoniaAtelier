@@ -841,15 +841,24 @@ document.addEventListener('keydown', event => {
       return;
     }
 
-    try {
-      const response = await fetch(`/api/design-edition-access?session_id=${encodeURIComponent(sessionId)}`);
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.error || 'Purchase verification failed.');
-      renderProtectedEdition(payload, sessionId);
-    } catch (error) {
-      renderAccessError(error.message);
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        const response = await fetch(`/api/design-edition-access?session_id=${encodeURIComponent(sessionId)}`);
+        const payload = await response.json().catch(() => ({}));
+        if (response.ok) {
+          renderProtectedEdition(payload, sessionId);
+          return;
+        }
+        if (response.status !== 402 || attempt === 4) {
+          throw new Error(payload.error || 'Purchase verification failed.');
+        }
+        await new Promise(resolve => window.setTimeout(resolve, 1200));
+      } catch (error) {
+        if (attempt === 4) renderAccessError(error.message);
+      }
     }
   };
 
   initDesignEditionAccess();
 })();
+
