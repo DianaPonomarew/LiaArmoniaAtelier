@@ -1,5 +1,3 @@
-const ATELIER_INBOX = 'atelier@liaarmonia.com';
-
 const hero = document.querySelector('.hero');
 const venuePanorama = document.querySelector('.venue-panorama');
 const roomButtons = [...document.querySelectorAll('.room-hotspots button')];
@@ -9,7 +7,7 @@ let roomTimer;
 let roomMoveTimer;
 
 const rooms = [
-  { name: 'Vision', x: '50%', position: '50% 42%', image: "url('assets/lia-atelier-colonnade.jpg')" },
+  { name: 'Vision', x: '50%', position: '50% 50%', image: "url('assets/lia-hero-vision-1000115928.png')" },
   { name: 'Space', x: '50%', position: '50% 50%', image: "url('assets/lia-stone-arch.jpg')" },
   { name: 'Walkthrough', x: '50%', position: '50% 48%', image: "url('assets/journal-veil-dinner-01.jpg')" },
   { name: 'Production', x: '50%', position: '50% 55%', image: "url('assets/concept-detail.jpg')" }
@@ -51,56 +49,59 @@ if (venuePanorama) {
 }
 
 document.querySelectorAll('.atelier-inquiry-form').forEach(form => {
-  const successPage = form.dataset.successPage || 'thankyou.html';
   form.addEventListener('submit', event => {
+    event.preventDefault();
     const status = form.querySelector('.form-status');
     const styleOptions = form.querySelectorAll('input[name="style"]');
     if (styleOptions.length && ![...styleOptions].some(option => option.checked)) {
-      event.preventDefault();
       if (status) status.textContent = 'Please choose at least one style direction.';
       return;
     }
-
-    event.preventDefault();
     const button = form.querySelector('button[type="submit"]');
-    if (button) { button.disabled = true; button.textContent = 'Sending...'; }
+    const originalLabel = button?.textContent || 'Send';
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending...';
+    }
     if (status) status.textContent = 'Your note is being sent.';
-
     const payload = {};
     new FormData(form).forEach((value, key) => {
-      if (payload[key]) {
-        payload[key] = Array.isArray(payload[key]) ? [...payload[key], value] : [payload[key], value];
-      } else {
-        payload[key] = value;
-      }
+      if (payload[key]) payload[key] = Array.isArray(payload[key]) ? [...payload[key], value] : [payload[key], value];
+      else payload[key] = value;
     });
-
-    // Honeypot: a filled hidden field means a bot. Pretend success, send nothing.
-    if (String(payload.website || '').trim()) {
-      window.location.href = successPage;
-      return;
-    }
-    delete payload.website;
-
-    payload._subject = payload.subject || `NEW INQUIRY - ${payload.name || payload.company || payload.email || 'Lia Armonia'}`;
-    payload._replyto = payload.email || '';
-    payload._template = 'table';
-    payload._captcha = 'false';
-    delete payload.subject;
-
-    fetch(`https://formsubmit.co/ajax/${ATELIER_INBOX}`, {
+    fetch(form.getAttribute('action') || '/api/atelier-inquiry', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
       .then(async response => {
         const result = await response.json().catch(() => ({}));
-        if (!response.ok || String(result.success) !== 'true') throw new Error('failed');
-        window.location.href = successPage;
+        if (!response.ok) {
+          const error = new Error(result.error || 'Submission failed');
+          error.status = response.status;
+          throw error;
+        }
+        return result;
       })
-      .catch(() => {
-        if (button) { button.disabled = false; button.textContent = 'Try again'; }
-        if (status) status.textContent = `Could not send. Please email ${ATELIER_INBOX} directly.`;
+      .then(() => {
+        form.reset();
+        if (button) button.textContent = 'Inquiry sent';
+        if (status) status.textContent = 'Thank you. Your note has been sent to the atelier.';
+      })
+      .catch(error => {
+        if (button) {
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+        if (status) {
+          if (error?.status === 404) {
+            status.textContent = 'The email function is missing on Vercel. Deploy this folder with the api directory at the project root.';
+          } else if (error?.message === 'Email service is not configured.') {
+            status.textContent = 'Email delivery is not connected on Vercel yet. Add the Resend environment variables, then redeploy.';
+          } else {
+            status.textContent = 'The note could not be sent. Please try again or email atelier@liaarmonia.com.';
+          }
+        }
       });
   });
 });
@@ -119,13 +120,6 @@ const conciergeSteps = [...document.querySelectorAll('[data-concierge-step]')];
 const conciergePrev = document.querySelector('[data-concierge-prev]');
 const conciergeNext = document.querySelector('[data-concierge-next]');
 const conciergeSubmit = document.querySelector('[data-concierge-submit]');
-const finalConfirm = document.querySelector('.final-confirm input[type="checkbox"]');
-
-function syncFinalConfirm() {
-  if (!conciergeSubmit || !finalConfirm) return;
-  conciergeSubmit.disabled = !finalConfirm.checked;
-}
-finalConfirm?.addEventListener('change', syncFinalConfirm);
 const conciergeForm = document.querySelector('.one-question-concierge');
 const conciergeActions = document.querySelector('.concierge-actions');
 let conciergeIndex = 0;
@@ -207,16 +201,9 @@ function setConciergeStep(index) {
     step.classList.toggle('active', stepIndex === activeChapter);
   });
   if (conciergePrev) conciergePrev.style.visibility = conciergeIndex === 0 ? 'hidden' : 'visible';
-  const isFinalStep = conciergeIndex === conciergeQuestions.length - 1;
-  if (conciergeNext) conciergeNext.hidden = isFinalStep;
-  if (conciergeSubmit) conciergeSubmit.hidden = !isFinalStep;
-  if (isFinalStep) syncFinalConfirm();
+  if (conciergeNext) conciergeNext.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'none' : 'inline-flex';
+  if (conciergeSubmit) conciergeSubmit.style.display = conciergeIndex === conciergeQuestions.length - 1 ? 'inline-flex' : 'none';
   conciergeActions?.classList.toggle('is-final-step', conciergeIndex === conciergeQuestions.length - 1);
-  const rail = document.querySelector('[data-concierge-rail]');
-  if (rail) {
-    const progress = ((conciergeIndex + 1) / conciergeQuestions.length) * 100;
-    rail.style.width = `${progress}%`;
-  }
 }
 
 function canLeaveConciergeStep() {
@@ -291,41 +278,8 @@ conciergeForm?.addEventListener('change', event => {
   }
   if (target.name === 'environments' || target.name === 'support') updatePricingGuidance();
 });
-/* ---------------------------------- Concierge confirmation modal --------- */
-const conciergeModal = document.querySelector('[data-concierge-modal]');
-let conciergeModalReturnFocus = null;
-
-function closeConciergeModal() {
-  if (!conciergeModal || conciergeModal.hidden) return;
-  conciergeModal.hidden = true;
-  document.body.classList.remove('concierge-modal-open');
-  conciergeModalReturnFocus?.focus?.();
-  conciergeModalReturnFocus = null;
-}
-
-function openConciergeModal(inquiryId) {
-  if (!conciergeModal) return;
-  const reference = conciergeModal.querySelector('[data-concierge-modal-reference]');
-  if (reference) reference.textContent = inquiryId ? `Inquiry reference: ${inquiryId}` : '';
-  conciergeModalReturnFocus = document.activeElement;
-  conciergeModal.hidden = false;
-  document.body.classList.add('concierge-modal-open');
-  conciergeModal.querySelector('.concierge-modal-button')?.focus();
-}
-
-conciergeModal?.querySelectorAll('[data-concierge-modal-close]').forEach(node => {
-  node.addEventListener('click', closeConciergeModal);
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') closeConciergeModal();
-});
-
 conciergeForm?.addEventListener('submit', event => {
   event.preventDefault();
-  if (finalConfirm && !finalConfirm.checked) {
-    finalConfirm.closest('.check')?.classList.add('needs-attention');
-    return;
-  }
   if (!canLeaveConciergeStep()) return;
   const invalidGroupIndex = conciergeQuestions.findIndex(question => {
     return [...question.querySelectorAll('[data-required-group]')].some(group => !group.querySelector('input:checked'));
@@ -348,8 +302,6 @@ conciergeForm?.addEventListener('submit', event => {
   if (timestampField) timestampField.value = submittedAt;
   localStorage.setItem('lia-last-inquiry-id', inquiryId);
   localStorage.setItem('lia-last-inquiry-name', conciergeForm.elements.names?.value || '');
-  const submitNote = conciergeForm.querySelector('.concierge-submit-note');
-  submitNote?.classList.remove('is-visible');
   if (conciergeSubmit) {
     conciergeSubmit.disabled = true;
     conciergeSubmit.textContent = 'Sending request...';
@@ -363,48 +315,44 @@ conciergeForm?.addEventListener('submit', event => {
       payload[key] = value;
     }
   });
-  // --- Delivery -----------------------------------------------------------
-  // FormSubmit forwards the submission straight to the atelier inbox.
-  // No account, no API key, no server code. The very first submission
-  // triggers a one-time confirmation email that must be clicked once.
-  payload._subject = `NEW PRIVATE DESIGN INQUIRY - ${payload.names || 'Private client'} - ${inquiryId}`;
-  payload._replyto = payload.email || '';
-  payload._template = 'table';
-  payload._captcha = 'false';
-  delete payload.website;
-  delete payload['form-name'];
-  delete payload.subject;
-
-  fetch(`https://formsubmit.co/ajax/${ATELIER_INBOX}`, {
+  payload.form_name = 'private-design-consultation';
+  fetch('/api/private-design-consultation', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
     .then(async response => {
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || String(result.success) !== 'true') {
-        throw new Error(result.message || 'Submission failed');
+      if (!response.ok) {
+        const error = new Error(result.error || 'Submission failed');
+        error.status = response.status;
+        throw error;
       }
       return result;
     })
-    .then(() => {
+    .then(result => {
+      const confirmedInquiryId = result.inquiryId || inquiryId;
       conciergeForm.classList.add('is-submitted');
       const success = conciergeForm.querySelector('[data-concierge-success]');
       const reference = conciergeForm.querySelector('[data-success-reference]');
-      if (reference) reference.textContent = `Inquiry reference: ${inquiryId}`;
+      if (reference) reference.textContent = `Inquiry reference: ${confirmedInquiryId}`;
       if (success) success.hidden = false;
-      openConciergeModal(inquiryId);
       success?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     })
-    .catch(() => {
+    .catch(error => {
       if (conciergeSubmit) {
         conciergeSubmit.disabled = false;
         conciergeSubmit.textContent = 'Try again';
       }
       const note = conciergeForm.querySelector('.concierge-submit-note');
       if (note) {
-        note.textContent = `The request could not be sent. Please email ${ATELIER_INBOX} directly and include your answers.`;
-        note.classList.add('is-visible');
+        if (error?.status === 404) {
+          note.textContent = 'The email function is missing on Vercel. Deploy this folder with the api directory at the project root, then the request will send automatically.';
+        } else if (error?.message === 'Email service is not configured.') {
+          note.textContent = 'Email delivery is not connected on Vercel yet. Add the Resend environment variables, redeploy, and this request will send automatically.';
+        } else {
+          note.textContent = 'Email delivery did not complete. Please try once more or email atelier@liaarmonia.com with your answers.';
+        }
       }
     });
 });
@@ -659,49 +607,249 @@ document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && invitationFlow?.classList.contains('is-open')) closeInvitationFlow();
 });
 
+(() => {
+  const checkoutButtons = document.querySelectorAll('[data-design-edition-checkout]');
+  const checkoutStatus = document.querySelectorAll('[data-design-edition-status]');
+  const accessRoot = document.querySelector('[data-design-edition-access]');
+  let editionConfig = window.LIA_DESIGN_EDITIONS?.products?.['burgundy-chartreuse'];
 
-
-
-/* ============================================================
-   Collapsible sections — click a heading to reveal its text.
-   Any element marked data-collapse becomes an accordion whose
-   first heading is the trigger and whose remaining children are
-   the panel. Open by default on the first item of each group.
-   ============================================================ */
-(function initCollapsibles(){
-  document.querySelectorAll('[data-collapse]').forEach((block, index) => {
-    const heading = block.querySelector('h2, h3, h4, .collapse-title');
-    if (!heading) return;
-
-    const panel = document.createElement('div');
-    panel.className = 'collapse-panel';
-    while (heading.nextSibling) panel.appendChild(heading.nextSibling);
-    block.appendChild(panel);
-
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'collapse-trigger';
-    button.setAttribute('aria-expanded', 'false');
-    heading.parentNode.insertBefore(button, heading);
-    button.appendChild(heading);
-
-    const mark = document.createElement('span');
-    mark.className = 'collapse-mark';
-    mark.setAttribute('aria-hidden', 'true');
-    button.appendChild(mark);
-
-    const setOpen = open => {
-      block.classList.toggle('is-open', open);
-      button.setAttribute('aria-expanded', String(open));
-      panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+  const trackEditionEvent = (name, params = {}) => {
+    const payload = {
+      design_edition_slug: 'burgundy-chartreuse',
+      design_edition_number: '01',
+      ...params
     };
+    if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+    if (typeof window.plausible === 'function') window.plausible(name, { props: payload });
+    window.dataLayer?.push?.({ event: name, ...payload });
+  };
 
-    button.addEventListener('click', () => setOpen(!block.classList.contains('is-open')));
-    setOpen(index === 0 && block.hasAttribute('data-collapse-open'));
-    window.addEventListener('resize', () => {
-      if (block.classList.contains('is-open')) panel.style.maxHeight = panel.scrollHeight + 'px';
+  const applyEditionConfig = config => {
+    if (!config) return;
+    editionConfig = config;
+    document.querySelectorAll('[data-design-edition-price]').forEach(node => {
+      node.textContent = editionConfig.priceLabel;
+    });
+    checkoutButtons.forEach(button => {
+      button.textContent = button.dataset.designEditionCheckoutLabel === 'purchase'
+        ? `Purchase Edition — ${editionConfig.priceLabel}`
+        : editionConfig.ctaLabel;
+    });
+  };
+
+  applyEditionConfig(editionConfig);
+
+  if (checkoutButtons.length || accessRoot) {
+    fetch('/api/design-edition-config')
+      .then(response => (response.ok ? response.json() : null))
+      .then(payload => applyEditionConfig(payload?.products?.['burgundy-chartreuse']))
+      .catch(() => {});
+  }
+
+  if (document.body.classList.contains('de-product')) {
+    trackEditionEvent('design_edition_view', {
+      value: editionConfig?.price || 1200,
+      currency: 'USD'
+    });
+  }
+
+  const setEditionStatus = message => {
+    checkoutStatus.forEach(node => {
+      node.textContent = message;
+    });
+  };
+
+  checkoutButtons.forEach(button => {
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      setEditionStatus('Opening secure checkout...');
+      trackEditionEvent('design_edition_checkout_started', {
+        value: editionConfig?.price || 1200,
+        currency: 'USD'
+      });
+
+      try {
+        const response = await fetch('/api/design-edition-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productSlug: 'burgundy-chartreuse' })
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.url) {
+          throw new Error(payload.error || 'Checkout could not be opened.');
+        }
+        window.location.assign(payload.url);
+      } catch (error) {
+        setEditionStatus(`${error.message} Please email atelier@liaarmonia.com if this continues.`);
+        button.disabled = false;
+      }
     });
   });
+
+  if (!accessRoot) return;
+
+  const escapeEditionHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+
+  const renderAccessError = message => {
+    accessRoot.innerHTML = `
+      <section class="de-access-loading de-access-denied">
+        <p class="de-eyebrow">Private Access</p>
+        <h1>We could not verify this purchase.</h1>
+        <p>${escapeEditionHtml(message)}</p>
+        <a class="de-primary-button" href="mailto:atelier@liaarmonia.com?subject=Design%20Edition%20Access%20Help">Email the Atelier</a>
+      </section>
+    `;
+  };
+
+  const renderProtectedEdition = (payload, sessionId) => {
+    const sections = payload.edition?.sections || [];
+    const downloads = payload.edition?.downloads || [];
+    const gallery = payload.edition?.gallery || [];
+    const title = payload.edition?.title || 'Burgundy + Chartreuse';
+    const summary = payload.edition?.summary || '';
+
+    accessRoot.innerHTML = `
+      <section class="de-private-hero">
+        <div>
+          <p class="de-eyebrow">Design Edition 01</p>
+          <h1>Your Design Edition is ready.</h1>
+          <p class="de-private-subtitle">Welcome inside the ${escapeEditionHtml(title)} ceremony design direction.</p>
+          <p>${escapeEditionHtml(summary)}</p>
+          <small>Private access verified${payload.buyerEmail ? ` for ${escapeEditionHtml(payload.buyerEmail)}` : ''}.</small>
+          <div class="de-action-row">
+            <a class="de-primary-button" data-edition-pdf-open href="/api/design-edition-download?asset=dossier&session_id=${encodeURIComponent(sessionId)}">Open the Design Edition</a>
+            <a class="de-secondary-button" data-edition-digital-open href="/api/design-edition-digital?session_id=${encodeURIComponent(sessionId)}">View Digital Edition</a>
+          </div>
+        </div>
+        <figure><img src="assets/design-edition-burgundy-chartreuse-center-aisle.jpg" alt=""></figure>
+      </section>
+
+      <nav class="de-private-nav" aria-label="Edition sections">
+        ${sections.map(section => `<a href="#${escapeEditionHtml(section.id)}">${escapeEditionHtml(section.number)} ${escapeEditionHtml(section.title)}</a>`).join('')}
+      </nav>
+
+      <section class="de-private-gallery" aria-label="Visual library">
+        ${gallery.map((src, index) => `<figure><img src="${escapeEditionHtml(src)}" alt="Burgundy Chartreuse visual library ${index + 1}"></figure>`).join('')}
+      </section>
+
+      <section class="de-private-sections">
+        ${sections.map(section => `
+          <article id="${escapeEditionHtml(section.id)}">
+            <span>${escapeEditionHtml(section.number)}</span>
+            <h2>${escapeEditionHtml(section.title)}</h2>
+            <p>${escapeEditionHtml(section.body)}</p>
+          </article>
+        `).join('')}
+      </section>
+
+      <section class="de-downloads">
+        <div>
+          <p class="de-eyebrow">Downloads</p>
+          <h2>Your protected ceremony files.</h2>
+          <p>The PDF dossier is the primary working file. Each link verifies the Stripe session before serving the protected asset.</p>
+        </div>
+        <div class="de-download-grid">
+          ${downloads.map(download => `
+            <a class="de-download-card" href="/api/design-edition-download?asset=${encodeURIComponent(download.key)}&session_id=${encodeURIComponent(sessionId)}">
+              <span>${escapeEditionHtml(download.type)}</span>
+              <strong>${escapeEditionHtml(download.label)}</strong>
+              <em>Download →</em>
+            </a>
+          `).join('')}
+        </div>
+      </section>
+
+      <section class="de-upsell">
+        <div>
+          <p class="de-eyebrow">Make This Design Yours</p>
+          <h2>Adapt this edition to a real venue.</h2>
+          <p>Share the setting, guest count and ceremony production range. The atelier can review whether this direction belongs in your space or should be adjusted before production begins.</p>
+        </div>
+        <form class="de-upsell-form" data-design-edition-upsell>
+          <label>Venue name or link<input name="venue" placeholder="Venue, website or Google Maps link"></label>
+          <label>Wedding location<input name="location" placeholder="Orange County / Italy / still searching"></label>
+          <label>Date or season<input name="date" placeholder="September 2027 / Fall 2027"></label>
+          <label>Guest count<input name="guestCount" placeholder="80"></label>
+          <label>Approximate production budget<input name="productionBudget" placeholder="$15,000 - $29,000 / to be discussed"></label>
+          <label>Your email<input name="email" type="email" placeholder="you@email.com" required></label>
+          <label class="de-upsell-wide">What should the atelier know?<textarea name="message" rows="5" placeholder="Tell us about the venue, feeling, timing or what you want to adapt."></textarea></label>
+          <button class="de-primary-button" type="submit">Adapt This Edition to My Venue</button>
+          <p data-upsell-status></p>
+        </form>
+      </section>
+    `;
+
+    trackEditionEvent('design_edition_purchase_success');
+    accessRoot.querySelector('[data-edition-pdf-open]')?.addEventListener('click', () => {
+      trackEditionEvent('design_edition_pdf_opened');
+    });
+    accessRoot.querySelector('[data-edition-digital-open]')?.addEventListener('click', () => {
+      trackEditionEvent('design_edition_digital_view_opened');
+    });
+    accessRoot.querySelectorAll('.de-download-card').forEach(link => {
+      link.addEventListener('click', () => {
+        if (link.href.includes('asset=dossier')) trackEditionEvent('design_edition_pdf_opened');
+      });
+    });
+
+    accessRoot.querySelector('[data-design-edition-upsell]')?.addEventListener('submit', async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const status = form.querySelector('[data-upsell-status]');
+      const data = Object.fromEntries(new FormData(form).entries());
+      status.textContent = 'Sending to the atelier...';
+
+      try {
+        const response = await fetch('/api/atelier-inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'Design Edition adaptation',
+            subject: 'Design Edition Adaptation — Burgundy + Chartreuse',
+            email: data.email,
+            message: [
+              'Design Edition adaptation request',
+              `Venue: ${data.venue || 'Not provided'}`,
+              `Location: ${data.location || 'Not provided'}`,
+              `Date: ${data.date || 'Not provided'}`,
+              `Guest count: ${data.guestCount || 'Not provided'}`,
+              `Production budget: ${data.productionBudget || 'Not provided'}`,
+              `Message: ${data.message || 'Not provided'}`
+            ].join('\n')
+          })
+        });
+        if (!response.ok) throw new Error('The request could not be sent.');
+        status.textContent = 'Request sent. The atelier will review your venue direction.';
+        form.reset();
+      } catch {
+        status.innerHTML = 'Please email <a href="mailto:atelier@liaarmonia.com">atelier@liaarmonia.com</a> with your venue details.';
+      }
+    });
+  };
+
+  const initDesignEditionAccess = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    if (!sessionId) {
+      renderAccessError('The private access link is missing its Stripe session.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/design-edition-access?session_id=${encodeURIComponent(sessionId)}`);
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || 'Purchase verification failed.');
+      renderProtectedEdition(payload, sessionId);
+    } catch (error) {
+      renderAccessError(error.message);
+    }
+  };
+
+  initDesignEditionAccess();
 })();
-
-

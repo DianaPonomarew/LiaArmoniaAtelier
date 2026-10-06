@@ -5590,6 +5590,133 @@ body.invitation-flow-open{
   }
 }
 
+.visual-atelier .services-refined{
+  justify-content:flex-start;
+  padding-top:clamp(118px,15vh,168px);
+  padding-bottom:clamp(84px,10vh,124px);
+}
+.visual-atelier .services-refined .services-choice-intro{
+  max-width:900px;
+  margin-bottom:clamp(38px,5vh,62px);
+}
+.visual-atelier .services-refined .services-choice-intro h1{
+  max-width:820px;
+  font-size:clamp(48px,5.6vw,86px);
+  line-height:.98;
+}
+.visual-atelier .services-refined .services-choice-intro p{
+  max-width:650px;
+  margin:0 auto;
+  font-family:var(--sans);
+  font-size:clamp(15px,1.15vw,18px);
+  line-height:1.65;
+  color:rgba(246,239,228,.72);
+}
+.visual-atelier .services-refined .services-choice-grid{
+  width:min(100%,1180px);
+  align-items:stretch;
+  gap:clamp(18px,2.2vw,32px);
+}
+.visual-atelier .services-refined .service-choice-card{
+  min-height:0;
+  padding:clamp(32px,3vw,46px);
+  align-items:flex-start;
+  justify-content:flex-start;
+  text-align:left;
+  border-color:rgba(239,229,212,.2);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.024),rgba(255,255,255,.004) 48%,rgba(216,186,145,.018)),
+    rgba(8,8,7,.92);
+}
+.visual-atelier .services-refined .service-choice-card::before{
+  border-color:rgba(239,229,212,.025);
+}
+.visual-atelier .services-refined .service-choice-card span,
+.visual-atelier .services-refined .service-choice-card small,
+.visual-atelier .services-refined .service-subroutes strong,
+.visual-atelier .services-refined .service-choice-card b,
+.visual-atelier .services-refined .service-venue-note summary{
+  color:#f6efe4;
+  letter-spacing:.24em;
+}
+.visual-atelier .services-refined .service-choice-card i{
+  width:44px;
+  margin:22px 0 30px;
+  background:rgba(216,186,145,.62);
+}
+.visual-atelier .services-refined .service-choice-card h2{
+  font-size:clamp(36px,3.8vw,58px);
+  line-height:1;
+  margin-bottom:14px;
+}
+.visual-atelier .services-refined .service-choice-card p{
+  max-width:520px;
+  margin:30px 0 24px;
+  color:rgba(246,239,228,.7);
+}
+.visual-atelier .services-refined .service-choice-parent{
+  grid-column:span 1;
+}
+.visual-atelier .services-refined .service-subroutes{
+  max-width:none;
+  margin-top:18px;
+}
+.visual-atelier .services-refined .service-subroutes a{
+  padding:18px 0;
+  border-width:1px 0 0;
+  border-color:rgba(239,229,212,.12);
+  background:transparent;
+}
+.visual-atelier .services-refined .service-subroutes a:last-child{
+  border-bottom:1px solid rgba(239,229,212,.12);
+}
+.visual-atelier .services-refined .service-subroutes a:hover,
+.visual-atelier .services-refined .service-subroutes a:focus-visible{
+  padding-left:14px;
+  border-color:rgba(246,239,228,.46);
+  background:rgba(239,229,212,.026);
+}
+.visual-atelier .services-refined .service-subroutes em{
+  color:rgba(216,198,174,.74);
+}
+.visual-atelier .services-refined .service-venue-note{
+  max-width:none;
+  margin:2px 0 20px;
+}
+.visual-atelier .services-refined .service-choice-card b{
+  display:inline-block;
+  margin-top:auto;
+}
+.visual-atelier .services-note{
+  width:min(100%,760px);
+  margin:clamp(34px,5vh,58px) auto 0;
+  padding-top:24px;
+  border-top:1px solid rgba(239,229,212,.12);
+  text-align:center;
+}
+.visual-atelier .services-note p{
+  margin:0;
+  font:300 13px/1.8 var(--sans);
+  color:rgba(216,198,174,.66);
+}
+@media(max-width:900px){
+  .visual-atelier .services-refined{
+    padding-top:104px;
+  }
+  .visual-atelier .services-refined .services-choice-intro{
+    text-align:left;
+  }
+  .visual-atelier .services-refined .services-choice-intro p{
+    margin-left:0;
+  }
+  .visual-atelier .services-refined .services-choice-grid{
+    gap:18px;
+  }
+  .visual-atelier .services-note{
+    text-align:left;
+  }
+}
+
 /* Collaborations */
 .collaborations-page main{
   background:#070706;
@@ -8247,19 +8374,50 @@ body.invitation-flow-open{
   display:grid!important;
   grid-template-columns:18px 1fr!important;
   align-items:start!important;
-  color:rgba(239,229,212,.72)!important;
-  font:300 13px/1.55 var(--sans)!important;
+  gap:14px!important;
+  color:rgba(246,239,228,.78)!important;
+  font:300 13px/1.62 var(--sans)!important;
   letter-spacing:0!important;
   text-transform:none!important;
 }
 .wedding-design-page .private-chat-form .check input{
-  min-height:18px!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  width:16px!important;
+  height:16px!important;
+  min-height:16px!important;
   padding:0!important;
+  margin:2px 0 0!important;
+  border:1px solid rgba(246,239,228,.46)!important;
+  background:transparent!important;
+  display:grid!important;
+  place-items:center!important;
+  cursor:pointer!important;
+}
+.wedding-design-page .private-chat-form .check input::before{
+  content:""!important;
+  width:8px!important;
+  height:8px!important;
+  transform:scale(0)!important;
+  transition:transform .16s ease!important;
+  background:#070706!important;
+}
+.wedding-design-page .private-chat-form .check input:checked{
+  background:#f0ddc6!important;
+  border-color:#f0ddc6!important;
+}
+.wedding-design-page .private-chat-form .check input:checked::before{
+  transform:scale(1)!important;
+}
+.wedding-design-page .private-chat-form .check input:focus-visible{
+  outline:2px solid rgba(246,239,228,.74)!important;
+  outline-offset:3px!important;
 }
 .wedding-design-page .concierge-guidance{
-  border:1px solid rgba(239,229,212,.16)!important;
-  padding:20px!important;
-  background:rgba(216,186,145,.04)!important;
+  border:1px solid rgba(246,239,228,.18)!important;
+  padding:24px!important;
+  background:rgba(7,7,6,.32)!important;
+  box-shadow:0 28px 70px rgba(0,0,0,.18)!important;
 }
 .wedding-design-page .concierge-guidance b{
   color:#f6efe4!important;
@@ -8308,11 +8466,11 @@ body.invitation-flow-open{
   grid-column:2!important;
   justify-self:center!important;
 }
-/* Removed: .concierge-actions button:last-child primary styling.
-   It targeted DOM position, so whenever a button was display:none the cream
-   treatment landed on the hidden element and the visible "Continue" button
-   rendered as a plain outline. Primary styling is now assigned by role
-   ([data-concierge-next] / [data-concierge-submit]) further down this file. */
+.wedding-design-page .concierge-actions button:last-child{
+  background:#f0ddc6!important;
+  color:#070706!important;
+  border-color:#f0ddc6!important;
+}
 .wedding-design-page .concierge-success{
   margin-top:28px;
   padding:clamp(30px,4vw,52px);
@@ -8435,15 +8593,7 @@ body.invitation-flow-open{
   overflow:hidden;
 }
 .wedding-design-page .concierge-question::after{
-  content:"";
-  position:absolute;
-  right:clamp(18px,3vw,42px);
-  bottom:clamp(18px,3vw,42px);
-  width:120px;
-  height:120px;
-  border:1px solid rgba(216,186,145,.12);
-  transform:rotate(45deg);
-  pointer-events:none;
+  content:none!important;
 }
 .wedding-design-page .concierge-question.active{
   display:flex!important;
@@ -8548,6 +8698,10 @@ body.invitation-flow-open{
   max-width:720px;
   display:grid;
   gap:16px;
+}
+.wedding-design-page .concierge-question .concierge-guidance{
+  background:rgba(5,5,4,.28)!important;
+  border-color:rgba(246,239,228,.16)!important;
 }
 .wedding-design-page .concierge-question .concierge-guidance .check{
   max-width:none;
@@ -10593,1083 +10747,3156 @@ body.invitation-page .builder-phone::after{
   .launch-success-shell>div{align-items:flex-start;flex-direction:column}
 }
 
-/* ============================================================
-   Private Design Concierge — confirmation modal
-   ============================================================ */
-.concierge-modal{
-  position:fixed;
-  inset:0;
-  z-index:9000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
+/* Private Design Concierge — launch polish */
+.wedding-design-page .private-client-shell{
+  grid-template-columns:minmax(300px,.7fr) minmax(520px,1fr)!important;
+  gap:clamp(44px,6vw,96px)!important;
 }
-.concierge-modal[hidden]{
-  display:none!important;
+.wedding-design-page .private-chat-panel{
+  background:linear-gradient(145deg,rgba(239,229,212,.045),rgba(239,229,212,.014))!important;
+  border-color:rgba(239,229,212,.14)!important;
+  box-shadow:0 34px 90px rgba(0,0,0,.24)!important;
 }
-.concierge-modal-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(4,4,3,.86);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  animation:conciergeModalFade .5s ease both;
+.wedding-design-page .concierge-progress{
+  margin-bottom:clamp(24px,3vw,40px)!important;
 }
-.concierge-modal-panel{
-  position:relative;
-  width:min(620px,100%);
-  max-height:88vh;
-  overflow-y:auto;
-  padding:clamp(34px,5vw,60px);
-  border:1px solid rgba(239,229,212,.22);
-  background:linear-gradient(155deg,#141110,#0a0908 62%);
-  box-shadow:0 40px 120px rgba(0,0,0,.7);
-  text-align:left;
-  animation:conciergeModalRise .62s cubic-bezier(.2,.7,.25,1) both;
+.wedding-design-page .concierge-question{
+  min-height:clamp(360px,48vh,560px)!important;
+  padding:clamp(30px,4.4vw,58px)!important;
+  background:rgba(2,2,2,.18)!important;
+  border-color:rgba(239,229,212,.105)!important;
 }
-.concierge-modal-eyebrow{
-  display:block;
-  color:#d8ba91;
-  font:700 10px/1.4 var(--sans,Arial,sans-serif);
-  letter-spacing:.3em;
-  text-transform:uppercase;
+.wedding-design-page .concierge-question.active{
+  justify-content:center!important;
 }
-.concierge-modal-panel h3{
-  margin:20px 0 18px;
-  color:#f7efe3;
-  font:300 clamp(40px,6vw,64px)/.98 var(--display,Georgia,serif);
-  letter-spacing:-.01em;
+.wedding-design-page .concierge-question h3{
+  max-width:760px!important;
+  font-size:clamp(38px,4.25vw,64px)!important;
+  line-height:.98!important;
 }
-.concierge-modal-panel p{
-  margin:0 0 16px;
-  color:rgba(239,229,212,.72);
-  font:300 15px/1.8 var(--sans,Arial,sans-serif);
+.wedding-design-page .concierge-question>p{
+  max-width:600px!important;
+  margin-bottom:clamp(24px,3vw,34px)!important;
 }
-.concierge-modal-secondary{
-  font-size:13.5px!important;
-  color:rgba(239,229,212,.5)!important;
+.wedding-design-page .concierge-question[data-chapter="3"] .consultation-request-grid{
+  max-width:820px!important;
 }
-.concierge-modal-secondary a{
-  color:#d8ba91;
-  text-decoration:none;
-  border-bottom:1px solid rgba(216,186,145,.4);
+.wedding-design-page .review-send-card{
+  max-width:820px!important;
+  margin-top:24px!important;
+  padding:clamp(24px,3vw,34px)!important;
+  background:linear-gradient(145deg,rgba(239,229,212,.06),rgba(239,229,212,.018))!important;
+  border-color:rgba(239,229,212,.16)!important;
+  box-shadow:none!important;
 }
-.concierge-modal-panel small{
-  display:block;
-  margin-top:22px;
-  padding-top:20px;
-  border-top:1px solid rgba(239,229,212,.14);
-  color:#d8ba91;
-  font:700 10px/1.4 var(--sans,Arial,sans-serif);
-  letter-spacing:.24em;
-  text-transform:uppercase;
+.wedding-design-page .review-send-card p{
+  max-width:610px!important;
+  margin:12px 0 20px!important;
+  color:rgba(246,239,228,.64)!important;
+  font-size:13px!important;
 }
-.concierge-modal-button{
-  margin-top:30px;
-  padding:15px 40px;
-  border:1px solid #f0ddc6;
-  background:#f0ddc6;
-  color:#070706;
-  font:700 10px/1 var(--sans,Arial,sans-serif);
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:background .3s ease,color .3s ease;
+.wedding-design-page .review-send-card .check{
+  padding:12px 0!important;
+  border-top:1px solid rgba(239,229,212,.08)!important;
 }
-.concierge-modal-button:hover{
-  background:transparent;
-  color:#f0ddc6;
+.wedding-design-page .review-send-card .check:first-of-type{
+  border-top:0!important;
 }
-.concierge-modal-dismiss{
-  position:absolute;
-  top:16px;
-  right:18px;
-  width:40px;
-  height:40px;
-  border:0;
-  background:none;
-  color:rgba(239,229,212,.45);
-  font-size:26px;
-  line-height:1;
-  cursor:pointer;
-  transition:color .3s ease;
+.wedding-design-page .private-chat-form .check input{
+  border-radius:0!important;
 }
-.concierge-modal-dismiss:hover{
-  color:#f0ddc6;
+.wedding-design-page .private-chat-form .check input:checked::before{
+  width:9px!important;
+  height:9px!important;
+  clip-path:polygon(14% 48%, 38% 72%, 86% 20%, 96% 30%, 39% 88%, 4% 56%)!important;
 }
-body.concierge-modal-open{
-  overflow:hidden;
+.wedding-design-page .concierge-actions.is-final-step{
+  grid-template-columns:minmax(180px,260px) minmax(240px,340px)!important;
+  justify-content:center!important;
 }
-@keyframes conciergeModalFade{
-  from{opacity:0}
-  to{opacity:1}
-}
-@keyframes conciergeModalRise{
-  from{opacity:0;transform:translateY(26px) scale(.985)}
-  to{opacity:1;transform:none}
-}
-@media (prefers-reduced-motion:reduce){
-  .concierge-modal-backdrop,
-  .concierge-modal-panel{animation:none}
-}
-@media (max-width:560px){
-  .concierge-modal{padding:16px}
-  .concierge-modal-button{width:100%}
-}
-
-/* ============================================================
-   Concierge action bar — stable centering + real button hierarchy
-   Replaces the earlier :last-child / auto-placement approach, which
-   broke whenever a button was display:none (the primary styling
-   landed on the hidden element and the row lost its centre).
-   ============================================================ */
-.wedding-design-page .concierge-actions{
-  display:grid!important;
-  grid-template-columns:1fr auto 1fr!important;
-  align-items:center!important;
-  gap:16px!important;
-  margin-top:26px!important;
-}
-/* Explicit columns: the centre stays the centre even when a button is hidden. */
-.wedding-design-page .concierge-actions [data-concierge-prev]{
+.wedding-design-page .concierge-actions.is-final-step [data-concierge-prev]{
   grid-column:1!important;
-  justify-self:start!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-next],
-.wedding-design-page .concierge-actions [data-concierge-submit]{
-  grid-column:2!important;
-  justify-self:center!important;
+  justify-self:stretch!important;
 }
 .wedding-design-page .concierge-actions.is-final-step [data-concierge-submit]{
   grid-column:2!important;
-  justify-self:center!important;
+  justify-self:stretch!important;
 }
-
-/* Base button reset for the row */
 .wedding-design-page .concierge-actions button{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:12px!important;
-  min-height:58px!important;
-  padding:0 34px!important;
-  border:1px solid rgba(239,229,212,.24)!important;
-  background:transparent!important;
-  color:#f6efe4!important;
-  font:700 10px/1 var(--sans)!important;
-  letter-spacing:.26em!important;
-  text-transform:uppercase!important;
-  cursor:pointer!important;
-  transition:background .28s ease,color .28s ease,border-color .28s ease,transform .28s ease,opacity .28s ease!important;
+  transition:background-color .22s ease,border-color .22s ease,color .22s ease,transform .22s ease!important;
 }
-
-/* Primary CTA — targeted by role, not by DOM position */
-.wedding-design-page .concierge-actions [data-concierge-next],
-.wedding-design-page .concierge-actions [data-concierge-submit]{
-  min-width:clamp(240px,26vw,320px)!important;
-  border-color:#f0ddc6!important;
-  background:#f0ddc6!important;
-  color:#070706!important;
+.wedding-design-page .concierge-actions button:hover{
+  transform:translateY(-1px)!important;
+  border-color:rgba(246,239,228,.52)!important;
 }
-.wedding-design-page .concierge-actions [data-concierge-next]:hover,
-.wedding-design-page .concierge-actions [data-concierge-submit]:hover{
-  background:transparent!important;
-  color:#f0ddc6!important;
-  transform:translateY(-2px)!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-submit]{
-  min-width:clamp(280px,30vw,380px)!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-submit]:disabled{
-  opacity:.5!important;
-  cursor:progress!important;
-  transform:none!important;
-  background:#f0ddc6!important;
-  color:#070706!important;
-}
-
-/* Secondary — quiet, narrow, clearly subordinate */
-.wedding-design-page .concierge-actions [data-concierge-prev]{
-  min-width:0!important;
-  min-height:58px!important;
-  padding:0 22px!important;
-  border-color:transparent!important;
-  color:rgba(239,229,212,.5)!important;
-  letter-spacing:.22em!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-prev]::before{
-  content:"\2190";
-  font-size:14px;
-  letter-spacing:0;
-  opacity:.7;
-}
-.wedding-design-page .concierge-actions [data-concierge-prev]:hover{
-  color:#f0ddc6!important;
-  border-color:rgba(239,229,212,.2)!important;
-}
-.wedding-design-page .concierge-actions button:focus-visible{
-  outline:2px solid #f0ddc6!important;
-  outline-offset:3px!important;
-}
-
-/* Chapter progress rail under the action bar */
-.wedding-design-page .concierge-rail{
-  grid-column:1/-1;
-  margin-top:22px;
-  height:2px;
-  background:rgba(239,229,212,.12);
-  overflow:hidden;
-}
-.wedding-design-page .concierge-rail span{
-  display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,rgba(216,186,145,.5),#f0ddc6);
-  transition:width .5s cubic-bezier(.2,.7,.25,1);
-}
-
-@media(max-width:720px){
-  .wedding-design-page .concierge-actions{
-    grid-template-columns:1fr!important;
-    gap:12px!important;
-  }
-  .wedding-design-page .concierge-actions [data-concierge-prev]{
-    grid-column:1!important;
-    grid-row:2!important;
-    justify-self:center!important;
-    width:auto!important;
-  }
-  .wedding-design-page .concierge-actions [data-concierge-next],
-  .wedding-design-page .concierge-actions [data-concierge-submit]{
-    grid-column:1!important;
-    grid-row:1!important;
-    justify-self:stretch!important;
-    width:100%!important;
-    min-width:0!important;
-  }
-  .wedding-design-page .concierge-rail{grid-row:3;}
-}
-
-/* ------------------------------------------------------------
-   Site-wide accessibility + polish
-   ------------------------------------------------------------ */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-[tabindex]:focus-visible{
-  outline:2px solid #f0ddc6;
-  outline-offset:3px;
-}
-html{
-  scroll-behavior:smooth;
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
-  }
-}
-img,video{
-  max-width:100%;
-}
-::selection{
-  background:#f0ddc6;
-  color:#070706;
-}
-
-/* ============================================================
-   Fixes from live screenshots — 20260902b
-   ============================================================ */
-
-/* --- Homepage hero: the two CTAs sat on different baselines -------------
-   .visual-atelier .enter-worlds (earlier in this file) forces
-   margin-top:30px!important, which pushed the first link down while the
-   second stayed put, and gave the two links different underline offsets.
-   Neutralise it inside the hero action row only.                        */
-.visual-atelier .gallery-hero-copy .launch-hero-actions{
-  display:flex!important;
-  align-items:flex-end!important;
-  flex-wrap:wrap!important;
-  gap:clamp(20px,2.4vw,34px)!important;
-  margin-top:34px!important;
-}
-.visual-atelier .gallery-hero-copy .launch-hero-actions>a,
-.visual-atelier .gallery-hero-copy .launch-hero-actions .enter-worlds{
-  margin:0!important;
-  min-height:0!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  padding:0 0 10px!important;
-  border:0!important;
-  border-bottom:1px solid rgba(246,239,228,.32)!important;
-  background:transparent!important;
-  color:rgba(246,239,228,.78)!important;
-  font:500 10px/1 var(--sans)!important;
-  letter-spacing:.2em!important;
-  text-transform:uppercase!important;
-  text-decoration:none!important;
-  white-space:nowrap!important;
-  transition:color .3s ease,border-color .3s ease!important;
-}
-/* Primary of the two reads brighter, not bigger */
-.visual-atelier .gallery-hero-copy .launch-hero-actions .enter-worlds{
-  color:#f6efe4!important;
-  border-bottom-color:rgba(246,239,228,.75)!important;
-}
-.visual-atelier .gallery-hero-copy .launch-hero-actions>a:hover{
-  color:#f0ddc6!important;
-  border-bottom-color:#f0ddc6!important;
-}
-@media(max-width:640px){
-  .visual-atelier .gallery-hero-copy .launch-hero-actions{
-    align-items:flex-start!important;
-    flex-direction:column!important;
-    gap:16px!important;
-  }
-}
-
-/* --- Concierge action bar: force the label to sit inside its box -------- */
-.wedding-design-page .concierge-actions button{
-  box-sizing:border-box!important;
-  height:auto!important;
-  line-height:1.1!important;
-  padding-top:20px!important;
-  padding-bottom:20px!important;
-  text-align:center!important;
-  white-space:nowrap!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-prev]{
-  padding-top:18px!important;
-  padding-bottom:18px!important;
-}
-
-/* --- Decorative diamond overlapped the input field --------------------- */
-.wedding-design-page .concierge-question::after{
-  right:clamp(10px,1.6vw,22px)!important;
-  bottom:clamp(10px,1.6vw,22px)!important;
-  width:84px!important;
-  height:84px!important;
-  border-color:rgba(216,186,145,.07)!important;
-  z-index:0!important;
-}
-.wedding-design-page .concierge-question>*{
-  position:relative;
-  z-index:1;
-}
-
-/* --- The standing note under the form read like a confirmation ---------
-   It is now hidden by default and only revealed by app.js when a
-   submission actually fails, as an error message.                       */
 .wedding-design-page .concierge-submit-note{
-  display:none!important;
+  max-width:720px!important;
+  margin:22px auto 0!important;
+  text-align:center!important;
+  color:rgba(246,239,228,.5)!important;
 }
-.wedding-design-page .concierge-submit-note.is-visible{
-  display:block!important;
-  margin-top:18px!important;
-  color:#e5b8a4!important;
-  font:400 13px/1.7 var(--sans)!important;
+.wedding-design-page .concierge-success{
+  max-width:860px!important;
+  margin:32px auto 0!important;
+  text-align:left!important;
 }
-
-/* ============================================================
-   TYPOGRAPHIC REFINEMENT — 20260902b
-   ------------------------------------------------------------
-   Findings from auditing the stylesheet:
-
-   • 158 declarations at 10px and 43 at 11px. Tracked micro-caps
-     are correct for this register, but they were also carrying
-     text meant to be read, not scanned.
-   • Roughly twenty distinct body sizes (8,9,10,11,12,13,14,15,
-     16,17,18,20,22…) with no relationship between them.
-   • Forty-plus separate clamp() display sizes.
-   • Body copy at 12–13px against display type up to 72px — a
-     ratio of nearly 6:1, which reads as two unrelated designs.
-
-   The fix is a modular scale (≈1.25) tied to one set of tokens,
-   applied where text is read rather than scanned.
-   ============================================================ */
-
-:root{
-  /* Micro — tracked capitals, for labels and eyebrows only */
-  --t-micro:11px;
-  --t-micro-track:.24em;
-  /* Reading sizes */
-  --t-small:13.5px;
-  --t-body:15.5px;
-  --t-lead:18px;
-  /* Display steps */
-  --t-h3:clamp(30px,2.9vw,44px);
-  --t-h2:clamp(38px,3.8vw,58px);
-  --t-h1:clamp(48px,5.4vw,84px);
-  /* Vertical rhythm */
-  --lh-body:1.75;
-  --lh-lead:1.65;
-  --lh-display:1.04;
-  /* Measure — keeps lines under ~72 characters */
-  --measure:64ch;
-  --measure-tight:52ch;
-}
-
-/* --- Reading text ------------------------------------------------------
-   Only paragraphs inside prose contexts. Labels, chips, nav and buttons
-   keep their tracked micro-caps.                                        */
-.wedding-design-page .concierge-question>p,
-.wedding-design-page .private-client-intro p,
-.launch-success-shell>p,
-.simple-inquiry-copy>p{
-  font-size:var(--t-body)!important;
-  line-height:var(--lh-body)!important;
-  letter-spacing:0!important;
-  max-width:var(--measure)!important;
-  text-transform:none!important;
-}
-
-/* Long explanatory copy was set at 12px — the hardest text on the site
-   to read, and the text that most needs reading.                       */
-.wedding-design-page .concierge-guidance p,
-.wedding-design-page .private-chat-form>p:not(.concierge-submit-note){
-  font-size:var(--t-small)!important;
-  line-height:1.7!important;
-  max-width:var(--measure)!important;
-}
-
-/* --- Concierge question card ------------------------------------------
-   The headline ran to 72px against 15px body and wrapped to three lines,
-   and the card was locked to 620px tall, which left the large empty gap
-   above the action bar.                                                 */
-.wedding-design-page .concierge-question{
-  min-height:clamp(340px,42vh,460px)!important;
-  padding:clamp(30px,3.4vw,48px)!important;
-}
-.wedding-design-page .concierge-question h3{
-  font-size:var(--t-h3)!important;
-  line-height:1.08!important;
-  letter-spacing:0!important;
-  max-width:var(--measure-tight)!important;
-  margin:0 0 14px!important;
-}
-.wedding-design-page .concierge-question>p{
-  margin:0 0 28px!important;
-}
-.wedding-design-page .question-count{
-  font-size:var(--t-micro)!important;
-  letter-spacing:var(--t-micro-track)!important;
-  margin:0 0 20px!important;
-  opacity:.75;
-}
-
-/* Field labels and inputs: the label was the same size as the value,
-   so the two competed. The value now leads.                            */
-.wedding-design-page .private-chat-form label{
-  font-size:10.5px!important;
-  letter-spacing:.2em!important;
-}
-.wedding-design-page .private-chat-form input,
-.wedding-design-page .private-chat-form select,
-.wedding-design-page .private-chat-form textarea{
-  font-size:16px!important;      /* 16px also stops iOS zooming on focus */
-  line-height:1.5!important;
-  min-height:56px!important;
-}
-.wedding-design-page .private-chat-form .check{
-  font-size:var(--t-small)!important;
-  line-height:1.6!important;
-  gap:12px!important;
-  max-width:var(--measure)!important;
-}
-
-/* Answer chips were 10px caps at .22em — legible as labels, but these
-   are choices people read. Slightly larger, slightly less tracked.     */
-.wedding-design-page .answer-chips span{
-  font-size:11px!important;
-  letter-spacing:.16em!important;
-  min-height:58px!important;
-}
-.wedding-design-page .answer-chips{
-  gap:10px!important;
-}
-
-/* Chapter rail */
-.wedding-design-page .concierge-progress button{
-  font-size:10.5px!important;
-  letter-spacing:.18em!important;
-}
-
-/* --- Homepage hero ----------------------------------------------------
-   .18em tracking on a 98px display face opens gaps between letters at
-   large sizes. Tracking should shrink as size grows, not stay fixed.   */
-.visual-atelier .gallery-hero-copy h1{
-  font-size:var(--t-h1)!important;
-  line-height:var(--lh-display)!important;
-  letter-spacing:.1em!important;
-}
-.visual-atelier .gallery-hero-copy .eyebrow,
-.visual-atelier .gallery-hero-copy .kicker{
-  font-size:var(--t-micro)!important;
-  letter-spacing:var(--t-micro-track)!important;
-  line-height:1.8!important;
-}
-.visual-atelier .gallery-hero-copy>p{
-  font-size:var(--t-lead)!important;
-  line-height:var(--lh-lead)!important;
-  max-width:38ch!important;
-  letter-spacing:0!important;
-}
-
-/* --- Navigation -------------------------------------------------------
-   Links sat at 11px untracked while the wordmark used .32em, so the two
-   halves of the bar read as different typefaces.                       */
-.navlinks{
-  font-size:10.5px!important;
-  letter-spacing:.16em!important;
-  text-transform:uppercase!important;
-  gap:clamp(22px,2.6vw,38px)!important;
-}
-
-/* --- Global guardrails ------------------------------------------------ */
-.eyebrow,.kicker{
-  font-size:var(--t-micro)!important;
-  letter-spacing:var(--t-micro-track)!important;
-}
-/* Hyphenation and orphan control for the long serif headlines */
-h1,h2,h3{
-  text-wrap:balance;
-}
-p{
-  text-wrap:pretty;
-}
-
-/* ============================================================
-   SPACING & ALIGNMENT — 20260902b
-   A single spacing scale, so vertical gaps stop being arbitrary.
-   ============================================================ */
-:root{
-  --s-1:8px;
-  --s-2:14px;
-  --s-3:22px;
-  --s-4:34px;
-  --s-5:clamp(44px,5vw,68px);
-  --s-6:clamp(68px,8vw,104px);
-}
-
-/* Concierge column: card, actions and progress rail now sit on one rhythm */
-.wedding-design-page .concierge-progress{
-  margin-bottom:var(--s-3)!important;
-  gap:var(--s-1)!important;
-}
-.wedding-design-page .concierge-actions{
-  margin-top:var(--s-3)!important;
-  gap:var(--s-2)!important;
-}
-.wedding-design-page .concierge-rail{
-  margin-top:var(--s-3)!important;
-}
-
-/* Success modal: match the refined scale */
-.concierge-modal-panel h3{
-  font:300 clamp(34px,3.6vw,50px)/1.06 var(--display)!important;
-  letter-spacing:0!important;
-}
-.concierge-modal-panel p{
-  font-size:var(--t-body)!important;
-  line-height:var(--lh-body)!important;
-  max-width:52ch!important;
-}
-.concierge-modal-secondary{
-  font-size:var(--t-small)!important;
-}
-.concierge-modal-eyebrow,
-.concierge-modal-panel small{
-  font-size:var(--t-micro)!important;
-  letter-spacing:var(--t-micro-track)!important;
-}
-
-/* Footer and legal pages were the smallest text on the site */
-footer p,
-.privacy-shell p,
-.terms-shell p{
-  font-size:var(--t-small)!important;
-  line-height:1.75!important;
-  max-width:var(--measure)!important;
-}
-
-/* ============================================================
-   MOBILE — purpose-built, not a shrunk desktop
-   ============================================================ */
-
-/* --- BUG FIX -----------------------------------------------------------
-   app.js hid the submit button with an inline style:display:none, but the
-   rule above declares display:inline-flex!important, and !important beats
-   an inline style. Both buttons rendered on top of each other. The script
-   now toggles the hidden property; honour it explicitly.               */
-.wedding-design-page .concierge-actions button[hidden],
-.concierge-actions button[hidden]{
-  display:none!important;
-}
-
-/* Never let a CTA leave the document flow */
-.wedding-design-page .concierge-actions{
-  position:static!important;
-}
-
-/* Single final confirmation */
-.wedding-design-page .final-confirm{
-  align-items:flex-start!important;
-  padding:18px 20px!important;
-  border:1px solid rgba(239,229,212,.16)!important;
-  background:rgba(239,229,212,.03)!important;
-}
-.wedding-design-page .final-confirm.needs-attention{
-  border-color:#e5b8a4!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-submit]:disabled{
-  opacity:.42!important;
-  cursor:not-allowed!important;
-}
-
-/* --- Room tabs were cut off at the right edge --------------------------- */
-@media (max-width:860px){
-  .venue-switch,.room-switch,.walkthrough-tabs{
-    overflow-x:auto!important;
-    scroll-snap-type:x mandatory!important;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .venue-switch::-webkit-scrollbar,
-  .room-switch::-webkit-scrollbar{display:none;}
-  .venue-switch>*,.room-switch>*{
-    flex:0 0 auto!important;
-    scroll-snap-align:start;
+@media(max-width:1050px){
+  .wedding-design-page .private-client-shell{
+    grid-template-columns:1fr!important;
   }
 }
-
-/* --- Concierge on a phone --------------------------------------------- */
-@media (max-width:860px){
-  .private-client-shell,.concierge-shell,.one-question-shell{
-    display:block!important;
-    padding:0 18px!important;
+@media(max-width:720px){
+  .wedding-design-page .private-chat-panel{
+    box-shadow:none!important;
   }
   .wedding-design-page .concierge-question{
-    min-height:0!important;
-    padding:26px 20px 30px!important;
+    min-height:auto!important;
+    padding:28px 18px!important;
   }
-  .wedding-design-page .concierge-question h3{
-    font-size:clamp(26px,7.4vw,34px)!important;
-  }
-  .wedding-design-page .answer-chips{
+  .wedding-design-page .concierge-actions.is-final-step{
     grid-template-columns:1fr!important;
   }
-  .wedding-design-page .answer-chips span{
-    min-height:60px!important;
-    justify-content:space-between!important;
-    padding:0 18px!important;
-  }
-  /* Chapter rail scrolls instead of wrapping into a broken grid */
-  .wedding-design-page .concierge-progress{
-    display:flex!important;
-    overflow-x:auto!important;
-    gap:8px!important;
-    padding-bottom:6px!important;
-    scrollbar-width:none;
-  }
-  .wedding-design-page .concierge-progress::-webkit-scrollbar{display:none;}
-  .wedding-design-page .concierge-progress button{
-    flex:0 0 auto!important;
-    white-space:nowrap!important;
-  }
-  /* Safe area for the phone's home indicator and browser chrome */
-  .wedding-design-page .concierge-actions{
-    padding-bottom:calc(18px + env(safe-area-inset-bottom))!important;
+  .wedding-design-page .concierge-actions.is-final-step [data-concierge-prev],
+  .wedding-design-page .concierge-actions.is-final-step [data-concierge-submit]{
+    grid-column:auto!important;
   }
 }
 
-/* --- No horizontal overflow, anywhere --------------------------------- */
-html,body{
-  max-width:100%;
-  overflow-x:hidden;
+/* Concierge review refinement */
+.wedding-design-page .review-send-card{
+  position:relative!important;
+  max-width:760px!important;
+  margin:clamp(26px,3vw,40px) auto 0!important;
+  padding:clamp(22px,2.4vw,30px) 0!important;
+  background:transparent!important;
+  border-width:1px 0!important;
+  border-style:solid!important;
+  border-color:rgba(246,239,228,.18)!important;
 }
-@media (max-width:860px){
-  img,video,iframe,table{max-width:100%!important;height:auto!important;}
-  *{word-break:normal;overflow-wrap:anywhere;}
+.wedding-design-page .review-send-card::before,
+.wedding-design-page .review-send-card::after{
+  display:none!important;
+}
+.wedding-design-page .review-send-card b{
+  display:block!important;
+  color:var(--ivory)!important;
+  font-family:var(--font-sans)!important;
+  font-size:12px!important;
+  letter-spacing:.24em!important;
+  line-height:1.4!important;
+  text-transform:uppercase!important;
+}
+.wedding-design-page .review-send-card p{
+  max-width:560px!important;
+  margin:12px 0 18px!important;
+  color:rgba(246,239,228,.66)!important;
+  font-family:var(--font-sans)!important;
+  font-size:14px!important;
+  line-height:1.75!important;
+}
+.wedding-design-page .review-send-card .check{
+  display:grid!important;
+  grid-template-columns:15px minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:13px!important;
+  max-width:680px!important;
+  padding:12px 0!important;
+  border-top:1px solid rgba(246,239,228,.08)!important;
+  color:rgba(246,239,228,.78)!important;
+  font-family:var(--font-sans)!important;
+  font-size:14px!important;
+  line-height:1.7!important;
+}
+.wedding-design-page .review-send-card .check:first-of-type{
+  border-top:0!important;
+}
+.wedding-design-page .review-send-card .check input{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  width:14px!important;
+  min-width:14px!important;
+  height:14px!important;
+  min-height:14px!important;
+  margin:5px 0 0!important;
+  border:1px solid rgba(246,239,228,.5)!important;
+  border-radius:0!important;
+  background:rgba(246,239,228,.025)!important;
+  box-shadow:none!important;
+}
+.wedding-design-page .review-send-card .check input:checked{
+  border-color:var(--ivory)!important;
+  background:var(--ivory)!important;
+}
+.wedding-design-page .review-send-card .check input:checked::before{
+  content:""!important;
+  display:block!important;
+  width:8px!important;
+  height:8px!important;
+  margin:2px!important;
+  background:var(--ink)!important;
+  clip-path:polygon(13% 50%, 38% 74%, 88% 18%, 98% 30%, 39% 91%, 2% 58%)!important;
+}
+.wedding-design-page .review-send-card a{
+  color:var(--ivory)!important;
+  text-decoration:underline!important;
+  text-decoration-thickness:1px!important;
+  text-underline-offset:4px!important;
+}
+.wedding-design-page .concierge-actions.is-final-step{
+  max-width:760px!important;
+  margin:clamp(28px,3vw,42px) auto 0!important;
+  grid-template-columns:minmax(180px,240px) minmax(260px,360px)!important;
+  align-items:stretch!important;
+  justify-content:center!important;
+  gap:14px!important;
+}
+.wedding-design-page .concierge-actions.is-final-step [data-concierge-prev],
+.wedding-design-page .concierge-actions.is-final-step [data-concierge-submit]{
+  grid-column:auto!important;
+  width:100%!important;
+}
+.wedding-design-page .concierge-actions.is-final-step [data-concierge-next]{
+  display:none!important;
+}
+.wedding-design-page .concierge-submit-note{
+  max-width:660px!important;
+  margin:20px auto 0!important;
+  text-align:center!important;
+  color:rgba(246,239,228,.55)!important;
+  font-size:12px!important;
+  line-height:1.8!important;
+}
+@media(max-width:720px){
+  .wedding-design-page .review-send-card{
+    max-width:none!important;
+  }
+  .wedding-design-page .concierge-actions.is-final-step{
+    max-width:none!important;
+    grid-template-columns:1fr!important;
+  }
 }
 
-/* ============================================================
-   COLLAPSIBLE SECTIONS
-   Long passages become a line you tap. The page reads as a list
-   of questions; the answer appears only when asked for.
-   ============================================================ */
-[data-collapse]{
-  border-bottom:1px solid rgba(239,229,212,.12);
+/* Design Edition ceremony correction */
+.de-product-hero-copy .de-price,
+.de-price{
+  margin:4px 0 22px;
+  color:var(--ivory,#f4ede2);
+  font:400 clamp(26px,3vw,42px)/1 var(--display);
 }
-[data-collapse]:first-of-type{
-  border-top:1px solid rgba(239,229,212,.12);
+.de-ceremony-scope{
+  display:grid;
+  grid-template-columns:minmax(180px,.28fr) minmax(0,.72fr);
+  gap:clamp(22px,5vw,74px);
+  padding:clamp(32px,5vw,68px) 0;
+  border-top:1px solid rgba(246,239,228,.16);
+  border-bottom:1px solid rgba(246,239,228,.16);
 }
-.collapse-trigger{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-  width:100%;
-  padding:clamp(22px,2.6vw,30px) 0;
-  border:0;
-  background:none;
-  color:inherit;
-  text-align:left;
-  cursor:pointer;
-  transition:opacity .3s ease;
+.de-ceremony-scope h2{
+  margin:0 0 12px;
+  color:var(--ivory,#f4ede2);
+  font:300 clamp(34px,4vw,58px)/.98 var(--display);
 }
-.collapse-trigger:hover{opacity:.72;}
-.collapse-trigger>h2,
-.collapse-trigger>h3,
-.collapse-trigger>h4,
-.collapse-trigger>.collapse-title{
-  margin:0!important;
-  font:300 clamp(21px,2.3vw,29px)/1.25 var(--display)!important;
-  letter-spacing:0!important;
-  color:#f6efe4!important;
-  text-transform:none!important;
+.de-ceremony-scope p:not(.de-eyebrow){
+  max-width:680px;
+  margin:0;
+  color:rgba(246,239,228,.72);
+  font:300 15px/1.85 var(--sans);
 }
-.collapse-mark{
+.de-visual-compact{
+  width:min(1500px, calc(100vw - 112px));
+  margin:0 auto;
+  padding:clamp(58px,8vw,118px) 0;
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) repeat(2,minmax(220px,.55fr));
+  gap:18px;
+}
+.de-visual-compact figure{
   position:relative;
-  flex:0 0 auto;
-  width:15px;
-  height:15px;
+  min-height:clamp(300px,36vw,560px);
+  margin:0;
+  overflow:hidden;
+  background:#090705;
+  border:1px solid rgba(246,239,228,.12);
 }
-.collapse-mark::before,
-.collapse-mark::after{
+.de-visual-compact .is-featured{
+  min-height:clamp(420px,52vw,760px);
+}
+.de-visual-compact img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  opacity:.92;
+  transform:scale(1.001);
+  transition:transform .5s ease, opacity .28s ease;
+}
+.de-visual-compact figure:hover img,
+.de-visual-compact figure:focus-within img{
+  transform:scale(1.035);
+  opacity:1;
+}
+.de-visual-compact figcaption{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  color:var(--ivory,#f4ede2);
+  font:600 10px/1 var(--sans);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.de-preview-grid-section .de-section-head h2{
+  max-width:820px;
+}
+.de-private-gallery{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+}
+.de-private-gallery figure{
+  min-height:220px!important;
+  max-height:360px!important;
+}
+.de-download-card:first-child{
+  border-color:rgba(246,239,228,.48);
+  background:rgba(246,239,228,.075);
+}
+@media(max-width:900px){
+  .de-visual-compact{
+    width:min(100% - 36px,760px);
+    grid-template-columns:1fr 1fr;
+  }
+  .de-visual-compact .is-featured{
+    grid-column:1/-1;
+  }
+  .de-ceremony-scope{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:560px){
+  .de-visual-compact{
+    width:calc(100% - 32px);
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .de-visual-compact figure,
+  .de-visual-compact .is-featured{
+    min-height:360px;
+  }
+  .de-private-gallery{
+    grid-template-columns:1fr!important;
+  }
+}
+
+/* Design Editions: public preview / private delivery */
+.visual-atelier.design-editions-index,
+.visual-atelier.design-edition-page{
+  background:#050403;
+  color:#f4eadc;
+}
+.visual-atelier .editions-intro,
+.visual-atelier .edition-section,
+.visual-atelier .edition-index-grid,
+.visual-atelier .design-edition-teaser{
+  width:min(1500px, calc(100vw - 112px));
+  margin-inline:auto;
+}
+.visual-atelier .editions-intro{
+  min-height:52vh;
+  display:grid;
+  align-content:end;
+  padding:clamp(110px, 13vw, 190px) 0 clamp(56px, 7vw, 94px);
+}
+.visual-atelier .editions-intro h1{
+  max-width:880px;
+  margin:18px 0 22px;
+  color:#f6eee4;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:300;
+  font-size:clamp(54px, 7.2vw, 112px);
+  line-height:.9;
+  letter-spacing:0;
+}
+.visual-atelier .editions-intro p:not(.eyebrow){
+  max-width:590px;
+  color:rgba(244,234,220,.7);
+  font-size:16px;
+  line-height:1.9;
+}
+.visual-atelier .edition-index-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap:28px;
+  padding:0 0 clamp(88px, 10vw, 150px);
+}
+.visual-atelier .edition-index-card{
+  position:relative;
+  min-height:520px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  padding:clamp(26px, 4vw, 58px);
+  border:1px solid rgba(244,234,220,.18);
+  text-decoration:none;
+  color:#f6eee4;
+  background:rgba(255,255,255,.025);
+  transition:border-color .25s ease, transform .25s ease, background .25s ease;
+}
+.visual-atelier .edition-index-card:hover,
+.visual-atelier .edition-index-card:focus-visible{
+  transform:translateY(-4px);
+  border-color:rgba(244,234,220,.5);
+  background:rgba(255,255,255,.045);
+  outline:none;
+}
+.visual-atelier .edition-index-card img{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.64;
+  transition:transform .65s ease, opacity .3s ease;
+}
+.visual-atelier .edition-index-card:hover img,
+.visual-atelier .edition-index-card:focus-visible img{
+  transform:scale(1.025);
+  opacity:.78;
+}
+.visual-atelier .edition-index-card::after{
   content:"";
   position:absolute;
-  left:0;
-  top:7px;
-  width:15px;
-  height:1px;
-  background:#d8ba91;
-  transition:transform .38s cubic-bezier(.2,.7,.25,1);
+  inset:0;
+  z-index:1;
+  background:linear-gradient(180deg, rgba(5,4,3,.05), rgba(5,4,3,.76));
 }
-.collapse-mark::after{transform:rotate(90deg);}
-[data-collapse].is-open .collapse-mark::after{transform:rotate(0deg);}
-
-.collapse-panel{
-  max-height:0;
+.visual-atelier .edition-index-card > *:not(img){
+  position:relative;
+  z-index:2;
+}
+.visual-atelier .edition-index-card span,
+.visual-atelier .edition-locked-grid span{
+  color:#c6a077;
+  font-family:Inter, sans-serif;
+  font-size:12px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.visual-atelier .edition-index-card h2{
+  max-width:540px;
+  margin:18px 0 12px;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:300;
+  font-size:clamp(42px, 5vw, 86px);
+  line-height:.92;
+}
+.visual-atelier .edition-index-card p{
+  max-width:460px;
+  color:rgba(244,234,220,.74);
+  font-size:15px;
+  line-height:1.75;
+}
+.visual-atelier .edition-index-card b,
+.visual-atelier .edition-primary-link,
+.visual-atelier .edition-secondary-link{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  margin-top:28px;
+  color:#f6eee4;
+  font:600 12px/1 Inter, sans-serif;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.visual-atelier .edition-index-card-soon{
+  justify-content:center;
+}
+.visual-atelier .edition-index-card-soon::after{
+  display:none;
+}
+.visual-atelier .edition-index-card-soon h2{
+  font-size:clamp(34px, 3.4vw, 54px);
+}
+.visual-atelier .design-edition-teaser{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  align-items:end;
+  gap:34px;
+  margin-top:clamp(54px, 7vw, 90px);
+  padding:clamp(28px, 4vw, 48px) 0;
+  border-top:1px solid rgba(244,234,220,.18);
+  border-bottom:1px solid rgba(244,234,220,.18);
+}
+.visual-atelier .design-edition-teaser h2{
+  margin:12px 0 14px;
+  color:#f6eee4;
+  font-family:"Cormorant Garamond", serif;
+  font-size:clamp(38px, 5vw, 78px);
+  font-weight:300;
+  line-height:.96;
+}
+.visual-atelier .design-edition-teaser p{
+  max-width:690px;
+  color:rgba(244,234,220,.7);
+  font-size:15px;
+  line-height:1.85;
+}
+.visual-atelier .edition-hero{
+  position:relative;
+  min-height:calc(100vh - 84px);
+  display:grid;
+  align-items:end;
   overflow:hidden;
-  transition:max-height .5s cubic-bezier(.2,.7,.25,1),opacity .4s ease;
-  opacity:0;
+  background:#050403;
 }
-[data-collapse].is-open .collapse-panel{opacity:1;}
-.collapse-panel>*:first-child{margin-top:0;}
-.collapse-panel>*:last-child{margin-bottom:clamp(24px,3vw,34px);}
-.collapse-panel p,
-.collapse-panel li{
-  font-size:var(--t-body)!important;
-  line-height:var(--lh-body)!important;
-  max-width:var(--measure)!important;
-  color:rgba(239,229,212,.7)!important;
+.visual-atelier .gateway-edition-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(5,4,3,.88) 0%, rgba(5,4,3,.58) 36%, rgba(5,4,3,.12) 72%),
+    url("assets/design-edition-gateway-hero.jpg") center / cover no-repeat;
 }
-@media (prefers-reduced-motion:reduce){
-  .collapse-panel{transition:none;}
+.visual-atelier .edition-hero-copy{
+  position:relative;
+  z-index:1;
+  width:min(1500px, calc(100vw - 112px));
+  margin:0 auto;
+  padding:0 0 clamp(58px, 8vw, 110px);
 }
-@media (max-width:860px){
-  .collapse-trigger{padding:20px 0;gap:16px;}
-  .collapse-trigger>h2,.collapse-trigger>h3,.collapse-trigger>h4{
-    font-size:19px!important;
+.visual-atelier .edition-hero-copy h1{
+  max-width:720px;
+  margin:18px 0 18px;
+  color:#f6eee4;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:300;
+  font-size:clamp(70px, 8.5vw, 142px);
+  line-height:.82;
+  letter-spacing:0;
+}
+.visual-atelier .edition-hero-copy p:not(.eyebrow){
+  max-width:510px;
+  color:rgba(244,234,220,.78);
+  font-size:16px;
+  line-height:1.9;
+}
+.visual-atelier .edition-primary-link{
+  min-height:46px;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(244,234,220,.58);
+  text-decoration:none;
+  transition:color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.visual-atelier .edition-primary-link:hover,
+.visual-atelier .edition-primary-link:focus-visible,
+.visual-atelier .edition-secondary-link:hover,
+.visual-atelier .edition-secondary-link:focus-visible{
+  color:#fff;
+  border-color:#fff;
+  transform:translateX(3px);
+  outline:none;
+}
+.visual-atelier .edition-section{
+  padding:clamp(78px, 10vw, 138px) 0;
+  border-bottom:1px solid rgba(244,234,220,.12);
+}
+.visual-atelier .edition-story{
+  display:grid;
+  grid-template-columns:.32fr minmax(0, .9fr) minmax(280px, .5fr);
+  gap:clamp(24px, 5vw, 72px);
+  align-items:end;
+}
+.visual-atelier .edition-story h2,
+.visual-atelier .edition-spec-grid h2,
+.visual-atelier .edition-locked h2,
+.visual-atelier .edition-access-panel h2{
+  margin:0;
+  color:#f6eee4;
+  font-family:"Cormorant Garamond", serif;
+  font-weight:300;
+  font-size:clamp(38px, 4.7vw, 76px);
+  line-height:.98;
+}
+.visual-atelier .edition-story p:not(.eyebrow),
+.visual-atelier .edition-spec-copy p,
+.visual-atelier .edition-access-panel p{
+  max-width:560px;
+  color:rgba(244,234,220,.72);
+  font-size:15px;
+  line-height:1.9;
+}
+.visual-atelier .edition-sequence{
+  width:min(1500px, calc(100vw - 112px));
+  margin:0 auto;
+  padding:clamp(72px, 9vw, 128px) 0;
+  display:grid;
+  grid-template-columns:1.18fr .82fr;
+  gap:20px;
+}
+.visual-atelier .edition-sequence figure{
+  position:relative;
+  min-height:420px;
+  margin:0;
+  overflow:hidden;
+  background:#090705;
+}
+.visual-atelier .edition-sequence .edition-sequence-large{
+  grid-row:span 2;
+  min-height:860px;
+}
+.visual-atelier .edition-sequence img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  opacity:.92;
+}
+.visual-atelier .edition-sequence figcaption{
+  position:absolute;
+  left:22px;
+  bottom:20px;
+  color:#f6eee4;
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+}
+.visual-atelier .edition-spec-grid{
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(320px, .7fr);
+  gap:clamp(28px, 7vw, 104px);
+}
+.visual-atelier .edition-quiet-details{
+  margin-top:30px;
+  padding-top:22px;
+  border-top:1px solid rgba(244,234,220,.16);
+}
+.visual-atelier .edition-quiet-details summary{
+  cursor:pointer;
+  color:#f6eee4;
+  font:600 12px/1 Inter, sans-serif;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.visual-atelier .edition-quiet-details p{
+  margin:18px 0 0;
+}
+.visual-atelier .edition-locked > h2{
+  max-width:840px;
+  margin-top:14px;
+}
+.visual-atelier .edition-locked-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:1px;
+  margin-top:44px;
+  background:rgba(244,234,220,.16);
+  border:1px solid rgba(244,234,220,.16);
+}
+.visual-atelier .edition-locked-grid article{
+  min-height:220px;
+  padding:30px;
+  background:rgba(5,4,3,.94);
+}
+.visual-atelier .edition-locked-grid h3{
+  margin:24px 0 12px;
+  color:#f6eee4;
+  font-family:"Cormorant Garamond", serif;
+  font-size:32px;
+  font-weight:300;
+  line-height:1;
+}
+.visual-atelier .edition-locked-grid p{
+  color:rgba(244,234,220,.68);
+  font-size:14px;
+  line-height:1.75;
+}
+.visual-atelier .edition-access-panel{
+  display:grid;
+  grid-template-columns:.42fr minmax(0, .74fr) minmax(280px, .46fr);
+  gap:clamp(24px, 5vw, 70px);
+  align-items:start;
+  border-bottom:0;
+}
+.visual-atelier .edition-cta-row{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:16px;
+}
+.visual-atelier .edition-secondary-link{
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(244,234,220,.22);
+  color:rgba(244,234,220,.74);
+  text-decoration:none;
+}
+@media (max-width: 980px){
+  .visual-atelier .editions-intro,
+  .visual-atelier .edition-section,
+  .visual-atelier .edition-index-grid,
+  .visual-atelier .design-edition-teaser,
+  .visual-atelier .edition-hero-copy,
+  .visual-atelier .edition-sequence{
+    width:min(100% - 40px, 760px);
   }
-}
-
-/* ============================================================
-   CONCIERGE TYPOGRAPHY — editorial, not interface
-   ------------------------------------------------------------
-   The questionnaire was set in tracked Inter capitals: the visual
-   language of dashboards and checkout flows. The markup already
-   carries natural sentence case ("Names", "Under 25", "Continue")
-   — only CSS was shouting it. Switched to the display serif at a
-   readable size, with tracking near zero. The one exception is
-   the step counter, where small tracked caps still read as a
-   quiet index rather than as UI chrome.
-   ============================================================ */
-
-/* Field labels */
-.wedding-design-page .private-chat-form label,
-.wedding-design-page .private-chat-form .field-label{
-  font:400 15px/1.4 var(--display)!important;
-  letter-spacing:.005em!important;
-  text-transform:none!important;
-  color:rgba(239,229,212,.62)!important;
-  margin-bottom:10px!important;
-}
-
-/* Answers the client types */
-.wedding-design-page .private-chat-form input,
-.wedding-design-page .private-chat-form select,
-.wedding-design-page .private-chat-form textarea{
-  font:400 18px/1.5 var(--display)!important;
-  letter-spacing:.005em!important;
-  color:#f6efe4!important;
-  padding:16px 18px!important;
-}
-.wedding-design-page .private-chat-form input::placeholder,
-.wedding-design-page .private-chat-form textarea::placeholder{
-  font-family:var(--display)!important;
-  font-style:italic!important;
-  color:rgba(239,229,212,.3)!important;
-  letter-spacing:0!important;
-}
-
-/* Answer chips read as choices, not as button labels */
-.wedding-design-page .answer-chips span{
-  font:400 17px/1.35 var(--display)!important;
-  letter-spacing:.005em!important;
-  text-transform:none!important;
-  padding:0 20px!important;
-}
-
-/* Consent line */
-.wedding-design-page .private-chat-form .check,
-.wedding-design-page .final-confirm{
-  font:400 15px/1.65 var(--display)!important;
-  letter-spacing:.005em!important;
-  text-transform:none!important;
-}
-
-/* Chapter rail */
-.wedding-design-page .concierge-progress button{
-  font:400 15px/1.3 var(--display)!important;
-  letter-spacing:.01em!important;
-  text-transform:none!important;
-}
-
-/* Actions — a served invitation, not a submit control */
-.wedding-design-page .concierge-actions button{
-  font:400 16px/1.2 var(--display)!important;
-  letter-spacing:.03em!important;
-  text-transform:none!important;
-}
-.wedding-design-page .concierge-actions [data-concierge-prev]{
-  font-style:italic!important;
-  letter-spacing:.01em!important;
-}
-
-/* The single place tracked caps still belong: the quiet step index */
-.wedding-design-page .question-count{
-  font:500 10px/1.4 var(--sans)!important;
-  letter-spacing:.3em!important;
-  text-transform:uppercase!important;
-  color:rgba(216,186,145,.55)!important;
-}
-
-/* Question text: slightly more air now that everything shares one voice */
-.wedding-design-page .concierge-question>p{
-  font-family:var(--display)!important;
-  font-size:19px!important;
-  line-height:1.6!important;
-  color:rgba(239,229,212,.6)!important;
-}
-
-@media (max-width:860px){
-  .wedding-design-page .private-chat-form input,
-  .wedding-design-page .private-chat-form select,
-  .wedding-design-page .private-chat-form textarea{
-    font-size:18px!important;
+  .visual-atelier .edition-index-grid,
+  .visual-atelier .edition-story,
+  .visual-atelier .edition-spec-grid,
+  .visual-atelier .edition-access-panel,
+  .visual-atelier .design-edition-teaser{
+    grid-template-columns:1fr;
   }
-  .wedding-design-page .answer-chips span{font-size:16px!important;}
-  .wedding-design-page .concierge-actions button{font-size:16px!important;}
-  .wedding-design-page .concierge-question>p{font-size:17px!important;}
-}
-
-
-/* ============================================================
-   MOBILE HOMEPAGE
-   ------------------------------------------------------------
-   Earlier attempts lost the cascade: .visual-atelier .room-hotspots
-   and .funnel-mode .venue-panorama are two-class selectors carrying
-   !important, so single-class overrides never applied. Everything
-   below is scoped to body.funnel-mode.visual-atelier so it outranks
-   them. Desktop is untouched.
-   ============================================================ */
-@media (max-width:860px){
-
-  /* 1 — Room tabs off */
-  html body.funnel-mode.visual-atelier .room-hotspots,
-  html body.visual-atelier .room-hotspots{
-    display:none!important;
+  .visual-atelier .edition-index-card{
+    min-height:420px;
   }
-
-  /* 2 — Hero collapses to the image's own height. .hero was locked to
-        100svh with min-height:720px, which is exactly the black gap. */
-  html body.funnel-mode.visual-atelier header.hero,
-  html body.visual-atelier header.hero{
-    height:auto!important;
-    min-height:0!important;
-    overflow:visible!important;
+  .visual-atelier .gateway-edition-hero::before{
+    background:
+      linear-gradient(180deg, rgba(5,4,3,.38), rgba(5,4,3,.88)),
+      url("assets/design-edition-gateway-hero.jpg") center top / cover no-repeat;
   }
-  html body.funnel-mode.visual-atelier .hero-film{
-    position:relative!important;
-    inset:auto!important;
-    width:100%!important;
-    aspect-ratio:1023/1537!important;
-    height:auto!important;
-    min-height:0!important;
-    overflow:hidden!important;
+  .visual-atelier .edition-hero{
+    min-height:88vh;
   }
-  /* .funnel-mode .venue-panorama used inset:-5% -8% and
-     background-size:auto 118% — that is what cropped the picture. */
-  html body.funnel-mode.visual-atelier .venue-panorama{
-    position:absolute!important;
-    inset:0!important;
-    width:100%!important;
-    height:100%!important;
-    background-size:cover!important;
-    background-position:center center!important;
-    filter:none!important;
+  .visual-atelier .edition-hero-copy h1{
+    font-size:clamp(58px, 18vw, 92px);
   }
-  html body.funnel-mode.visual-atelier .venue-panorama::after{
-    background:none!important;
+  .visual-atelier .edition-sequence{
+    grid-template-columns:1fr;
   }
-  html body.funnel-mode.visual-atelier .film-light,
-  html body.funnel-mode.visual-atelier .film-grids{
-    display:none!important;
+  .visual-atelier .edition-sequence .edition-sequence-large,
+  .visual-atelier .edition-sequence figure{
+    min-height:auto;
+    aspect-ratio:4/5;
   }
-  html body.funnel-mode.visual-atelier .veil{
-    position:absolute!important;
-    inset:0!important;
-    background:linear-gradient(180deg,rgba(7,7,6,.5) 0%,rgba(7,7,6,0) 20%,rgba(7,7,6,0) 72%,rgba(7,7,6,.9) 100%)!important;
-  }
-
-  /* Copy sits directly under the image, no reserved space */
-  html body.funnel-mode.visual-atelier .hero-copy.gallery-hero-copy{
-    position:relative!important;
-    left:auto!important;
-    right:auto!important;
-    top:auto!important;
-    bottom:auto!important;
-    width:auto!important;
-    max-width:none!important;
-    transform:none!important;
-    margin:0!important;
-    padding:32px 22px 48px!important;
-  }
-  html body.funnel-mode.visual-atelier .gallery-hero-copy h1{
-    font-size:clamp(40px,11.4vw,54px)!important;
-    letter-spacing:.06em!important;
-    line-height:1.02!important;
-    margin:16px 0 14px!important;
-  }
-
-  /* 3 — Calls to action */
-  html body.funnel-mode.visual-atelier .launch-hero-actions{
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:stretch!important;
-    gap:18px!important;
-    margin-top:30px!important;
-  }
-  html body.funnel-mode.visual-atelier .launch-hero-actions .enter-worlds{
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    min-height:62px!important;
-    padding:0 22px!important;
-    margin:0!important;
-    border:0!important;
-    background:#f0ddc6!important;
-    color:#0b0a09!important;
-    font:500 11px/1 var(--sans)!important;
-    letter-spacing:.2em!important;
-    text-transform:uppercase!important;
-  }
-  html body.funnel-mode.visual-atelier .launch-hero-actions>a:last-child{
-    display:inline-flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    gap:12px!important;
-    align-self:center!important;
-    margin:0!important;
-    padding:0 2px 11px!important;
-    border:0!important;
-    border-bottom:1px solid rgba(239,229,212,.28)!important;
-    background:transparent!important;
-    color:rgba(239,229,212,.72)!important;
-    font:500 10.5px/1 var(--sans)!important;
-    letter-spacing:.2em!important;
-    text-transform:uppercase!important;
-  }
-  html body.funnel-mode.visual-atelier .launch-hero-actions>a:last-child::after{
-    content:"";
-    width:20px;
-    height:1px;
-    background:currentColor;
-    opacity:.75;
+  .visual-atelier .edition-locked-grid{
+    grid-template-columns:1fr;
   }
 }
 
-/* ============================================================
-   MOBILE HERO — neutralising the 850px treatment
-   ------------------------------------------------------------
-   An earlier @media(max-width:850px) block builds a split layout:
-     .visual-atelier .venue-panorama { height:50svh }   <- half image
-     .visual-atelier .hero::before   { inset:50svh 0 0 0 }  <- black slab
-     .visual-atelier .gallery-hero-copy { position absolute at 50svh }
-     .visual-atelier .hero { min-height:max(100svh,820px) }
-   Overriding the image alone was not enough — the two pseudo-elements
-   and the absolute copy stayed. All four are neutralised here.
-   ============================================================ */
-@media (max-width:860px){
+/* Design Editions V5: paid product experience */
+.de-page{
+  --de-bg:#050403;
+  --de-panel:#0b0907;
+  --de-panel-soft:rgba(255,248,238,.045);
+  --de-ivory:#f7efe5;
+  --de-muted:rgba(247,239,229,.68);
+  --de-faint:rgba(247,239,229,.44);
+  --de-line:rgba(247,218,184,.18);
+  --de-accent:#dfb377;
+  background:var(--de-bg);
+  color:var(--de-ivory);
+}
+.de-page .gallery-nav{
+  background:rgba(5,4,3,.86);
+  border-bottom-color:rgba(247,218,184,.13);
+  backdrop-filter:blur(18px);
+}
+.de-shell{
+  width:min(1500px, calc(100vw - 112px));
+  margin-inline:auto;
+}
+.de-eyebrow{
+  margin:0 0 18px;
+  color:var(--de-accent);
+  font:600 12px/1.4 Inter, sans-serif;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+}
+.de-archive-hero{
+  max-width:900px;
+  padding:clamp(98px, 12vw, 174px) 0 clamp(44px, 5vw, 78px);
+}
+.de-archive-hero h1,
+.de-product-hero-copy h1,
+.de-section-head h2,
+.de-story-grid h2,
+.de-spec-grid h2,
+.de-access-cta h2,
+.de-private-hero h1,
+.de-downloads h2,
+.de-upsell h2{
+  margin:0;
+  color:var(--de-ivory);
+  font-family:"Cormorant Garamond", serif;
+  font-weight:300;
+  line-height:.98;
+  letter-spacing:0;
+}
+.de-archive-hero h1{
+  max-width:820px;
+  font-size:clamp(56px, 7vw, 104px);
+}
+.de-archive-hero p,
+.de-product-hero-copy p,
+.de-story-grid > p,
+.de-spec-grid p,
+.de-access-cta p,
+.de-private-hero p,
+.de-downloads p,
+.de-upsell p{
+  max-width:660px;
+  margin:26px 0 0;
+  color:var(--de-muted);
+  font:300 16px/1.85 Inter, sans-serif;
+}
+.de-edition-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:clamp(28px, 3vw, 52px);
+  padding:0 0 clamp(96px, 11vw, 160px);
+}
+.de-card{
+  position:relative;
+  display:grid;
+  min-height:680px;
+  overflow:hidden;
+  color:var(--de-ivory);
+  text-decoration:none;
+  background:var(--de-panel);
+  border:1px solid var(--de-line);
+  isolation:isolate;
+}
+.de-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(180deg, rgba(5,4,3,.1), rgba(5,4,3,.62) 62%, rgba(5,4,3,.92));
+  pointer-events:none;
+}
+.de-card figure{
+  position:absolute;
+  inset:0;
+  margin:0;
+}
+.de-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.78;
+  transform:scale(1.01);
+  transition:opacity .45s ease, transform .7s ease;
+}
+.de-card-copy{
+  position:relative;
+  z-index:2;
+  align-self:end;
+  display:grid;
+  min-height:360px;
+  padding:clamp(28px, 3.2vw, 48px);
+}
+.de-card-copy span,
+.de-card-copy small{
+  color:var(--de-accent);
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+}
+.de-card-copy small{
+  justify-self:start;
+  margin-top:10px;
+  color:var(--de-faint);
+}
+.de-card-copy h2{
+  max-width:360px;
+  margin:30px 0 0;
+  color:var(--de-ivory);
+  font-family:"Cormorant Garamond", serif;
+  font-size:clamp(34px, 3vw, 50px);
+  font-weight:300;
+  line-height:.96;
+}
+.de-card-copy p{
+  max-width:340px;
+  margin:18px 0 32px;
+  color:var(--de-muted);
+  font:300 14px/1.75 Inter, sans-serif;
+}
+.de-card-copy b{
+  align-self:end;
+  width:max-content;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(247,239,229,.38);
+  color:var(--de-ivory);
+  font:600 12px/1 Inter, sans-serif;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.de-card-available:hover,
+.de-card-available:focus-visible{
+  border-color:rgba(247,218,184,.52);
+  outline:none;
+  box-shadow:0 20px 80px rgba(0,0,0,.42), inset 0 0 90px rgba(223,179,119,.08);
+}
+.de-card-available:hover img,
+.de-card-available:focus-visible img{
+  opacity:.92;
+  transform:scale(1.045);
+}
+.de-card-locked img{
+  opacity:.34;
+  filter:saturate(.78) brightness(.75);
+}
+.de-product-hero{
+  width:min(1500px, calc(100vw - 112px));
+  min-height:calc(100vh - 86px);
+  margin-inline:auto;
+  padding:clamp(46px, 7vw, 92px) 0;
+  display:grid;
+  grid-template-columns:minmax(0, 1.04fr) minmax(360px, .76fr);
+  gap:clamp(36px, 5.5vw, 84px);
+  align-items:center;
+}
+.de-product-hero figure,
+.de-visual-run figure,
+.de-private-gallery figure,
+.de-private-hero figure{
+  margin:0;
+  overflow:hidden;
+  background:#0a0806;
+  border:1px solid var(--de-line);
+}
+.de-product-hero figure{
+  aspect-ratio:4/5;
+  max-height:82vh;
+}
+.de-product-hero img,
+.de-visual-run img,
+.de-private-gallery img,
+.de-private-hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.de-product-hero-copy{
+  max-width:560px;
+}
+.de-product-hero-copy h1{
+  font-size:clamp(58px, 6.8vw, 106px);
+}
+.de-subtitle{
+  margin-top:16px!important;
+  color:var(--de-accent)!important;
+  font-size:13px!important;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.de-primary-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:58px;
+  margin-top:34px;
+  padding:0 34px;
+  color:#090705;
+  background:var(--de-ivory);
+  border:1px solid var(--de-ivory);
+  text-decoration:none;
+  font:700 12px/1 Inter, sans-serif;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .25s ease, color .25s ease, transform .25s ease, border-color .25s ease;
+}
+.de-primary-button:hover,
+.de-primary-button:focus-visible{
+  background:var(--de-accent);
+  border-color:var(--de-accent);
+  outline:1px solid rgba(247,239,229,.62);
+  outline-offset:4px;
+  transform:translateY(-2px);
+}
+.de-primary-button:disabled{
+  cursor:progress;
+  opacity:.64;
+  transform:none;
+}
+.de-secondary-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:58px;
+  padding:0 26px;
+  color:var(--de-ivory);
+  background:transparent;
+  border:1px solid rgba(247,239,229,.42);
+  text-decoration:none;
+  font:700 12px/1 Inter, sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .25s ease, color .25s ease, transform .25s ease, border-color .25s ease;
+}
+.de-secondary-button:hover,
+.de-secondary-button:focus-visible{
+  background:rgba(247,239,229,.08);
+  border-color:var(--de-ivory);
+  outline:1px solid rgba(247,239,229,.38);
+  outline-offset:4px;
+  transform:translateY(-2px);
+}
+.de-action-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-top:24px;
+}
+.de-action-row .de-primary-button{
+  margin-top:0;
+}
+.de-private-subtitle{
+  color:var(--de-accent)!important;
+  font-size:13px!important;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-bottom:14px!important;
+}
+.de-status{
+  min-height:22px;
+  color:var(--de-faint)!important;
+  font-size:12px!important;
+}
+.de-story-grid,
+.de-spec-grid{
+  display:grid;
+  grid-template-columns:minmax(300px, .72fr) minmax(0, 1fr);
+  gap:clamp(34px, 7vw, 114px);
+  padding:clamp(74px, 8vw, 124px) 0;
+  border-top:1px solid var(--de-line);
+}
+.de-story-grid h2,
+.de-spec-grid h2,
+.de-section-head h2,
+.de-access-cta h2{
+  max-width:720px;
+  font-size:clamp(38px, 4.8vw, 72px);
+}
+.de-visual-run{
+  width:min(1500px, calc(100vw - 112px));
+  margin:0 auto clamp(84px, 9vw, 140px);
+  display:grid;
+  grid-template-columns:repeat(6, 1fr);
+  gap:18px;
+}
+.de-visual-run figure{
+  min-height:480px;
+  position:relative;
+}
+.de-visual-run .de-visual-large{
+  grid-column:span 3;
+  min-height:720px;
+}
+.de-visual-run figure:not(.de-visual-large){
+  grid-column:span 3;
+}
+.de-visual-run figcaption{
+  position:absolute;
+  left:20px;
+  bottom:18px;
+  color:var(--de-ivory);
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.de-section-head{
+  max-width:860px;
+  margin-bottom:42px;
+}
+.de-preview-grid,
+.de-locked-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:1px;
+  margin-bottom:clamp(82px, 9vw, 138px);
+  background:var(--de-line);
+  border:1px solid var(--de-line);
+}
+.de-preview-grid article,
+.de-locked-grid article{
+  min-height:230px;
+  padding:28px;
+  background:rgba(8,6,5,.95);
+}
+.de-preview-grid span,
+.de-locked-grid span,
+.de-private-sections span,
+.de-download-card span{
+  color:var(--de-accent);
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+.de-preview-grid h3,
+.de-locked-grid h3{
+  margin:28px 0 16px;
+  color:var(--de-ivory);
+  font-family:"Cormorant Garamond", serif;
+  font-size:34px;
+  font-weight:300;
+  line-height:1;
+}
+.de-preview-grid p{
+  color:var(--de-muted);
+  font:300 14px/1.72 Inter, sans-serif;
+}
+.de-locked-grid article{
+  min-height:160px;
+  background:rgba(8,6,5,.72);
+}
+.de-access-cta{
+  max-width:860px;
+  padding:0 0 clamp(96px, 11vw, 156px);
+}
+.de-access-main{
+  padding:clamp(88px, 10vw, 150px) 0;
+}
+.de-access-loading{
+  max-width:820px;
+  min-height:56vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.de-access-loading h1{
+  margin:0;
+  color:var(--de-ivory);
+  font-family:"Cormorant Garamond", serif;
+  font-size:clamp(54px, 7vw, 102px);
+  font-weight:300;
+  line-height:.98;
+}
+.de-access-loading p{
+  max-width:620px;
+  color:var(--de-muted);
+  font:300 16px/1.85 Inter, sans-serif;
+}
+.de-access-denied .de-primary-button{
+  width:max-content;
+  color:#090705;
+}
+.de-private-hero{
+  display:grid;
+  grid-template-columns:minmax(0, .88fr) minmax(360px, .62fr);
+  gap:clamp(34px, 6vw, 92px);
+  align-items:end;
+  padding-bottom:54px;
+  border-bottom:1px solid var(--de-line);
+}
+.de-private-hero h1{
+  max-width:680px;
+  font-size:clamp(62px, 7vw, 112px);
+}
+.de-private-hero small{
+  display:block;
+  margin-top:22px;
+  color:var(--de-faint);
+  font:500 11px/1.5 Inter, sans-serif;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.de-private-hero figure{
+  aspect-ratio:4/5;
+}
+.de-private-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 28px;
+  padding:30px 0 48px;
+}
+.de-private-nav a{
+  color:var(--de-muted);
+  text-decoration:none;
+  font:600 11px/1.5 Inter, sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.de-private-nav a:hover,
+.de-private-nav a:focus-visible{
+  color:var(--de-ivory);
+  outline:none;
+}
+.de-private-gallery{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:18px;
+  margin-bottom:clamp(70px, 8vw, 122px);
+}
+.de-private-gallery figure{
+  aspect-ratio:4/5;
+}
+.de-private-gallery figure:nth-child(1){
+  grid-column:span 2;
+  aspect-ratio:16/10;
+}
+.de-private-sections{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:1px;
+  background:var(--de-line);
+  border:1px solid var(--de-line);
+}
+.de-private-sections article{
+  min-height:260px;
+  padding:clamp(28px, 3.4vw, 48px);
+  background:rgba(8,6,5,.95);
+}
+.de-private-sections h2{
+  margin:24px 0 18px;
+  color:var(--de-ivory);
+  font-family:"Cormorant Garamond", serif;
+  font-size:clamp(34px, 3.6vw, 56px);
+  font-weight:300;
+  line-height:.98;
+}
+.de-private-sections p{
+  max-width:620px;
+  color:var(--de-muted);
+  font:300 15px/1.78 Inter, sans-serif;
+}
+.de-downloads,
+.de-upsell{
+  display:grid;
+  grid-template-columns:minmax(280px, .52fr) minmax(0, 1fr);
+  gap:clamp(30px, 6vw, 86px);
+  padding:clamp(76px, 8vw, 128px) 0;
+  border-top:1px solid var(--de-line);
+}
+.de-downloads h2,
+.de-upsell h2{
+  font-size:clamp(38px, 4.8vw, 70px);
+}
+.de-download-grid{
+  display:grid;
+  gap:14px;
+}
+.de-download-card{
+  display:grid;
+  grid-template-columns:130px minmax(0,1fr) auto;
+  gap:22px;
+  align-items:center;
+  padding:24px 0;
+  color:var(--de-ivory);
+  text-decoration:none;
+  border-bottom:1px solid var(--de-line);
+}
+.de-download-card strong{
+  font:300 28px/1.1 "Cormorant Garamond", serif;
+}
+.de-download-card em{
+  color:var(--de-muted);
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-style:normal;
+}
+.de-download-card:hover em,
+.de-download-card:focus-visible em{
+  color:var(--de-ivory);
+}
+.de-upsell-form{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:28px;
+}
+.de-upsell-form label{
+  display:grid;
+  gap:10px;
+  color:var(--de-accent);
+  font:600 11px/1.4 Inter, sans-serif;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.de-upsell-form input,
+.de-upsell-form textarea{
+  width:100%;
+  min-height:54px;
+  padding:14px 0;
+  color:var(--de-ivory);
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--de-line);
+  border-radius:0;
+  font:300 16px/1.6 Inter, sans-serif;
+  outline:none;
+}
+.de-upsell-form textarea{
+  min-height:132px;
+  resize:vertical;
+}
+.de-upsell-form input:focus,
+.de-upsell-form textarea:focus{
+  border-bottom-color:rgba(247,239,229,.72);
+}
+.de-upsell-wide,
+.de-upsell-form button,
+.de-upsell-form [data-upsell-status]{
+  grid-column:1 / -1;
+}
+.de-upsell-form [data-upsell-status]{
+  margin:0;
+  color:var(--de-muted);
+  font:300 13px/1.6 Inter, sans-serif;
+}
+.de-upsell-form [data-upsell-status] a{
+  color:var(--de-ivory);
+}
+@media (max-width: 1040px){
+  .de-shell,
+  .de-product-hero,
+  .de-visual-run{
+    width:min(100% - 44px, 820px);
+  }
+  .de-edition-grid,
+  .de-product-hero,
+  .de-story-grid,
+  .de-spec-grid,
+  .de-private-hero,
+  .de-downloads,
+  .de-upsell{
+    grid-template-columns:1fr;
+  }
+  .de-card{
+    min-height:540px;
+  }
+  .de-product-hero figure{
+    max-height:none;
+  }
+  .de-visual-run{
+    grid-template-columns:1fr;
+  }
+  .de-visual-run .de-visual-large,
+  .de-visual-run figure:not(.de-visual-large){
+    grid-column:auto;
+    min-height:auto;
+    aspect-ratio:4/5;
+  }
+  .de-preview-grid,
+  .de-locked-grid,
+  .de-private-gallery,
+  .de-private-sections{
+    grid-template-columns:1fr;
+  }
+  .de-private-gallery figure:nth-child(1){
+    grid-column:auto;
+    aspect-ratio:4/5;
+  }
+}
+@media (max-width: 620px){
+  .de-shell,
+  .de-product-hero,
+  .de-visual-run{
+    width:calc(100% - 32px);
+  }
+  .de-archive-hero h1,
+  .de-product-hero-copy h1,
+  .de-private-hero h1,
+  .de-access-loading h1{
+    font-size:clamp(46px, 15vw, 70px);
+  }
+  .de-card{
+    min-height:470px;
+  }
+  .de-card-copy{
+    min-height:310px;
+    padding:26px;
+  }
+  .de-preview-grid article,
+  .de-private-sections article{
+    min-height:auto;
+  }
+  .de-download-card{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .de-upsell-form{
+    grid-template-columns:1fr;
+  }
+}
 
-  html body.visual-atelier .hero::before,
-  html body.visual-atelier .hero::after,
-  html body.funnel-mode.visual-atelier .hero::before,
-  html body.funnel-mode.visual-atelier .hero::after{
-    content:none!important;
-    display:none!important;
+@media (max-width: 720px){
+  .visual-atelier footer{
+    grid-template-columns:1fr;
+    justify-items:center;
+    align-items:center;
+    gap:22px;
+    padding:44px 22px;
+    text-align:center;
+  }
+  .visual-atelier footer>.brand{
+    display:none;
+  }
+  .visual-atelier footer>p{
+    justify-self:center;
+    font-size:24px;
+  }
+  .visual-atelier footer>div:last-child{
+    justify-self:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:14px 20px;
+  }
+}
+
+/* Design series pages: unified editorial gallery and strict series separation */
+.design-series-page{
+  background:#070706;
+  color:#f3eadc;
+}
+
+.design-series-page .design-series-hero{
+  min-height:calc(100vh - 72px);
+  padding:clamp(112px,12vh,160px) clamp(28px,5.6vw,84px) clamp(56px,8vh,96px);
+  display:grid;
+  grid-template-columns:minmax(260px,.82fr) minmax(520px,1.18fr);
+  gap:clamp(44px,6vw,104px);
+  align-items:end;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(255,255,255,.035),transparent 32%),
+    #070706;
+}
+
+.design-series-page .design-series-hero>div{
+  max-width:560px;
+  padding-bottom:clamp(10px,3vh,40px);
+}
+
+.design-series-page .design-series-hero h1{
+  margin:18px 0 24px;
+  font-family:var(--display);
+  font-size:clamp(54px,6.6vw,112px);
+  font-weight:300;
+  line-height:.86;
+  letter-spacing:0;
+  color:#f3eadc;
+}
+
+.design-series-page .design-series-hero p:not(.eyebrow),
+.design-series-page .design-series-intro p{
+  max-width:560px;
+  margin:0;
+  font:300 15px/1.9 var(--sans);
+  color:rgba(243,234,220,.68);
+}
+
+.design-series-page .design-series-hero figure{
+  margin:0;
+  width:100%;
+  min-height:0;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:#11100e;
+}
+
+.design-series-page .design-series-hero img,
+.design-series-page .design-series-hero video{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  filter:saturate(.92) contrast(1.04) brightness(.9);
+}
+
+.design-series-page .design-series-intro{
+  width:min(760px,calc(100% - 56px));
+  margin:clamp(78px,10vw,132px) auto clamp(62px,8vw,104px);
+  text-align:center;
+}
+
+.design-series-page .design-series-gallery{
+  width:min(1440px,calc(100% - clamp(36px,8vw,128px)));
+  margin:0 auto clamp(96px,12vw,168px);
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:clamp(14px,1.8vw,28px);
+  background:#070706;
+}
+
+.design-series-page .design-series-gallery figure{
+  margin:0;
+  min-width:0;
+  overflow:hidden;
+  background:#11100e;
+  border:1px solid rgba(243,234,220,.09);
+}
+
+.design-series-page .design-series-gallery img,
+.design-series-page .design-series-gallery video{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  filter:saturate(.9) contrast(1.03) brightness(.92);
+}
+
+.design-series-page .design-series-gallery .full{
+  grid-column:1/-1;
+  aspect-ratio:16/9;
+}
+
+.design-series-page .design-series-gallery .wide{
+  grid-column:span 8;
+  aspect-ratio:16/10;
+}
+
+.design-series-page .design-series-gallery .tall{
+  grid-column:span 4;
+  aspect-ratio:4/5;
+}
+
+.design-series-page .design-series-gallery.compact-series .wide{
+  grid-column:span 7;
+}
+
+.design-series-page .design-series-gallery.compact-series .tall{
+  grid-column:span 5;
+}
+
+.design-series-page .design-series-gallery.series-curated-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(12px,1.4vw,20px);
+}
+
+.design-series-page .design-series-gallery.series-curated-grid .full,
+.design-series-page .design-series-gallery.series-curated-grid .wide,
+.design-series-page .design-series-gallery.series-curated-grid .tall{
+  grid-column:auto;
+  aspect-ratio:4/5;
+}
+
+.design-series-page .design-series-gallery.series-curated-grid figure{
+  min-height:0;
+}
+
+.design-series-page .design-series-gallery.series-curated-grid figure:hover{
+  z-index:2;
+  transform:scale(1.035);
+  border-color:rgba(243,234,220,.28);
+}
+
+.design-series-page .design-series-gallery.series-curated-grid img{
+  transition:transform .55s ease,filter .35s ease;
+}
+
+.design-series-page .design-series-gallery.series-curated-grid figure:hover img{
+  transform:scale(1.06);
+  filter:saturate(.96) contrast(1.04) brightness(.98);
+}
+
+.design-series-page footer{
+  border-top:1px solid rgba(243,234,220,.12);
+}
+
+@media(max-width:980px){
+  .design-series-page .design-series-hero{
+    min-height:0;
+    grid-template-columns:1fr;
+    padding-top:118px;
   }
 
-  html body.visual-atelier .hero,
-  html body.funnel-mode.visual-atelier .hero{
-    height:auto!important;
-    min-height:0!important;
-    max-height:none!important;
-    overflow:visible!important;
-    display:block!important;
+  .design-series-page .design-series-hero figure{
+    aspect-ratio:16/11;
   }
 
-  html body.visual-atelier .hero-film,
-  html body.funnel-mode.visual-atelier .hero-film{
-    position:relative!important;
-    inset:auto!important;
-    top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
-    width:100%!important;
-    height:auto!important;
-    min-height:0!important;
-    max-height:none!important;
-    aspect-ratio:1023/1537!important;
-    overflow:hidden!important;
-    transform:none!important;
+  .design-series-page .design-series-gallery .full,
+  .design-series-page .design-series-gallery .wide,
+  .design-series-page .design-series-gallery .tall,
+  .design-series-page .design-series-gallery.compact-series .wide,
+  .design-series-page .design-series-gallery.compact-series .tall{
+    grid-column:1/-1;
   }
 
-  html body.visual-atelier .venue-panorama,
-  html body.funnel-mode.visual-atelier .venue-panorama{
-    position:absolute!important;
-    inset:0!important;
-    top:0!important;left:0!important;right:0!important;bottom:0!important;
-    width:100%!important;
-    height:100%!important;
-    background-size:cover!important;
-    background-position:center center!important;
-    filter:none!important;
-    transform:none!important;
+  .design-series-page .design-series-gallery.series-curated-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
-  html body.visual-atelier .gallery-hero-copy,
-  html body.funnel-mode.visual-atelier .gallery-hero-copy{
-    position:relative!important;
-    top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
-    width:auto!important;
-    max-width:none!important;
-    transform:none!important;
-    margin:0!important;
-    padding:32px 22px 48px!important;
+  .design-series-page .design-series-gallery.series-curated-grid .full,
+  .design-series-page .design-series-gallery.series-curated-grid .wide,
+  .design-series-page .design-series-gallery.series-curated-grid .tall{
+    grid-column:auto;
+    aspect-ratio:4/5;
+  }
+
+  .design-series-page .design-series-gallery .full,
+  .design-series-page .design-series-gallery .wide,
+  .design-series-page .design-series-gallery.compact-series .wide{
+    aspect-ratio:4/5;
+  }
+}
+
+@media(max-width:620px){
+  .design-series-page .design-series-hero{
+    padding:104px 20px 48px;
+    gap:34px;
+  }
+
+  .design-series-page .design-series-hero h1{
+    font-size:clamp(48px,15vw,72px);
+  }
+
+  .design-series-page .design-series-hero figure{
+    aspect-ratio:3/4;
+  }
+
+  .design-series-page .design-series-intro,
+  .design-series-page .design-series-gallery{
+    width:calc(100% - 40px);
+  }
+
+  .design-series-page .design-series-gallery{
+    gap:12px;
+  }
+
+  .design-series-page .design-series-gallery.series-curated-grid figure:hover{
+    transform:none;
+  }
+}
+
+/* Design Editions library refinement */
+.edition-library{
+  background:#050403;
+}
+
+.edition-library-hero{
+  padding:clamp(112px,14vh,164px) 0 clamp(44px,6vw,72px);
+}
+
+.edition-library-hero h1{
+  max-width:860px;
+  margin:18px 0 22px;
+  color:#f7efe2;
+  font:300 clamp(54px,6vw,92px)/.96 "Cormorant Garamond", serif;
+}
+
+.edition-library-hero > p:not(.de-eyebrow){
+  max-width:650px;
+  margin:0;
+  color:rgba(246,239,228,.72);
+  font:300 16px/1.85 Inter, sans-serif;
+}
+
+.edition-library-note{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 22px;
+  max-width:900px;
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid rgba(239,229,212,.13);
+}
+
+.edition-library-note span{
+  color:rgba(247,218,184,.78);
+  font:500 11px/1.4 Inter, sans-serif;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.edition-product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(34px,5vw,76px);
+  padding-bottom:clamp(78px,10vw,136px);
+}
+
+.edition-product-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  overflow:visible;
+  border:1px solid rgba(239,229,212,.16);
+  background:rgba(12,10,8,.72);
+  color:#f7efe2;
+  text-decoration:none;
+  transform-origin:center bottom;
+  transition:transform .32s ease,border-color .32s ease,box-shadow .32s ease,background .32s ease;
+}
+
+.edition-product-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,244,228,.035),rgba(5,4,3,0) 38%,rgba(5,4,3,.14));
+  pointer-events:none;
+}
+
+.edition-product-card figure{
+  position:relative;
+  margin:0;
+  aspect-ratio:4 / 5;
+  overflow:hidden;
+  background:#050403;
+}
+
+.edition-product-card img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  opacity:.78;
+  transform:scale(1);
+  transition:opacity .45s ease,filter .45s ease,transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.edition-product-card.is-soon img{
+  opacity:.48;
+  filter:saturate(.86) brightness(.82);
+}
+
+.edition-product-copy{
+  position:relative;
+  z-index:1;
+  display:grid;
+  min-height:260px;
+  padding:clamp(22px,2.4vw,34px);
+  background:linear-gradient(180deg,rgba(8,7,6,.9),rgba(8,7,6,.98));
+}
+
+.edition-product-copy div{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:start;
+}
+
+.edition-product-copy span,
+.edition-product-copy small{
+  color:rgba(247,218,184,.84);
+  font:600 11px/1.35 Inter, sans-serif;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+
+.edition-product-copy small{
+  color:rgba(246,239,228,.58);
+  text-align:right;
+}
+
+.edition-product-copy h2{
+  max-width:360px;
+  margin:28px 0 0;
+  color:#f7efe2;
+  font:300 clamp(30px,2.6vw,42px)/1 "Cormorant Garamond", serif;
+}
+
+.edition-product-copy p{
+  max-width:360px;
+  margin:16px 0 26px;
+  color:rgba(246,239,228,.72);
+  font:300 14px/1.75 Inter, sans-serif;
+}
+
+.edition-product-copy b{
+  align-self:end;
+  width:max-content;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(246,239,228,.4);
+  color:#f7efe2;
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+}
+
+.edition-product-preview{
+  position:relative;
+  z-index:1;
+  display:block;
+  color:inherit;
+  text-decoration:none;
+}
+
+.edition-product-actions{
+  display:flex!important;
+  flex-wrap:wrap;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  align-items:center!important;
+  margin-top:auto;
+}
+
+.edition-product-actions a,
+.edition-product-actions button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 16px;
+  border:1px solid rgba(246,239,228,.42);
+  color:#f7efe2;
+  background:transparent;
+  font:600 10px/1 Inter,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+
+.edition-product-actions button{
+  color:#090705;
+  background:#f7efe2;
+  border-color:#f7efe2;
+}
+
+.edition-product-actions a:hover,
+.edition-product-actions a:focus-visible,
+.edition-product-actions button:hover,
+.edition-product-actions button:focus-visible{
+  color:#090705;
+  background:var(--de-accent);
+  border-color:var(--de-accent);
+  outline:none;
+}
+
+.edition-product-actions button:disabled{
+  cursor:progress;
+  opacity:.64;
+}
+
+.edition-product-copy .edition-product-status{
+  min-height:18px;
+  margin:12px 0 0;
+  color:rgba(246,239,228,.58)!important;
+  font-size:11px!important;
+  line-height:1.45;
+}
+
+.edition-product-card.is-live:hover,
+.edition-product-card.is-live:focus-within{
+  z-index:3;
+  transform:translateY(-10px) scale(1.035);
+  border-color:rgba(247,218,184,.58);
+  background:rgba(16,13,10,.92);
+  box-shadow:0 32px 100px rgba(0,0,0,.62), inset 0 0 90px rgba(247,218,184,.045);
+  outline:none;
+}
+
+.edition-product-card.is-live:hover img,
+.edition-product-card.is-live:focus-within img{
+  opacity:.96;
+  filter:saturate(1.04) brightness(1.08);
+  transform:scale(1.095);
+}
+
+.edition-delivery{
+  display:grid;
+  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+  gap:clamp(42px,6vw,86px);
+  padding:clamp(74px,9vw,118px) 0 clamp(92px,11vw,148px);
+  border-top:1px solid rgba(239,229,212,.12);
+}
+
+.edition-delivery h2{
+  max-width:620px;
+  margin:18px 0 0;
+  color:#f7efe2;
+  font:300 clamp(38px,4vw,62px)/1 "Cormorant Garamond", serif;
+}
+
+.edition-delivery-list{
+  display:grid;
+  gap:1px;
+}
+
+.edition-delivery-list article{
+  display:grid;
+  grid-template-columns:72px minmax(180px,.55fr) minmax(0,1fr);
+  gap:28px;
+  align-items:baseline;
+  padding:26px 0;
+  border-top:1px solid rgba(239,229,212,.13);
+}
+
+.edition-delivery-list article:last-child{
+  border-bottom:1px solid rgba(239,229,212,.13);
+}
+
+.edition-delivery-list span{
+  color:rgba(247,218,184,.78);
+  font:600 11px/1 Inter, sans-serif;
+  letter-spacing:.24em;
+}
+
+.edition-delivery-list h3{
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(24px,2.4vw,34px)/1.05 "Cormorant Garamond", serif;
+}
+
+.edition-delivery-list p{
+  margin:0;
+  color:rgba(246,239,228,.66);
+  font:300 14px/1.75 Inter, sans-serif;
+}
+
+/* Collaboration pricing refinement */
+.collab-models{
+  padding:clamp(90px,12vh,142px) 6vw;
+  border-top:1px solid rgba(239,229,212,.1);
+}
+
+.collab-models-head{
+  display:grid;
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  gap:clamp(32px,6vw,88px);
+  align-items:end;
+  margin-bottom:clamp(36px,5vw,64px);
+}
+
+.collab-models-head h2{
+  max-width:760px;
+  margin:16px 0 0;
+  color:#f7efe2;
+  font:300 clamp(44px,5.4vw,82px)/.98 var(--display);
+}
+
+.collab-models-head p:not(.eyebrow){
+  max-width:650px;
+  margin:0;
+  color:rgba(216,198,174,.74);
+  font:300 15px/1.85 var(--sans);
+}
+
+.collab-model-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(22px,3vw,38px);
+}
+
+.collab-model-card{
+  display:grid;
+  gap:24px;
+  padding:clamp(32px,4vw,56px);
+  border:1px solid rgba(239,229,212,.16);
+  background:linear-gradient(145deg,rgba(255,255,255,.026),rgba(255,255,255,.006));
+}
+
+.collab-model-card span,
+.collab-investment strong{
+  color:#f3d2a9;
+  font:600 11px/1 var(--sans);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+
+.collab-model-card h3{
+  max-width:520px;
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(34px,3.6vw,56px)/1 var(--display);
+}
+
+.collab-model-card p,
+.collab-model-card li,
+.collab-boundary{
+  color:rgba(216,198,174,.72);
+  font:300 14px/1.8 var(--sans);
+}
+
+.collab-model-card ul{
+  display:grid;
+  gap:10px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.collab-model-card li{
+  padding-top:10px;
+  border-top:1px solid rgba(239,229,212,.08);
+}
+
+.collab-investment{
+  margin-top:8px;
+  padding-top:22px;
+  border-top:1px solid rgba(239,229,212,.16);
+}
+
+.collab-investment p{
+  margin:12px 0 0;
+  color:#f7efe2;
+  font-size:16px;
+}
+
+.collab-boundary{
+  max-width:940px;
+  margin:clamp(28px,4vw,44px) 0 0;
+  color:rgba(216,198,174,.62);
+}
+
+@media(max-width:980px){
+  .edition-product-grid,
+  .edition-delivery,
+  .collab-models-head,
+  .collab-model-grid{
+    grid-template-columns:1fr;
+  }
+
+  .edition-delivery-list article{
+    grid-template-columns:46px minmax(0,1fr);
+  }
+
+  .edition-delivery-list p{
+    grid-column:2;
+  }
+}
+
+@media(max-width:640px){
+  .edition-library-hero,
+  .edition-product-grid,
+  .edition-delivery{
+    width:calc(100vw - 40px);
+  }
+
+  .edition-library-hero h1{
+    font-size:clamp(46px,14vw,66px);
+  }
+
+  .edition-product-grid{
+    gap:26px;
+  }
+
+  .edition-product-card{
+    min-height:0;
+  }
+
+  .edition-product-card figure{
+    aspect-ratio:5 / 6;
+  }
+
+  .edition-product-copy{
+    min-height:240px;
+  }
+
+  .edition-product-copy div{
+    display:grid;
+  }
+
+  .edition-product-copy small{
+    text-align:left;
+  }
+
+  .collab-models{
+    padding-left:20px;
+    padding-right:20px;
+  }
+}
+
+/* Inquiry paths */
+.visual-atelier .inquiry-choice-page{
+  min-height:calc(100vh - 72px);
+  padding:clamp(120px,15vh,170px) clamp(24px,6vw,92px) clamp(70px,9vw,120px);
+  background:#070706;
+  color:#f6efe4;
+}
+
+.visual-atelier .inquiry-choice-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.52fr);
+  gap:clamp(36px,7vw,110px);
+  align-items:end;
+  margin-bottom:clamp(64px,8vw,108px);
+}
+
+.visual-atelier .inquiry-choice-intro .eyebrow{
+  grid-column:1/-1;
+  margin:0;
+  color:#d8ba91;
+}
+
+.visual-atelier .inquiry-choice-intro h1{
+  max-width:820px;
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(54px,6.5vw,104px)/.92 var(--display);
+  letter-spacing:0;
+}
+
+.visual-atelier .inquiry-choice-intro>p:not(.eyebrow){
+  max-width:470px;
+  margin:0;
+  color:rgba(216,198,174,.72);
+  font:300 15px/1.85 var(--sans);
+}
+
+.visual-atelier .inquiry-choice-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid rgba(247,239,226,.16);
+  border-bottom:1px solid rgba(247,239,226,.16);
+}
+
+.visual-atelier .inquiry-choice{
+  min-height:clamp(310px,30vw,430px);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  padding:clamp(32px,4.2vw,60px);
+  color:#f7efe2;
+  border-right:1px solid rgba(247,239,226,.12);
+  text-decoration:none;
+  transition:background .25s ease;
+}
+
+.visual-atelier .inquiry-choice:last-child{
+  border-right:0;
+}
+
+.visual-atelier .inquiry-choice:hover,
+.visual-atelier .inquiry-choice:focus-visible{
+  background:rgba(247,239,226,.035);
+  outline:none;
+}
+
+.visual-atelier .inquiry-choice span{
+  color:rgba(247,218,184,.78);
+  font:500 10px/1.2 var(--sans);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.visual-atelier .inquiry-choice h2{
+  max-width:520px;
+  margin:clamp(52px,6vw,86px) 0 22px;
+  color:#f7efe2;
+  font:300 clamp(38px,4.1vw,62px)/.96 var(--display);
+  letter-spacing:0;
+}
+
+.visual-atelier .inquiry-choice p{
+  max-width:480px;
+  margin:0 0 38px;
+  color:rgba(216,198,174,.68);
+  font:300 14px/1.75 var(--sans);
+}
+
+.visual-atelier .inquiry-choice em{
+  margin-top:auto;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(247,218,184,.48);
+  color:#f7efe2;
+  font:500 10px/1 var(--sans);
+  font-style:normal;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.visual-atelier .inquiry-choice-location{
+  margin:36px 0 0;
+  color:rgba(216,198,174,.54);
+  font:300 12px/1.7 var(--sans);
+}
+
+@media(max-width:780px){
+  .visual-atelier .inquiry-choice-page{
+    padding:112px 20px 70px;
+  }
+
+  .visual-atelier .inquiry-choice-intro,
+  .visual-atelier .inquiry-choice-grid{
+    grid-template-columns:1fr;
+  }
+
+  .visual-atelier .inquiry-choice-intro{
+    gap:24px;
+    margin-bottom:58px;
+  }
+
+  .visual-atelier .inquiry-choice-intro h1{
+    font-size:clamp(48px,14vw,68px);
+  }
+
+  .visual-atelier .inquiry-choice{
+    min-height:300px;
+    padding:34px 0;
+    border-right:0;
+    border-bottom:1px solid rgba(247,239,226,.12);
+  }
+
+  .visual-atelier .inquiry-choice:last-child{
+    border-bottom:0;
+  }
+
+  .visual-atelier .inquiry-choice h2{
+    margin-top:46px;
+    font-size:clamp(38px,11vw,52px);
+  }
+}
+
+/* Final Design Edition ceremony layer */
+.visual-atelier.de-product .de-visual-compact{
+  width:min(1500px, calc(100vw - 112px));
+  margin:0 auto;
+  padding:clamp(58px,8vw,118px) 0;
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) repeat(2,minmax(220px,.56fr));
+  gap:18px;
+}
+.visual-atelier.de-product .de-visual-compact figure{
+  position:relative;
+  min-height:clamp(300px,36vw,560px);
+  margin:0;
+  overflow:hidden;
+  background:#090705;
+  border:1px solid rgba(246,239,228,.12);
+}
+.visual-atelier.de-product .de-visual-compact .is-featured{
+  min-height:clamp(420px,52vw,760px);
+}
+.visual-atelier.de-product .de-visual-compact img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  opacity:.92;
+  transition:transform .5s ease, opacity .28s ease;
+}
+.visual-atelier.de-product .de-visual-compact figure:hover img{
+  transform:scale(1.035);
+  opacity:1;
+}
+.visual-atelier.de-product .de-visual-compact figcaption{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  color:var(--ivory,#f4ede2);
+  font:600 10px/1 var(--sans);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.visual-atelier.de-product .de-ceremony-scope{
+  display:grid;
+  grid-template-columns:minmax(180px,.28fr) minmax(0,.72fr);
+  gap:clamp(22px,5vw,74px);
+  padding:clamp(32px,5vw,68px) 0;
+  border-top:1px solid rgba(246,239,228,.16);
+  border-bottom:1px solid rgba(246,239,228,.16);
+}
+.visual-atelier.de-product .de-ceremony-scope h2{
+  margin:0 0 12px;
+  max-width:560px;
+  color:var(--ivory,#f4ede2);
+  font:300 clamp(30px,3.2vw,48px)/1.02 var(--display);
+}
+.visual-atelier.de-product .de-ceremony-scope p:not(.de-eyebrow){
+  max-width:680px;
+  margin:0;
+  color:rgba(246,239,228,.72);
+  font:300 15px/1.85 var(--sans);
+}
+.visual-atelier.de-product .de-product-hero-copy .de-price{
+  margin:4px 0 22px;
+  color:var(--ivory,#f4ede2);
+  font:400 clamp(26px,3vw,42px)/1 var(--display);
+}
+.visual-atelier.de-product .de-download-card:first-child,
+.visual-atelier .de-download-card:first-child{
+  border-color:rgba(246,239,228,.48);
+  background:rgba(246,239,228,.075);
+}
+@media(max-width:900px){
+  .visual-atelier.de-product .de-visual-compact{
+    width:min(100% - 36px,760px);
+    grid-template-columns:1fr 1fr;
+  }
+  .visual-atelier.de-product .de-visual-compact .is-featured{
+    grid-column:1/-1;
+  }
+  .visual-atelier.de-product .de-ceremony-scope{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:560px){
+  .visual-atelier.de-product .de-visual-compact{
+    width:calc(100% - 32px);
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .visual-atelier.de-product .de-visual-compact figure,
+  .visual-atelier.de-product .de-visual-compact .is-featured{
+    min-height:360px;
+  }
+}
+
+/* Collaboration dossier reveal */
+.collab-hero-minimal{
+  min-height:auto;
+  padding:clamp(132px,18vh,210px) clamp(28px,6vw,92px) clamp(62px,8vh,104px);
+  grid-template-columns:minmax(0,840px);
+  gap:0;
+  border-top:0;
+  align-items:end;
+}
+
+.collab-hero-minimal h1{
+  max-width:820px;
+  font-size:clamp(48px,5.4vw,86px);
+  line-height:.98;
+}
+
+.collab-hero-minimal p:not(.eyebrow){
+  max-width:560px;
+  margin:26px 0 0;
+  color:rgba(247,239,226,.72);
+  font-size:15px;
+  line-height:1.75;
+}
+
+.collab-hero-minimal figure{
+  border:0;
+}
+
+.collab-hero-minimal img{
+  height:min(72vh,760px);
+  filter:saturate(.9) contrast(1.04) brightness(.82);
+}
+
+.collab-hero-actions{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-top:38px;
+}
+
+.collab-capabilities{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:10px;
+  max-width:540px;
+  margin-top:34px;
+  padding-top:26px;
+  border-top:1px solid rgba(247,239,226,.16);
+}
+
+.collab-capabilities strong,
+.collab-capabilities span{
+  display:block;
+  color:rgba(247,239,226,.84);
+  font:500 11px/1.25 var(--sans);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.collab-capabilities strong{
+  color:rgba(247,218,184,.8);
+  margin-bottom:4px;
+}
+
+.collab-capabilities span{
+  color:rgba(216,198,174,.72);
+}
+
+.collab-text-link{
+  color:rgba(247,239,226,.82);
+  font:600 11px/1 var(--sans);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(247,239,226,.35);
+  padding-bottom:11px;
+}
+
+.collab-text-link:hover,
+.collab-text-link:focus-visible{
+  color:#f7efe2;
+  border-color:#f7efe2;
+  outline:none;
+}
+
+.collab-essentials{
+  width:min(1420px,calc(100vw - 112px));
+  margin:0 auto clamp(82px,10vw,140px);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid rgba(247,239,226,.14);
+  border-bottom:1px solid rgba(247,239,226,.14);
+}
+
+.collab-essentials article{
+  min-height:250px;
+  display:grid;
+  align-content:start;
+  gap:20px;
+  padding:clamp(30px,4vw,52px);
+  border-right:1px solid rgba(247,239,226,.1);
+}
+
+.collab-essentials article:last-child{
+  border-right:0;
+}
+
+.collab-essentials span{
+  color:rgba(247,218,184,.74);
+  font:600 11px/1 var(--sans);
+  letter-spacing:.24em;
+}
+
+.collab-essentials h2{
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(30px,3.2vw,46px)/1 var(--display);
+}
+
+.collab-essentials p{
+  max-width:330px;
+  margin:0;
+  color:rgba(216,198,174,.7);
+  font:300 14px/1.75 var(--sans);
+}
+
+.collab-dossier{
+  width:min(1500px,calc(100vw - 112px));
+  margin:0 auto clamp(72px,9vw,124px);
+  border-top:1px solid rgba(247,239,226,.16);
+  border-bottom:1px solid rgba(247,239,226,.16);
+  color:#f7efe2;
+}
+
+.collab-dossier summary{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:32px;
+  align-items:center;
+  min-height:clamp(104px,11vw,146px);
+  padding:clamp(26px,4vw,46px) 0;
+  cursor:pointer;
+  list-style:none;
+}
+
+.collab-dossier summary::-webkit-details-marker{
+  display:none;
+}
+
+.collab-dossier summary span{
+  display:grid;
+  gap:16px;
+}
+
+.collab-dossier summary small,
+.collab-dossier-notes span,
+.collab-dossier-cta{
+  color:rgba(247,218,184,.82);
+  font:600 11px/1 var(--sans);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+
+.collab-dossier summary strong{
+  max-width:680px;
+  color:#f7efe2;
+  font:300 clamp(28px,3.1vw,44px)/1.05 var(--display);
+  letter-spacing:0;
+}
+
+.collab-dossier summary em{
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border:1px solid rgba(247,239,226,.25);
+  color:#f7efe2;
+  font:300 28px/1 var(--display);
+  font-style:normal;
+  transition:transform .28s ease,border-color .28s ease,background .28s ease;
+}
+
+.collab-dossier[open] summary em{
+  transform:rotate(45deg);
+  border-color:rgba(247,218,184,.72);
+  background:rgba(247,218,184,.08);
+}
+
+.collab-dossier-panel{
+  display:grid;
+  gap:clamp(32px,5vw,62px);
+  padding:0 0 clamp(48px,6vw,76px);
+  border-top:1px solid rgba(247,239,226,.1);
+}
+
+.collab-dossier-intro{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,.72fr);
+  gap:clamp(34px,6vw,92px);
+  align-items:end;
+  padding-top:clamp(42px,6vw,76px);
+}
+
+.collab-dossier-intro h2{
+  max-width:680px;
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(32px,3.9vw,54px)/1.03 var(--display);
+}
+
+.collab-dossier-intro p:not(.eyebrow){
+  margin:0;
+  max-width:640px;
+  color:rgba(216,198,174,.78);
+  font:300 15px/1.9 var(--sans);
+}
+
+.collab-dossier-preview,
+.collab-dossier-atmospheres{
+  display:grid;
+  gap:clamp(14px,1.6vw,24px);
+}
+
+.collab-dossier-preview{
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  align-items:stretch;
+}
+
+.collab-dossier-stack{
+  display:grid;
+  grid-template-columns:1fr .58fr;
+  gap:clamp(14px,1.6vw,24px);
+}
+
+.collab-dossier-atmospheres{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.collab-dossier-preview figure,
+.collab-dossier-atmospheres figure{
+  position:relative;
+  min-height:0;
+  margin:0;
+  overflow:hidden;
+  border:1px solid rgba(247,239,226,.14);
+  background:#090807;
+}
+
+.collab-dossier-preview img,
+.collab-dossier-atmospheres img{
+  width:100%;
+  height:100%;
+  display:block;
+  opacity:.9;
+  transform:scale(1.001);
+}
+
+.collab-dossier-preview figure{
+  display:grid;
+  place-items:center;
+  padding:clamp(10px,1.2vw,18px);
+  background:linear-gradient(145deg,rgba(247,239,226,.035),rgba(255,255,255,.006));
+}
+
+.collab-dossier-preview img{
+  object-fit:contain;
+  opacity:.96;
+}
+
+.collab-dossier-sheet{
+  aspect-ratio:2 / 3;
+}
+
+.collab-dossier-stack figure:first-child{
+  aspect-ratio:4 / 3;
+}
+
+.collab-dossier-stack figure:last-child{
+  aspect-ratio:9 / 16;
+}
+
+.collab-dossier-atmospheres figure{
+  aspect-ratio:4 / 3;
+}
+
+.collab-dossier-atmospheres img{
+  object-fit:cover;
+}
+
+.collab-dossier-notes{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid rgba(247,239,226,.12);
+  border-bottom:1px solid rgba(247,239,226,.12);
+}
+
+.collab-dossier-notes article{
+  display:grid;
+  align-content:start;
+  gap:18px;
+  min-height:220px;
+  padding:clamp(26px,3.4vw,44px);
+  border-right:1px solid rgba(247,239,226,.1);
+}
+
+.collab-dossier-notes article:last-child{
+  border-right:0;
+}
+
+.collab-dossier-notes h3{
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(28px,3vw,42px)/1.05 var(--display);
+}
+
+.collab-dossier-notes p{
+  max-width:360px;
+  margin:0;
+  color:rgba(216,198,174,.72);
+  font:300 14px/1.75 var(--sans);
+}
+
+.collab-dossier .collab-models{
+  padding:0;
+  border-top:0;
+}
+
+.collab-dossier .collab-models-head h2{
+  font-size:clamp(32px,3.6vw,54px);
+}
+
+.collab-dossier .collab-model-card{
+  gap:18px;
+  padding:clamp(26px,3.5vw,44px);
+}
+
+.collab-dossier .collab-model-card h3{
+  font-size:clamp(28px,3vw,42px);
+}
+
+.collab-scope-summary{
+  display:grid;
+  grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);
+  gap:clamp(28px,5vw,76px);
+  align-items:start;
+  padding-top:clamp(10px,2vw,20px);
+}
+
+.collab-scope-summary h2{
+  margin:0;
+  max-width:520px;
+  color:#f7efe2;
+  font:300 clamp(28px,3.2vw,46px)/1.04 var(--display);
+}
+
+.collab-scope-table{
+  display:grid;
+  border-top:1px solid rgba(247,239,226,.14);
+  color:rgba(216,198,174,.78);
+  font:300 13px/1.5 var(--sans);
+}
+
+.collab-scope-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 82px 82px;
+  gap:14px;
+  align-items:center;
+  min-height:48px;
+  border-bottom:1px solid rgba(247,239,226,.1);
+}
+
+.collab-scope-head{
+  color:rgba(247,218,184,.82);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.collab-scope-row b{
+  justify-self:center;
+  color:#f7efe2;
+  font:500 11px/1 var(--sans);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.collab-terms-summary{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  background:rgba(247,239,226,.1);
+  border:1px solid rgba(247,239,226,.1);
+}
+
+.collab-terms-summary article{
+  display:grid;
+  gap:14px;
+  align-content:start;
+  min-height:180px;
+  padding:clamp(22px,2.6vw,34px);
+  background:#080706;
+}
+
+.collab-terms-summary h3{
+  margin:0;
+  color:#f7efe2;
+  font:300 clamp(24px,2.5vw,34px)/1.08 var(--display);
+}
+
+.collab-terms-summary p{
+  margin:0;
+  color:rgba(216,198,174,.72);
+  font:300 13px/1.75 var(--sans);
+}
+
+.collab-inquiry{
+  padding-top:clamp(72px,10vh,120px);
+}
+
+.collab-dossier .collab-model-card{
+  background:rgba(255,255,255,.018);
+}
+
+.collab-dossier-cta{
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  min-height:48px;
+  border-bottom:1px solid rgba(247,218,184,.62);
+  text-decoration:none;
+  transition:color .25s ease,border-color .25s ease,transform .25s ease;
+}
+
+.collab-dossier-cta:hover,
+.collab-dossier-cta:focus-visible{
+  color:#f7efe2;
+  border-color:#f7efe2;
+  transform:translateX(4px);
+  outline:none;
+}
+
+@media(max-width:980px){
+  .collab-hero-minimal,
+  .collab-essentials{
+    grid-template-columns:1fr;
+  }
+
+  .collab-hero-minimal{
+    min-height:0;
+  }
+
+  .collab-hero-minimal img{
+    height:auto;
+    aspect-ratio:4/5;
+  }
+
+  .collab-essentials{
+    width:calc(100vw - 48px);
+  }
+
+  .collab-essentials article{
+    min-height:0;
+    border-right:0;
+    border-bottom:1px solid rgba(247,239,226,.1);
+  }
+
+  .collab-essentials article:last-child{
+    border-bottom:0;
+  }
+
+  .collab-dossier{
+    width:calc(100vw - 48px);
+  }
+
+  .collab-dossier summary,
+  .collab-dossier-intro,
+  .collab-dossier-preview,
+  .collab-dossier-stack,
+  .collab-dossier-atmospheres,
+  .collab-dossier-notes,
+  .collab-scope-summary,
+  .collab-terms-summary{
+    grid-template-columns:1fr;
+  }
+
+  .collab-dossier-sheet,
+  .collab-dossier-stack figure:first-child,
+  .collab-dossier-stack figure:last-child{
+    aspect-ratio:auto;
+  }
+
+  .collab-dossier-notes article{
+    min-height:0;
+    border-right:0;
+    border-bottom:1px solid rgba(247,239,226,.1);
+  }
+
+  .collab-dossier-notes article:last-child{
+    border-bottom:0;
+  }
+}
+
+@media(max-width:640px){
+  .collab-hero-minimal{
+    padding:104px 20px 54px;
+    gap:34px;
+  }
+
+  .collab-hero-minimal h1{
+    font-size:clamp(43px,13vw,62px);
+  }
+
+  .collab-hero-actions{
+    gap:18px;
+  }
+
+  .collab-essentials{
+    width:calc(100vw - 40px);
+    margin-bottom:64px;
+  }
+
+  .collab-essentials article{
+    padding:30px 0;
+  }
+
+  .collab-dossier{
+    width:calc(100vw - 40px);
+    margin-block:64px;
+  }
+
+  .collab-dossier summary{
+    gap:20px;
+  }
+
+  .collab-dossier summary strong{
+    font-size:clamp(28px,8vw,38px);
+  }
+
+  .collab-dossier summary em{
+    width:42px;
+    height:42px;
+  }
+}
+
+/* Design Editions: product-scaled override */
+.visual-atelier.de-page .navlinks a[href="designs.html"]{
+  display:none;
+}
+
+.visual-atelier.de-index .edition-library-hero{
+  min-height:0;
+  padding-top:clamp(110px,12vh,146px);
+  padding-bottom:clamp(34px,5vw,62px);
+}
+
+.visual-atelier.de-index .edition-library-hero h1{
+  max-width:680px;
+  font-size:clamp(40px,4.2vw,66px);
+  line-height:1;
+}
+
+.visual-atelier.de-index .edition-library-hero > p:not(.de-eyebrow){
+  max-width:720px;
+  margin-top:20px;
+  font-size:15px;
+  line-height:1.72;
+}
+
+.visual-atelier.de-index .edition-library-note{
+  margin-top:34px;
+  gap:12px 28px;
+}
+
+.visual-atelier.de-index .edition-product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:clamp(14px,1.6vw,22px);
+  padding-bottom:clamp(56px,7vw,92px);
+}
+
+.visual-atelier.de-index .edition-product-card{
+  min-height:0;
+  overflow:hidden;
+}
+
+.visual-atelier.de-index .edition-product-card figure{
+  aspect-ratio:4/3;
+  max-height:360px;
+}
+
+.visual-atelier.de-index .edition-product-copy{
+  min-height:0;
+  padding:clamp(18px,2vw,26px);
+}
+
+.visual-atelier.de-index .edition-product-copy h2{
+  max-width:300px;
+  margin-top:20px;
+  font-size:clamp(26px,2.4vw,36px);
+  line-height:1.02;
+}
+
+.visual-atelier.de-index .edition-product-copy p{
+  max-width:320px;
+  font-size:13px;
+  line-height:1.58;
+  margin-bottom:20px;
+}
+
+.visual-atelier.de-index .edition-product-card.is-live:hover,
+.visual-atelier.de-index .edition-product-card.is-live:focus-within{
+  transform:translateY(-6px);
+}
+
+.visual-atelier.de-index .edition-product-card.is-live:hover figure,
+.visual-atelier.de-index .edition-product-card.is-live:focus-within figure{
+  overflow:visible;
+}
+
+.visual-atelier.de-product .de-product-hero{
+  min-height:auto;
+  grid-template-columns:minmax(320px,.72fr) minmax(360px,.64fr);
+  gap:clamp(34px,5vw,74px);
+  align-items:center;
+  padding-top:clamp(96px,9vh,118px);
+  padding-bottom:clamp(42px,5vw,58px);
+}
+
+.visual-atelier.de-product .de-product-hero figure{
+  aspect-ratio:4/5;
+  max-height:min(560px,60vh);
+}
+
+.visual-atelier.de-product .de-product-hero-copy{
+  max-width:620px;
+}
+
+.visual-atelier.de-product .de-product-hero-copy h1{
+  font-size:clamp(38px,3.85vw,56px);
+  line-height:1;
+}
+
+.visual-atelier.de-product .de-product-hero-copy p:not(.de-subtitle):not(.de-status){
+  max-width:560px;
+  margin-top:22px;
+  font-size:15px;
+  line-height:1.72;
+}
+
+.visual-atelier.de-product .de-primary-button{
+  min-height:50px;
+  margin-top:26px;
+  padding-inline:28px;
+  font-size:11px;
+}
+
+.visual-atelier.de-product .de-story-grid,
+.visual-atelier.de-product .de-spec-grid{
+  grid-template-columns:minmax(260px,.58fr) minmax(0,.88fr);
+  gap:clamp(28px,5vw,78px);
+  padding:clamp(52px,6vw,84px) 0;
+}
+
+.visual-atelier.de-product .de-story-grid h2,
+.visual-atelier.de-product .de-spec-grid h2,
+.visual-atelier.de-product .de-section-head h2,
+.visual-atelier.de-product .de-access-cta h2{
+  max-width:560px;
+  font-size:clamp(28px,3vw,42px);
+  line-height:1.05;
+}
+
+.visual-atelier.de-product .de-story-grid > p,
+.visual-atelier.de-product .de-spec-grid p,
+.visual-atelier.de-product .de-access-cta p{
+  max-width:680px;
+  font-size:14px;
+  line-height:1.78;
+}
+
+.visual-atelier.de-product .de-visual-run{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:clamp(54px,7vw,88px);
+}
+
+.visual-atelier.de-product .de-visual-run figure,
+.visual-atelier.de-product .de-visual-run .de-visual-large,
+.visual-atelier.de-product .de-visual-run figure:not(.de-visual-large){
+  grid-column:auto;
+  min-height:0;
+  aspect-ratio:4/5;
+  cursor:zoom-in;
+}
+
+.visual-atelier.de-product .de-visual-run figure{
+  opacity:.76;
+  transition:opacity .28s ease, transform .32s ease, border-color .28s ease;
+}
+
+.visual-atelier.de-product .de-visual-run figure:hover,
+.visual-atelier.de-product .de-visual-run figure:focus-within{
+  z-index:3;
+  opacity:1;
+  transform:scale(1.06);
+  border-color:rgba(247,239,229,.5);
+}
+
+.visual-atelier.de-product .de-visual-run figcaption{
+  left:14px;
+  bottom:14px;
+  font-size:9px;
+  letter-spacing:.2em;
+}
+
+.visual-atelier.de-product .de-preview-grid,
+.visual-atelier.de-product .de-locked-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-bottom:clamp(54px,7vw,88px);
+}
+
+.visual-atelier.de-product .de-preview-grid article,
+.visual-atelier.de-product .de-locked-grid article{
+  min-height:150px;
+  padding:22px;
+}
+
+.visual-atelier.de-product .de-preview-grid h3,
+.visual-atelier.de-product .de-locked-grid h3{
+  margin:18px 0 10px;
+  font-size:clamp(24px,2.3vw,32px);
+  line-height:1.04;
+}
+
+.visual-atelier.de-product .de-preview-grid p{
+  margin:0;
+  font-size:13px;
+  line-height:1.6;
+}
+
+body.design-edition-page .edition-hero{
+  min-height:72vh;
+  align-items:end;
+  padding-bottom:clamp(56px,8vh,92px);
+}
+
+body.design-edition-page .edition-hero-copy h1{
+  max-width:560px;
+  font-size:clamp(40px,4.2vw,68px);
+  line-height:1;
+}
+
+body.design-edition-page .edition-hero-copy p:not(.eyebrow){
+  max-width:520px;
+  font-size:15px;
+  line-height:1.7;
+}
+
+body.design-edition-page .edition-section{
+  padding:clamp(54px,6vw,86px) 0;
+}
+
+body.design-edition-page .edition-story{
+  grid-template-columns:.22fr minmax(0,.62fr) minmax(280px,.62fr);
+  gap:clamp(24px,4vw,58px);
+}
+
+body.design-edition-page .edition-story h2,
+body.design-edition-page .edition-spec-grid h2,
+body.design-edition-page .edition-locked h2,
+body.design-edition-page .edition-access-panel h2{
+  font-size:clamp(28px,3vw,44px);
+  line-height:1.04;
+}
+
+body.design-edition-page .edition-sequence{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  padding:clamp(48px,6vw,76px) 0;
+}
+
+body.design-edition-page .edition-sequence .edition-sequence-large,
+body.design-edition-page .edition-sequence figure{
+  grid-row:auto;
+  min-height:0;
+  aspect-ratio:4/5;
+}
+
+body.design-edition-page .edition-sequence figure{
+  transition:opacity .28s ease, transform .32s ease, border-color .28s ease;
+}
+
+body.design-edition-page .edition-sequence figure:hover{
+  z-index:3;
+  transform:scale(1.05);
+}
+
+body.design-edition-page .edition-locked-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+body.design-edition-page .edition-locked-grid article{
+  min-height:170px;
+  padding:24px;
+}
+
+body.design-edition-page .edition-locked-grid h3{
+  font-size:clamp(24px,2.4vw,34px);
+}
+
+@media(max-width:980px){
+  .visual-atelier.de-index .edition-product-grid,
+  .visual-atelier.de-product .de-product-hero,
+  .visual-atelier.de-product .de-story-grid,
+  .visual-atelier.de-product .de-spec-grid,
+  body.design-edition-page .edition-story,
+  body.design-edition-page .edition-spec-grid,
+  body.design-edition-page .edition-access-panel{
+    grid-template-columns:1fr;
+  }
+
+  .visual-atelier.de-product .de-visual-run,
+  body.design-edition-page .edition-sequence{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .visual-atelier.de-product .de-preview-grid,
+  .visual-atelier.de-product .de-locked-grid,
+  body.design-edition-page .edition-locked-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:640px){
+  .visual-atelier.de-index .edition-library-hero,
+  .visual-atelier.de-index .edition-product-grid,
+  .visual-atelier.de-product .de-product-hero,
+  .visual-atelier.de-product .de-visual-run,
+  body.design-edition-page .edition-sequence{
+    width:calc(100vw - 40px);
+  }
+
+  .visual-atelier.de-index .edition-library-hero h1,
+  .visual-atelier.de-product .de-product-hero-copy h1,
+  body.design-edition-page .edition-hero-copy h1{
+    font-size:clamp(34px,10vw,48px);
+  }
+
+  .visual-atelier.de-index .edition-product-card figure{
+    aspect-ratio:16/10;
+    max-height:260px;
+  }
+
+  .visual-atelier.de-product .de-product-hero figure{
+    aspect-ratio:16/10;
+    max-height:260px;
+  }
+
+  .visual-atelier.de-index .edition-product-grid,
+  .visual-atelier.de-product .de-preview-grid,
+  .visual-atelier.de-product .de-locked-grid,
+  body.design-edition-page .edition-locked-grid{
+    grid-template-columns:1fr;
+  }
+
+  .visual-atelier.de-product .de-visual-run,
+  body.design-edition-page .edition-sequence{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .visual-atelier.de-product .de-visual-run figure,
+  body.design-edition-page .edition-sequence figure{
+    aspect-ratio:4/5;
+  }
+
+  .visual-atelier.de-product .de-visual-run figure:hover,
+  body.design-edition-page .edition-sequence figure:hover{
+    transform:none;
   }
 }

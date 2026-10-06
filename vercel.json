@@ -1,21 +1,89 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "liaarmonia.com"
+        }
+      ],
+      "destination": "https://www.liaarmonia.com/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/design-editions",
+      "destination": "/design-editions.html"
+    },
+    {
+      "source": "/design-editions/burgundy-chartreuse",
+      "destination": "/design-edition-burgundy-chartreuse.html"
+    },
+    {
+      "source": "/design-editions/burgundy-chartreuse/access",
+      "destination": "/design-edition-burgundy-chartreuse-access.html"
+    },
+    {
+      "source": "/design-editions/success",
+      "destination": "/design-edition-burgundy-chartreuse-access.html"
+    },
+    {
+      "source": "/design-editions/cancel",
+      "destination": "/design-edition-cancel.html"
+    },
+    {
+      "source": "/wedding-design",
+      "destination": "/wedding-design.html"
+    },
+    {
+      "source": "/collaborations",
+      "destination": "/collaborations.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/atelier",
+      "destination": "/atelier.html"
+    },
+    {
+      "source": "/designs",
+      "destination": "/designs.html"
+    },
+    {
+      "source": "/inquiries",
+      "destination": "/inquiries.html"
+    },
+    {
+      "source": "/digital-atelier",
+      "destination": "/invitations.html"
+    }
+  ],
+  "functions": {
+    "api/*.js": {
+      "includeFiles": "api/_protected/**"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
     }
-  ],
-  "redirects": [
-    { "source": "/digital-atelier/:path*", "destination": "/invitations.html", "permanent": false },
-    { "source": "/classy-white.html", "destination": "/invitations.html", "permanent": false },
-    { "source": "/invitation-builder-dev.html", "destination": "/invitations.html", "permanent": false }
   ]
 }

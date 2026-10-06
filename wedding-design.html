@@ -3,26 +3,11 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wedding Design — LIA ARMONÍA</title>
-<link rel="canonical" href="https://liaarmonia.com/wedding-design.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="LIA ARMONÍA">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://liaarmonia.com/wedding-design.html">
-<meta property="og:title" content="Wedding Design — LIA ARMONÍA">
-<meta property="og:description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
-<meta property="og:image" content="https://liaarmonia.com/assets/hero-clean.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wedding Design — LIA ARMONÍA">
-<meta name="twitter:description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
-<meta name="twitter:image" content="https://liaarmonia.com/assets/hero-clean.jpg">
-<meta name="theme-color" content="#070706">
 <meta name="description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260902k">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=venue-details">
 </head>
 <body class="funnel-mode visual-atelier wedding-design-page">
 <div class="grain"></div>
@@ -37,10 +22,10 @@
       <summary>No venue yet?</summary>
       <p>You do not need to begin with one. If you are drawn to a Lia Armonía design concept, we can source and coordinate a real venue whose architecture, proportions, setting and atmosphere support that direction. From there, the concept is developed specifically around the selected venue, adapting the spatial design, scale, materials and visual language to the real setting. One direction. One suitable place. One cohesive celebration.</p>
     </details>
-    <details class="private-launch-note" aria-label="Private launch commissions">
-      <summary>Private Launch Commissions</summary>
+    <aside class="private-launch-note" aria-label="Private launch commissions">
+      <span>Private Launch Commissions</span>
       <p>Ahead of the official Lia Armonía launch, three celebrations that feel especially aligned with the atelier are being selected for Private Launch Commissions. A private introductory commission rate may be offered after review; selection considers creative fit, venue, scope, timing and readiness.</p>
-    </details>
+    </aside>
     <div class="private-client-notes">
       <span>Wedding</span>
       <span>Vision</span>
@@ -60,7 +45,7 @@
       <button type="button" data-concierge-step="2">03 Design</button>
       <button type="button" data-concierge-step="3">04 Consultation</button>
     </div>
-    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="https://formsubmit.co/atelier@liaarmonia.com" method="POST">
+    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="/api/private-design-consultation" method="POST">
       <input type="hidden" name="form-name" value="private-design-consultation">
       <input type="hidden" name="subject" value="NEW PRIVATE DESIGN INQUIRY">
       <input type="hidden" name="inquiry_id" value="" data-inquiry-id>
@@ -193,19 +178,21 @@
           <label>Timezone *<select name="timezone" required><option value="">Select timezone</option><option>Pacific Time (PT)</option><option>Mountain Time (MT)</option><option>Central Time (CT)</option><option>Eastern Time (ET)</option><option>Central European Time (CET)</option><option>Other / note below</option></select></label>
           <label>Alternative date / time<input name="alternative_consultation_time" placeholder="Thursday afternoon / Friday after 11am"></label>
         </div>
-        <label class="check flexible-check"><input type="checkbox" name="consultation_flexible" value="Yes"> I am flexible if another time is better for the atelier.</label>
+        <label class="check flexible-check"><input type="checkbox" name="consultation_flexible" value="Yes"><span>I am flexible if another time is better for the atelier.</span></label>
         <label>Final note<textarea name="call_note" rows="4" placeholder="Deadlines, planner details, venue links, priorities or questions."></textarea></label>
-        <div class="concierge-guidance">
+        <div class="concierge-guidance review-send-card">
           <b>Before sending</b>
-          <label class="check final-confirm"><input type="checkbox" name="confirmation" value="Yes" required> I confirm that the information provided is accurate and understand that submitting this inquiry does not guarantee availability or constitute a booking.</label>
-          <label class="check"><input type="checkbox" name="storage_consent" value="Yes" required> I agree that Lia Armonía may store my answers to review this inquiry.</label>
+          <p>A short confirmation so the consultation request stays clear on both sides.</p>
+          <label class="check"><input type="checkbox" name="pricing_acknowledgement" value="Yes" required><span>The design guidance is preliminary; final scope is confirmed after atelier review.</span></label>
+          <label class="check"><input type="checkbox" name="separate_costs_acknowledgement" value="Yes" required><span>Venue, production, florals, rentals and third-party services are separate unless stated otherwise.</span></label>
+          <label class="check"><input type="checkbox" name="request_acknowledgement" value="Yes" required><span>This is a complimentary consultation request, not a confirmed appointment or reserved wedding date.</span></label>
+          <label class="check"><input type="checkbox" name="storage_consent" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a> and inquiry review.</span></label>
         </div>
       </div>
       <div class="concierge-actions wide">
         <button type="button" data-concierge-prev>Back</button>
         <button type="button" data-concierge-next>Continue</button>
         <button type="submit" data-concierge-submit>Send consultation request</button>
-        <div class="concierge-rail" aria-hidden="true"><span data-concierge-rail></span></div>
       </div>
       <div class="concierge-success wide" data-concierge-success hidden>
         <span>Request submitted</span>
@@ -213,23 +200,11 @@
         <p>Diana will review your answers personally and reply from atelier@liaarmonia.com with either a confirmation for your requested consultation time or a refined alternative.</p>
         <small data-success-reference></small>
       </div>
-      <p class="wide concierge-submit-note">Your complete inquiry is sent privately to the atelier. Diana reviews every submission personally and will confirm your requested time or suggest an alternative by email.</p>
+      <p class="wide concierge-submit-note">Your complete inquiry is sent privately to atelier@liaarmonia.com. Diana reviews every submission personally and replies from the atelier inbox.</p>
     </form>
   </section>
 </section>
 </main>
-<div class="concierge-modal" data-concierge-modal hidden role="dialog" aria-modal="true" aria-labelledby="conciergeModalTitle">
-  <div class="concierge-modal-backdrop" data-concierge-modal-close></div>
-  <div class="concierge-modal-panel" role="document">
-    <button class="concierge-modal-dismiss" type="button" data-concierge-modal-close aria-label="Close">&times;</button>
-    <span class="concierge-modal-eyebrow">Request received</span>
-    <h3 id="conciergeModalTitle">Thank you.</h3>
-    <p>Your private design inquiry has reached the atelier. Diana reviews every request personally and will be in touch with you shortly by email — either confirming your preferred consultation time or proposing a refined alternative.</p>
-    <p class="concierge-modal-secondary">A confirmation has been sent to your email address. If it does not arrive, please check your spam folder or write to <a href="mailto:atelier@liaarmonia.com">atelier@liaarmonia.com</a>.</p>
-    <small data-concierge-modal-reference></small>
-    <button class="concierge-modal-button" type="button" data-concierge-modal-close>Close</button>
-  </div>
-</div>
-<footer><div class="brand"><span>LA</span><b>Lia Armonía</b></div><p><strong>LIA ARMONÍA</strong><br><em>Wedding Design Atelier</em></p><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a class="footer-icon-link" href="mailto:atelier@liaarmonia.com" aria-label="Email"><span class="contact-icon mail-icon"></span>Email</a><a class="footer-icon-link" href="https://www.instagram.com/lia_armonia/" target="_blank" rel="noopener" aria-label="Instagram"><span class="contact-icon instagram-icon"></span>Instagram</a></div></footer>
-<script src="app.js?v=20260902k"></script>
+<footer><p><strong>LIA ARMONÍA</strong><br><em>Wedding Design Atelier</em></p><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a class="footer-icon-link" href="mailto:atelier@liaarmonia.com" aria-label="Email"><span class="contact-icon mail-icon"></span>Email</a><a class="footer-icon-link" href="https://www.instagram.com/lia_armonia/" target="_blank" rel="noopener" aria-label="Instagram"><span class="contact-icon instagram-icon"></span>Instagram</a></div></footer>
+<script src="app.js"></script>
 </body></html>

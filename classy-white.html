@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Classy White Invitation — LIA ARMONÍA</title>
+<meta name="description" content="Classy White digital wedding invitation experience by Lia Armonia.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=classy-white-renderer">
+</head>
+<body class="classy-white-page">
+<main class="classy-white-experience" data-classy-white>
+  <div class="cw-progress" aria-label="Invitation scene progress">
+    <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <button class="cw-exit" type="button" onclick="location.href='invitations.html'">Exit</button>
+
+  <section class="cw-scene cw-gate active" data-scene="0" style="--scene:url('assets/classy-white/references/keyframes/01-gate.jpg')">
+    <div class="cw-panel cw-panel-left"></div>
+    <div class="cw-panel cw-panel-right"></div>
+    <div class="cw-scene-copy">
+      <p>Classy White</p>
+      <h1><span data-cw="monogram">L | A</span></h1>
+      <b data-cw="date">Your Date</b>
+      <button type="button" data-cw-next>Enter</button>
+    </div>
+  </section>
+
+  <section class="cw-scene" data-scene="1" style="--scene:url('assets/classy-white/references/keyframes/02-venue-reveal.jpg')">
+    <div class="cw-scene-copy cw-bottom">
+      <p>Venue Reveal</p>
+      <h2 data-cw="names">Your Names</h2>
+      <b><span data-cw="venue">Your Venue</span> · <span data-cw="location">Your Location</span></b>
+      <button type="button" data-cw-next>Continue</button>
+    </div>
+  </section>
+
+  <section class="cw-scene" data-scene="2" style="--scene:url('assets/classy-white/references/keyframes/03-glimpse-of-us.jpg')">
+    <div class="cw-scene-copy">
+      <p>A Glimpse of Us</p>
+      <h2>Open the story</h2>
+      <button type="button" data-cw-next>Open</button>
+    </div>
+  </section>
+
+  <section class="cw-scene" data-scene="3" style="--scene:url('assets/classy-white/references/keyframes/03-glimpse-of-us.jpg')">
+    <div class="cw-media-frame" aria-label="Couple media preview">
+      <div class="cw-media-slot" data-cw-media><span>Your image or film will appear here.</span></div>
+      <div><span data-cw="story-heading">Our Story</span><p data-cw="message">Your story note will appear here.</p></div>
+    </div>
+    <button class="cw-floating-next" type="button" data-cw-next>Continue</button>
+  </section>
+
+  <section class="cw-scene" data-scene="4" style="--scene:url('assets/classy-white/references/keyframes/05-invitation-details.jpg')">
+    <div class="cw-invite-card">
+      <span data-cw="monogram">L | A</span>
+      <p>Together with their families</p>
+      <h2 data-cw="names">Your Names</h2>
+      <p data-cw="invitation-message">request the pleasure of your company</p>
+      <b><span data-cw="date">Your Date</span><span data-cw="time"></span></b>
+      <em><span data-cw="venue">Your Venue</span><br><span data-cw="location">Your Location</span></em>
+      <div class="cw-audio-control" data-cw-audio hidden></div>
+      <button type="button" data-cw-next>Continue</button>
+    </div>
+  </section>
+
+  <section class="cw-scene cw-response" data-scene="5" style="--scene:url('assets/classy-white/references/keyframes/06-response-form.jpg')">
+    <form name="classy-white-response" method="POST" action="#" class="cw-response-form">
+      <input type="hidden" name="form-name" value="classy-white-response">
+      <input type="hidden" name="subject" value="Classy White guest response — LIA ARMONÍA">
+      <input class="hidden" name="website" tabindex="-1" autocomplete="off">
+      <p>Guest Response</p>
+      <h2>Will you join us?</h2>
+      <div class="cw-choice-row">
+        <label><input type="radio" name="attendance" value="Joyfully accept" required><span>Joyfully Accept</span></label>
+        <label><input type="radio" name="attendance" value="Regretfully decline"><span>Regretfully Decline</span></label>
+      </div>
+      <label>Your party<input name="guest_names" placeholder="Names attending" required></label>
+      <label data-cw-dining-label>Dining preference<input name="dining" data-cw-dining placeholder="Vegetarian, fish, meat..."></label>
+      <label data-cw-dietary-label>Dietary notes<textarea name="dietary_notes" rows="2" placeholder="Anything we should know?"></textarea></label>
+      <label data-cw-message-label>A message for us<textarea name="message" rows="3" placeholder="Leave a note for the couple..."></textarea></label>
+      <button type="submit" data-cw-submit>Send Response</button>
+    </form>
+  </section>
+
+  <section class="cw-scene" data-scene="6" style="--scene:url('assets/classy-white/references/keyframes/07-thank-you.jpg')">
+    <div class="cw-scene-copy">
+      <p>Thank You</p>
+      <h2>Your response has been received.</h2>
+      <b>With love, <span data-cw="names">Your Names</span></b>
+      <button type="button" data-cw-reset>Return to invitation</button>
+    </div>
+  </section>
+</main>
+<script src="invitation-config.js"></script>
+<script src="classy-white.js"></script>
+</body>
+</html>
