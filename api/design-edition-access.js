@@ -6,8 +6,8 @@ const purchasedEdition = {
   subtitle: 'Ceremony Design Edition',
   summary: 'Your private Lia Armonía ceremony dossier: design direction, venue fit, seating logic, ceremony aisle rhythm, scenic wall routes, sourcing, floral and candle guidance, budget architecture and planner hand-off.',
   gallery: [
-    'assets/design-edition-burgundy-chartreuse-center-aisle.jpg',
-    'assets/design-edition-burgundy-chartreuse-chair-detail.jpg'
+    'assets/design-edition-burgundy-chartreuse-center-aisle.png',
+    'assets/design-edition-burgundy-chartreuse-chair-detail.png'
   ],
   sections: [
     {
@@ -22,8 +22,8 @@ const purchasedEdition = {
       title: 'Ceremony Visual Library',
       body: 'Selected views document the ceremony world: cover composition, architectural focal point, aisle rhythm and chair detail. Reception, dinner and lounge imagery are intentionally excluded from the paid product scope.',
       gallery: [
-        'assets/design-edition-burgundy-chartreuse-center-aisle.jpg',
-        'assets/design-edition-burgundy-chartreuse-chair-detail.jpg'
+        'assets/design-edition-burgundy-chartreuse-center-aisle.png',
+        'assets/design-edition-burgundy-chartreuse-chair-detail.png'
       ]
     },
     {
@@ -94,10 +94,11 @@ export default async function handler(req, res) {
     return sendJson(res, 200, {
       productSlug: DESIGN_EDITION.productSlug,
       editionNumber: DESIGN_EDITION.editionNumber,
-      buyerEmail: session.customer_details?.email || session.customer_email || '',
+      buyerEmail: session.customerEmail || '',
       edition: purchasedEdition
     });
   } catch (error) {
     return sendJson(res, error.statusCode || 500, { error: error.message || 'Access could not be verified.' });
   }
 }
+
