@@ -1,5 +1,3 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import crypto from 'node:crypto';
 
 export const DESIGN_EDITION = {
@@ -13,14 +11,14 @@ export const DESIGN_EDITION = {
   label: 'Design Edition 01',
   studyLabel: 'Southern California coastal ceremony study',
   ctaLabel: 'Access the Ceremony Edition',
-  heroImage: 'assets/design-edition-burgundy-chartreuse-center-aisle.png',
+  heroImage: 'assets/design-edition-burgundy-chartreuse-center-aisle.jpg',
   gallery: [
     {
-      src: 'assets/design-edition-burgundy-chartreuse-center-aisle.png',
+      src: 'assets/design-edition-burgundy-chartreuse-center-aisle.jpg',
       label: 'Aisle Composition'
     },
     {
-      src: 'assets/design-edition-burgundy-chartreuse-chair-detail.png',
+      src: 'assets/design-edition-burgundy-chartreuse-chair-detail.jpg',
       label: 'Seating Detail'
     }
   ],
@@ -40,29 +38,32 @@ export const DESIGN_EDITION = {
     description: 'Lia Armonia Design Edition 01: a ceremony-only Concept to Reality dossier with venue direction, seating logic, sourcing, scenic fabrication guidance and ceremony budget architecture.',
     ogTitle: 'Burgundy + Chartreuse Ceremony Design Edition - LIA ARMONIA',
     ogDescription: 'A ceremony-only Lia Armonia design dossier translated into practical production guidance.',
-    ogImage: 'https://www.liaarmonia.com/assets/design-edition-burgundy-chartreuse-center-aisle.png'
+    ogImage: 'https://www.liaarmonia.com/assets/design-edition-burgundy-chartreuse-center-aisle.jpg'
   },
   priceEnv: 'STRIPE_PRICE_DESIGN_EDITION_01',
   notifyEnv: 'DESIGN_EDITION_NOTIFY_TO',
   paymentLinkId: 'plink_1UNezYQvMYgiBRBOGoAunLOr',
   paymentLinkUrl: 'https://buy.stripe.com/28E5kFbcwbBZ9lB0fNgfu06',
-  protectedDir: path.join(process.cwd(), 'api', '_protected', 'design-editions', 'burgundy-chartreuse'),
   downloads: {
     'full-edition': {
       filename: 'LIA_ARMONIA_DESIGN_EDITION_01_BURGUNDY_CHARTREUSE.zip',
-      contentType: 'application/zip'
+      contentType: 'application/zip',
+      url: 'https://cfgjluzj3mgsfn7c.private.blob.vercel-storage.com/design-editions/burgundy-chartreuse/LIA_ARMONIA_DESIGN_EDITION_01_BURGUNDY_CHARTREUSE.zip'
     },
     dossier: {
       filename: '01_CONCEPT_TO_REALITY_DOSSIER.pdf',
-      contentType: 'application/pdf'
+      contentType: 'application/pdf',
+      url: 'https://cfgjluzj3mgsfn7c.private.blob.vercel-storage.com/design-editions/burgundy-chartreuse/01_CONCEPT_TO_REALITY_DOSSIER.pdf'
     },
     'planner-brief': {
       filename: '02_PLANNER_PRODUCER_QUICK_BRIEF.pdf',
-      contentType: 'application/pdf'
+      contentType: 'application/pdf',
+      url: 'https://cfgjluzj3mgsfn7c.private.blob.vercel-storage.com/design-editions/burgundy-chartreuse/02_PLANNER_PRODUCER_QUICK_BRIEF.pdf'
     },
     'digital-edition': {
       filename: '03_PRIVATE_DIGITAL_EDITION.html',
-      contentType: 'text/html; charset=utf-8'
+      contentType: 'text/html; charset=utf-8',
+      url: 'https://cfgjluzj3mgsfn7c.private.blob.vercel-storage.com/design-editions/burgundy-chartreuse/03_PRIVATE_DIGITAL_EDITION.html'
     }
   }
 };
@@ -216,10 +217,26 @@ export function verifyStripeSignature(rawBody, signatureHeader, endpointSecret) 
 export function protectedFilePath(downloadKey) {
   const download = DESIGN_EDITION.downloads[downloadKey];
   if (!download) return null;
-  const resolved = path.resolve(DESIGN_EDITION.protectedDir, download.filename);
-  const protectedRoot = path.resolve(DESIGN_EDITION.protectedDir);
-  if (!resolved.startsWith(protectedRoot)) return null;
-  if (!fs.existsSync(resolved)) return null;
-  return { ...download, path: resolved };
+  return download;
 }
 
+export async function readProtectedFile(downloadKey) {
+  const download = protectedFilePath(downloadKey);
+  if (!download) return null;
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) {
+    const error = new Error('Private file storage is not configured.');
+    error.statusCode = 503;
+    throw error;
+  }
+  const response = await fetch(download.url, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: 'no-store'
+  });
+  if (!response.ok) {
+    const error = new Error('Private file could not be loaded.');
+    error.statusCode = response.status === 404 ? 404 : 502;
+    throw error;
+  }
+  return { ...download, body: Buffer.from(await response.arrayBuffer()) };
+}

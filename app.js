@@ -861,4 +861,3 @@ document.addEventListener('keydown', event => {
 
   initDesignEditionAccess();
 })();
-
