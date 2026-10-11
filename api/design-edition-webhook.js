@@ -1,5 +1,6 @@
 import { DESIGN_EDITION, readRawBody, sendJson, verifyStripeSignature } from './_design-edition-stripe.js';
 import { put } from '@vercel/blob';
+import { VENUE_VISUALIZATION } from './_venue-visualization.js';
 
 async function grantEditionAccess(session) {
   const record = {
@@ -18,6 +19,15 @@ async function grantEditionAccess(session) {
     token: process.env.BLOB_READ_WRITE_TOKEN
   });
   return record;
+}
+
+async function recordVenueVisualizationPayment(session) {
+  await put(`venue-visualizations/${session.id}/payment.json`, JSON.stringify({
+    sessionId: session.id,
+    paymentStatus: session.payment_status,
+    product: VENUE_VISUALIZATION.product,
+    paidAt: new Date().toISOString()
+  }), { access: 'private', addRandomSuffix: false, allowOverwrite: true, contentType: 'application/json', token: process.env.BLOB_READ_WRITE_TOKEN });
 }
 
 export default async function handler(req, res) {
@@ -49,6 +59,9 @@ export default async function handler(req, res) {
         && session?.metadata?.edition === 'burgundy_chartreuse';
       if (isPaidEdition) {
         await grantEditionAccess(session);
+      }
+      if (session?.payment_status === 'paid' && session?.metadata?.product === VENUE_VISUALIZATION.product) {
+        await recordVenueVisualizationPayment(session);
       }
     }
 

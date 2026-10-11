@@ -60,6 +60,10 @@
     {
       "source": "/digital-atelier",
       "destination": "/invitations.html"
+    },
+    {
+      "source": "/wedding-venue-visualization",
+      "destination": "/venue-visualization.html"
     }
   ],
   "functions": {

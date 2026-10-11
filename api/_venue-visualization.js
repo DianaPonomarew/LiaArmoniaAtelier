@@ -1,0 +1,54 @@
+import { list, put } from '@vercel/blob';
+import { getSiteUrl, sendJson, stripeRequest } from './_design-edition-stripe.js';
+
+export const VENUE_VISUALIZATION = {
+  product: 'wedding_venue_visualization',
+  priceCents: 29900,
+  currency: 'usd',
+  name: 'Wedding Venue Visualization',
+  recordPath: sessionId => `venue-visualizations/${sessionId}/brief.json`
+};
+
+export { getSiteUrl, sendJson };
+
+export async function verifyVenueSession(sessionId) {
+  if (!sessionId || typeof sessionId !== 'string') {
+    const error = new Error('Your private brief link is missing.');
+    error.statusCode = 400;
+    throw error;
+  }
+  const session = await stripeRequest(`/v1/checkout/sessions/${encodeURIComponent(sessionId)}`);
+  if (session.payment_status !== 'paid' || session.metadata?.product !== VENUE_VISUALIZATION.product) {
+    const error = new Error('This brief is available once payment has been confirmed.');
+    error.statusCode = 402;
+    throw error;
+  }
+  return session;
+}
+
+export async function saveBrief(sessionId, payload) {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    const error = new Error('Private file storage is not configured.');
+    error.statusCode = 503;
+    throw error;
+  }
+  await put(VENUE_VISUALIZATION.recordPath(sessionId), JSON.stringify(payload), {
+    access: 'private', addRandomSuffix: false, allowOverwrite: true,
+    contentType: 'application/json', token: process.env.BLOB_READ_WRITE_TOKEN
+  });
+}
+
+export async function readBrief(sessionId) {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
+  const pathname = VENUE_VISUALIZATION.recordPath(sessionId);
+  const found = await list({ prefix: pathname, limit: 1, token: process.env.BLOB_READ_WRITE_TOKEN });
+  const blob = found.blobs?.find(item => item.pathname === pathname);
+  if (!blob) return null;
+  const response = await fetch(blob.url, { headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }, cache: 'no-store' });
+  if (!response.ok) return null;
+  return response.json();
+}
+
+export function briefUrl(req, sessionId) {
+  return `${getSiteUrl(req)}/venue-visualization-brief.html?session_id=${encodeURIComponent(sessionId)}`;
+}
