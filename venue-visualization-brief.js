@@ -1,4 +1,4 @@
-import { upload } from 'https://esm.sh/@vercel/blob@2.0.0/client';
+import { upload } from 'https://esm.sh/@vercel/blob@2.8.1/client';
 
 let sessionId = new URLSearchParams(window.location.search).get('session_id') || localStorage.getItem('lia-venue-brief');
 const form = document.querySelector('#brief');
@@ -38,7 +38,7 @@ const setStatus = message => {
   statusEl.textContent = message || '';
 };
 
-const isUploading = () => files.some(file => file.state === 'Uploading...');
+const isUploading = () => files.some(file => file.state?.startsWith('Uploading'));
 const hasFailedUpload = () => files.some(file => file.state === 'Upload failed');
 
 const formDataObject = () => {
@@ -196,7 +196,13 @@ async function addFiles(kind, chosenFiles) {
       const blob = await upload(`venue-visualizations/${sessionId}/${kind}/${Date.now()}-${safeName}`, file, {
         access: 'private',
         handleUploadUrl: '/api/venue-visualization-upload',
-        clientPayload: JSON.stringify({ sessionId, kind })
+        clientPayload: JSON.stringify({ sessionId, kind }),
+        multipart: kind === 'video',
+        abortSignal: AbortSignal.timeout(kind === 'video' ? 180000 : 30000),
+        onUploadProgress: ({ percentage }) => {
+          entry.state = `Uploading ${Math.round(percentage)}%`;
+          renderFiles();
+        }
       });
       entry.url = blob.url;
       entry.pathname = blob.pathname;
@@ -206,7 +212,7 @@ async function addFiles(kind, chosenFiles) {
     } catch (error) {
       entry.state = 'Upload failed';
       entry.error = error.message;
-      setStatus(`${file.name} could not be uploaded. Please remove or replace it.`);
+      setStatus(`${file.name} could not be uploaded: ${error.name === 'TimeoutError' ? 'The connection took too long. Please try again.' : error.message || 'Please remove or replace it.'}`);
     } finally {
       submitButton.disabled = isUploading();
       renderFiles();
