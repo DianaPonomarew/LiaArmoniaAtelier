@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="preview.css">
   <style>
-    .venue-brief { max-width: 820px; margin: auto; padding: 130px 20px 90px; }
+    body.visual-atelier main.venue-brief { max-width: 820px; margin: auto; padding: 130px 20px 90px; background: var(--espresso); }
     .venue-brief h1 { font: 400 70px/.96 "Cormorant Garamond", serif; margin: 12px 0 18px; }
     .venue-brief > p { line-height: 1.7; max-width: 640px; }
     .q { border-top: 1px solid rgba(244,239,232,.25); padding: 28px 0; }
@@ -72,8 +72,8 @@
       <section class="q">
         <p class="eyebrow">01</p>
         <h2>Which venue and area are we designing?</h2>
-        <label>Venue name, location and selected area</label>
-        <textarea required name="venue_area" placeholder="Venue name, city / country, and Ceremony, Dinner or Ballroom"></textarea>
+        <label for="venue-area">Venue name, location and selected area</label>
+        <textarea id="venue-area" required name="venue_area" placeholder="Venue name, city / country, and Ceremony, Dinner or Ballroom"></textarea>
       </section>
 
       <section class="q">
@@ -81,12 +81,12 @@
         <h2>When is your wedding, and how many guests are you expecting?</h2>
         <div class="split">
           <div>
-            <label>Wedding date</label>
-            <input required name="wedding_date" type="date">
+            <label for="wedding-date">Wedding date</label>
+            <input id="wedding-date" required name="wedding_date" type="date">
           </div>
           <div>
-            <label>Approximate guest count</label>
-            <input required name="guest_count" inputmode="numeric" placeholder="e.g. 110">
+            <label for="guest-count">Approximate guest count</label>
+            <input id="guest-count" required name="guest_count" type="number" min="1" inputmode="numeric" placeholder="e.g. 110">
           </div>
         </div>
       </section>
@@ -94,15 +94,15 @@
       <section class="q">
         <p class="eyebrow">03</p>
         <h2>What atmosphere and colours do you envision?</h2>
-        <label>Style, atmosphere, colours to include and colours to avoid</label>
-        <textarea required name="atmosphere_colours" placeholder="Describe the feeling you want to create."></textarea>
+        <label for="atmosphere">Style, atmosphere, colours to include and colours to avoid</label>
+        <textarea id="atmosphere" required name="atmosphere_colours" placeholder="Describe the feeling you want to create."></textarea>
       </section>
 
       <section class="q">
         <p class="eyebrow">04</p>
         <h2>What would you love to include?</h2>
-        <label>Flowers, candles, furniture, lighting and textiles</label>
-        <textarea required name="include" placeholder="Tell us what is essential to you."></textarea>
+        <label for="included-details">Flowers, candles, furniture, lighting and textiles</label>
+        <textarea id="included-details" required name="include" placeholder="Tell us what is essential to you."></textarea>
         <label>Approximate decor budget for this area (optional)</label>
         <input name="decor_budget" placeholder="Optional">
       </section>

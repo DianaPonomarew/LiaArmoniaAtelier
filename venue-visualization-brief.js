@@ -259,7 +259,10 @@ function renderSubmittedSummary(data) {
 
   submittedSummary.innerHTML = `<dl>${rows.map(([label, value]) => (
     `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`
-  )).join('')}</dl>`;
+  )).join('')}</dl><ul>${files.filter(file => file.pathname).map(file => {
+    const url = `/api/venue-visualization-file?session_id=${encodeURIComponent(sessionId)}&path=${encodeURIComponent(file.pathname)}`;
+    return `<li>${escapeHtml(file.name)} <a href="${url}">Download original</a>${file.type?.startsWith('image/') ? ` · <a href="${url}&preview=1" target="_blank" rel="noopener">View image</a>` : ''}</li>`;
+  }).join('')}</ul>`;
 }
 
 form.onsubmit = async event => {
