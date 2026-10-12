@@ -12,9 +12,9 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="preview.css">
   <style>
-    .brief { max-width: 820px; margin: auto; padding: 130px 20px 90px; }
-    .brief h1 { font: 400 clamp(42px, 7vw, 70px)/.96 "Cormorant Garamond", serif; margin: 12px 0 18px; }
-    .brief > p { line-height: 1.7; max-width: 640px; }
+    .venue-brief { max-width: 820px; margin: auto; padding: 130px 20px 90px; }
+    .venue-brief h1 { font: 400 70px/.96 "Cormorant Garamond", serif; margin: 12px 0 18px; }
+    .venue-brief > p { line-height: 1.7; max-width: 640px; }
     .q { border-top: 1px solid rgba(244,239,232,.25); padding: 28px 0; }
     .q h2 { font: 400 32px/1.08 "Cormorant Garamond", serif; margin: 0 0 8px; }
     .q p { line-height: 1.65; }
@@ -48,7 +48,8 @@
     .summary dd { margin: 4px 0 0; white-space: pre-wrap; line-height: 1.6; }
     .hidden { display: none; }
     @media (max-width: 600px) {
-      .brief { padding-top: 110px; }
+      .venue-brief { padding-top: 110px; }
+      .venue-brief h1 { font-size: 42px; }
       .split,
       .file-row { grid-template-columns: 1fr; }
       .q h2 { font-size: 28px; }
@@ -62,7 +63,7 @@
   <nav class="nav gallery-nav">
     <a class="brand" href="index.html"><span>LA</span><b>L I A&nbsp;&nbsp;A R M O N Í A</b></a>
   </nav>
-  <main class="brief">
+  <main class="venue-brief">
     <p class="eyebrow">Wedding Venue Visualization</p>
     <h1>Your private design brief.</h1>
     <p>Tell us what you envision, then upload your venue photos. Your private draft is saved as you go. At the end, send your brief and pay $299 for five design images and two final videos.</p>
