@@ -1,6 +1,9 @@
 import { DESIGN_EDITION, readRawBody, sendJson, verifyStripeSignature } from './_design-edition-stripe.js';
 import { put } from '@vercel/blob';
 import { VENUE_VISUALIZATION } from './_venue-visualization.js';
+import { confirmPaidVenueBrief } from './venue-visualization-brief.js';
+
+export const config = { api: { bodyParser: false } };
 
 async function grantEditionAccess(session) {
   const record = {
@@ -62,6 +65,7 @@ export default async function handler(req, res) {
       }
       if (session?.payment_status === 'paid' && session?.metadata?.product === VENUE_VISUALIZATION.product) {
         await recordVenueVisualizationPayment(session);
+        await confirmPaidVenueBrief(session, req);
       }
     }
 

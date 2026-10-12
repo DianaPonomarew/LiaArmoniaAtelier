@@ -116,6 +116,8 @@ export function readRawBody(req) {
 }
 
 export async function readJsonBody(req) {
+  if (req.body && typeof req.body === 'object' && !Buffer.isBuffer(req.body)) return req.body;
+  if (typeof req.body === 'string') return JSON.parse(req.body);
   const raw = await readRawBody(req);
   if (!raw.length) return {};
   try {

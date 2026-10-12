@@ -1,5 +1,5 @@
 import { handleUpload } from '@vercel/blob/client';
-import { verifyVenueSession, sendJson } from './_venue-visualization.js';
+import { verifyVenueSession, readBrief, sendJson } from './_venue-visualization.js';
 import { readJsonBody } from './_design-edition-stripe.js';
 
 const imageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/heic'];
@@ -15,6 +15,8 @@ export default async function handler(req, res) {
       onBeforeGenerateToken: async (pathname, clientPayload) => {
         const payload = JSON.parse(clientPayload || '{}');
         const session = await verifyVenueSession(payload.sessionId);
+        const brief = await readBrief(session.id);
+        if (brief?.status !== 'draft') throw new Error('Files cannot be changed after your brief is sent for payment.');
         const kind = payload.kind;
         if (!['venue', 'video', 'plan', 'inspiration'].includes(kind)) throw new Error('This upload category is not supported.');
         const prefix = `venue-visualizations/${session.id}/${kind}/`;

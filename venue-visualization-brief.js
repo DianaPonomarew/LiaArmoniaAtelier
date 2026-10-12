@@ -1,6 +1,6 @@
 import { upload } from 'https://esm.sh/@vercel/blob@2.0.0/client';
 
-const sessionId = new URLSearchParams(window.location.search).get('session_id');
+let sessionId = new URLSearchParams(window.location.search).get('session_id') || localStorage.getItem('lia-venue-brief');
 const form = document.querySelector('#brief');
 const statusEl = document.querySelector('.status');
 const submitButton = document.querySelector('.submit');
@@ -16,9 +16,23 @@ const kindLabels = {
 };
 
 if (!sessionId) {
-  form.innerHTML = '<p>Your private brief link is missing. Please return from the payment confirmation email.</p>';
-  throw new Error('Missing Checkout Session ID.');
+  submitButton.disabled = true;
+  try {
+  const response = await fetch('/api/venue-visualization-brief', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'create' }), signal: AbortSignal.timeout(20000) });
+  const result = await response.json();
+  if (!response.ok) {
+    setTimeout(() => { statusEl.textContent = result.error || 'Your private draft could not be created. Please try again.'; }, 0);
+    throw new Error(result.error);
+  }
+  sessionId = result.sessionId;
+  localStorage.setItem('lia-venue-brief', sessionId);
+  submitButton.disabled = false;
+  } catch (error) {
+    statusEl.textContent = 'Your private draft could not be opened. Please check your connection and reload.';
+    throw error;
+  }
 }
+history.replaceState(null, '', `?session_id=${encodeURIComponent(sessionId)}`);
 
 const setStatus = message => {
   statusEl.textContent = message || '';
@@ -48,8 +62,9 @@ function renderFiles() {
     const matching = files.filter(file => file.kind === kind);
     list.innerHTML = matching.map(file => {
       const fileIndex = files.indexOf(file);
-      const preview = file.preview
-        ? `<img src="${file.preview}" alt="">`
+      const previewUrl = file.preview || (file.pathname && file.type?.startsWith('image/') ? `/api/venue-visualization-file?session_id=${encodeURIComponent(sessionId)}&path=${encodeURIComponent(file.pathname)}&preview=1` : '');
+      const preview = previewUrl
+        ? `<img src="${previewUrl}" alt="">`
         : `<span>${kind === 'video' ? 'Video' : kind === 'plan' ? 'File' : 'Image'}</span>`;
       const download = file.pathname
         ? `<a href="/api/venue-visualization-file?session_id=${encodeURIComponent(sessionId)}&path=${encodeURIComponent(file.pathname)}">Download</a>`
@@ -81,13 +96,17 @@ function renderFiles() {
 async function saveDraft() {
   if (isUploading()) return;
   try {
-    await fetch('/api/venue-visualization-brief', {
+    const response = await fetch('/api/venue-visualization-brief', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...formDataObject(), draft: true })
+      body: JSON.stringify({ ...formDataObject(), draft: true }),
+      signal: AbortSignal.timeout(20000)
     });
+    if (!response.ok) throw new Error('Your draft could not be saved.');
+    return true;
   } catch {
-    // Draft saving is helpful, but it should never interrupt the form flow.
+    setStatus('Your draft could not be saved. Please check your connection and try again.');
+    return false;
   }
 }
 
@@ -101,7 +120,11 @@ async function loadSavedBrief() {
   try {
     const response = await fetch(`/api/venue-visualization-brief?session_id=${encodeURIComponent(sessionId)}`);
     const data = await response.json();
-    if (!response.ok || !data.brief) return;
+    if (!response.ok || !data.brief) {
+      setStatus(data.error || 'Your saved brief could not be loaded. Please try again.');
+      submitButton.disabled = true;
+      return;
+    }
 
     for (const [key, value] of Object.entries(data.brief)) {
       const field = form.elements.namedItem(key);
@@ -113,9 +136,24 @@ async function loadSavedBrief() {
       renderFiles();
     }
 
-    setStatus(data.brief.status === 'submitted' ? 'Your submitted brief is loaded.' : 'Your saved draft is loaded.');
+    if (data.brief.status === 'submitted') {
+      renderSubmittedSummary(data.brief);
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    } else if (data.brief.status === 'awaiting_payment') {
+      form.querySelectorAll('input, textarea, button').forEach(field => { field.disabled = true; });
+      submitButton.disabled = false;
+      submitButton.textContent = 'Continue to payment - $299';
+      setStatus('Your brief and files are saved. Complete payment to confirm your order.');
+      if (sessionId.startsWith('cs_')) {
+        submitButton.disabled = true;
+        setStatus('Your payment is confirmed. Waiting for your order confirmation...');
+        window.setTimeout(loadSavedBrief, 4000);
+      }
+    } else setStatus('Your saved draft is loaded.');
   } catch {
-    setStatus('Your private brief is ready.');
+    setStatus('Your saved brief could not be loaded. Please check your connection and reload.');
+    submitButton.disabled = true;
   }
 }
 
@@ -130,6 +168,11 @@ async function addFiles(kind, chosenFiles) {
   }
 
   for (const file of selected) {
+    const extensions = kind === 'video' ? /\.(mp4|mov|webm)$/i : kind === 'plan' ? /\.(pdf|jpe?g|png|webp|heic)$/i : /\.(jpe?g|png|webp|heic)$/i;
+    if (!extensions.test(file.name)) {
+      setStatus(`${file.name} is not a supported format. Please choose one of the formats listed above.`);
+      continue;
+    }
     const maxMb = kind === 'video' ? 200 : 20;
     if (file.size > maxMb * 1024 * 1024) {
       setStatus(`${file.name} is larger than the ${maxMb} MB limit.`);
@@ -234,27 +277,31 @@ form.onsubmit = async event => {
     return;
   }
 
-  const data = formDataObject();
-  renderSubmittedSummary(data);
   submitButton.disabled = true;
-  setStatus('Sending your brief...');
-
-  const response = await fetch('/api/venue-visualization-brief', {
+  window.clearTimeout(draftTimer);
+  setStatus('Saving your brief and opening secure payment...');
+  try {
+  const loaded = await fetch(`/api/venue-visualization-brief?session_id=${encodeURIComponent(sessionId)}`).then(response => response.json());
+  if (loaded.brief?.status !== 'awaiting_payment' && !await saveDraft()) throw new Error('Please save your brief before continuing.');
+  const response = await fetch('/api/venue-visualization-checkout', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ sessionId }),
+    signal: AbortSignal.timeout(25000)
   });
   const result = await response.json();
 
   if (!response.ok) {
     submitButton.disabled = false;
-    setStatus(result.error || 'Your brief could not be sent.');
+    setStatus(response.status === 503 ? 'Secure payment is temporarily unavailable. Your brief is saved. Please try again later.' : result.error || 'Your brief could not be sent.');
     return;
   }
 
-  form.classList.add('hidden');
-  success.classList.remove('hidden');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.location.assign(result.url);
+  } catch (error) {
+    submitButton.disabled = false;
+    setStatus(error.name === 'TimeoutError' ? 'Payment took too long to open. Your brief is saved. Please try again.' : error.message);
+  }
 };
 
 renderFiles();

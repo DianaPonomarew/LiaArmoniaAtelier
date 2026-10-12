@@ -12,6 +12,11 @@ export const VENUE_VISUALIZATION = {
 export { getSiteUrl, sendJson };
 
 export async function verifyVenueSession(sessionId) {
+  if (/^brief_[a-f0-9]{64}$/.test(sessionId || '')) {
+    const brief = await readBrief(sessionId);
+    if (!brief) throw Object.assign(new Error('Your private brief could not be found.'), { statusCode: 404 });
+    return { id: sessionId, payment_status: brief.status === 'submitted' ? 'paid' : 'unpaid', customer_email: brief.customerEmail };
+  }
   if (!sessionId || typeof sessionId !== 'string') {
     const error = new Error('Your private brief link is missing.');
     error.statusCode = 400;
@@ -23,7 +28,7 @@ export async function verifyVenueSession(sessionId) {
     error.statusCode = 402;
     throw error;
   }
-  return session;
+  return { ...session, id: session.metadata?.brief_id || session.id };
 }
 
 export async function saveBrief(sessionId, payload) {

@@ -17,7 +17,8 @@ export default async function handler(req, res) {
     if (!response.ok) return sendJson(res, response.status === 404 ? 404 : 502, { error: 'The file could not be loaded.' });
     res.statusCode = 200;
     res.setHeader('Content-Type', response.headers.get('content-type') || 'application/octet-stream');
-    res.setHeader('Content-Disposition', `attachment; filename="${(pathname.split('/').pop() || 'file').replace(/["\\]/g, '')}"`);
+    const disposition = url.searchParams.get('preview') === '1' && response.headers.get('content-type')?.startsWith('image/') ? 'inline' : 'attachment';
+    res.setHeader('Content-Disposition', `${disposition}; filename="${(pathname.split('/').pop() || 'file').replace(/["\\]/g, '')}"`);
     res.setHeader('Cache-Control', 'private, no-store');
     res.end(Buffer.from(await response.arrayBuffer()));
   } catch (error) { return sendJson(res, error.statusCode || 500, { error: error.message || 'The file could not be loaded.' }); }
