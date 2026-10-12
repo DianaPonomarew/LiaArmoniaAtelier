@@ -1,4 +1,4 @@
-import { list, put } from '@vercel/blob';
+import { get, put } from '@vercel/blob';
 import { getSiteUrl, sendJson, stripeRequest } from './_design-edition-stripe.js';
 
 export const VENUE_VISUALIZATION = {
@@ -46,12 +46,9 @@ export async function saveBrief(sessionId, payload) {
 export async function readBrief(sessionId) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
   const pathname = VENUE_VISUALIZATION.recordPath(sessionId);
-  const found = await list({ prefix: pathname, limit: 1, token: process.env.BLOB_READ_WRITE_TOKEN });
-  const blob = found.blobs?.find(item => item.pathname === pathname);
+  const blob = await get(pathname, { access: 'private', useCache: false, token: process.env.BLOB_READ_WRITE_TOKEN });
   if (!blob) return null;
-  const response = await fetch(blob.url, { headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }, cache: 'no-store' });
-  if (!response.ok) return null;
-  return response.json();
+  return new Response(blob.stream).json();
 }
 
 export function briefUrl(req, sessionId) {

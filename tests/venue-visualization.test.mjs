@@ -13,6 +13,7 @@ registerHooks({
     if (url !== 'mock:venue-blob') return nextLoad(url, context);
     return { format: 'module', shortCircuit: true, source: `
       export async function put(path, body) { globalThis.venueTestRecords.set(path, body); }
+      export async function get(path, options) { if (options.useCache !== false) throw new Error('Mutable briefs must bypass cache'); const body = globalThis.venueTestRecords.get(path); return body ? {stream: new Response(body).body} : null; }
       export async function list({prefix}) { return {blobs: [...globalThis.venueTestRecords.keys()].filter(path => path.startsWith(prefix)).map(path => ({pathname:path,url:'https://files.test/'+path}))}; }
     ` };
   }
