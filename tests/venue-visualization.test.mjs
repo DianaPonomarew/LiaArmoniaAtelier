@@ -23,7 +23,7 @@ const sessions = new Map();
 const emails = [];
 let checkoutParameters;
 process.env.BLOB_READ_WRITE_TOKEN = 'test-storage';
-process.env.STRIPE_SECRET_KEY = 'test-stripe';
+process.env.STRIPE_SECRET_KEY = 'sk_test_fixture';
 process.env.RESEND_API_KEY = 'test-mail';
 globalThis.fetch = async (url, options = {}) => {
   if (url.startsWith('https://files.test/')) return new Response(records.get(url.slice('https://files.test/'.length)), { status: 200 });
@@ -90,4 +90,11 @@ test('private brief is saved before payment and confirmed only after paid checko
   assert.equal(emails.length, 2);
   assert.equal((await call(briefHandler, {}, 'GET', { session_id: session.id })).brief.sessionId, id);
   assert.equal((await call(fileHandler, {}, 'GET', { session_id: id, path: 'another-order/photo.jpg' })).status, 403);
+});
+
+test('invalid configuration never enters a request header or error response', async () => {
+  const { stripeRequest } = await import('../api/_design-edition-stripe.js');
+  process.env.STRIPE_SECRET_KEY = 'private pasted text\nnot a key';
+  await assert.rejects(stripeRequest('/v1/checkout/sessions/example'), error => error.statusCode === 503 && error.message === 'Stripe is not configured.');
+  process.env.STRIPE_SECRET_KEY = 'sk_test_fixture';
 });

@@ -130,8 +130,8 @@ export async function readJsonBody(req) {
 }
 
 export async function stripeRequest(endpoint, { method = 'GET', body } = {}) {
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-  if (!secretKey) {
+  const secretKey = process.env.STRIPE_SECRET_KEY?.trim();
+  if (!secretKey || !/^(sk|rk)_(live|test)_[A-Za-z0-9]+$/.test(secretKey)) {
     const error = new Error('Stripe is not configured.');
     error.statusCode = 503;
     throw error;
@@ -149,7 +149,7 @@ export async function stripeRequest(endpoint, { method = 'GET', body } = {}) {
 
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
-    const error = new Error(payload?.error?.message || 'Stripe request failed.');
+    const error = new Error(response.status === 401 || response.status === 403 ? 'Stripe authentication is not configured correctly.' : payload?.error?.message || 'Stripe request failed.');
     error.statusCode = response.status;
     error.stripe = payload;
     throw error;
