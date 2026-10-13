@@ -30,6 +30,7 @@ export default async function handler(req, res) {
     const site = getSiteUrl(req);
     const params = new URLSearchParams({
       mode: 'payment',
+      'managed_payments[enabled]': 'false',
       success_url: `${site}/venue-visualization-brief.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}/venue-visualization-brief.html?session_id=${encodeURIComponent(owner.id)}`,
       'line_items[0][price_data][currency]': VENUE_VISUALIZATION.currency,
