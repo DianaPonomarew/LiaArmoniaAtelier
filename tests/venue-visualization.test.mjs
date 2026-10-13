@@ -69,6 +69,7 @@ test('private brief is saved before payment and confirmed only after paid checko
   assert.equal(checkout.status, 200);
   assert.equal(checkoutParameters.get('line_items[0][price_data][unit_amount]'), '29900');
   assert.equal(checkoutParameters.get('metadata[brief_id]'), id);
+  assert.equal(checkoutParameters.get('phone_number_collection[enabled]'), 'true');
   assert.equal(checkoutParameters.has('payment_method_types'), false);
   assert.ok(checkoutParameters.get('cancel_url').includes(id));
   assert.equal((await readBrief(id)).status, 'awaiting_payment');
@@ -79,10 +80,13 @@ test('private brief is saved before payment and confirmed only after paid checko
   assert.equal(emails.length, 0);
   session.payment_status = 'paid';
   session.status = 'complete';
-  session.customer_details = { email: 'customer@example.test' };
+  session.customer_details = { email: 'customer@example.test', phone: '+491701234567' };
   await confirmPaidVenueBrief(session, { headers: { host: 'www.liaarmonia.com' } });
   assert.equal((await readBrief(id)).status, 'submitted');
+  assert.equal((await readBrief(id)).customerPhone, '+491701234567');
   assert.equal(emails.length, 2);
+  assert.match(emails[0].html, /https:\/\/wa.me\/491701234567/);
+  assert.match(emails[1].html, /WhatsApp/);
   assert.match(emails[1].html, /five design images/);
   assert.match(emails[1].html, /two final videos/);
   assert.match(emails[1].html, /1.jpg/);

@@ -61,20 +61,23 @@ export async function confirmPaidVenueBrief(session, req) {
   if (!brief || brief.checkoutSessionId !== session.id) throw new Error('The paid order does not match its brief.');
   const client = session.customer_details?.email || session.customer_email;
   const paidAt = brief.paidAt || new Date().toISOString();
-  const payload = { ...brief, status: 'submitted', customerEmail: client, paidAt };
+  const phone = session.customer_details?.phone || brief.customerPhone || '';
+  const payload = { ...brief, status: 'submitted', customerEmail: client, customerPhone: phone, paidAt };
   await saveBrief(id, payload);
   const from = process.env.RESEND_FROM || 'Lia Armonia <onboarding@resend.dev>';
   const link = briefUrl(req, id);
   const summary = `<table>${rows(brief)}</table><h3>Files received</h3><ul>${(brief.files || []).map(file => `<li>${esc(file.name)} (${esc(file.kind)})</li>`).join('')}</ul>`;
   const timing = '<p>Your brief is with the atelier. Your five design images will arrive within seven calendar days of confirmed payment and receipt of the complete brief. Your two final videos are created after approval of the image concept.</p>';
+  const delivery = '<p>The atelier will deliver your images and videos via WhatsApp, or send a download link by SMS to the mobile number provided at checkout.</p>';
+  const contact = `<p>Customer email: ${esc(client)}</p><p>Delivery mobile number: ${esc(phone)}</p>${phone ? `<p><a href="https://wa.me/${phone.replace(/\D/g, '')}">Open WhatsApp</a></p>` : ''}`;
   if (!process.env.RESEND_API_KEY) throw new Error('Confirmation email is not configured.');
   if (!brief.studioEmailSentAt) {
-    await email({ from, to: [studioEmail()], ...(client ? { reply_to: client } : {}), subject: 'Paid Wedding Venue Visualization brief', html: `${timing}${summary}<p><a href="${link}">View brief and download original files</a></p>` }, `venue-studio-${session.id}`);
+    await email({ from, to: [studioEmail()], ...(client ? { reply_to: client } : {}), subject: 'Paid Wedding Venue Visualization brief', html: `${timing}${contact}${summary}<p><a href="${link}">View brief and download original files</a></p>` }, `venue-studio-${session.id}`);
     payload.studioEmailSentAt = new Date().toISOString();
     await saveBrief(id, payload);
   }
   if (client && !brief.customerEmailSentAt) {
-    await email({ from, to: [client], reply_to: studioEmail(), subject: 'Your Wedding Venue Visualization - LIA ARMONIA', html: `${timing}${summary}<p>Your files have arrived.</p><p><a href="${link}">Your private brief</a></p>` }, `venue-client-${session.id}`);
+    await email({ from, to: [client], reply_to: studioEmail(), subject: 'Your Wedding Venue Visualization - LIA ARMONIA', html: `<p>Thank you for your booking.</p>${timing}${delivery}${summary}<p>Your files have arrived.</p><p><a href="${link}">Your private brief</a></p>` }, `venue-client-${session.id}`);
     payload.customerEmailSentAt = new Date().toISOString();
     await saveBrief(id, payload);
   }
