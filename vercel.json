@@ -1,5 +1,4 @@
 {
-  "buildCommand": "node scripts/verify-booking-email.mjs",
   "redirects": [
     {
       "source": "/(.*)",
