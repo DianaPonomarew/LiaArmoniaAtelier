@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
+import { createHmac } from 'node:crypto';
+import { Readable } from 'node:stream';
 
 const records = new Map();
 globalThis.venueTestRecords = records;
@@ -43,6 +45,7 @@ const { default: briefHandler, confirmPaidVenueBrief } = await import('../api/ve
 const { default: checkoutHandler } = await import('../api/venue-visualization-checkout.js');
 const { default: fileHandler } = await import('../api/venue-visualization-file.js');
 const { readBrief } = await import('../api/_venue-visualization.js');
+const { default: webhookHandler } = await import('../api/design-edition-webhook.js');
 async function call(handler, body, method = 'POST', query = {}) {
   let result;
   const res = { setHeader() {}, end(value) { result = JSON.parse(value); } };
@@ -101,4 +104,42 @@ test('invalid configuration never enters a request header or error response', as
   process.env.STRIPE_SECRET_KEY = 'private pasted text\nnot a key';
   await assert.rejects(stripeRequest('/v1/checkout/sessions/example'), error => error.statusCode === 503 && error.message === 'Stripe is not configured.');
   process.env.STRIPE_SECRET_KEY = 'sk_test_fixture';
+});
+
+test('signed paid webhook retries missing mail configuration and sends each confirmation once', async () => {
+  const created = await call(briefHandler, { action: 'create' });
+  const id = created.sessionId;
+  const photos = [1, 2, 3].map(index => ({ kind: 'venue', name: `${index}.jpg`, pathname: `venue-visualizations/${id}/venue/${index}.jpg` }));
+  photos.forEach(file => records.set(file.pathname, 'original'));
+  await call(briefHandler, { sessionId: id, draft: true, venue_area: 'Webhook QA', wedding_date: '2027-04-03', guest_count: '50', atmosphere_colours: 'Bordeaux', include: 'Candles', files: photos });
+  await call(checkoutHandler, { sessionId: id });
+  const session = sessions.get('cs_test_order');
+  Object.assign(session, { payment_status: 'paid', customer_details: { email: 'webhook@example.test', phone: '+491701234567' } });
+  process.env.STRIPE_WEBHOOK_SECRET = 'whsec_fixture';
+  const raw = JSON.stringify({ type: 'checkout.session.completed', data: { object: session } });
+  const timestamp = Math.floor(Date.now() / 1000);
+  const signature = createHmac('sha256', process.env.STRIPE_WEBHOOK_SECRET).update(`${timestamp}.${raw}`).digest('hex');
+  async function deliver(signatureHeader) {
+    const req = Readable.from([raw]);
+    Object.assign(req, { method: 'POST', headers: { host: 'www.liaarmonia.com', 'stripe-signature': signatureHeader } });
+    let result;
+    const res = { setHeader() {}, end(value) { result = JSON.parse(value); } };
+    await webhookHandler(req, res);
+    return { status: res.statusCode, ...result };
+  }
+  assert.equal((await deliver('invalid')).status, 400);
+  assert.equal((await readBrief(id)).status, 'awaiting_payment');
+  const before = emails.length;
+  delete process.env.RESEND_API_KEY;
+  const failed = await deliver(`t=${timestamp},v1=${signature}`);
+  assert.equal(failed.status, 400);
+  assert.match(failed.error, /email is not configured/);
+  assert.equal(emails.length, before);
+  process.env.RESEND_API_KEY = 'test-mail';
+  assert.equal((await deliver(`t=${timestamp},v1=${signature}`)).status, 200);
+  assert.equal(emails.length, before + 2);
+  assert.ok((await readBrief(id)).customerEmailSentAt);
+  assert.ok((await readBrief(id)).studioEmailSentAt);
+  assert.equal((await deliver(`t=${timestamp},v1=${signature}`)).status, 200);
+  assert.equal(emails.length, before + 2);
 });
