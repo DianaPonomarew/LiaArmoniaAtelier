@@ -40,6 +40,10 @@
     .file-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
     .submit { width: 100%; padding: 18px; border: 0; background: #6b2638; color: #f4efe8; font: 500 12px Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
     .submit:disabled { opacity: .55; cursor: wait; }
+    .booking-consent { border-top: 1px solid rgba(244,239,232,.25); padding: 20px 0; }
+    .booking-consent label { display: flex; align-items: flex-start; gap: 12px; margin: 14px 0; font: 400 13px/1.65 Inter, sans-serif; }
+    .booking-consent input { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 3px; accent-color: #6b2638; }
+    .booking-consent a { color: inherit; text-decoration: underline; }
     .status { margin-top: 18px; line-height: 1.6; color: #d8cabd; }
     .success { padding: 28px; border: 1px solid #8a755a; margin-top: 30px; background: rgba(20, 10, 8, .32); }
     .summary { margin-top: 18px; border-top: 1px solid rgba(244,239,232,.22); padding-top: 16px; }
@@ -160,6 +164,11 @@
       </section>
 
       <p>Five design images within seven calendar days after confirmed payment and a complete brief. Two final videos after approval of the image concept.</p>
+      <div class="booking-consent">
+        <label><input type="checkbox" name="terms_accepted" required><span>I have read and accept the <a href="venue-visualization-terms.html" target="_blank" rel="noopener">booking conditions and withdrawal information</a> for the USD 299 package.</span></label>
+        <label><input type="checkbox" name="early_start" required><span>I expressly request that Lia Armonia begin the commissioned service before the 14-day withdrawal period ends. I understand that, for a service contract, my withdrawal right ends once the service has been fully performed. If I withdraw earlier, proportionate payment for work already provided is due only where legally permitted.</span></label>
+        <p>Early production is requested for the seven-day image delivery. To arrange a later start, contact <a href="mailto:atelier@liaarmonia.com">atelier@liaarmonia.com</a> before booking.</p>
+      </div>
       <button class="submit" type="submit">Send My Brief &amp; Pay $299</button>
       <p class="status" aria-live="polite"></p>
     </form>

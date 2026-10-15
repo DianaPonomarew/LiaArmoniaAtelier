@@ -1,5 +1,6 @@
 import { upload } from '@vercel/blob/client';
 import { readFile } from 'node:fs/promises';
+import { BOOKING_TERMS_VERSION } from '../venue-visualization-terms.js';
 
 const site = 'https://www.liaarmonia.com';
 async function post(path, data) {
@@ -21,7 +22,7 @@ try {
     files.push({ name, kind: 'venue', type: 'image/png', pathname: blob.pathname, state: 'Uploaded' });
   }
   await post('/api/venue-visualization-brief', { sessionId, draft: true, venue_area: 'QA TEST ONLY - Paris, Dinner', wedding_date: '2027-06-01', guest_count: '80', atmosphere_colours: 'Bordeaux', include: 'Candles', files });
-  const checkout = await post('/api/venue-visualization-checkout', { sessionId });
+  const checkout = await post('/api/venue-visualization-checkout', { sessionId, termsVersion: BOOKING_TERMS_VERSION, termsAccepted: true, earlyStart: true });
   console.log(JSON.stringify({ checkoutOpened: Boolean(checkout.url), url: checkout.url }));
 } catch (error) {
   console.error('Checkout diagnosis:', error.message);

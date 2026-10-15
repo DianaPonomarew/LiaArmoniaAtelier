@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
 import { createHmac } from 'node:crypto';
 import { Readable } from 'node:stream';
+import { BOOKING_TERMS_VERSION } from '../venue-visualization-terms.js';
 
 const records = new Map();
 globalThis.venueTestRecords = records;
@@ -47,6 +48,7 @@ const { default: fileHandler } = await import('../api/venue-visualization-file.j
 const { readBrief } = await import('../api/_venue-visualization.js');
 const { default: webhookHandler } = await import('../api/design-edition-webhook.js');
 async function call(handler, body, method = 'POST', query = {}) {
+  if (handler === checkoutHandler) body = { termsVersion: BOOKING_TERMS_VERSION, termsAccepted: true, earlyStart: true, ...body };
   let result;
   const res = { setHeader() {}, end(value) { result = JSON.parse(value); } };
   await handler({ method, body, query, url: '/api/test', headers: { host: 'www.liaarmonia.com' } }, res);
@@ -68,6 +70,9 @@ test('private brief is saved before payment and confirmed only after paid checko
   await call(briefHandler, { ...draft, files: [{ ...photos[0], pathname: 'another-order/photo.jpg' }, ...photos.slice(1)] });
   assert.equal((await call(checkoutHandler, { sessionId: id })).status, 400);
   await call(briefHandler, { ...draft, files: photos });
+  assert.equal((await call(checkoutHandler, { sessionId: id, termsAccepted: false })).status, 400);
+  assert.equal((await call(checkoutHandler, { sessionId: id, earlyStart: false })).status, 400);
+  assert.equal((await call(checkoutHandler, { sessionId: id, termsVersion: 'outdated' })).status, 400);
   const checkout = await call(checkoutHandler, { sessionId: id });
   assert.equal(checkout.status, 200);
   assert.equal(checkoutParameters.get('line_items[0][price_data][unit_amount]'), '29900');
@@ -76,6 +81,9 @@ test('private brief is saved before payment and confirmed only after paid checko
   assert.equal(checkoutParameters.has('payment_method_types'), false);
   assert.ok(checkoutParameters.get('cancel_url').includes(id));
   assert.equal((await readBrief(id)).status, 'awaiting_payment');
+  assert.equal((await readBrief(id)).termsAcceptance.version, BOOKING_TERMS_VERSION);
+  assert.ok((await readBrief(id)).termsAcceptance.acceptedAt);
+  assert.equal((await readBrief(id)).termsAcceptance.earlyStartRequested, true);
   assert.equal((await call(briefHandler, draft)).status, 409);
   assert.equal((await call(checkoutHandler, { sessionId: id })).url, checkout.url);
   const session = sessions.get('cs_test_order');
@@ -93,6 +101,10 @@ test('private brief is saved before payment and confirmed only after paid checko
   assert.match(emails[1].html, /five design images/);
   assert.match(emails[1].html, /two final videos/);
   assert.match(emails[1].html, /1.jpg/);
+  assert.match(emails[1].html, /Your agreed booking conditions/);
+  assert.match(emails[1].html, /Right of withdrawal/);
+  assert.match(emails[1].html, /Optional withdrawal form/);
+  assert.match(emails[1].html, /one consolidated round/i);
   await confirmPaidVenueBrief(session, { headers: { host: 'www.liaarmonia.com' } });
   assert.equal(emails.length, 2);
   assert.equal((await call(briefHandler, {}, 'GET', { session_id: session.id })).brief.sessionId, id);

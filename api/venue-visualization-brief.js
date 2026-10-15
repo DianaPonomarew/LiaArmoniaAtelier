@@ -6,6 +6,11 @@ const studioEmail = () => process.env.VENUE_VISUALIZATION_NOTIFY_TO || 'atelier@
 const esc = value => String(value || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' })[c]);
 const fields = ['venue_area', 'wedding_date', 'guest_count', 'atmosphere_colours', 'include', 'decor_budget', 'inspiration_links', 'additional_notes'];
 const rows = data => fields.filter(key => data[key]).map(key => `<tr><td style="padding:8px 16px 8px 0;color:#6b2638;vertical-align:top">${esc(key.replaceAll('_', ' '))}</td><td style="padding:8px 0;white-space:pre-wrap">${esc(data[key])}</td></tr>`).join('');
+function bookingConditions(brief) {
+  const terms = brief.termsAcceptance;
+  if (!terms) return '';
+  return `<hr><h2>Your agreed booking conditions</h2><p>Version ${esc(terms.version)}. Accepted ${esc(terms.acceptedAt)}.</p><p>${esc(terms.provider)}</p><h3>Your early-start request</h3><p>${esc(terms.earlyStartNotice)}</p>${terms.sections.map(([heading, text]) => `<h3>${esc(heading)}</h3><p>${esc(text)}</p>`).join('')}`;
+}
 async function email(payload, idempotencyKey) {
   if (!process.env.RESEND_API_KEY) return;
   const response = await fetch('https://api.resend.com/emails', { method:'POST', headers:{ Authorization:`Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type':'application/json', ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}) }, body:JSON.stringify(payload) });
@@ -70,14 +75,15 @@ export async function confirmPaidVenueBrief(session, req) {
   const timing = '<p>Your brief is with the atelier. Your five design images will arrive within seven calendar days of confirmed payment and receipt of the complete brief. Your two final videos are created after approval of the image concept.</p>';
   const delivery = '<p>The atelier will deliver your images and videos via WhatsApp, or send a download link by SMS to the mobile number provided at checkout.</p>';
   const contact = `<p>Customer email: ${esc(client)}</p><p>Delivery mobile number: ${esc(phone)}</p>${phone ? `<p><a href="https://wa.me/${phone.replace(/\D/g, '')}">Open WhatsApp</a></p>` : ''}`;
+  const conditions = bookingConditions(brief);
   if (!process.env.RESEND_API_KEY) throw new Error('Confirmation email is not configured.');
   if (!brief.studioEmailSentAt) {
-    await email({ from, to: [studioEmail()], ...(client ? { reply_to: client } : {}), subject: 'Paid Wedding Venue Visualization brief', html: `${timing}${contact}${summary}<p><a href="${link}">View brief and download original files</a></p>` }, `venue-studio-${session.id}`);
+    await email({ from, to: [studioEmail()], ...(client ? { reply_to: client } : {}), subject: 'Paid Wedding Venue Visualization brief', html: `${timing}${contact}${summary}<p><a href="${link}">View brief and download original files</a></p>${conditions}` }, `venue-studio-${session.id}`);
     payload.studioEmailSentAt = new Date().toISOString();
     await saveBrief(id, payload);
   }
   if (client && !brief.customerEmailSentAt) {
-    await email({ from, to: [client], reply_to: studioEmail(), subject: 'Your Wedding Venue Visualization - LIA ARMONIA', html: `<p>Thank you for your booking.</p>${timing}${delivery}${summary}<p>Your files have arrived.</p><p><a href="${link}">Your private brief</a></p>` }, `venue-client-${session.id}`);
+    await email({ from, to: [client], reply_to: studioEmail(), subject: 'Your Wedding Venue Visualization - LIA ARMONIA', html: `<p>Thank you for your booking.</p>${timing}${delivery}${summary}<p>Your files have arrived.</p><p><a href="${link}">Your private brief</a></p>${conditions}` }, `venue-client-${session.id}`);
     payload.customerEmailSentAt = new Date().toISOString();
     await saveBrief(id, payload);
   }

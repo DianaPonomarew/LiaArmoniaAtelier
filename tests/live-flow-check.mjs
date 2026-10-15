@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { upload } from '@vercel/blob/client';
+import { BOOKING_TERMS_VERSION } from '../venue-visualization-terms.js';
 
 const site = 'https://www.liaarmonia.com';
 async function request(path, data) {
@@ -49,9 +50,10 @@ assert.equal(saved.brief.venue_area, draft.venue_area);
 await post('/api/venue-visualization-brief', { ...draft, files: files.filter(file => file.kind !== 'inspiration') });
 const changed = await (await request(`/api/venue-visualization-brief?session_id=${sessionId}`)).json();
 assert.equal(changed.brief.files.length, 5);
-const checkout = await post('/api/venue-visualization-checkout', { sessionId });
+const consent = { sessionId, termsVersion: BOOKING_TERMS_VERSION, termsAccepted: true, earlyStart: true };
+const checkout = await post('/api/venue-visualization-checkout', consent);
 assert.match(checkout.url, /^https:\/\/checkout.stripe.com\//);
-assert.equal((await post('/api/venue-visualization-checkout', { sessionId })).url, checkout.url);
+assert.equal((await post('/api/venue-visualization-checkout', consent)).url, checkout.url);
 const unpaid = await (await request(`/api/venue-visualization-brief?session_id=${sessionId}`)).json();
 assert.equal(unpaid.brief.status, 'awaiting_payment');
 const fake = await request('/api/design-edition-webhook', { type: 'checkout.session.completed', data: { object: { payment_status: 'paid' } } });

@@ -1,4 +1,5 @@
 import { upload } from 'https://esm.sh/@vercel/blob@2.8.1/client';
+import { BOOKING_TERMS_VERSION } from './venue-visualization-terms.js';
 
 let sessionId = new URLSearchParams(window.location.search).get('session_id') || localStorage.getItem('lia-venue-brief');
 const form = document.querySelector('#brief');
@@ -142,6 +143,11 @@ async function loadSavedBrief() {
       success.classList.remove('hidden');
     } else if (data.brief.status === 'awaiting_payment') {
       form.querySelectorAll('input, textarea, button').forEach(field => { field.disabled = true; });
+      for (const name of ['terms_accepted', 'early_start']) {
+        const field = form.elements.namedItem(name);
+        field.disabled = false;
+        field.checked = data.brief.termsAcceptance?.version === BOOKING_TERMS_VERSION;
+      }
       submitButton.disabled = false;
       submitButton.textContent = 'Continue to payment - $299';
       setStatus('Your brief and files are saved. Complete payment to confirm your order.');
@@ -295,7 +301,7 @@ form.onsubmit = async event => {
   const response = await fetch('/api/venue-visualization-checkout', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ sessionId }),
+    body: JSON.stringify({ sessionId, termsVersion: BOOKING_TERMS_VERSION, termsAccepted: form.elements.namedItem('terms_accepted').checked, earlyStart: form.elements.namedItem('early_start').checked }),
     signal: AbortSignal.timeout(25000)
   });
   const result = await response.json();
