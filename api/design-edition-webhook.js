@@ -2,6 +2,7 @@ import { DESIGN_EDITION, readRawBody, sendJson, verifyStripeSignature } from './
 import { put } from '@vercel/blob';
 import { VENUE_VISUALIZATION } from './_venue-visualization.js';
 import { confirmPaidVenueBrief } from './venue-visualization-brief.js';
+import { confirmCinematicSaveDateOrder } from './_cinematic-save-date.js';
 
 export const config = { api: { bodyParser: false } };
 
@@ -62,6 +63,9 @@ export default async function handler(req, res) {
         && session?.metadata?.edition === 'burgundy_chartreuse';
       if (isPaidEdition) {
         await grantEditionAccess(session);
+      }
+      if (session?.payment_status === 'paid' && session?.metadata?.product === 'cinematic_save_the_date') {
+        await confirmCinematicSaveDateOrder(session);
       }
       if (session?.payment_status === 'paid' && session?.metadata?.product === VENUE_VISUALIZATION.product) {
         await recordVenueVisualizationPayment(session);
