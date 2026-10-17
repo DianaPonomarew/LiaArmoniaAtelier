@@ -42,11 +42,23 @@ export async function confirmCinematicSaveDateOrder(session) {
     contentType:'application/json', token:process.env.BLOB_READ_WRITE_TOKEN
   });
   const from = process.env.RESEND_FROM || 'Lia Armonia <atelier@liaarmonia.com>';
-  const summary = `<p><b>Film:</b> ${escapeHtml(details.design === 'yacht'?'The Yacht':'The Coastal Drive')}<br><b>Names:</b> ${escapeHtml(details.names)}<br><b>Wedding date:</b> ${escapeHtml(details.date)}<br><b>Text:</b> ${escapeHtml(details.title || 'Save the Date')}<br><b>Notes:</b> ${escapeHtml(details.notes || 'None')}<br><b>Phone:</b> ${escapeHtml(details.phone || 'Not supplied')}</p>`;
+  const filmName = details.design === 'yacht' ? 'The Yacht' : 'The Coastal Drive';
+  const headline = details.title || 'Save the Date';
+  const deliveryDueAt = new Date(Date.now() + 48 * 60 * 60 * 1000);
+  const dueLabel = deliveryDueAt.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'medium', timeStyle: 'short' }) + ' (Los Angeles)';
+  const summary = `<table style="border-collapse:collapse;width:100%;font:14px/1.7 Arial,sans-serif">${[
+    ['Selected design',filmName],
+    ['Names — exact spelling',details.names],
+    ['Wedding date',details.date],
+    ['Requested wording',headline],
+    ['Additional notes',details.notes || 'None'],
+    ['Customer email',client],
+    ['Mobile number',details.phone || 'Not supplied']
+  ].map(([label,value])=>`<tr><td style="padding:8px 16px 8px 0;vertical-align:top;color:#765c55;border-bottom:1px solid #e8ded8">${escapeHtml(label)}</td><td style="padding:8px 0;vertical-align:top;border-bottom:1px solid #e8ded8;white-space:pre-wrap">${escapeHtml(value)}</td></tr>`).join('')}</table>`;
   await notify({
     from,to:[studioEmail], ...(client?{reply_to:client}:{}),
-    subject:'Paid Cinematic Save the Date · $29',
-    html:`<div style="font:15px/1.7 Arial,sans-serif;max-width:620px;margin:auto"><h1>New paid Save the Date order</h1>${summary}<p>Customer email: ${escapeHtml(client)}</p><p>Stripe session: ${escapeHtml(session.id)}</p><p>Deliver personalized vertical MP4 by email within 48 hours.</p></div>`
+    subject:`NEW PAID ORDER · ${filmName} · ${details.names.slice(0,65)}`,
+    html:`<div style="font:14px/1.7 Arial,sans-serif;max-width:640px;margin:auto;color:#2a1a16"><p style="letter-spacing:.2em">LIA ARMONÍA · DIGITAL ATELIER</p><h1 style="font:400 36px Georgia,serif">New paid Save the Date order</h1><p><b>Status:</b> Payment confirmed · Ready for personalization</p>${summary}<p><b>Delivery target:</b> Within 48 hours of confirmed payment and complete information (approximately ${escapeHtml(dueLabel)}).</p><p><b>Stripe session:</b> ${escapeHtml(session.id)}</p><p>Prepare one vertical 9:16 MP4 and deliver it to the customer's email. Phone number is provided for order-related questions.</p></div>`
   },`cinematic-owner-${session.id}`);
   if (client) await notify({
     from,to:[client],reply_to:studioEmail,
