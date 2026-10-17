@@ -19,19 +19,20 @@ async function notify(message, idempotencyKey) {
 }
 
 export async function confirmCinematicSaveDateOrder(session) {
-  if (session?.payment_status !== 'paid'
-      || session.payment_link !== CINEMATIC_LINK_ID
-      || session.metadata?.product !== 'cinematic_save_the_date') return false;
-  const details = Object.fromEntries((session.custom_fields || []).map(item => [
-    item.key, item.dropdown?.value || item.text?.value || ''
-  ]));
+  if (session?.payment_status !== 'paid' || session.metadata?.product !== 'cinematic_save_the_date') return false;
+  const isLegacyLink = session.payment_link === CINEMATIC_LINK_ID;
+  if (session.payment_link && !isLegacyLink) return false;
+  const details = isLegacyLink
+    ? Object.fromEntries((session.custom_fields || []).map(item => [item.key, item.dropdown?.value || item.text?.value || '']))
+    : { design:session.metadata.design, names:session.metadata.names, date:session.metadata.date, title:session.metadata.title, notes:session.metadata.notes, phone:session.metadata.phone, email:session.metadata.email };
   if (!['coastaldrive','yacht'].includes(details.design) || !details.names || !details.date) {
     throw new Error('Paid Save the Date order is missing personalization details.');
   }
-  const client = session.customer_details?.email || session.customer_email || '';
+  const client = session.customer_details?.email || session.customer_email || details.email || '';
   const record = {
     sessionId:session.id, paymentStatus:'paid', product:'cinematic_save_the_date',
     design:details.design, coupleNames:details.names, weddingDate:details.date,
+    headline: details.title || 'Save the Date', additionalNotes: details.notes || '', customerPhone: details.phone || '',
     customerEmail:client, paidAt:new Date().toISOString(),
     fulfillment:'awaiting_manual_render'
   };
@@ -41,7 +42,7 @@ export async function confirmCinematicSaveDateOrder(session) {
     contentType:'application/json', token:process.env.BLOB_READ_WRITE_TOKEN
   });
   const from = process.env.RESEND_FROM || 'Lia Armonia <atelier@liaarmonia.com>';
-  const summary = `<p><b>Film:</b> ${escapeHtml(details.design === 'yacht'?'The Yacht':'The Coastal Drive')}<br><b>Names:</b> ${escapeHtml(details.names)}<br><b>Wedding date:</b> ${escapeHtml(details.date)}</p>`;
+  const summary = `<p><b>Film:</b> ${escapeHtml(details.design === 'yacht'?'The Yacht':'The Coastal Drive')}<br><b>Names:</b> ${escapeHtml(details.names)}<br><b>Wedding date:</b> ${escapeHtml(details.date)}<br><b>Text:</b> ${escapeHtml(details.title || 'Save the Date')}<br><b>Notes:</b> ${escapeHtml(details.notes || 'None')}<br><b>Phone:</b> ${escapeHtml(details.phone || 'Not supplied')}</p>`;
   await notify({
     from,to:[studioEmail], ...(client?{reply_to:client}:{}),
     subject:'Paid Cinematic Save the Date · $29',
