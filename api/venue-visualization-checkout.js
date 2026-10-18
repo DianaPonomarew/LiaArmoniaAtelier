@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       'managed_payments[enabled]': 'false',
       'phone_number_collection[enabled]': 'true',
       'custom_text[submit][message]': 'Please provide your mobile number so the atelier can deliver your design images and videos via WhatsApp or send a download link by SMS.',
-      success_url: `${site}/venue-visualization-brief.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${site}/venue-visualization-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}/venue-visualization-brief.html?session_id=${encodeURIComponent(owner.id)}`,
       'line_items[0][price_data][currency]': VENUE_VISUALIZATION.currency,
       'line_items[0][price_data][unit_amount]': String(VENUE_VISUALIZATION.priceCents),
