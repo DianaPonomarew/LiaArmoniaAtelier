@@ -67,7 +67,7 @@
     },
     {
       "source": "/venue-visualization-success",
-      "destination": "/api/venue-visualization-success"
+      "destination": "/api/venue-visualization-checkout"
     }
   ],
   "functions": {
