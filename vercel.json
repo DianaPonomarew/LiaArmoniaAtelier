@@ -64,6 +64,10 @@
     {
       "source": "/wedding-venue-visualization",
       "destination": "/venue-visualization.html"
+    },
+    {
+      "source": "/venue-visualization-success",
+      "destination": "/api/venue-visualization-success"
     }
   ],
   "functions": {
