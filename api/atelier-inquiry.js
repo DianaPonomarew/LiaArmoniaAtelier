@@ -118,6 +118,46 @@ export async function processInquiry(body) {
   return { status: 200, payload: { ok: true } };
 }
 
+
+async function processFeedback(body) {
+  const { put } = await import('@vercel/blob');
+  const { randomUUID } = await import('node:crypto');
+  const name=asValue(body.name).slice(0,80);
+  const rating=Number(body.rating);
+  const comment=asValue(body.comment).slice(0,1200);
+  const sharePermission=body.sharePermission === true;
+  if(!name || !Number.isInteger(rating) || rating<1 || rating>5)
+    return {status:400,payload:{ok:false,error:'Please add your name and a rating.'}};
+  if(!process.env.RESEND_API_KEY || !process.env.BLOB_READ_WRITE_TOKEN)
+    return {status:503,payload:{ok:false,error:'Feedback service is temporarily unavailable.'}};
+  const id=randomUUID();
+  const saved={id,receivedAt:new Date().toISOString(),name,rating,comment,sharePermission,product:'Cinematic Save the Date — The Yacht'};
+  try{
+    await put(`atelier-feedback/${saved.receivedAt.slice(0,10)}/${id}.json`,JSON.stringify(saved),{
+      access:'private',addRandomSuffix:false,allowOverwrite:false,
+      contentType:'application/json',token:process.env.BLOB_READ_WRITE_TOKEN
+    });
+  }catch(error){
+    console.error('Feedback backup failed:',error.message);
+    return {status:503,payload:{ok:false,error:'Could not save feedback. Please try again.'}};
+  }
+  const permission=sharePermission?'YES — written review and first name may be shared':'NO — keep private';
+  const rows={name, rating:rating+'/5',comment:comment||'(no written comment)',testimonial_permission:permission,submitted_at:saved.receivedAt,backup_id:id};
+  try{
+    await sendViaResend(process.env.RESEND_API_KEY,{
+      from:process.env.RESEND_FROM||'LIA ARMONÍA <atelier@liaarmonia.com>',
+      to:[STUDIO_FALLBACK],
+      subject:`NEW FEEDBACK · ${rating}/5 · ${name}`,
+      html:buildHtml(rows),
+      text:createRows(rows).map(r=>r.label+': '+r.value).join('\n')
+    });
+  }catch(error){
+    console.error('Feedback email notification failed:',error.message);
+    return {status:502,payload:{ok:false,error:'Feedback saved but email notification could not be confirmed. Please contact atelier@liaarmonia.com.'}};
+  }
+  return {status:200,payload:{ok:true}};
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method === 'OPTIONS') {
@@ -129,6 +169,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
   const body = await readBody(req);
-  const result = await processInquiry(body);
+  const result = body.formType === 'client_feedback' ? await processFeedback(body) : await processInquiry(body);
   return res.status(result.status).json(result.payload);
 }
