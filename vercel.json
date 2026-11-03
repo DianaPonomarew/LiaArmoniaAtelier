@@ -42,6 +42,10 @@
       "destination": "/collaborations.html"
     },
     {
+      "source": "/venue-collaborations",
+      "destination": "/venues.html"
+    },
+    {
       "source": "/services",
       "destination": "/services.html"
     },
