@@ -1,0 +1,233 @@
+/* LIA ARMONÍA / EARTHEN EDITORIAL V9
+   Art direction: warm stone, oxidized wine-brown, charcoal, aged ivory.
+   Clean asymmetry and generous type. No bright cherry/purple, drapery or florals beyond home. */
+:root{
+ --ee-espresso:#2C1C1B;
+ --ee-oxblood:#362024;
+ --ee-wine:#493033;
+ --ee-stone:#E8DED2;
+ --ee-paper:#F2EBE2;
+ --ee-ivory:#F8F4ED;
+ --ee-taupe:#75675E;
+ --ee-text:#332C28;
+ --ee-line:rgba(60,39,37,.20);
+}
+html{scroll-behavior:smooth}
+body.la4.earth-site{background:var(--ee-paper);color:var(--ee-text)}
+body.la4.earth-site .la4-header{
+ position:relative;z-index:40;
+ min-height:86px;background:var(--ee-paper)!important;
+ border:0;border-bottom:1px solid var(--ee-line);
+ box-shadow:none!important;
+ padding:16px clamp(24px,5.5vw,95px);
+ display:flex;align-items:center;justify-content:space-between;gap:32px;
+}
+body.la4.earth-site .la4-header .la4-logo{
+ font-family:Inter,"Helvetica Neue",sans-serif;font-size:clamp(16px,1.4vw,22px);
+ font-weight:300;letter-spacing:.26em;color:var(--ee-espresso)!important;
+ -webkit-text-fill-color:var(--ee-espresso)!important;
+ text-shadow:none;filter:none;
+}
+body.la4.earth-site .la4-header .la4-nav{gap:clamp(24px,3vw,56px)}
+body.la4.earth-site .la4-header .la4-nav a{
+ color:var(--ee-espresso)!important;-webkit-text-fill-color:var(--ee-espresso)!important;
+ font-size:10px;font-weight:500;letter-spacing:.15em;
+}
+body.la4.earth-site .la4-header .la4-nav a::after{background:var(--ee-wine)}
+body.la4.earth-site .la4-header .la4-nav .la4-nav-enquiry{border:0;padding:0}
+body.la4.earth-site .la4-header .la4-nav .la4-nav-enquiry::after{display:block}
+body.la4.earth-site .la4-header .la4-nav .la4-nav-enquiry:hover{
+ background:none;color:var(--ee-wine)!important;-webkit-text-fill-color:var(--ee-wine)!important;
+}
+.earth-kicker{
+ color:var(--ee-wine);font:500 10px/1.6 Inter,Arial,sans-serif;
+ letter-spacing:.20em;text-transform:uppercase;
+}
+.earth-hairline{border:0;border-top:1px solid var(--ee-line)}
+/* About: real photograph in a single image panel, no frame, alongside editorial heading */
+.earth-about-feature{
+ display:grid;grid-template-columns:minmax(0,51%) minmax(0,49%);
+ min-height:560px;background:var(--ee-stone);
+}
+.earth-about-intro{
+ padding:clamp(46px,7vw,115px) clamp(32px,7vw,125px);
+ display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+}
+.earth-about-intro .earth-kicker{margin:0 0 36px}
+.earth-about-intro h1{
+ font:400 clamp(69px,7.7vw,130px)/.85 "Cormorant Garamond",Georgia,serif;
+ color:var(--ee-espresso);letter-spacing:-.064em;margin:0 0 35px;
+}
+.earth-about-intro h1 em{font-weight:300}
+.earth-about-intro .earth-about-tagline{
+ font:400 clamp(14px,1.15vw,17px)/1.7 Inter,Arial,sans-serif;
+ color:#544740;max-width:360px;margin:0;
+}
+.earth-about-image{
+ margin:0;background:var(--ee-espresso);
+ display:flex;align-items:center;justify-content:center;flex-direction:column;
+ padding:36px clamp(25px,5vw,90px) 24px;
+}
+.earth-about-image img{
+ display:block;width:auto;height:auto;max-width:100%;max-height:585px;
+ object-fit:contain;filter:grayscale(1);box-shadow:none;
+}
+.earth-about-image figcaption{
+ font:400 9px/1.6 Inter,Arial,sans-serif;letter-spacing:.16em;
+ text-transform:uppercase;color:#E2D7CB;text-align:center;margin-top:20px;
+}
+.earth-about-story{
+ display:grid;grid-template-columns:minmax(0,.76fr) minmax(0,1.24fr);
+ gap:clamp(32px,7vw,120px);align-items:start;
+ max-width:1450px;margin:auto;
+ padding:clamp(58px,7vw,104px) clamp(28px,7vw,120px) clamp(60px,7vw,108px);
+}
+.earth-about-story-title .earth-kicker{margin:0 0 22px}
+.earth-about-story h2{
+ color:var(--ee-espresso);font:400 clamp(46px,5vw,80px)/.98 "Cormorant Garamond",Georgia,serif;
+ letter-spacing:-.052em;margin:0;
+}
+.earth-about-story h2 em{font-weight:300}
+.earth-about-prose{max-width:650px}
+.earth-about-prose p{
+ font:400 clamp(13px,1vw,15px)/1.86 Inter,Arial,sans-serif;
+ color:#61554F;margin:0 0 17px;
+}
+.earth-about-prose strong{font-weight:600;color:var(--ee-espresso)}
+.earth-about-founder{
+ padding-top:20px;margin-top:25px;border-top:1px solid var(--ee-line);
+}
+.earth-primary-link{
+ display:inline-flex;justify-content:space-between;align-items:center;
+ gap:36px;min-height:48px;padding:13px 21px;margin-top:18px;
+ background:var(--ee-espresso);border:1px solid var(--ee-espresso);
+ color:var(--ee-ivory)!important;font:500 10px/1.4 Inter,Arial,sans-serif;
+ text-transform:uppercase;letter-spacing:.14em;transition:background .2s;
+}
+.earth-primary-link:hover{background:var(--ee-wine)}
+/* Services: page header and clean magazine index */
+.earth-services-page{min-height:calc(100svh - 86px);background:var(--ee-paper)}
+.earth-services-lead{
+ display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.55fr);gap:30px;align-items:end;
+ max-width:1450px;margin:auto;
+ padding:clamp(62px,8vw,120px) clamp(28px,7vw,120px) clamp(46px,6.4vw,85px);
+}
+.earth-services-lead h1{
+ font:400 clamp(76px,9vw,152px)/.82 "Cormorant Garamond",Georgia,serif;
+ color:var(--ee-espresso);margin:18px 0 0;letter-spacing:-.063em;
+}
+.earth-services-lead h1 em{font-weight:300}
+.earth-services-lead p{font:400 clamp(13px,1.1vw,16px)/1.8 Inter,Arial,sans-serif;color:#675A51;max-width:345px;margin:0 0 5px}
+.earth-services-index{
+ background:var(--ee-stone);border-top:1px solid var(--ee-line);
+ border-bottom:1px solid var(--ee-line);
+}
+.earth-services-index-inner{
+ max-width:1450px;margin:auto;display:grid;grid-template-columns:1fr 1fr;
+ gap:clamp(48px,7vw,112px);padding:clamp(47px,6vw,86px) clamp(28px,7vw,120px);
+}
+.earth-services-group{border-top:1px solid rgba(50,27,26,.40);padding-top:16px}
+.earth-services-group .earth-kicker{font-size:10px}
+.earth-services-group h2{
+ color:var(--ee-espresso);font:400 clamp(47px,4.8vw,75px)/.98 "Cormorant Garamond",Georgia,serif;
+ letter-spacing:-.048em;margin:22px 0 15px;
+}
+.earth-services-group>p{font:400 13px/1.75 Inter,Arial,sans-serif;color:#6C5C51;max-width:420px;margin:0 0 21px}
+.earth-services-links{display:flex;flex-direction:column}
+.earth-services-links a{
+ display:flex;align-items:center;justify-content:space-between;gap:15px;
+ padding:15px 0;border-bottom:1px solid var(--ee-line);
+ color:var(--ee-text);font:400 13px/1.5 Inter,Arial,sans-serif;
+ transition:color .2s,padding .2s;
+}
+.earth-services-links a:hover{color:var(--ee-wine);padding-left:5px}
+.earth-services-links a span{font-size:17px;color:var(--ee-wine)}
+.earth-services-footer{
+ max-width:1450px;margin:auto;padding:23px clamp(28px,7vw,120px) 55px;
+ display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.earth-services-footer small{font:500 10px/1.5 Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--ee-taupe)}
+.earth-services-footer a{color:var(--ee-wine);font:500 10px/1.4 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.15em}
+/* Shared quiet surfaces for Inquiries, Collaborations, Venue Collection */
+body.la4.earth-site .la4-page{
+ background:var(--ee-paper)!important;color:var(--ee-text);
+}
+body.la4.earth-site .la4-page-heading{
+ color:var(--ee-espresso);font-family:"Cormorant Garamond",Georgia,serif;
+ font-weight:400;text-transform:none;letter-spacing:-.052em;
+}
+body.la4.earth-site .la4-option{
+ background:var(--ee-stone);border:1px solid var(--ee-line);box-shadow:none;
+}
+body.la4.earth-site .la4-option h2{color:var(--ee-espresso);font-family:"Cormorant Garamond",Georgia,serif;font-weight:400}
+body.la4.earth-site .la4-option .la4-option-cta{color:var(--ee-wine)}
+body.la4.earth-site .la4-collab-v6{background:var(--ee-paper);color:var(--ee-text)}
+body.la4.earth-site .la4-collab-hero h1,
+body.la4.earth-site .la4-collab-card h2,
+body.la4.earth-site .la4-collab-form-head h2{color:var(--ee-espresso)}
+body.la4.earth-site .la4-collab-form-section{background:var(--ee-stone);border-color:var(--ee-line)}
+body.la4.earth-site .la4-collab-form button,
+body.la4.earth-site .la4-submit{background:var(--ee-espresso);border-color:var(--ee-espresso)}
+body.la4.earth-site .la4-input-group label{color:var(--ee-espresso)}
+/* Homepage: keep the wedding imagery and animations. Reduce artificial purple/wine saturation. */
+body.la4.couture-site.earth-home .la4-header{background:transparent!important;border:0!important;box-shadow:none!important}
+body.la4.couture-site.earth-home .couture-photo{
+ background-color:#2A1315;
+ filter:saturate(.72) contrast(1.025) sepia(.05);
+}
+body.la4.couture-site.earth-home .couture-floral{filter:saturate(.78)}
+body.la4.couture-site.earth-home .couture-main-cta{background:#F3EBDE;color:#382022!important}
+@media(max-width:850px){
+ .earth-about-feature{grid-template-columns:minmax(0,52%) minmax(0,48%);min-height:0}
+ .earth-about-intro{padding:40px 30px}
+ .earth-about-intro h1{font-size:clamp(60px,8vw,86px)}
+ .earth-about-image{padding:30px 23px 20px}
+ .earth-about-image img{max-height:470px}
+}
+@media(max-width:680px){
+ body.la4.earth-site .la4-header{
+   height:92px;min-height:92px;padding:14px 22px 13px;
+   flex-direction:column;align-items:center;justify-content:center;gap:11px;
+ }
+ body.la4.earth-site .la4-header .la4-logo{
+   font-size:19px;letter-spacing:.21em;width:100%;text-align:center;line-height:1.1;
+ }
+ body.la4.earth-site .la4-header .la4-nav{
+  width:100%;display:flex;flex-direction:row;justify-content:space-between;gap:10px;
+ }
+ body.la4.earth-site .la4-header .la4-nav a{font-size:9px;letter-spacing:.12em}
+ .earth-about-feature{grid-template-columns:minmax(0,53%) minmax(0,47%);min-height:0}
+ .earth-about-intro{padding:26px 10px 24px 23px}
+ .earth-about-intro .earth-kicker{font-size:8px;letter-spacing:.13em;margin:0 0 22px}
+ .earth-about-intro h1{font-size:clamp(43px,10.4vw,59px);line-height:.89;margin:0 0 19px}
+ .earth-about-intro .earth-about-tagline{font-size:10px;line-height:1.6}
+ .earth-about-image{padding:21px 12px 17px 0}
+ .earth-about-image img{max-width:100%;max-height:285px;width:auto;height:auto;object-fit:contain}
+ .earth-about-image figcaption{font-size:7px;letter-spacing:.08em;line-height:1.5;margin-top:10px}
+ .earth-about-story{display:block;padding:45px 25px 62px}
+ .earth-about-story h2{font-size:clamp(47px,11vw,65px);margin-bottom:23px}
+ .earth-about-story-title .earth-kicker{margin-bottom:14px}
+ .earth-about-prose p{font-size:13px;line-height:1.8}
+ .earth-about-founder{margin-top:22px;padding-top:20px}
+ .earth-services-lead{display:block;padding:49px 25px 44px}
+ .earth-services-lead h1{font-size:clamp(76px,16vw,110px);margin:17px 0 23px}
+ .earth-services-lead p{font-size:13px;line-height:1.7;max-width:310px}
+ .earth-services-index-inner{grid-template-columns:1fr;gap:51px;padding:40px 25px 50px}
+ .earth-services-group h2{font-size:54px}
+ .earth-services-footer{padding:24px 25px 48px}
+ body.la4.couture-site.earth-home .la4-header{
+   background:transparent!important;position:absolute;
+   height:92px;min-height:92px;left:0;right:0;top:0;
+ }
+ body.la4.couture-site.earth-home .la4-header .la4-logo,
+ body.la4.couture-site.earth-home .la4-header .la4-nav a{
+   color:#F7EDE1!important;-webkit-text-fill-color:#F7EDE1!important;
+ }
+ body.la4.couture-site.earth-home .couture-inner{padding-top:140px}
+ body.la4.couture-site.earth-home .couture-heading{font-size:clamp(49px,11.7vw,67px)}
+}
+@media(max-width:370px){
+ .earth-about-intro{padding:22px 6px 20px 18px}
+ .earth-about-intro h1{font-size:39px}
+ .earth-about-intro .earth-about-tagline{font-size:9px}
+}
