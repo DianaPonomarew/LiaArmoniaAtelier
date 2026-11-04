@@ -1,0 +1,68 @@
+/* Lia Armonía • Founder and Collaborations • final editorial unification */
+:root{--fashion-wine:#560D23;--fashion-ivory:#F8F2E8;--fashion-ink:#391C27}
+body.la4 .la4-header:not(.la4-header--over){background:var(--fashion-wine)}
+.la4-about-v6{min-height:calc(100svh - 82px);background:var(--fashion-ivory);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.la4-about-v6-copy{padding:clamp(36px,5vw,96px) clamp(26px,5.6vw,104px);display:flex;flex-direction:column;justify-content:center}
+.la4-about-v6-copy .la4-overline{color:#7F3043}
+.la4-about-v6-copy h1{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(54px,5vw,90px);font-weight:400;letter-spacing:-.044em;line-height:.95;margin:24px 0 22px;color:#5C1128}
+.la4-about-v6-copy h1 em{font-weight:300}
+.la4-about-v6-copy p{max-width:600px;margin:0 0 18px;color:#55474A;line-height:1.8;font-size:clamp(13px,1.08vw,16px);font-weight:400}
+.la4-about-v6-copy p.la4-lead{font-size:clamp(16px,1.3vw,19px);line-height:1.5;color:#642039;margin-bottom:20px;font-weight:500}
+.la4-founder-detail{border-top:1px solid rgba(89,30,47,.25);padding-top:17px;margin-top:2px}
+.la4-founder-detail strong{color:#541C30;font-weight:600}
+.la4-about-v6 .la4-about-photo{padding:clamp(32px,4.7vw,78px);background:linear-gradient(145deg,#E8DFD8,#F8F2E8 56%,#DFD5CE);display:flex;align-items:center;justify-content:center;min-height:0}
+.la4-about-v6 .la4-about-photo img{display:block;max-width:100%;width:auto;height:auto;max-height:calc(100svh - 155px);object-fit:contain;object-position:center;filter:grayscale(100%);box-shadow:0 17px 70px rgba(47,16,28,.09)}
+.la4-about-v6 .la4-about-photo figure{margin:0;display:flex;align-items:center;justify-content:center;flex-direction:column;width:100%;height:auto}
+.la4-about-v6 .la4-about-photo figcaption{color:#754D57;font-size:10px;letter-spacing:.17em;text-transform:uppercase;margin-top:15px;text-align:center}
+.la4-about-v6 .la4-cta{width:max-content;margin-top:12px;background:#650F2A;color:#FFF7EC!important;border-color:#650F2A}
+.la4-about-v6 .la4-cta:hover{background:#831C3C}
+.la4-collab-v6{min-height:100svh;background:linear-gradient(135deg,#F9F2EA,#F1E6DF);color:#3D232A}
+.la4-collab-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:end;gap:clamp(25px,5vw,80px);padding-bottom:38px;border-bottom:1px solid rgba(88,24,44,.25)}
+.la4-collab-hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;line-height:.9;letter-spacing:-.045em;font-size:clamp(64px,7vw,118px);color:#571428;margin:20px 0 5px}
+.la4-collab-hero h1 em{font-weight:300}
+.la4-collab-hero p{font-size:15px;line-height:1.75;color:#6A555B;max-width:370px;margin:0 0 6px}
+.la4-collab-audiences{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px;margin:37px 0 53px}
+.la4-collab-card{padding:21px 5px 20px 0;border-top:1px solid rgba(88,24,44,.35)}
+.la4-collab-card h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(29px,2.75vw,45px);font-weight:400;letter-spacing:-.035em;margin:14px 0 8px;color:#571428}
+.la4-collab-card p{font-size:13px;line-height:1.75;color:#6A555B;max-width:355px}
+.la4-collab-form-section{background:rgba(255,255,255,.68);border:1px solid rgba(88,24,44,.18);padding:clamp(24px,4vw,62px);margin:0 0 70px}
+.la4-collab-form-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:35px}
+.la4-collab-form-head h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(37px,4.3vw,67px);font-weight:400;line-height:1.1;letter-spacing:-.035em;margin:0;color:#571428}
+.la4-collab-form-head p{max-width:335px;margin:0;line-height:1.7;color:#6A555B;font-size:13px}
+.la4-collab-form{display:grid;grid-template-columns:1fr 1fr;gap:17px 24px}
+.la4-collab-form label{display:flex;flex-direction:column;gap:9px;font-size:10px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;color:#5D2540}
+.la4-collab-form input,.la4-collab-form textarea{border-radius:0;border:1px solid #D4C2C7;background:#FFFDF9;color:#37272C;outline:0;padding:13px 14px;min-height:48px;width:100%;font-size:14px;font-weight:400;text-transform:none;letter-spacing:normal}
+.la4-collab-form input:focus,.la4-collab-form textarea:focus{border-color:#7E2842;box-shadow:0 0 0 1px #7E2842}
+.la4-collab-form .span-two{grid-column:1/-1}
+.la4-collab-form button{background:#60182F;color:#FFF9F0;border:0;text-transform:uppercase;letter-spacing:.18em;font-size:10px;padding:16px 23px;cursor:pointer;width:max-content}
+.la4-collab-form button:hover{background:#842647}
+.la4-collab-form .form-status{grid-column:1/-1;font-style:normal;font-size:13px}
+.la4-collab-form .hidden-field{position:absolute!important;left:-99999px!important;opacity:0}
+.la4-collab-footer{border-top:1px solid rgba(90,27,43,.2);padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:11px;color:#6E5B60}
+.la4-collab-footer a{color:#60182F}
+.couture-veil{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:.30;background:url("assets/hero-wedding-clean.webp") right center/auto 100% no-repeat;-webkit-mask-image:linear-gradient(154deg,transparent 16%,transparent 32%,#000 41%,#000 53%,transparent 65%);mask-image:linear-gradient(154deg,transparent 16%,transparent 32%,#000 41%,#000 53%,transparent 65%);transform-origin:72% 53%;animation:couture-veil-float 12s ease-in-out infinite alternate;filter:url(#couture-wind)}
+@keyframes couture-veil-float{0%{transform:translate3d(-1.5px,1px,0) rotate(-.08deg);opacity:.21}100%{transform:translate3d(2px,-3px,0) rotate(.12deg);opacity:.35}}
+@media(max-width:900px){
+.la4-about-v6-copy{padding:40px 28px}
+.la4-about-v6 .la4-about-photo{padding:29px}
+.la4-about-v6 .la4-about-photo img{max-height:75vh}
+}
+@media(max-width:680px){
+.la4-about-v6{grid-template-columns:1fr}
+.la4-about-v6-copy{padding:41px 27px 40px}
+.la4-about-v6-copy h1{font-size:clamp(49px,11vw,71px);margin:17px 0 20px}
+.la4-about-v6-copy p{font-size:14px;line-height:1.75}
+.la4-about-v6 .la4-about-photo{padding:25px 28px 32px;grid-row:2}
+.la4-about-v6 .la4-about-photo img{height:auto;max-height:none;width:min(100%,380px);object-fit:contain}
+.la4-collab-hero{grid-template-columns:1fr;gap:18px}
+.la4-collab-hero h1{font-size:clamp(61px,13vw,91px)}
+.la4-collab-audiences{grid-template-columns:1fr;gap:4px}
+.la4-collab-card{padding:16px 0}
+.la4-collab-card h2{margin:9px 0 5px;font-size:36px}
+.la4-collab-form-head{display:block}
+.la4-collab-form-head p{margin-top:14px}
+.la4-collab-form{grid-template-columns:1fr}
+.la4-collab-form .span-two{grid-column:auto}
+.couture-veil{background-position:56% center;background-size:cover}
+}
+@media(prefers-reduced-motion:reduce){.couture-veil{animation:none;filter:none}}
