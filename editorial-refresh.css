@@ -395,3 +395,46 @@ body.la-v2 .er-skip:focus{background:#f5ede7;color:#170c10!important}
  .la-home-description{margin-top:17px;margin-bottom:15px}
 }
 @media(prefers-reduced-motion:reduce){.la-sculpture::after{animation:none}}
+
+
+/* LIÁ — Bordeaux / lacquered-ivory palette inspired by the submitted architecture image */
+body.la-v2{--la-bg:#400d23;--la-espresso:#3d1028;--la-bordeaux:#681e3d;--la-ivory:#fffaf0;--la-dim:#f0dfdb;background:#430d26;color:#fff9f2}
+body.la-v2 .er-nav{border-bottom-color:rgba(255,249,238,.29)}
+body.la-v2 .er-brand{color:#fff9f2!important;-webkit-text-fill-color:#fff9f2!important}
+body.la-v2 .er-links a{color:#fff9f2!important}
+.la-screen{background:
+radial-gradient(ellipse 56% 83% at 91% 52%,rgba(239,155,170,.35),transparent 72%),
+radial-gradient(ellipse 47% 74% at 20% 22%,#8b2549 0%,transparent 65%),
+linear-gradient(115deg,#4a1029,#7a2047 52%,#461329 100%)}
+.la-screen::before{opacity:.045}
+.la-sculpture{inset:-12% -8% -12% 35%;opacity:.90;filter:contrast(.82) saturate(.66) brightness(1.25)}
+.la-sculpture::before{content:"";position:absolute;z-index:0;inset:12% 14% 15% 6%;background:radial-gradient(ellipse at 62% 49%,rgba(255,252,236,.67),rgba(255,248,230,.15) 31%,transparent 67%);mix-blend-mode:screen;filter:blur(24px)}
+.la-sculpture::after{background:linear-gradient(107deg,transparent 31%,rgba(255,251,231,.64) 44%,rgba(255,255,245,.10) 50%,transparent 64%);opacity:.75}
+.la-screen-shade{background:linear-gradient(90deg,rgba(64,13,35,.88),rgba(81,16,43,.83) 23%,rgba(103,24,53,.30) 53%,rgba(79,19,44,.13) 100%)}
+.la-home-copy .la-overline{color:#ffe4dd}
+.la-title{color:#fffaf2}
+.la-title em{color:#fff4e6}
+.la-home-description{color:#f6e3e2}
+.la-home-foot{border-top-color:rgba(255,251,243,.4)}
+.la-home-foot small{color:#f8dfe2}
+.la-home-foot .la-trace{color:#ffe8e4}
+.la-dot{background:#fff6e8;box-shadow:0 0 20px rgba(255,249,222,.65)}
+.la-inner{background:radial-gradient(ellipse 90% 85% at 100% 15%,rgba(228,143,158,.22),transparent 72%),linear-gradient(120deg,#430d26,#702344 60%,#4e1731)}
+.la-inner::before{opacity:.19;filter:blur(4px) brightness(1.45) saturate(.65)}
+.la-overline,.la-service-number,.la-field label{color:#ffe1d8}
+.la-lead,.la-about-grid p,.la-service-column p,.la-note{color:#f1dce0}
+.la-service-links a{border-bottom-color:rgba(255,244,235,.33)}
+.la-service-grid,.la-about-grid,.la-inner-foot{border-color:rgba(255,245,238,.38)}
+.la-field select{background:#5d1d39;color:#fffaf3;border-color:rgba(255,246,236,.5)}
+.la-submit{background:#fff6e8;color:#5b1936;border-color:#fff6e8}
+.la-submit:hover{background:#f1d4d6}
+.la-founder-photo{display:block;width:100%;max-height:650px;object-fit:cover;object-position:center 27%;filter:grayscale(1);border:1px solid rgba(255,250,245,.28)}
+.la-about-portrait-grid{display:grid;grid-template-columns:minmax(220px,.65fr) minmax(0,1.35fr);gap:clamp(30px,6vw,100px);align-items:center;margin-top:45px}
+.la-about-portrait-grid .la-about-grid{display:block;border-top:0;padding-top:0;margin-top:0}
+.la-founder-caption{font-size:10px;color:#f7e5e3;text-transform:uppercase;letter-spacing:.16em;margin-top:12px}
+@media(max-width:760px){
+.la-sculpture{inset:13% -40% -3% 8%;opacity:.66}
+.la-screen-shade{background:linear-gradient(90deg,rgba(78,14,39,.91),rgba(95,20,47,.68) 57%,rgba(106,26,58,.28)),linear-gradient(0deg,rgba(82,17,42,.5),transparent 52%)}
+.la-about-portrait-grid{grid-template-columns:1fr;gap:36px}
+.la-founder-photo{max-height:520px;object-position:center 25%}
+}
