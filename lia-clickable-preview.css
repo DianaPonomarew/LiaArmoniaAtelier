@@ -1,0 +1,49 @@
+/* LIA ARMONÍA / clickable preview: real photo source & responsive couture */
+:root { --la-wine-dark: #280609; --la-cream: #f5ecdf; }
+body.la4.couture-site{background:var(--la-wine-dark)}
+body.la4.couture-site .couture-home{background:var(--la-wine-dark);height:100svh;min-height:640px}
+body.la4.couture-site .couture-photo{
+ background-color:var(--la-wine-dark);
+ background-image:
+  linear-gradient(90deg,#280609 0%,rgba(40,6,9,.98) 21%,rgba(40,6,9,.84) 43%,rgba(40,6,9,.48) 65%,rgba(40,6,9,.14) 100%),
+  url("assets/lia-stone-table.jpg");
+ background-position:center,right center;
+ background-repeat:no-repeat;
+ background-size:100% 100%,auto 100%;
+ filter:none;
+}
+body.la4.couture-site .couture-floral,
+body.la4.couture-site .couture-veil{display:none}
+body.la4.couture-site .couture-sun{inset:-12% -6% 0 51%;opacity:.15;filter:blur(30px)}
+body.la4.couture-site .couture-heading{color:#fbf2e9;text-shadow:0 2px 18px rgba(0,0,0,.08)}
+body.la4.couture-site .couture-main-cta{background:#f3eadd;color:#30161b!important}
+body.la4.couture-site .la4-header{background:transparent!important;box-shadow:none!important;border:0!important;backdrop-filter:none!important}
+body.la4.couture-site .la4-header .la4-logo,
+body.la4.couture-site .la4-header .la4-nav a{color:#f8f0e4!important;-webkit-text-fill-color:#f8f0e4!important}
+body.la4.couture-site .la4-header .la4-nav a::after{background:#f8f0e4!important}
+@media(min-width:900px){
+ body.la4.couture-site .couture-photo{
+  background-image:linear-gradient(90deg,#280609 1%,rgba(40,6,9,.94) 24%,rgba(40,6,9,.48) 54%,rgba(40,6,9,.10) 100%),url("assets/lia-stone-table.jpg");
+  background-size:100% 100%,auto 100%;
+  background-position:center,right center;
+ }
+}
+@media(max-width:680px){
+ body.la4.couture-site .la4-header{position:absolute!important;top:0;left:0;right:0;height:106px;min-height:106px;padding:19px 24px 12px;gap:11px;display:flex;flex-direction:column;justify-content:center}
+ body.la4.couture-site .la4-logo{width:100%;font-size:19px;letter-spacing:.24em;text-align:center;line-height:1.3}
+ body.la4.couture-site .la4-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+ body.la4.couture-site .la4-nav a{font-size:9px;letter-spacing:.13em;white-space:nowrap}
+ body.la4.couture-site .couture-nav-divider{bottom:-7px;opacity:.42}
+ body.la4.couture-site .couture-photo{
+   background-image:linear-gradient(90deg,rgba(35,5,8,.88) 0%,rgba(35,5,8,.67) 47%,rgba(35,5,8,.2) 100%),url("assets/lia-stone-table.jpg");
+   background-position:center,62% center;
+   background-size:100% 100%,cover;
+ }
+ body.la4.couture-site .couture-inner{padding:148px 27px 87px}
+ body.la4.couture-site .couture-heading{font-size:clamp(47px,11.7vw,68px);line-height:.9;letter-spacing:-.035em}
+ body.la4.couture-site .couture-descriptor{margin-bottom:22px}
+ body.la4.couture-site .couture-main-cta{min-width:min(280px,96%);padding:15px 19px;font-size:10px}
+ body.la4.couture-site .couture-partner-link{margin-top:19px;font-size:9px}
+ body.la4.couture-site .couture-sun{inset:12% -15% 0 49%;opacity:.10}
+}
+@media(prefers-reduced-motion:reduce){body.la4.couture-site .couture-sun{animation:none}}
