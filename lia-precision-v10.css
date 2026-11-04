@@ -217,3 +217,30 @@ body.la4.couture-edit .ce-footer nav{gap:22px}
  body.la4.couture-edit .ce-hero h1{font-size:60px}
 }
 @media(prefers-reduced-motion:reduce){body.la4.couture-edit .ce-light{animation:none}}
+
+
+/* V10.1: single editorial axis for all full-bleed blocks at large viewports. */
+body.la4.couture-edit{
+ --edge:max(var(--gutter),calc(50vw - 640px + var(--gutter)));
+ --display:'Bodoni Moda','Cormorant Garamond',Georgia,serif;
+}
+body.la4.couture-edit .ce-header{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-hero-inner{max-width:1280px;margin-inline:auto;}
+body.la4.couture-edit .ce-footbar{left:var(--edge);right:var(--edge);}
+body.la4.couture-edit .ce-journal-hero{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-section-dark{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-venue-hero-copy{padding-left:var(--edge);}
+body.la4.couture-edit .ce-venue-partners{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-footer{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-about-copy{padding-left:var(--edge);}
+body.la4.couture-edit :is(.ce-story h2,.ce-venue-card h3,.ce-about-copy h1,.ce-about-body h2,.ce-services-intro h1,.ce-service-list h2,.ce-inquiry-grid h2,.ce-filter-top h2,.ce-venue-hero h1,.ce-venue-partners h2,.ce-quote-band blockquote,.ce-hero h1){
+ font-family:var(--display);
+}
+body.la4.couture-edit :is(.ce-kicker,.ce-brand,.ce-nav a,.ce-corner){text-rendering:optimizeLegibility;}
+@media(max-width:670px){
+ body.la4.couture-edit{--edge:var(--gutter);}
+ body.la4.couture-edit .ce-hero-inner{max-width:none;}
+ body.la4.couture-edit .ce-venue-hero-copy{padding-left:var(--gutter);}
+ body.la4.couture-edit .ce-about-copy{padding-left:var(--gutter);}
+ body.la4.couture-edit .ce-footer{padding-inline:var(--gutter);}
+}
