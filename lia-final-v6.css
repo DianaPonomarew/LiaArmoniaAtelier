@@ -66,3 +66,13 @@ body.la4 .la4-header:not(.la4-header--over){background:var(--fashion-wine)}
 .couture-veil{background-position:56% center;background-size:cover}
 }
 @media(prefers-reduced-motion:reduce){.couture-veil{animation:none;filter:none}}
+
+
+/* Mobile: show the full founder portrait early and at its natural aspect ratio. */
+@media(max-width:680px){
+.la4-about-v6 .la4-about-photo{grid-row:1;padding:20px 22px 24px}
+.la4-about-v6 .la4-about-photo img{max-width:260px;width:100%;height:auto;max-height:none;object-fit:contain}
+.la4-about-v6-copy{grid-row:2}
+}
+/* Keep wedding hero fabric motion very light and free from invalid filters. */
+.couture-veil{filter:none;opacity:.22;mix-blend-mode:screen}
