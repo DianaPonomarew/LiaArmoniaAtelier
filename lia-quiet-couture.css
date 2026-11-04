@@ -1,0 +1,220 @@
+/*
+ * LIA ARMONÍA / Quiet Couture
+ * Intentionally applies ONLY to About Us and Services.
+ * Single warm stone background; deep merlot, no gradients, gloss, drapery,
+ * flowers, decorative frames or motion on these two pages.
+ */
+body.la4.calm-editorial-page {
+  --quiet-bg:#EFE8DE;
+  --quiet-wine:#3B0A14;
+  --quiet-ink:#302321;
+  --quiet-muted:#625652;
+  --quiet-rule:rgba(59,10,20,.19);
+  background:var(--quiet-bg);
+  color:var(--quiet-ink);
+}
+body.la4.calm-editorial-page .la4-header {
+  background:var(--quiet-wine)!important;
+  border-bottom:0;
+  box-shadow:none;
+}
+body.la4.calm-editorial-page .la4-logo,
+body.la4.calm-editorial-page .la4-nav a {
+  color:#F8F1E9!important;
+  -webkit-text-fill-color:#F8F1E9!important;
+}
+body.la4.calm-editorial-page .la4-nav a::after { background:#F8F1E9; }
+body.la4.calm-editorial-page .la4-nav-enquiry {
+  border-color:rgba(248,241,233,.5);
+}
+body.la4.calm-editorial-page .la4-nav-enquiry:hover {
+  background:#F8F1E9;
+  color:var(--quiet-wine)!important;
+  -webkit-text-fill-color:var(--quiet-wine)!important;
+}
+/* About: true side-by-side editorial composition with zero visual effects */
+body.la4.calm-editorial-page .la4-about-v6 {
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  background:var(--quiet-bg);
+  color:var(--quiet-ink);
+  min-height:calc(100svh - 82px);
+}
+body.la4.calm-editorial-page .la4-about-v6-copy {
+  padding:clamp(42px,6.2vw,112px) clamp(28px,6.2vw,112px);
+  background:transparent;
+}
+body.la4.calm-editorial-page .la4-about-v6-copy h1 {
+  color:var(--quiet-wine);
+  font-size:clamp(53px,5vw,89px);
+  line-height:.98;
+  margin:21px 0 25px;
+}
+body.la4.calm-editorial-page .la4-about-v6-copy .la4-overline {
+  color:var(--quiet-wine);
+  font-weight:500;
+  font-size:10px;
+  letter-spacing:.18em;
+}
+body.la4.calm-editorial-page .la4-about-v6-copy p {
+  color:var(--quiet-muted);
+  line-height:1.76;
+  font-size:clamp(13px,1.05vw,15px);
+  margin-bottom:16px;
+}
+body.la4.calm-editorial-page .la4-about-v6-copy p.la4-lead {
+  color:var(--quiet-ink);
+  line-height:1.5;
+  font-size:clamp(15px,1.22vw,18px);
+  font-weight:500;
+  margin-bottom:24px;
+}
+body.la4.calm-editorial-page .la4-founder-detail {
+  border-top:1px solid var(--quiet-rule);
+  padding-top:19px;
+}
+body.la4.calm-editorial-page .la4-founder-detail strong {
+  color:var(--quiet-wine);
+}
+body.la4.calm-editorial-page .la4-about-v6 .la4-about-photo {
+  background:var(--quiet-bg);
+  padding:clamp(28px,4.7vw,72px);
+}
+body.la4.calm-editorial-page .la4-about-v6 .la4-about-photo img {
+  max-width:100%;
+  width:auto;
+  height:auto;
+  max-height:min(76svh,760px);
+  object-fit:contain;
+  box-shadow:none;
+  border:0;
+}
+body.la4.calm-editorial-page .la4-about-v6 .la4-about-photo figcaption {
+  color:var(--quiet-muted);
+  font-weight:500;
+  letter-spacing:.12em;
+}
+body.la4.calm-editorial-page .la4-about-v6 .la4-cta {
+  background:var(--quiet-wine);
+  border-color:var(--quiet-wine);
+  color:#FFF8F0!important;
+  font-size:10px;
+  letter-spacing:.13em;
+  margin-top:11px;
+}
+body.la4.calm-editorial-page .la4-about-v6 .la4-cta:hover {
+  background:#5B1C28;
+}
+/* Services: one matte beige canvas, two straightforward columns, no cards */
+body.la4.calm-editorial-page .la4-page {
+  background:var(--quiet-bg)!important;
+  color:var(--quiet-ink);
+  box-shadow:none;
+}
+body.la4.calm-editorial-page .la4-shell {
+  max-width:1300px;
+  padding-top:clamp(60px,8vh,105px);
+  padding-bottom:clamp(60px,8vh,105px);
+}
+body.la4.calm-editorial-page .la4-overline,
+body.la4.calm-editorial-page .la4-serial {
+  color:var(--quiet-wine);
+  letter-spacing:.17em;
+}
+body.la4.calm-editorial-page .la4-page-heading {
+  color:var(--quiet-wine);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:400;
+  font-size:clamp(63px,6.5vw,105px);
+  text-transform:none;
+  line-height:.92;
+  letter-spacing:-.046em;
+  margin-top:17px;
+}
+body.la4.calm-editorial-page .la4-page-intro {
+  color:var(--quiet-muted);
+  line-height:1.65;
+  font-size:14px;
+}
+body.la4.calm-editorial-page .la4-services-top {
+  align-items:end;
+  margin-bottom:clamp(44px,7vh,80px);
+}
+body.la4.calm-editorial-page .la4-service-columns {
+  gap:clamp(42px,7vw,120px);
+}
+body.la4.calm-editorial-page .la4-service-card {
+  background:transparent;
+  border:0;
+  border-top:1px solid var(--quiet-rule);
+  padding-top:20px;
+  box-shadow:none;
+}
+body.la4.calm-editorial-page .la4-service-card h2 {
+  color:var(--quiet-wine);
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:400;
+  font-size:clamp(41px,4vw,65px);
+  letter-spacing:-.04em;
+  line-height:1.02;
+  margin:17px 0 12px;
+}
+body.la4.calm-editorial-page .la4-service-card p {
+  color:var(--quiet-muted);
+  margin-bottom:24px;
+  font-size:13px;
+}
+body.la4.calm-editorial-page .la4-link-list a {
+  color:var(--quiet-ink);
+  border-bottom:1px solid var(--quiet-rule);
+  font-size:13px;
+  padding:16px 0;
+}
+body.la4.calm-editorial-page .la4-link-list a:hover {
+  color:var(--quiet-wine);
+}
+body.la4.calm-editorial-page .la4-small-footer {
+  border-top:1px solid var(--quiet-rule);
+  color:var(--quiet-muted);
+  margin-top:60px;
+}
+body.la4.calm-editorial-page .la4-small-footer a {
+  color:var(--quiet-wine);
+}
+@media(max-width:680px){
+  body.la4.calm-editorial-page .la4-about-v6 {
+    grid-template-columns:1fr;
+  }
+  body.la4.calm-editorial-page .la4-about-v6 .la4-about-photo {
+    grid-row:1;
+    padding:27px 24px 20px;
+  }
+  body.la4.calm-editorial-page .la4-about-v6 .la4-about-photo img {
+    max-height:none;
+    height:auto;
+    width:min(100%,330px);
+    object-fit:contain;
+  }
+  body.la4.calm-editorial-page .la4-about-v6-copy {
+    grid-row:2;
+    padding:38px 25px 55px;
+  }
+  body.la4.calm-editorial-page .la4-about-v6-copy h1 {
+    font-size:clamp(49px,11vw,74px);
+  }
+  body.la4.calm-editorial-page .la4-shell {
+    padding:50px 24px 65px;
+  }
+  body.la4.calm-editorial-page .la4-services-top {
+    margin-bottom:35px;
+  }
+  body.la4.calm-editorial-page .la4-page-heading {
+    font-size:clamp(61px,13vw,85px);
+  }
+  body.la4.calm-editorial-page .la4-service-columns {
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+  body.la4.calm-editorial-page .la4-service-card h2 {
+    font-size:48px;
+  }
+}
