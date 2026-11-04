@@ -231,3 +231,32 @@ body.la4.couture-site.earth-home .couture-main-cta{background:#F3EBDE;color:#382
  .earth-about-intro h1{font-size:39px}
  .earth-about-intro .earth-about-tagline{font-size:9px}
 }
+
+
+/* Preserve the existing bridal hero, correcting the inherited mobile header band. */
+body.la4.couture-site.earth-home .la4-header{
+ position:absolute!important;top:0;left:0;right:0;
+ background:transparent!important;box-shadow:none!important;
+ border:0!important;backdrop-filter:none!important;
+ -webkit-backdrop-filter:none!important;
+}
+body.la4.couture-site.earth-home .la4-header .la4-logo,
+body.la4.couture-site.earth-home .la4-header .la4-nav a{
+ color:#F8F1E6!important;-webkit-text-fill-color:#F8F1E6!important;
+}
+body.la4.couture-site.earth-home .la4-header .la4-nav a::after{background:#F8F1E6}
+body.la4.couture-site.earth-home .la4-header .la4-nav .la4-nav-enquiry{border:0;padding:0}
+body.la4.couture-site.earth-home .couture-nav-divider{opacity:.36}
+body.la4.earth-site .la4-overline,
+body.la4.earth-site .la4-serial{color:var(--ee-wine)}
+body.la4.earth-site .la4-page-intro,
+body.la4.earth-site .la4-option p{color:#62564F}
+body.la4.earth-site .la4-small-footer{border-color:var(--ee-line);color:var(--ee-taupe)}
+body.la4.earth-site .la4-small-footer a{color:var(--ee-espresso)}
+body.la4.earth-site .la4-progress-label{color:var(--ee-espresso);background:var(--ee-stone)}
+body.la4.earth-site .la4-preview-filters{background:var(--ee-stone);border-color:var(--ee-line)}
+body.la4.earth-site .la4-input-group select{background:var(--ee-ivory);border-color:rgba(60,39,37,.25)}
+body.la4.earth-site .la4-collab-form input,
+body.la4.earth-site .la4-collab-form textarea{background:var(--ee-ivory)}
+body.la4.earth-site .la4-collab-form label,
+body.la4.earth-site .la4-collab-footer a{color:var(--ee-espresso)}
