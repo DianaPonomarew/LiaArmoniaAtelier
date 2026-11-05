@@ -114,3 +114,11 @@ body.la4.couture-edit .lia-edit-note .ce-underline{
   body.la4.couture-edit .lia-edit-note p{font-size:42px}
 }
 @media(prefers-reduced-motion:reduce){body.la4.couture-edit .lia-edit-feature-visual img{transition:none}}
+
+/* Homepage bottom navigation: aligned Current Edit and Instagram links. */
+body.la4.couture-edit .ce-footbar .ce-ig-foot{white-space:nowrap;text-align:right;letter-spacing:.1em;}
+@media(max-width:670px){
+ body.la4.couture-edit .ce-footbar{gap:12px;}
+ body.la4.couture-edit .ce-footbar a{font-size:9px;letter-spacing:.05em;line-height:1.5;}
+ body.la4.couture-edit .ce-footbar .ce-ig-foot{font-size:9px;}
+}
