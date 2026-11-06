@@ -1,0 +1,76 @@
+/* LIA ARMONÍA — EDITORIAL MIDDLE GROUND
+   About + Services only: deep red-black wine, stone beige, clean fashion typography.
+   Home hero intentionally untouched. No florals, cloth textures, or photo overlays. */
+:root{--mid-oxblood:#300609;--mid-wine:#430B11;--mid-deep:#230407;--mid-beige:#EEE5D9;--mid-cream:#F6EFE5;--mid-ink:#332323;--mid-rule:rgba(54,15,17,.19);}
+body.la4.middle-couture{background:var(--mid-beige);color:var(--mid-ink)}
+body.la4.middle-couture .la4-header{background:var(--mid-oxblood)!important;border-bottom:1px solid rgba(255,247,237,.2);box-shadow:none;min-height:84px}
+body.la4.middle-couture .la4-logo{font-size:clamp(18px,1.4vw,22px);letter-spacing:.29em}
+body.la4.middle-couture .la4-nav .la4-nav-enquiry{border-color:rgba(255,244,230,.55);background:transparent}
+body.la4.middle-couture .la4-nav .la4-nav-enquiry:hover{background:#F6EFE5;color:var(--mid-oxblood)!important;-webkit-text-fill-color:var(--mid-oxblood)!important}
+body.la4.middle-couture .la4-overline{font-size:10px;letter-spacing:.20em;font-weight:500;text-transform:uppercase}
+body.la4.middle-couture .la4-about-v6{grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--mid-beige);color:var(--mid-ink);min-height:calc(100svh - 84px)}
+body.la4.middle-couture .la4-about-v6-copy{padding:clamp(45px,6vw,100px) clamp(32px,5.5vw,105px);align-self:center;justify-content:center}
+body.la4.middle-couture .la4-about-v6-copy .la4-overline{color:#76323A;letter-spacing:.18em}
+body.la4.middle-couture .la4-about-v6-copy h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(59px,5.5vw,96px);letter-spacing:-.052em;line-height:.92;color:var(--mid-wine);margin:24px 0 27px}
+body.la4.middle-couture .la4-about-v6-copy h1 em{font-weight:300;color:var(--mid-oxblood)}
+body.la4.middle-couture .la4-about-v6-copy p{font-size:clamp(13px,1.04vw,15px);color:#5A4C47;line-height:1.75;margin-bottom:16px}
+body.la4.middle-couture .la4-about-v6-copy p.la4-lead{font-weight:500;color:#432B2B;font-size:clamp(16px,1.2vw,18px);line-height:1.5;max-width:530px;margin-bottom:21px}
+body.la4.middle-couture .la4-founder-detail{border-color:var(--mid-rule);padding-top:18px}
+body.la4.middle-couture .la4-founder-detail strong{color:var(--mid-wine)}
+body.la4.middle-couture .la4-about-v6 .la4-about-photo{background:var(--mid-oxblood);position:relative;overflow:hidden;padding:clamp(42px,5.5vw,98px) clamp(35px,5vw,90px) 34px;min-height:calc(100svh - 84px)}
+body.la4.middle-couture .la4-about-v6 .la4-about-photo::before{content:"";position:absolute;left:24px;top:24px;right:24px;bottom:24px;border:1px solid rgba(246,239,229,.22);pointer-events:none}
+body.la4.middle-couture .la4-about-v6 .la4-about-photo figure{position:relative;z-index:1;max-width:520px;margin:auto}
+body.la4.middle-couture .la4-about-v6 .la4-about-photo img{width:auto;max-width:100%;height:auto;max-height:min(73svh,760px);object-fit:contain;box-shadow:none;filter:grayscale(1);border:0}
+body.la4.middle-couture .la4-about-v6 .la4-about-photo figcaption{color:#E5D7CF;letter-spacing:.17em;font-size:9px;margin-top:19px;text-transform:uppercase;font-weight:400}
+body.la4.middle-couture .la4-about-v6 .la4-cta{border-color:var(--mid-oxblood);background:var(--mid-oxblood);color:#F8EEE3!important;letter-spacing:.13em;font-size:10px;margin-top:14px;min-height:50px}
+body.la4.middle-couture .la4-about-v6 .la4-cta:hover{background:#54151B;border-color:#54151B}
+body.la4.middle-couture .la7-photo-index{position:absolute;right:34px;top:30px;font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:rgba(246,239,229,.65)}
+/* Services — full oxblood masthead + warm stone index. */
+body.la4.middle-couture .la7-services{background:var(--mid-beige);min-height:calc(100svh - 84px);color:var(--mid-ink)}
+body.la4.middle-couture .la7-services-mast{background:var(--mid-oxblood);color:var(--mid-cream);position:relative;overflow:hidden}
+body.la4.middle-couture .la7-services-mast::after{content:"";position:absolute;right:-13%;top:-65%;width:43%;height:230%;pointer-events:none;background:linear-gradient(94deg,transparent,rgba(190,109,79,.12),transparent);transform:rotate(22deg)}
+body.la4.middle-couture .la7-services-mast-inner{max-width:1440px;padding:clamp(48px,6vw,88px) clamp(26px,7vw,112px) clamp(54px,6.3vw,95px);margin:0 auto;position:relative;z-index:1}
+body.la4.middle-couture .la7-services-mast .la4-overline{color:#E9CCBD}
+body.la4.middle-couture .la7-services-title-line{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-top:16px}
+body.la4.middle-couture .la7-services-title-line h1{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(75px,8vw,142px);line-height:.81;letter-spacing:-.053em;color:var(--mid-cream);font-weight:400;margin:0}
+body.la4.middle-couture .la7-services-title-line h1 em{font-weight:300}
+body.la4.middle-couture .la7-services-title-line p{font-size:clamp(13px,1.11vw,16px);line-height:1.7;color:#E9DCD1;max-width:325px;margin:0 0 6px;font-weight:300}
+body.la4.middle-couture .la7-services-body{max-width:1440px;margin:0 auto;padding:clamp(44px,6.5vw,85px) clamp(26px,7vw,112px) clamp(48px,5vw,80px)}
+body.la4.middle-couture .la7-services-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(46px,7.5vw,130px)}
+body.la4.middle-couture .la7-service{border-top:1px solid rgba(48,6,9,.40);padding-top:22px}
+body.la4.middle-couture .la7-service-label{color:#7A3940;text-transform:uppercase;letter-spacing:.18em;font-size:10px;font-weight:500}
+body.la4.middle-couture .la7-service h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(52px,5.1vw,78px);font-weight:400;letter-spacing:-.047em;line-height:.98;color:var(--mid-wine);margin:24px 0 13px}
+body.la4.middle-couture .la7-service>p{color:#64534D;font-size:13px;line-height:1.75;margin:0 0 24px;max-width:435px}
+body.la4.middle-couture .la7-service-links{display:flex;flex-direction:column}
+body.la4.middle-couture .la7-service-links a{border-bottom:1px solid var(--mid-rule);padding:16px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#342624;font-size:13px;font-weight:400;transition:padding-left .23s,color .23s}
+body.la4.middle-couture .la7-service-links a:hover{padding-left:7px;color:#7B1B24}
+body.la4.middle-couture .la7-service-links a span{font-size:19px;color:#7B1B24}
+body.la4.middle-couture .la7-services-closure{border-top:1px solid var(--mid-rule);margin-top:clamp(55px,7vw,90px);padding-top:23px;display:flex;justify-content:space-between;align-items:center;gap:25px}
+body.la4.middle-couture .la7-services-closure p{font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:#816964;margin:0}
+body.la4.middle-couture .la7-services-closure a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--mid-wine);white-space:nowrap}
+@media(max-width:900px){
+ body.la4.middle-couture .la4-about-v6-copy{padding:38px 29px}
+ body.la4.middle-couture .la4-about-v6 .la4-about-photo{padding:48px 24px}
+ body.la4.middle-couture .la4-about-v6 .la4-about-photo img{max-height:70svh}
+}
+@media(max-width:680px){
+ body.la4.middle-couture .la4-header{min-height:107px}
+ body.la4.middle-couture .la4-about-v6{grid-template-columns:1fr;min-height:0}
+ body.la4.middle-couture .la4-about-v6 .la4-about-photo{grid-row:1;min-height:0;padding:34px 28px 24px}
+ body.la4.middle-couture .la4-about-v6 .la4-about-photo::before{left:15px;top:15px;right:15px;bottom:15px}
+ body.la4.middle-couture .la4-about-v6 .la4-about-photo img{width:auto;max-width:100%;height:auto;max-height:420px}
+ body.la4.middle-couture .la4-about-v6 .la4-about-photo figcaption{font-size:8px;letter-spacing:.12em;margin-top:14px}
+ body.la4.middle-couture .la7-photo-index{right:21px;top:20px}
+ body.la4.middle-couture .la4-about-v6-copy{grid-row:2;padding:48px 27px 60px}
+ body.la4.middle-couture .la4-about-v6-copy h1{font-size:clamp(60px,12vw,78px);margin:21px 0 22px}
+ body.la4.middle-couture .la4-about-v6-copy p{font-size:14px;line-height:1.74}
+ body.la4.middle-couture .la7-services-mast-inner{padding:49px 27px 52px}
+ body.la4.middle-couture .la7-services-title-line{display:block;margin-top:25px}
+ body.la4.middle-couture .la7-services-title-line h1{font-size:clamp(80px,15vw,110px)}
+ body.la4.middle-couture .la7-services-title-line p{margin:24px 0 0;font-size:13px;max-width:320px}
+ body.la4.middle-couture .la7-services-body{padding:43px 27px 65px}
+ body.la4.middle-couture .la7-services-cols{grid-template-columns:1fr;gap:57px}
+ body.la4.middle-couture .la7-service h2{font-size:61px;margin:18px 0 13px}
+ body.la4.middle-couture .la7-service>p{margin-bottom:15px}
+ body.la4.middle-couture .la7-services-closure{margin-top:46px}
+}

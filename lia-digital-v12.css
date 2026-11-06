@@ -1,0 +1,258 @@
+/* LIA ARMONÍA — The Digital Atelier (2026-11-04)
+   Mirrors the approved couture editorial site without altering checkout/brief APIs.
+   Matte oyster, aged limestone, espresso-oxblood, full-bleed photography, fine rules. */
+body.la4.couture-edit .da-hero{
+ display:grid;grid-template-columns:1fr 1fr;min-height:630px;
+ background:var(--stone);color:var(--ink);
+}
+body.la4.couture-edit .da-hero-copy{
+ padding:clamp(60px,7vw,115px) var(--gutter);
+ display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+}
+body.la4.couture-edit .da-hero-copy h1,
+body.la4.couture-edit .da-request-head h2{
+ font:500 clamp(62px,6.5vw,104px)/.94 var(--display);
+ letter-spacing:-.03em;color:var(--ink);margin:20px 0 24px;
+}
+body.la4.couture-edit .da-hero-copy h1 em{font-weight:500}
+body.la4.couture-edit .da-hero-copy>p:not(.ce-kicker){max-width:455px;font-size:14px;line-height:1.83;color:var(--inkSoft);margin:0 0 24px}
+body.la4.couture-edit .da-hero-visual{position:relative;margin:0;background:var(--wineDeep);overflow:hidden;}
+body.la4.couture-edit .da-hero-visual img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.72) contrast(1.04)}
+body.la4.couture-edit .da-hero-visual figcaption{position:absolute;bottom:18px;left:21px;color:#fff8ed;font:500 9px/1.5 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-shadow:0 2px 10px #1f1713}
+body.la4.couture-edit .da-primary{
+ display:inline-flex;align-items:center;justify-content:space-between;gap:30px;
+ min-height:50px;background:var(--wineDeep);color:var(--oyster)!important;
+ padding:16px 22px;text-transform:uppercase;letter-spacing:.15em;
+ font:600 10px/1.4 var(--sans);border:0;cursor:pointer;text-decoration:none;
+}
+body.la4.couture-edit .da-primary:hover{background:#483235;}
+body.la4.couture-edit .da-detail{
+ padding:clamp(60px,7vw,105px) var(--gutter);
+ max-width:1280px;margin:auto;
+ display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+ gap:clamp(36px,8vw,100px);
+}
+body.la4.couture-edit .da-detail h2{
+ font:500 clamp(45px,4.4vw,65px)/.98 var(--display);
+ letter-spacing:-.026em;margin:17px 0 0;color:var(--ink);
+}
+body.la4.couture-edit .da-detail p{font:400 13px/1.8 var(--sans);color:var(--inkSoft);margin:0 0 16px}
+body.la4.couture-edit .da-detail .da-keypoints{
+ display:grid;grid-template-columns:1fr;gap:0;
+ padding:0;margin:0 0 28px;list-style:none;
+}
+body.la4.couture-edit .da-keypoints li{
+ border-top:1px solid var(--line);
+ padding:17px 0;display:grid;grid-template-columns:30px 1fr;gap:15px;
+ font:400 13px/1.65 var(--sans);color:var(--inkSoft);
+}
+body.la4.couture-edit .da-keypoints span{color:#8c7366;font:500 13px var(--display)}
+/* Film shop retains the existing Stripe form IDs and values. */
+body.la4.couture-edit main.csd.da-film{background:var(--oyster);color:var(--ink);padding:0;min-height:0}
+body.la4.couture-edit .da-film .intro{
+ padding:clamp(62px,8vw,110px) var(--gutter);
+ background:var(--wineDeep);text-align:left;color:var(--oyster);margin:0;
+ max-width:none;
+}
+body.la4.couture-edit .da-film .intro>*{max-width:1160px;margin-left:auto;margin-right:auto}
+body.la4.couture-edit .da-film .intro .eyebrow{
+ font:500 10px/1.6 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#e2cfc3;
+}
+body.la4.couture-edit .da-film .intro h1{
+ font:500 clamp(66px,7vw,112px)/.93 var(--display);
+ letter-spacing:-.028em;color:var(--oyster);margin-top:24px;margin-bottom:24px;
+}
+body.la4.couture-edit .da-film .intro p:last-child{
+ font:400 14px/1.75 var(--sans);max-width:1160px;color:#ddd0c6;
+}
+body.la4.couture-edit .da-film .gallery{
+ max-width:1160px;margin:0 auto;padding:clamp(50px,6vw,90px) var(--gutter) 26px;
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:clamp(22px,4vw,48px);
+}
+body.la4.couture-edit .da-film .scene{
+ min-width:0;border:0;background:transparent;overflow:hidden;
+}
+body.la4.couture-edit .da-film .scene img{
+ display:block;width:100%;height:auto;aspect-ratio:9/13;
+ object-fit:cover;filter:saturate(.81) contrast(1.04);
+}
+body.la4.couture-edit .da-film .scene-info{
+ background:transparent;padding:18px 0 8px;
+ border-top:0;border-bottom:1px solid var(--line);
+}
+body.la4.couture-edit .da-film .scene-info span{
+ font:500 10px/1.6 var(--sans);letter-spacing:.17em;text-transform:uppercase;color:#816f65;
+}
+body.la4.couture-edit .da-film .scene-info h2{
+ font:500 clamp(37px,4vw,59px)/1 var(--display);
+ letter-spacing:-.03em;color:var(--ink);margin:10px 0;
+}
+body.la4.couture-edit .da-film .scene-info p{font-size:13px;line-height:1.7;color:var(--inkSoft);margin:0 0 15px}
+body.la4.couture-edit .da-film .note{
+ margin:0 auto;padding:0 var(--gutter) 54px;
+ text-align:center;max-width:950px;color:#78675d;
+ font:400 11px/1.7 var(--sans);
+}
+body.la4.couture-edit .da-film .order{
+ max-width:none;margin:0;background:var(--stone);
+ padding:clamp(58px,7vw,110px) var(--gutter) clamp(65px,8vw,112px);
+ border:0;
+}
+body.la4.couture-edit .da-film .order>*{max-width:830px;margin-left:auto;margin-right:auto}
+body.la4.couture-edit .da-film .order>h2{
+ font:500 clamp(53px,6vw,88px)/.98 var(--display);
+ letter-spacing:-.03em;text-align:center;color:var(--ink);
+ margin-top:16px;margin-bottom:14px;
+}
+body.la4.couture-edit .da-film .order .eyebrow{
+ font:500 10px/1.6 var(--sans);letter-spacing:.18em;
+ color:#69554e;text-align:center;text-transform:uppercase;
+}
+body.la4.couture-edit .da-film .order>.subtitle{
+ font-size:13px;line-height:1.75;color:var(--inkSoft);
+ text-align:center;margin-bottom:38px;
+}
+body.la4.couture-edit .da-film .fields{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:19px 21px;
+}
+body.la4.couture-edit .da-film .field.full{grid-column:1/-1}
+body.la4.couture-edit .da-film .field{min-width:0}
+body.la4.couture-edit .da-film label,
+body.la4.couture-edit .da-request label{
+ display:block;font:600 10px/1.5 var(--sans);
+ letter-spacing:.1em;text-transform:uppercase;
+ color:var(--ink);margin:0 0 9px;
+}
+body.la4.couture-edit .da-film input:not([type=radio]):not([type=checkbox]),
+body.la4.couture-edit .da-film textarea,
+body.la4.couture-edit .da-film select,
+body.la4.couture-edit .da-request input:not([type=checkbox]),
+body.la4.couture-edit .da-request textarea,
+body.la4.couture-edit .da-request select{
+ width:100%;min-width:0;min-height:48px;
+ background:var(--oyster);color:var(--ink);
+ border:1px solid rgba(59,44,39,.25);
+ border-radius:0;padding:12px 14px;
+ font:400 14px/1.5 var(--sans);
+ box-shadow:none;outline:none;
+}
+body.la4.couture-edit .da-film textarea,body.la4.couture-edit .da-request textarea{min-height:115px;resize:vertical;}
+body.la4.couture-edit .da-film :is(input,select,textarea):focus-visible,
+body.la4.couture-edit .da-request :is(input,select,textarea):focus-visible{outline:1px solid var(--wine)}
+body.la4.couture-edit .da-film .choice{
+ display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:12px 0 18px;
+}
+body.la4.couture-edit .da-film .choice label{
+ display:flex;gap:11px;align-items:center;min-height:50px;
+ border:1px solid var(--line);padding:12px 15px;
+ font:400 13px/1.4 var(--sans);text-transform:none;letter-spacing:0;cursor:pointer;
+}
+body.la4.couture-edit .da-film .choice input{width:18px;height:18px;accent-color:var(--wine);}
+body.la4.couture-edit .da-film .required:after{content:" *";}
+body.la4.couture-edit .da-film .help,
+body.la4.couture-edit .da-film .fine{font:400 11px/1.7 var(--sans);color:#74635b;}
+body.la4.couture-edit .da-film .consent,
+body.la4.couture-edit .da-request .da-consent{
+ display:flex;gap:12px;align-items:flex-start;
+ font:400 12px/1.7 var(--sans);
+ color:var(--inkSoft);letter-spacing:0;text-transform:none;
+ margin:25px 0 18px;
+}
+body.la4.couture-edit .da-film .consent input,
+body.la4.couture-edit .da-request .da-consent input{
+ width:17px;height:17px;flex:0 0 17px;margin-top:3px;accent-color:var(--wine);
+}
+body.la4.couture-edit .da-film .consent a{color:var(--ink);text-decoration:underline;}
+body.la4.couture-edit .da-film .checkout,
+body.la4.couture-edit .da-request .da-submit{
+ width:100%;min-height:53px;
+ border:0;background:var(--wine);color:var(--oyster);
+ padding:17px 20px;letter-spacing:.15em;text-transform:uppercase;
+ font:600 11px/1.4 var(--sans);cursor:pointer;
+}
+body.la4.couture-edit .da-film .checkout:disabled,
+body.la4.couture-edit .da-request .da-submit:disabled{opacity:.5;cursor:wait}
+body.la4.couture-edit .da-film .status,
+body.la4.couture-edit .da-request .da-status{font:400 12px/1.6 var(--sans);color:var(--wine);min-height:20px;margin:15px 0;}
+body.la4.couture-edit .da-film .fine{text-align:center;margin-top:14px;}
+body.la4.couture-edit .da-film .fine a{color:var(--wine)!important;}
+/* Custom invitation enquiry */
+body.la4.couture-edit .da-request{max-width:1180px;margin:auto;padding:clamp(55px,7vw,100px) var(--gutter) clamp(70px,9vw,130px);}
+body.la4.couture-edit .da-request-head{max-width:680px;margin:0 auto 40px;text-align:center;}
+body.la4.couture-edit .da-request-head h2{font-size:clamp(51px,5.5vw,77px);margin:20px 0;}
+body.la4.couture-edit .da-request-head>p:last-child{font:400 13px/1.85 var(--sans);color:var(--inkSoft);}
+body.la4.couture-edit .da-request form{max-width:750px;margin:auto;}
+body.la4.couture-edit .da-request-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 22px;}
+body.la4.couture-edit .da-request .da-field{min-width:0;}
+body.la4.couture-edit .da-request .wide{grid-column:1/-1;}
+body.la4.couture-edit .da-request label .da-optional{color:#8e7b71;font-weight:400;letter-spacing:normal;text-transform:none}
+body.la4.couture-edit .da-request .da-help{font:400 11px/1.7 var(--sans);color:#7c6a60;margin:7px 0 0;}
+body.la4.couture-edit .da-request .da-consent{margin:26px 0 20px}
+body.la4.couture-edit .da-request .da-consent a{color:var(--ink);text-decoration:underline;}
+body.la4.couture-edit .da-request .da-honeypot{position:absolute;left:-10000px;opacity:0;pointer-events:none;}
+/* Make the experience consistent once a client opens the visualization brief. */
+body.la4.couture-edit.da-brief-body{background:var(--oyster);color:var(--ink);}
+body.la4.couture-edit.da-brief-body main.venue-brief{
+ max-width:820px;margin:0 auto;padding:clamp(55px,8vw,100px) 24px 100px;
+ background:var(--oyster);color:var(--ink);
+}
+body.la4.couture-edit.da-brief-body .venue-brief h1{
+ font:500 clamp(48px,6vw,80px)/1 var(--display);letter-spacing:-.027em;
+ margin:19px 0 17px;color:var(--ink);
+}
+body.la4.couture-edit.da-brief-body .venue-brief h2{font:500 clamp(28px,3vw,39px)/1.05 var(--display);color:var(--ink);}
+body.la4.couture-edit.da-brief-body .venue-brief .eyebrow{font:500 10px/1.6 var(--sans);letter-spacing:.17em;text-transform:uppercase;color:#836e61;}
+body.la4.couture-edit.da-brief-body .venue-brief>p{font-size:13px;line-height:1.85;color:var(--inkSoft)}
+body.la4.couture-edit.da-brief-body .venue-brief .q{border-color:var(--line);}
+body.la4.couture-edit.da-brief-body .venue-brief .q label,
+body.la4.couture-edit.da-brief-body .venue-brief .q small{color:var(--inkSoft);}
+body.la4.couture-edit.da-brief-body .venue-brief .q :is(input,textarea,select){
+ background:#faf7f1;color:var(--ink);border:1px solid var(--line);
+}
+body.la4.couture-edit.da-brief-body .venue-brief .drop{
+ background:var(--stone);border-color:rgba(59,44,39,.4);
+}
+body.la4.couture-edit.da-brief-body .venue-brief .drop.drag{background:#e4d6c7;border-color:var(--wine)}
+body.la4.couture-edit.da-brief-body .venue-brief .drop button,
+body.la4.couture-edit.da-brief-body .venue-brief .file-row button,
+body.la4.couture-edit.da-brief-body .venue-brief .file-row a{
+ color:var(--wine);border-color:var(--wine);
+}
+body.la4.couture-edit.da-brief-body .venue-brief .file-name,
+body.la4.couture-edit.da-brief-body .venue-brief .booking-consent,
+body.la4.couture-edit.da-brief-body .venue-brief .booking-consent a{color:var(--ink)}
+body.la4.couture-edit.da-brief-body .venue-brief .file-status{color:var(--inkSoft)}
+body.la4.couture-edit.da-brief-body .venue-brief .thumb{background:#ded4c8;color:var(--inkSoft)}
+body.la4.couture-edit.da-brief-body .venue-brief .submit{background:var(--wine);color:var(--oyster)}
+body.la4.couture-edit.da-brief-body .venue-brief .success{background:var(--stone);color:var(--ink);border-color:var(--line)}
+@media(max-width:850px){
+ body.la4.couture-edit .da-hero{min-height:0;}
+ body.la4.couture-edit .da-hero-copy{padding:55px var(--gutter);}
+ body.la4.couture-edit .da-hero-copy h1{font-size:clamp(55px,7.5vw,79px);}
+}
+@media(max-width:670px){
+ body.la4.couture-edit .da-hero{grid-template-columns:1fr;}
+ body.la4.couture-edit .da-hero-copy{padding:52px var(--gutter) 47px;}
+ body.la4.couture-edit .da-hero-copy h1{font-size:clamp(56px,12vw,79px);}
+ body.la4.couture-edit .da-hero-copy>p:not(.ce-kicker){font-size:13px;}
+ body.la4.couture-edit .da-hero-visual{height:345px;}
+ body.la4.couture-edit .da-detail{grid-template-columns:1fr;padding:53px var(--gutter) 70px;gap:30px;}
+ body.la4.couture-edit .da-detail h2{font-size:53px;}
+ body.la4.couture-edit .da-film .intro{padding:55px var(--gutter);}
+ body.la4.couture-edit .da-film .intro h1{font-size:clamp(60px,12.5vw,78px);}
+ body.la4.couture-edit .da-film .gallery{padding:40px var(--gutter) 23px;gap:13px;}
+ body.la4.couture-edit .da-film .scene-info{padding:13px 0;}
+ body.la4.couture-edit .da-film .scene-info h2{font-size:clamp(27px,7vw,38px);}
+ body.la4.couture-edit .da-film .scene-info p{font-size:11px;}
+ body.la4.couture-edit .da-film .order{padding:56px var(--gutter) 69px;}
+ body.la4.couture-edit .da-film .fields{grid-template-columns:1fr;gap:16px;}
+ body.la4.couture-edit .da-film .field.full{grid-column:auto;}
+ body.la4.couture-edit .da-film .choice{grid-template-columns:1fr 1fr;gap:10px;}
+ body.la4.couture-edit .da-film .choice label{font-size:11px;padding:10px;}
+ body.la4.couture-edit .da-request{padding:52px var(--gutter) 70px;}
+ body.la4.couture-edit .da-request-grid{grid-template-columns:1fr;gap:17px;}
+ body.la4.couture-edit .da-request .wide{grid-column:auto;}
+ body.la4.couture-edit .da-request-head h2{font-size:clamp(49px,11vw,68px);}
+}

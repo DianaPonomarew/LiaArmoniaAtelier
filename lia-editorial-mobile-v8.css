@@ -1,0 +1,174 @@
+/* LIA ARMONÍA — mobile editorial repair
+ * Only homepage navigation + new About layout + compact Services mobile.
+ * Real text/buttons; no baked-in image text.
+ */
+:root{--mc-wine:#260709;--mc-wine2:#350B0D;--mc-ivory:#F3EADF;--mc-text:#3A2725;}
+/* Neutralise the inherited global header background that turned the home hero into a separate red block. */
+body.la4.couture-site .la4-header{
+  background:transparent!important;
+  box-shadow:none!important;
+  border-bottom:0!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body.la4.couture-site .la4-header .la4-logo,
+body.la4.couture-site .la4-header .la4-nav a{
+ color:#FCF5E9!important;-webkit-text-fill-color:#FCF5E9!important;
+}
+@media(max-width:680px){
+  body.la4 .la4-header,
+  body.la4.couture-site .la4-header,
+  body.la4.middle-couture .la4-header,
+  body.la4.magazine-about .la4-header{
+    height:94px;min-height:94px;
+    padding:13px 22px 15px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:12px;
+  }
+  body.la4 .la4-header .la4-logo{
+    font-size:20px;letter-spacing:.24em;line-height:1.1;
+    text-align:center;width:100%;margin:0;
+  }
+  body.la4 .la4-header .la4-nav{
+    width:100%;display:flex;flex-direction:row;align-items:center;
+    justify-content:space-between;gap:10px;
+  }
+  body.la4 .la4-header .la4-nav a{
+    font-size:9px;letter-spacing:.13em;line-height:1.3;padding:0;
+    white-space:nowrap;
+  }
+  body.la4 .la4-header .la4-nav .la4-nav-enquiry{
+    border:0!important;padding:0!important;
+  }
+  body.la4.couture-site .couture-nav-divider{
+    display:block;left:22px;right:22px;bottom:-7px;opacity:.48;
+  }
+  /* Keep entire hero within available viewport: reduce top overhead without changing artwork */
+  body.la4.couture-site .couture-inner{
+    padding-top:139px;
+    padding-bottom:83px;
+  }
+  body.la4.couture-site .couture-heading{font-size:clamp(50px,11.8vw,66px)}
+  body.la4.couture-site .couture-main-cta{min-width:min(268px,88%);padding:14px 19px}
+  body.la4.couture-site .couture-partner-link{margin-top:20px}
+}
+/* About Us — deliberate half-and-half hero, followed by a compact readable story. */
+body.la4.magazine-about{
+  background:var(--mc-ivory);color:var(--mc-text);
+}
+body.la4.magazine-about .la4-header{
+  background:var(--mc-wine)!important;border:0;
+}
+.mag-about-hero{
+  background:var(--mc-wine);color:var(--mc-ivory);
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  min-height:min(76svh,740px);position:relative;
+}
+.mag-about-intro{
+  padding:clamp(40px,6.2vw,110px) clamp(30px,6vw,115px);
+  display:flex;flex-direction:column;justify-content:center;
+  min-width:0;
+}
+.mag-about-overline{
+  font:500 10px/1.5 "Inter",Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:.23em;color:#E7D1C4;
+  margin:0 0 27px;
+}
+.mag-about-heading{
+  color:#F9EEE3;font:400 clamp(64px,6.4vw,116px)/.87 "Cormorant Garamond",Georgia,serif;
+  letter-spacing:-.052em;margin:0 0 33px;
+}
+.mag-about-heading em{font-weight:300;}
+.mag-about-lead{
+  font:300 clamp(14px,1.22vw,17px)/1.7 "Inter",Arial,sans-serif;
+  color:#E9D9CE;max-width:370px;margin:0;
+}
+.mag-about-photo{
+  margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(25px,4vw,67px);background:var(--mc-wine);
+  min-width:0;
+}
+.mag-about-photo img{
+ display:block;width:auto;height:auto;max-width:100%;max-height:min(66svh,630px);
+ object-fit:contain;filter:grayscale(1);box-shadow:none;border:0;
+}
+.mag-about-photo figcaption{
+ font:400 9px/1.6 "Inter",Arial,sans-serif;letter-spacing:.16em;
+ color:#E6D8D0;text-align:center;text-transform:uppercase;margin-top:14px;
+}
+.mag-about-story{
+ max-width:1280px;margin:auto;padding:clamp(50px,6.3vw,92px) clamp(26px,7vw,110px) clamp(56px,6vw,88px);
+ display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(26px,6vw,100px);
+}
+.mag-about-story .story-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6D3030;margin:0 0 22px}
+.mag-about-story h2{
+  font:400 clamp(44px,4.4vw,71px)/.95 "Cormorant Garamond",Georgia,serif;
+  letter-spacing:-.047em;color:#350C0E;margin:0;
+}
+.mag-about-story h2 em{font-weight:300}
+.mag-about-prose{max-width:670px}
+.mag-about-prose p{
+  font:400 clamp(13px,1vw,15px)/1.82 "Inter",Arial,sans-serif;
+  color:#5A4A43;margin:0 0 17px;
+}
+.mag-about-prose strong{color:#3A1115;font-weight:600}
+.mag-about-prose .founder-note{
+  border-top:1px solid rgba(52,12,14,.24);padding-top:22px;margin-top:24px;
+}
+.mag-about-cta{
+ display:inline-flex;align-items:center;gap:38px;
+ color:#F7EDE2!important;background:#350C0E;border:1px solid #350C0E;
+ padding:14px 20px;min-height:48px;
+ font:500 10px/1.4 "Inter",Arial,sans-serif;
+ letter-spacing:.14em;text-transform:uppercase;
+ margin-top:14px;
+}
+.mag-about-cta:hover{background:#591C1E}
+@media(max-width:900px){
+ .mag-about-intro{padding:40px 30px}
+ .mag-about-heading{font-size:clamp(56px,8vw,83px)}
+ .mag-about-photo{padding:25px}
+}
+@media(max-width:680px){
+ .mag-about-hero{
+  grid-template-columns:minmax(0,53%) minmax(0,47%);
+  min-height:0;align-items:stretch;
+ }
+ .mag-about-intro{padding:23px 8px 23px 23px;justify-content:center}
+ .mag-about-overline{
+   font-size:8px;letter-spacing:.14em;margin-bottom:18px;max-width:175px;
+ }
+ .mag-about-heading{
+   font-size:clamp(39px,10.5vw,55px);line-height:.91;
+   letter-spacing:-.045em;margin-bottom:21px;
+ }
+ .mag-about-lead{font-size:10px;line-height:1.55;max-width:195px}
+ .mag-about-photo{padding:20px 15px 18px 0;min-height:0}
+ .mag-about-photo img{
+    width:100%;height:auto;max-width:100%;max-height:265px;object-fit:contain;
+ }
+ .mag-about-photo figcaption{
+   font-size:7px;letter-spacing:.09em;margin-top:9px;
+ }
+ .mag-about-story{
+  grid-template-columns:1fr;gap:25px;padding:46px 25px 60px;
+ }
+ .mag-about-story h2{font-size:clamp(46px,11vw,64px);max-width:360px}
+ .mag-about-story .story-label{margin-bottom:17px}
+ .mag-about-prose p{font-size:13px;line-height:1.8}
+ .mag-about-prose .founder-note{margin-top:18px;padding-top:18px}
+ .mag-about-cta{margin-top:11px}
+ /* Services stays two clean content blocks, but the dark opening is less oversized. */
+ body.la4.middle-couture .la7-services-mast-inner{padding-top:37px;padding-bottom:40px}
+ body.la4.middle-couture .la7-services-title-line{margin-top:15px}
+ body.la4.middle-couture .la7-services-title-line h1{font-size:clamp(67px,15vw,86px)}
+ body.la4.middle-couture .la7-services-title-line p{margin-top:14px}
+ body.la4.middle-couture .la7-services-body{padding-top:34px}
+ body.la4.middle-couture .la7-service h2{font-size:clamp(49px,11vw,57px)}
+}
+@media(max-width:360px){
+ .mag-about-intro{padding:20px 7px 20px 18px}
+ .mag-about-heading{font-size:36px}
+ .mag-about-overline{font-size:7px}
+ .mag-about-lead{font-size:9px}
+}

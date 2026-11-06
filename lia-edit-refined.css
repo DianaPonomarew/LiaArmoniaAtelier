@@ -1,0 +1,124 @@
+/* The Edit / restrained editorial arrangement; inherits sitewide couture system. */
+body.la4.couture-edit .lia-edit-intro{
+  max-width:1280px;
+  margin:0 auto;
+  padding:clamp(60px,7vw,100px) var(--gutter) clamp(50px,5vw,72px);
+  text-align:center;
+}
+body.la4.couture-edit .lia-edit-eyebrow,
+body.la4.couture-edit .lia-edit-number{
+  font:500 10px/1.6 var(--sans);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#79665c;
+}
+body.la4.couture-edit .lia-edit-intro h1{
+  margin:19px 0 17px;
+  font:500 clamp(76px,9vw,134px)/.9 var(--display);
+  letter-spacing:-.035em;
+  color:var(--ink);
+}
+body.la4.couture-edit .lia-edit-intro h1 em{font-weight:500;}
+body.la4.couture-edit .lia-edit-lead{
+  max-width:610px;
+  margin:0 auto;
+  font:400 clamp(14px,1.35vw,18px)/1.75 var(--sans);
+  color:var(--inkSoft);
+}
+body.la4.couture-edit .lia-edit-curation{
+  max-width:1280px;
+  padding:0 var(--gutter) clamp(60px,7vw,105px);
+  margin:0 auto;
+}
+body.la4.couture-edit .lia-edit-feature-visual{display:block;aspect-ratio:1.7;overflow:hidden;background:var(--stone)}
+body.la4.couture-edit .lia-edit-feature-visual img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 49%;
+  display:block;filter:saturate(.86) contrast(1.03);transition:transform .5s;
+}
+body.la4.couture-edit .lia-edit-feature-visual:hover img{transform:scale(1.015)}
+body.la4.couture-edit .lia-edit-feature-line{
+  display:flex;gap:20px;align-items:baseline;justify-content:space-between;
+  padding:21px 0 12px;border-bottom:1px solid var(--line);
+}
+body.la4.couture-edit .lia-edit-feature-line h2{
+  font:500 clamp(35px,4vw,57px)/.98 var(--display);letter-spacing:-.025em;
+  color:var(--ink);margin:0;
+}
+body.la4.couture-edit .lia-edit-feature-line em{font-weight:500}
+body.la4.couture-edit .lia-edit-meta{
+  font:500 10px/1.5 var(--sans);
+  letter-spacing:.12em;text-transform:uppercase;color:#84746b;
+}
+body.la4.couture-edit .lia-edit-feature>p{
+  max-width:620px;margin:18px 0 60px;
+  font:400 13px/1.82 var(--sans);color:var(--inkSoft);
+}
+body.la4.couture-edit .lia-edit-pair{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(18px,3.3vw,45px);
+}
+body.la4.couture-edit .lia-edit-story{min-width:0}
+body.la4.couture-edit .lia-edit-story img{
+  display:block;width:100%;aspect-ratio:.87;object-fit:cover;object-position:center;
+  background:var(--stone);filter:saturate(.83) contrast(1.025)
+}
+body.la4.couture-edit .lia-edit-story-bottom{padding:20px 0 0}
+body.la4.couture-edit .lia-edit-story h2{
+  font:500 clamp(38px,4.3vw,59px)/1 var(--display);
+  letter-spacing:-.028em;color:var(--ink);margin:10px 0 14px;
+}
+body.la4.couture-edit .lia-edit-story h2 em{font-weight:500}
+body.la4.couture-edit .lia-edit-story p{
+  max-width:440px;margin:0;
+  font:400 13px/1.8 var(--sans);color:var(--inkSoft);
+}
+body.la4.couture-edit .lia-edit-note{
+  border-top:1px solid var(--line);
+  margin-top:clamp(60px,8vw,120px);
+  padding:clamp(38px,5vw,70px) 0 0;
+  text-align:center;
+}
+body.la4.couture-edit .lia-edit-note p{
+  max-width:700px;margin:17px auto 23px;
+  font:500 clamp(35px,4.4vw,59px)/1.12 var(--display);
+  letter-spacing:-.027em;color:var(--ink);
+}
+body.la4.couture-edit .lia-edit-note .ce-underline{
+  margin:0 auto;
+}
+@media(max-width:670px){
+  body.la4.couture-edit .lia-edit-intro{
+    padding:53px var(--gutter) 39px;
+  }
+  body.la4.couture-edit .lia-edit-intro h1{
+    font-size:clamp(70px,16vw,92px);margin:17px 0 19px;
+  }
+  body.la4.couture-edit .lia-edit-lead{font-size:14px;}
+  body.la4.couture-edit .lia-edit-curation{padding:0 var(--gutter) 72px;}
+  body.la4.couture-edit .lia-edit-feature-visual{aspect-ratio:1.06}
+  body.la4.couture-edit .lia-edit-feature-line{
+    display:block;padding:17px 0 13px;
+  }
+  body.la4.couture-edit .lia-edit-feature-line h2{font-size:44px;margin:6px 0}
+  body.la4.couture-edit .lia-edit-meta{font-size:9px}
+  body.la4.couture-edit .lia-edit-feature>p{margin:17px 0 47px;font-size:12px}
+  body.la4.couture-edit .lia-edit-pair{gap:13px}
+  body.la4.couture-edit .lia-edit-story img{aspect-ratio:.72}
+  body.la4.couture-edit .lia-edit-story h2{
+    font-size:clamp(25px,6.9vw,36px);line-height:1.03;margin:8px 0 9px;
+  }
+  body.la4.couture-edit .lia-edit-story-bottom{padding-top:14px}
+  body.la4.couture-edit .lia-edit-story .lia-edit-number{font-size:8px;letter-spacing:.11em}
+  body.la4.couture-edit .lia-edit-story p{font-size:11px;line-height:1.68}
+  body.la4.couture-edit .lia-edit-note{margin-top:68px;padding-top:41px}
+  body.la4.couture-edit .lia-edit-note p{font-size:42px}
+}
+@media(prefers-reduced-motion:reduce){body.la4.couture-edit .lia-edit-feature-visual img{transition:none}}
+
+/* Homepage bottom navigation: aligned Current Edit and Instagram links. */
+body.la4.couture-edit .ce-footbar .ce-ig-foot{white-space:nowrap;text-align:right;letter-spacing:.1em;}
+@media(max-width:670px){
+ body.la4.couture-edit .ce-footbar{gap:12px;}
+ body.la4.couture-edit .ce-footbar a{font-size:9px;letter-spacing:.05em;line-height:1.5;}
+ body.la4.couture-edit .ce-footbar .ce-ig-foot{font-size:9px;}
+}

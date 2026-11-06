@@ -1,0 +1,246 @@
+/* LIA ARMONÍA — Precision Editorial V10
+   Design system: fixed optical axis, aged ivory, tobacco-rose stone and deepest oxblood.
+   No arbitrary frames, independent heading offsets, decorative borders around imagery,
+   heavy gradients, clipped hero titles, or card shadows.
+   Applies to the new couture-edit pages, without touching production or legacy flows.
+*/
+:root{
+ --ink:#29221f;--inkSoft:#61554e;--wine:#2a1a1d;--wineDeep:#211819;
+ --oyster:#f4efe7;--stone:#e6ded3;--taupe:#95877b;--line:rgba(56,46,40,.20);
+ --white:#fffaf3;--display:'Cormorant Garamond',Georgia,serif;--sans:'Inter',Arial,sans-serif;
+ --shell:1280px;--gutter:clamp(24px,5.2vw,76px);--section:clamp(62px,7vw,110px);
+}
+html{scroll-behavior:smooth}
+body.la4.couture-edit{background:var(--oyster);color:var(--ink);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
+body.la4.couture-edit :is(img,video){max-width:100%}
+body.la4.couture-edit :is(h1,h2,h3,p,figure,blockquote){padding:0}
+body.la4.couture-edit :is(h1,h2,h3){font-weight:400}
+body.la4.couture-edit :is(.ce-intro,.ce-story-grid,.ce-about-body,.ce-service-list,.ce-inquiry-grid,.ce-filter-area,.ce-venue-grid,.ce-services-intro,.ce-services-footer,.ce-venue-partners){box-sizing:border-box}
+body.la4.couture-edit :is(.ce-kicker,.ce-venue-card .ce-meta){font:500 10px/1.55 var(--sans);letter-spacing:.18em;text-transform:uppercase}
+body.la4.couture-edit .ce-display{font-family:var(--display);font-size:clamp(60px,7vw,105px);line-height:.95;letter-spacing:-.038em;font-weight:400}
+body.la4.couture-edit .ce-display em{font-weight:300}
+body.la4.couture-edit .ce-underline{font-size:10px;letter-spacing:.13em;gap:22px;min-height:41px}
+body.la4.couture-edit .ce-btn{border-radius:0;box-shadow:none}
+body.la4.couture-edit .ce-header{
+ height:80px;min-height:80px;
+ padding:0 var(--gutter);grid-template-columns:minmax(0,1fr) auto auto;
+ gap:clamp(25px,4vw,58px);background:var(--oyster);border:0;
+ align-items:center;
+}
+body.la4.couture-edit .ce-brand{font:300 clamp(17px,1.7vw,23px)/1 var(--sans);letter-spacing:.235em;color:var(--ink)!important}
+body.la4.couture-edit .ce-nav{gap:clamp(19px,2.4vw,37px);justify-content:flex-end}
+body.la4.couture-edit .ce-nav a{font:500 10px/1.4 var(--sans);letter-spacing:.1em;padding:8px 0}
+body.la4.couture-edit .ce-corner{font:500 10px/1.5 var(--sans);padding:9px 0!important;border:0!important;border-bottom:1px solid currentColor!important;letter-spacing:.1em;background:none!important}
+body.la4.couture-edit .ce-corner:hover{color:var(--wine)!important}
+/* Home: style should feel photographic, not a gradient card */
+body.la4.couture-edit.ce-home .ce-header{position:absolute;background:transparent!important;z-index:50;inset:0 0 auto;border:0}
+body.la4.couture-edit.ce-home .ce-corner:hover{color:#fff6ed!important}
+body.la4.couture-edit .ce-hero{min-height:680px;height:100svh;max-height:1200px;background:#241b1b}
+body.la4.couture-edit .ce-hero-photo{inset:0 0 0 34%}
+body.la4.couture-edit .ce-hero-photo img{filter:saturate(.82) contrast(1.05) brightness(.94);object-position:54% 51%}
+body.la4.couture-edit .ce-hero:before{background:linear-gradient(90deg,#241b1b 0%,rgba(36,27,27,.97) 25%,rgba(36,27,27,.77) 45%,rgba(36,27,27,.08) 82%)}
+body.la4.couture-edit .ce-hero-photo:after{background:none}
+body.la4.couture-edit .ce-hero-inner{max-width:none;margin:0;padding:155px var(--gutter) 110px;display:flex;align-items:center}
+body.la4.couture-edit .ce-hero-copy{width:min(630px,60%);padding-bottom:0}
+body.la4.couture-edit .ce-hero h1{font-size:clamp(72px,8.3vw,129px);line-height:.91;letter-spacing:-.04em;margin:0 0 25px}
+body.la4.couture-edit .ce-hero-copy .ce-kicker{font-size:10px;letter-spacing:.17em;margin-bottom:25px}
+body.la4.couture-edit .ce-hero p.ce-deck{font-size:11px;line-height:1.85;letter-spacing:.16em;margin:0 0 30px}
+body.la4.couture-edit .ce-hero-ctas{gap:22px}
+body.la4.couture-edit .ce-btn{padding:17px 24px;min-height:53px}
+body.la4.couture-edit .ce-hero-vertical{display:none}
+body.la4.couture-edit .ce-footbar{left:var(--gutter);right:var(--gutter);padding:16px 0 20px}
+body.la4.couture-edit .ce-light{opacity:.10;filter:blur(36px)}
+/* Unified editorial page intros, all aligned on exact same left edge */
+body.la4.couture-edit .ce-intro{
+ max-width:var(--shell);padding:var(--section) var(--gutter) 50px;margin:auto;
+}
+body.la4.couture-edit .ce-intro h1{max-width:1040px;margin:24px 0 24px}
+body.la4.couture-edit .ce-intro p{max-width:500px;font-size:14px;line-height:1.78}
+body.la4.couture-edit .ce-journal-hero{
+ background:var(--stone);color:var(--ink);padding:var(--section) max(var(--gutter),calc((100vw - var(--shell))/2 + var(--gutter))) 72px;
+}
+body.la4.couture-edit .ce-journal-hero:before{display:none}
+body.la4.couture-edit .ce-journal-hero h1{color:var(--ink);max-width:850px;margin:25px 0}
+body.la4.couture-edit .ce-journal-hero p{color:var(--inkSoft);font-size:14px;max-width:570px;line-height:1.7}
+body.la4.couture-edit .ce-journal-hero .ce-kicker{color:var(--wine)!important}
+body.la4.couture-edit .ce-story-grid{
+ max-width:var(--shell);padding:65px var(--gutter) 85px;
+ gap:clamp(20px,2.6vw,34px);align-items:start;
+}
+body.la4.couture-edit .ce-story-photo{aspect-ratio:3/4;background:var(--stone)}
+body.la4.couture-edit .ce-story-photo img{filter:saturate(.76) contrast(1.04);object-fit:cover}
+body.la4.couture-edit .ce-story .ce-kicker{margin:22px 0 10px;font-size:9px;letter-spacing:.16em}
+body.la4.couture-edit .ce-story h2{font-size:clamp(36px,3.4vw,49px);line-height:1.02;letter-spacing:-.025em;margin-bottom:13px}
+body.la4.couture-edit .ce-story p{font-size:13px;line-height:1.8}
+body.la4.couture-edit .ce-quote-band{padding:65px var(--gutter);background:var(--stone);border:0}
+body.la4.couture-edit .ce-quote-band blockquote{font-size:clamp(30px,3.3vw,49px);line-height:1.18}
+body.la4.couture-edit .ce-note{max-width:var(--shell);margin:auto;padding:18px var(--gutter) 42px;text-align:left}
+/* About: strong 50/50 editorial pairing, same safe optical axis in both halves */
+body.la4.couture-edit .ce-about-hero{min-height:590px;grid-template-columns:1fr 1fr;background:var(--stone)}
+body.la4.couture-edit .ce-about-copy{padding:60px var(--gutter);align-items:flex-start}
+body.la4.couture-edit .ce-about-copy h1{font-size:clamp(59px,5.7vw,90px);line-height:.98;letter-spacing:-.035em;margin:20px 0 25px}
+body.la4.couture-edit .ce-about-copy p{font-size:13px;max-width:440px;line-height:1.8}
+body.la4.couture-edit .ce-about-photo{background:var(--wine);padding:40px clamp(28px,4vw,65px) 30px;min-width:0;margin:0}
+body.la4.couture-edit .ce-about-photo img{max-height:515px;max-width:100%;width:auto;object-fit:contain;filter:grayscale(1)}
+body.la4.couture-edit .ce-about-photo figcaption{font-size:9px;line-height:1.6}
+body.la4.couture-edit .ce-about-body{
+ max-width:var(--shell);grid-template-columns:.75fr 1.25fr;gap:clamp(42px,8vw,110px);
+ padding:var(--section) var(--gutter);margin:auto;
+}
+body.la4.couture-edit .ce-about-body h2{font-size:clamp(45px,4.6vw,65px);line-height:1}
+body.la4.couture-edit .ce-about-body p{font-size:13px;line-height:1.85}
+body.la4.couture-edit .ce-about-body .ce-underline{margin-top:12px}
+/* Services: no random frames, all lines are structural and evenly spaced */
+body.la4.couture-edit .ce-section-dark{background:var(--wine);padding:80px var(--gutter)}
+body.la4.couture-edit .ce-services-intro{
+ max-width:calc(var(--shell) - 2 * var(--gutter));
+ margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:65px;align-items:end;
+}
+body.la4.couture-edit .ce-services-intro h1{font-size:clamp(70px,7.4vw,113px);line-height:.91}
+body.la4.couture-edit .ce-services-intro p{font-size:13px;line-height:1.8;max-width:340px}
+body.la4.couture-edit .ce-service-list{
+ max-width:var(--shell);padding:var(--section) var(--gutter) 90px;
+ gap:65px;grid-template-columns:repeat(2,minmax(0,1fr));
+}
+body.la4.couture-edit .ce-service-list section{padding-top:22px;border-top:1px solid var(--line)}
+body.la4.couture-edit .ce-service-list h2{font-size:clamp(42px,4.3vw,62px);line-height:1;letter-spacing:-.02em;margin:22px 0 18px}
+body.la4.couture-edit .ce-service-list p{font-size:13px;line-height:1.8;max-width:460px;margin:0 0 30px}
+body.la4.couture-edit .ce-service-list a{min-height:52px;align-items:center;gap:18px;font-size:12px}
+/* Inquiries uses the same typographic proportions */
+body.la4.couture-edit .ce-inquiry-grid{
+ max-width:var(--shell);padding:12px var(--gutter) 90px;gap:0 58px;
+}
+body.la4.couture-edit .ce-inquiry-grid a{padding:24px 0 32px}
+body.la4.couture-edit .ce-inquiry-grid h2{font-size:clamp(40px,4vw,56px);margin:18px 0 12px}
+body.la4.couture-edit .ce-inquiry-grid p{max-width:420px}
+/* Venue edits: identical columns, no box treatment on filters */
+body.la4.couture-edit .ce-venue-hero{min-height:420px;grid-template-columns:1fr 1fr}
+body.la4.couture-edit .ce-venue-hero-copy{padding:65px var(--gutter)}
+body.la4.couture-edit .ce-venue-hero h1{font-size:clamp(64px,6.4vw,100px);line-height:.94;letter-spacing:-.035em}
+body.la4.couture-edit .ce-venue-hero-media{margin:0}
+body.la4.couture-edit .ce-venue-hero-media img{filter:saturate(.75) contrast(1.04)}
+body.la4.couture-edit .ce-venue-hero-media figcaption{max-width:calc(100% - 38px);font-size:9px;line-height:1.5}
+body.la4.couture-edit .ce-filter-area{max-width:var(--shell);padding:65px var(--gutter) 26px}
+body.la4.couture-edit .ce-filter-top{align-items:start}
+body.la4.couture-edit .ce-filter-top h2{font-size:clamp(38px,3.6vw,52px);margin:13px 0 0}
+body.la4.couture-edit .ce-filter-top .ce-disclaimer{max-width:340px;font-size:11px}
+body.la4.couture-edit .ce-filters{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;padding:23px 0;gap:18px}
+body.la4.couture-edit .ce-field select,body.la4.couture-edit .ce-field input,body.la4.couture-edit .ce-field textarea{background:#faf6ef;border:1px solid #cfc1b4}
+body.la4.couture-edit .ce-filter-reset{border:0;border-bottom:1px solid currentColor;padding:0 7px;min-height:45px}
+body.la4.couture-edit .ce-venue-grid{
+ max-width:var(--shell);padding:10px var(--gutter) 90px;
+ gap:0 48px;
+}
+body.la4.couture-edit .ce-venue-card{padding:23px 0 28px;grid-template-columns:30px minmax(0,1fr);gap:12px}
+body.la4.couture-edit .ce-venue-card h3{font-size:clamp(30px,3vw,42px);line-height:1.1}
+body.la4.couture-edit .ce-venue-card .ce-meta{letter-spacing:.11em}
+body.la4.couture-edit .ce-venue-partners{padding:65px var(--gutter);align-items:center}
+body.la4.couture-edit .ce-venue-partners>div{max-width:660px}
+body.la4.couture-edit .ce-venue-partners h2{font-size:clamp(36px,4vw,55px)}
+body.la4.couture-edit .ce-footer{padding:28px var(--gutter);line-height:1.7;gap:22px}
+body.la4.couture-edit .ce-footer nav{gap:22px}
+@media(max-width:950px){
+ body.la4.couture-edit .ce-header{height:94px;min-height:94px;display:grid;grid-template-columns:1fr auto;grid-template-rows:32px 28px;align-content:center;gap:8px 16px;padding:11px var(--gutter)}
+ body.la4.couture-edit .ce-brand{grid-column:1;grid-row:1;font-size:19px}
+ body.la4.couture-edit .ce-corner{grid-column:2;grid-row:1;font-size:9px}
+ body.la4.couture-edit .ce-nav{grid-column:1/-1;grid-row:2;justify-content:space-between;gap:18px}
+ body.la4.couture-edit .ce-nav a{font-size:10px}
+ body.la4.couture-edit .ce-hero-photo{inset:0 0 0 25%}
+ body.la4.couture-edit .ce-hero-copy{width:80%}
+ body.la4.couture-edit .ce-hero h1{font-size:clamp(69px,9.6vw,108px)}
+ body.la4.couture-edit .ce-services-intro{grid-template-columns:1fr .85fr;gap:33px}
+}
+@media(max-width:670px){
+ :root{--gutter:24px;--section:56px}
+ body.la4.couture-edit .ce-header{height:96px;min-height:96px;padding:12px var(--gutter) 12px;gap:12px}
+ body.la4.couture-edit .ce-brand{font-size:17px;letter-spacing:.17em}
+ body.la4.couture-edit .ce-nav{gap:10px}
+ body.la4.couture-edit .ce-nav a{font-size:9px;letter-spacing:.06em}
+ body.la4.couture-edit .ce-corner{font-size:9px;letter-spacing:.04em}
+ body.la4.couture-edit .ce-hero{min-height:670px;height:100svh}
+ body.la4.couture-edit .ce-hero-photo{inset:0 0 0 5%}
+ body.la4.couture-edit .ce-hero-photo img{object-position:45% 50%;filter:saturate(.82) contrast(1.05) brightness(.75)}
+ body.la4.couture-edit .ce-hero:before{background:linear-gradient(90deg,rgba(36,27,27,.95),rgba(36,27,27,.75) 44%,rgba(36,27,27,.30))}
+ body.la4.couture-edit .ce-hero-inner{padding:138px var(--gutter) 99px;align-items:center}
+ body.la4.couture-edit .ce-hero-copy{width:100%;padding-bottom:0}
+ body.la4.couture-edit .ce-hero h1{font-size:clamp(62px,13.4vw,78px);line-height:.92;margin-bottom:25px}
+ body.la4.couture-edit .ce-hero-copy .ce-kicker{font-size:9px;margin-bottom:21px}
+ body.la4.couture-edit .ce-hero p.ce-deck{font-size:10px;letter-spacing:.14em;line-height:1.75}
+ body.la4.couture-edit .ce-hero-ctas{flex-direction:column;align-items:flex-start;gap:13px}
+ body.la4.couture-edit .ce-footbar{left:var(--gutter);right:var(--gutter);padding:14px 0 18px}
+ body.la4.couture-edit .ce-footbar .ce-footright{display:none}
+ body.la4.couture-edit .ce-journal-hero{padding:var(--section) var(--gutter)}
+ body.la4.couture-edit .ce-journal-hero h1{font-size:65px;max-width:100%;margin:18px 0 23px}
+ body.la4.couture-edit .ce-journal-hero p{font-size:13px}
+ body.la4.couture-edit .ce-story-grid{grid-template-columns:1fr;padding:44px var(--gutter) 70px;gap:46px}
+ body.la4.couture-edit .ce-story-photo{aspect-ratio:4/4.6}
+ body.la4.couture-edit .ce-story h2{font-size:48px}
+ body.la4.couture-edit .ce-quote-band{padding:50px var(--gutter)}
+ body.la4.couture-edit .ce-about-hero{grid-template-columns:1fr 1fr;min-height:0}
+ body.la4.couture-edit .ce-about-copy{padding:28px 10px 28px var(--gutter)}
+ body.la4.couture-edit .ce-about-copy h1{font-size:clamp(35px,9.4vw,52px);line-height:.96;letter-spacing:-.032em;margin:16px 0}
+ body.la4.couture-edit .ce-about-copy p{font-size:10px;line-height:1.6}
+ body.la4.couture-edit .ce-about-copy .ce-kicker{font-size:8px;letter-spacing:.08em}
+ body.la4.couture-edit .ce-about-photo{padding:22px 11px}
+ body.la4.couture-edit .ce-about-photo img{max-height:290px;max-width:100%;width:auto}
+ body.la4.couture-edit .ce-about-photo figcaption{font-size:7px;letter-spacing:.05em;margin-top:12px}
+ body.la4.couture-edit .ce-about-body{grid-template-columns:1fr;gap:27px;padding:var(--section) var(--gutter) 68px}
+ body.la4.couture-edit .ce-about-body h2{font-size:49px}
+ body.la4.couture-edit .ce-section-dark{padding:var(--section) var(--gutter)}
+ body.la4.couture-edit .ce-services-intro{grid-template-columns:1fr;gap:19px;display:grid}
+ body.la4.couture-edit .ce-services-intro h1{font-size:clamp(64px,13vw,80px);margin:15px 0}
+ body.la4.couture-edit .ce-service-list{grid-template-columns:1fr;padding:var(--section) var(--gutter) 65px;gap:48px}
+ body.la4.couture-edit .ce-service-list h2{font-size:50px}
+ body.la4.couture-edit .ce-intro{padding:var(--section) var(--gutter) 36px}
+ body.la4.couture-edit .ce-intro h1{font-size:clamp(56px,11.8vw,78px)}
+ body.la4.couture-edit .ce-inquiry-grid{grid-template-columns:1fr;gap:0;padding:10px var(--gutter) 65px}
+ body.la4.couture-edit .ce-inquiry-grid h2{font-size:44px}
+ body.la4.couture-edit .ce-venue-hero{grid-template-columns:1fr}
+ body.la4.couture-edit .ce-venue-hero-copy{padding:var(--section) var(--gutter) 38px}
+ body.la4.couture-edit .ce-venue-hero h1{font-size:64px}
+ body.la4.couture-edit .ce-venue-hero-media{height:270px}
+ body.la4.couture-edit .ce-filter-area{padding:var(--section) var(--gutter) 20px}
+ body.la4.couture-edit .ce-filter-top{display:block}
+ body.la4.couture-edit .ce-filter-top .ce-disclaimer{margin-top:18px}
+ body.la4.couture-edit .ce-filters{grid-template-columns:1fr 1fr;gap:14px}
+ body.la4.couture-edit .ce-filters .ce-field:first-child{grid-column:1/-1}
+ body.la4.couture-edit .ce-filter-reset{grid-column:1/-1}
+ body.la4.couture-edit .ce-venue-grid{grid-template-columns:1fr;padding:8px var(--gutter) 70px}
+ body.la4.couture-edit .ce-venue-partners{padding:50px var(--gutter);display:block}
+ body.la4.couture-edit .ce-venue-partners a{display:inline-block;margin-top:20px}
+ body.la4.couture-edit .ce-footer{padding:25px var(--gutter);gap:18px}
+}
+@media(max-width:360px){
+ body.la4.couture-edit .ce-nav a{font-size:8px}
+ body.la4.couture-edit .ce-brand{font-size:16px}
+ body.la4.couture-edit .ce-about-copy h1{font-size:34px}
+ body.la4.couture-edit .ce-hero h1{font-size:60px}
+}
+@media(prefers-reduced-motion:reduce){body.la4.couture-edit .ce-light{animation:none}}
+
+
+/* V10.1: single editorial axis for all full-bleed blocks at large viewports. */
+body.la4.couture-edit{
+ --edge:max(var(--gutter),calc(50vw - 640px + var(--gutter)));
+ --display:'Bodoni Moda','Cormorant Garamond',Georgia,serif;
+}
+body.la4.couture-edit .ce-header{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-hero-inner{max-width:1280px;margin-inline:auto;}
+body.la4.couture-edit .ce-footbar{left:var(--edge);right:var(--edge);}
+body.la4.couture-edit .ce-journal-hero{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-section-dark{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-venue-hero-copy{padding-left:var(--edge);}
+body.la4.couture-edit .ce-venue-partners{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-footer{padding-inline:var(--edge);}
+body.la4.couture-edit .ce-about-copy{padding-left:var(--edge);}
+body.la4.couture-edit :is(.ce-story h2,.ce-venue-card h3,.ce-about-copy h1,.ce-about-body h2,.ce-services-intro h1,.ce-service-list h2,.ce-inquiry-grid h2,.ce-filter-top h2,.ce-venue-hero h1,.ce-venue-partners h2,.ce-quote-band blockquote,.ce-hero h1){
+ font-family:var(--display);
+}
+body.la4.couture-edit :is(.ce-kicker,.ce-brand,.ce-nav a,.ce-corner){text-rendering:optimizeLegibility;}
+@media(max-width:670px){
+ body.la4.couture-edit{--edge:var(--gutter);}
+ body.la4.couture-edit .ce-hero-inner{max-width:none;}
+ body.la4.couture-edit .ce-venue-hero-copy{padding-left:var(--gutter);}
+ body.la4.couture-edit .ce-about-copy{padding-left:var(--gutter);}
+ body.la4.couture-edit .ce-footer{padding-inline:var(--gutter);}
+}
