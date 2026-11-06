@@ -773,7 +773,7 @@ document.addEventListener('keydown', event => {
         </div>
         <form class="de-upsell-form" data-design-edition-upsell>
           <label>Venue name or link<input name="venue" placeholder="Venue, website or Google Maps link"></label>
-          <label>Wedding location<input name="location" placeholder="Orange County / Italy / still searching"></label>
+          <label>Wedding location<input name="location" placeholder="Italy / Portugal / still searching"></label>
           <label>Date or season<input name="date" placeholder="September 2027 / Fall 2027"></label>
           <label>Guest count<input name="guestCount" placeholder="80"></label>
           <label>Approximate production budget<input name="productionBudget" placeholder="$15,000 - $29,000 / to be discussed"></label>
