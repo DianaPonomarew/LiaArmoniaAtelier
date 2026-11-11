@@ -5,15 +5,16 @@
 ## Request from interested wedding planners (sent by email after they opt in)
 
 - Studio trading name, legal entity and key contact (private email for operations)
-- Website, Instagram, home city, all countries/regions served, and languages
+- Instagram (optional), home city, all countries/regions served, and languages. Do not request or display a business website.
 - Planning services: full planning, partial planning, coordination, destination/production, etc.
 - Typical guest count and indicative starting planning fee or budget range (optional; confirm currency and tax basis)
-- A concise studio biography (up to 120 words), approach, signature style and 3–5 specialties
+- A concise studio biography (up to 450 characters), approach, signature style and 3–5 specialties
+- Optional personal planner introduction (up to 100 words and 650 characters), plus an optional separate headshot of the planner and portrait photography credit; confirm rights to publish the portrait
 - Three to six high-quality horizontal or portrait images (e.g. weddings they actually planned), with precise photographer credits and **written rights/permission to publish on LIA's website**
 - Optional client testimonials or external review page URL. Display a score only with a verifiable source, explicit rights and a current review count; no synthetic stars or fabricated reviews
 - The client's preferred contact process, acceptance restrictions and availability / response expectations
 - Written editorial approval of final profile, image rights, permission for each destination claimed and permission to display indicative pricing
-- **Separate signed referral agreement** for the proposed 15% of net planning-service fees actually received from attributable new Lia introductions, excluding taxes and pass-through/third-party costs; agree lead acknowledgment, prior-lead disputes, attribution window, proof of booking, payment timing, cancellation and required disclosures
+- **Separate signed referral agreement** for the proposed 15% of net planning-service fees actually received from attributable new Lia introductions, excluding taxes and pass-through/third-party costs. Planner must promptly report a confirmed referred booking and each subsequent client payment. Proposed commission is payable within 14 calendar days after each corresponding client payment, including installment payments. Define lead acknowledgment, prior-lead disputes, attribution window, evidence, invoicing, refunds/chargebacks, cancellations, late payments, payment currency and disclosures. No enforceable obligation arises from profile submission alone. Obtain appropriate local legal review before external execution.
 - Optional offer of LIA creative-direction / visualization services at case-specific partner pricing; no obligation to purchase them
 
 ## Published profile schema
@@ -36,7 +37,9 @@ Example structure (not an actual partner, and **do not publish**):
   "services": ["Full Planning", "Destination Weddings"],
   "styles": ["Editorial", "Modern romantic"],
   "starting_fee": "From €5,000",
-  "website": "https://example.com",
+  "planner_intro": "A few words about the lead planner",
+  "portrait": "https://approved-cdn.example.com/portrait.jpg",
+  "portrait_credit": "© Portrait photographer",
   "instagram": "https://instagram.com/example",
   "image": "https://approved-cdn.example.com/photo.jpg",
   "image_credit": "© Authorized photographer",
