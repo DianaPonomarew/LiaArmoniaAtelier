@@ -251,6 +251,25 @@ async function processFeedback(body) {
 }
 
 export default async function handler(req, res) {
+  // Planner microsite functions share this existing endpoint to stay within
+  // the Vercel Hobby deployment limit of 12 serverless functions.
+  const route = req.query || {};
+  if (route.plannerDirectory === '1') {
+    const { default: serveDirectory } = await import('./_planner-directory.js');
+    return serveDirectory(req, res);
+  }
+  if (route.plannerPhoto === '1') {
+    const { default: servePhoto } = await import('./_planner-public-image.js');
+    return servePhoto(req, res);
+  }
+  if (route.plannerReview === '1') {
+    const { default: serveReview } = await import('./_planner-review.js');
+    return serveReview(req, res);
+  }
+  if (route.plannerOnboarding === '1') {
+    const { default: serveOnboarding } = await import('./_planner-onboarding.js');
+    return serveOnboarding(req, res);
+  }
   res.setHeader('Cache-Control', 'no-store');
   if (req.method === 'OPTIONS') {
     res.setHeader('Allow', 'POST, OPTIONS');
