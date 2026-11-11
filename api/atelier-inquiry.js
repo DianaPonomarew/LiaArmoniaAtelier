@@ -119,6 +119,55 @@ export async function processInquiry(body) {
 }
 
 
+
+/**
+ * Planner network applications are saved before email notification.
+ * A delivery failure is reported separately so the applicant's submission is not lost.
+ */
+async function processPlannerPartnership(body) {
+  if (asValue(body.website)) return { status: 200, payload: { ok: true } };
+  const fields = {};
+  const allowed = ['contact_name','studio_name','email','instagram','portfolio_url','operating_regions','languages','budget_range','collaboration_types','message','referral_terms_interest','consent'];
+  for (const key of allowed) fields[key] = asValue(body[key]).slice(0, key === 'message' ? 2600 : 500);
+  if (!fields.contact_name || !fields.studio_name || !fields.operating_regions || !fields.message || fields.consent !== 'Yes' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+    return { status: 400, payload: { ok: false, error: 'Please complete the required partner details and consent.' } };
+  }
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return { status: 503, payload: { ok: false, error: 'The partner intake is unavailable. Please email atelier@liaarmonia.com.' } };
+  }
+  const { randomUUID } = await import('node:crypto');
+  const { put } = await import('@vercel/blob');
+  const id = 'PL-' + new Date().getUTCFullYear() + '-' + randomUUID().replace(/-/g,'').slice(0,10).toUpperCase();
+  const record = { ...fields, inquiry_id: id, form_type: 'planner_partnership', submitted_at: new Date().toISOString(), source: 'Planner Partnership Campaign' };
+  try {
+    await put('planner-partnership-inquiries/' + record.submitted_at.slice(0,10) + '/' + id + '.json',
+      JSON.stringify(record),
+      { access: 'private', addRandomSuffix: false, allowOverwrite: false,
+        contentType: 'application/json', token: process.env.BLOB_READ_WRITE_TOKEN });
+  } catch (error) {
+    console.error('Planner partner inquiry backup failed:', error.message);
+    return { status: 503, payload: { ok: false, error: 'Your introduction could not be saved. Please email atelier@liaarmonia.com.' } };
+  }
+  let emailPending = true;
+  if (process.env.RESEND_API_KEY) {
+    try {
+      await sendViaResend(process.env.RESEND_API_KEY, {
+        from: process.env.RESEND_FROM || 'Lia Armonia <onboarding@resend.dev>',
+        to: [process.env.PRIVATE_INQUIRY_TO || STUDIO_FALLBACK],
+        reply_to: fields.email,
+        subject: 'NEW PLANNER PARTNERSHIP · ' + fields.studio_name + ' · ' + id,
+        html: buildHtml(record),
+        text: createRows(record).map(row => row.label + ': ' + row.value).join('\n')
+      });
+      emailPending = false;
+    } catch (error) {
+      console.error('Planner partner inquiry notification failed for ' + id + ':', error.message);
+    }
+  } else console.error('Planner partner email integration not configured for ' + id);
+  return { status: 200, payload: { ok: true, stored: true, inquiryId: id, emailPending } };
+}
+
+
 async function processFeedback(body) {
   const { put } = await import('@vercel/blob');
   const { randomUUID } = await import('node:crypto');
@@ -169,6 +218,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
   const body = await readBody(req);
-  const result = body.formType === 'client_feedback' ? await processFeedback(body) : await processInquiry(body);
+  const result = body.formType === 'client_feedback' ? await processFeedback(body) : body.formType === 'planner_partnership' ? await processPlannerPartnership(body) : await processInquiry(body);
   return res.status(result.status).json(result.payload);
 }
