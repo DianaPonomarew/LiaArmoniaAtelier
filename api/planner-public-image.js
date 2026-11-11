@@ -1,8 +1,12 @@
 import { get } from '@vercel/blob';
 const token=()=>process.env.BLOB_READ_WRITE_TOKEN||'';
+const COLLECTION_LAUNCH_UTC=Date.parse('2027-01-15T17:00:00Z');
+const launched=()=>Date.now()>=COLLECTION_LAUNCH_UTC;
+
 const idOkay=id=>/^[a-f0-9-]{36}$/.test(String(id||''));
 export default async function handler(req,res){
  if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).end();}
+ if(!launched())return res.status(404).end();
  const id=String(req.query.id||''),number=Number(req.query.number);
  if(!idOkay(id)||!Number.isInteger(number)||number<0||number>5)return res.status(400).end();
  if(!token())return res.status(503).end();
