@@ -5,6 +5,9 @@ const secret=()=>process.env.PLANNER_EDITORIAL_SECRET||'';
 const idOkay=id=>/^[a-f0-9-]{36}$/.test(String(id||''));
 const path=id=>'planner-submissions/'+id+'/details.json';
 const indexPath='planner-directory/index.json';
+const COLLECTION_LAUNCH_UTC=Date.parse('2027-01-15T17:00:00Z');
+const launched=()=>Date.now()>=COLLECTION_LAUNCH_UTC;
+
 function hmac(data){return createHmac('sha256',secret()).update(data).digest('hex')}
 function same(a,b){if(!/^[a-f0-9]{64}$/i.test(String(a||'')))return false;return timingSafeEqual(Buffer.from(a,'hex'),Buffer.from(b,'hex'))}
 function authorized(id,t){
@@ -79,6 +82,6 @@ export default async function handler(req,res){
  try{
   await writeIndex([...index.filter(p=>p.id!==id),profile]);
   await put(path(id),JSON.stringify({...record,status:'published',updated_at:new Date().toISOString(),approved_at:new Date().toISOString()}),{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json',token:blobToken()});
-  return res.status(200).json({ok:true,status:'published',publicUrl:'https://www.liaarmonia.com/planners.html',studio:profile.studio_name});
+  return res.status(200).json({ok:true,status:launched()?'published':'scheduled',launch_date:'2027-01-15',publicUrl:'https://www.liaarmonia.com/planners.html',studio:profile.studio_name});
  }catch(e){console.error('Editorial publish failed:',e.message);return res.status(503).json({ok:false,error:'Publication failed. Please retry.'})}
 }
