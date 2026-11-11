@@ -1,6 +1,6 @@
 /** TEMPORARY READ-ONLY audit for the studio owner; remove immediately after inspection. */
 import { createHash, timingSafeEqual } from 'node:crypto';
-const expected = '4ecc8d7a35a34a442a392582addf0f83f297b6230f7c6272732e1e9806f543a9';
+const expected = '18cc906b8b5a78fcb8a1a74716ca216a10b6803041bd7b34937371f38b7d7b55';
 const isoStart = '2026-10-01T00:00:00Z';
 function authorized(token) {
   const actual = createHash('sha256').update(token || '').digest('hex');
