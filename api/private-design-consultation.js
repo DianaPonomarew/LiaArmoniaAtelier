@@ -237,8 +237,35 @@ export async function processSubmission(body) {
 
 /* --------------------------------------------------- Vercel Node.js entry */
 
+
+async function ownerAudit(req, res) {
+  const { createHash, timingSafeEqual } = await import('node:crypto');
+  const token = new URL(req.url, 'https://www.liaarmonia.com').searchParams.get('audit') || '';
+  const expected='18cc906b8b5a78fcb8a1a74716ca216a10b6803041bd7b34937371f38b7d7b55';
+  const actual=createHash('sha256').update(token).digest('hex');
+  if(!timingSafeEqual(Buffer.from(actual),Buffer.from(expected)))return res.status(404).json({error:'Not found'});
+  if(!process.env.RESEND_API_KEY)return res.status(503).json({error:'Resend is not configured'});
+  const headers={Authorization:'Bearer '+process.env.RESEND_API_KEY};
+  const items=[];let cursor=null,pages=0,count=0,diagnostic=[];
+  while(pages<20){
+    const u=new URL('https://api.resend.com/emails');u.searchParams.set('limit','100');if(cursor)u.searchParams.set('after',cursor);
+    const r=await fetch(u,{headers});if(!r.ok){diagnostic.push('list status '+r.status+' '+(await r.text()).slice(0,400));break;}
+    const json=await r.json();const batch=Array.isArray(json.data)?json.data:[];pages++;count+=batch.length;
+    for(const e of batch){
+      if(Date.parse(e.created_at||0)<Date.parse('2026-10-01T00:00:00Z'))continue;
+      if(/inquir|consultation|contact|lead|brief|collaboration/i.test(e.subject||'')){
+        items.push({id:e.id,created_at:e.created_at,subject:e.subject,to:e.to,last_event:e.last_event});
+      }
+    }
+    if(!json.has_more||!batch.length||Date.parse(batch[batch.length-1].created_at||0)<Date.parse('2026-10-01T00:00:00Z'))break;
+    cursor=batch[batch.length-1].id;
+  }
+  return res.status(200).json({pages,count,diagnostic,items});
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  if(req.method==='GET')return ownerAudit(req,res);
 
   if (req.method === 'OPTIONS') {
     res.setHeader('Allow', 'POST, OPTIONS');
