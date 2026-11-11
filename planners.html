@@ -35,7 +35,7 @@ let published=[];
 const txt=x=>String(x??"").trim(),arr=x=>Array.isArray(x)?x.map(txt).filter(Boolean):[];
 const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n};
 const addOptions=(target,values)=>{const present=target.value;[...target.options].slice(1).forEach(n=>n.remove());[...new Set(values)].sort((a,b)=>a.localeCompare(b)).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;target.append(o)});if([...target.options].some(o=>o.value===present))target.value=present};
-const validHref=(value)=>{try{const u=new URL(value);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return ""}};
+const validHref=(value)=>{try{const u=new URL(value,location.origin);return ["https:","http:"].includes(u.protocol)?u.href:""}catch{return ""}};
 function card(p){
 const a=el("article","profile");const photo=validHref(p.image);if(photo){const image=el("img");image.src=photo;image.loading="lazy";image.alt=txt(p.image_alt||"Wedding planning portfolio of "+p.studio_name);a.append(image)}
 const body=el("div","profile-body");body.append(el("p","meta",arr(p.countries).join(" · ")+(p.city?" / "+p.city:"")));body.append(el("h3","",p.studio_name));if(p.short_description)body.append(el("p","",p.short_description));
