@@ -25,6 +25,7 @@ async function send(apiKey,email){
 }
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store');
+ if(req.method==='GET'){ const {createHash,timingSafeEqual}=await import('node:crypto'); const q=new URL(req.url,'https://www.liaarmonia.com').searchParams.get('pipeline_check')||''; const digest=createHash('sha256').update(q).digest('hex'); const correct='e95104cb5e7aba441fe85b119bfcfdf888d2adb6c0110fcb05a6bd76512c6351'; if(!timingSafeEqual(Buffer.from(digest),Buffer.from(correct)))return res.status(404).json({error:'Not found'}); req.method='POST';req.body={names:'[TEST] Inquiry Pipeline Check',email:'atelier@liaarmonia.com',season:'November 2026 test',location:'TEST ONLY',support:'Technical verification',overall_budget:'TEST',vision:'Automated verification. No real client, no reply required.',storage_consent:'Yes'}; }
  if(req.method!=='POST'){res.setHeader('Allow','POST');return res.status(405).json({ok:false,error:'Method not allowed'});}
  let raw;
  try{raw=await parse(req);}catch{return res.status(400).json({ok:false,error:'Invalid request body'});}
