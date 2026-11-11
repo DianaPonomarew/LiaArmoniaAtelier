@@ -168,6 +168,49 @@ async function processPlannerPartnership(body) {
 }
 
 
+
+/** Private planner-discovery requests: durable storage, separate email delivery. */
+async function processPlannerDiscovery(body) {
+  if (asValue(body.website)) return {status:200,payload:{ok:true}};
+  const allowed=['names','email','destination','wedding_date','guest_count','overall_budget','message','planner_id','planner_name','consent'];
+  const record={};
+  for (const key of allowed) record[key]=asValue(body[key]).slice(0,key==='message'?2500:400);
+  if (!record.names || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(record.email) || !record.destination || !record.wedding_date || !record.message || record.consent!=='Yes') {
+    return {status:400,payload:{ok:false,error:'Please complete all required fields and privacy consent.'}};
+  }
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return {status:503,payload:{ok:false,error:'The inquiry service is temporarily unavailable. Please email atelier@liaarmonia.com.'}};
+  const {randomUUID}=await import('node:crypto');
+  const {put}=await import('@vercel/blob');
+  const inquiryId='PD-'+new Date().getUTCFullYear()+'-'+randomUUID().replace(/-/g,'').slice(0,10).toUpperCase();
+  const stored={...record,inquiry_id:inquiryId,submitted_at:new Date().toISOString(),source:'LIA ARMONÍA Planner Discovery',referral_status:'pending_studio_review',shared_with_planner:false};
+  try {
+    await put('planner-discovery-requests/'+stored.submitted_at.slice(0,10)+'/'+inquiryId+'.json',JSON.stringify(stored),{
+      access:'private',addRandomSuffix:false,allowOverwrite:false,contentType:'application/json',token:process.env.BLOB_READ_WRITE_TOKEN
+    });
+  } catch(err) {
+    console.error('Planner discovery storage failed:',err.message);
+    return {status:503,payload:{ok:false,error:'We could not save your request. Please email atelier@liaarmonia.com.'}};
+  }
+  let emailPending=true;
+  if(process.env.RESEND_API_KEY) {
+    try {
+      await sendViaResend(process.env.RESEND_API_KEY,{
+        from:process.env.RESEND_FROM||'Lia Armonia <onboarding@resend.dev>',
+        to:[process.env.PRIVATE_INQUIRY_TO||STUDIO_FALLBACK],
+        reply_to:record.email,
+        subject:'NEW PLANNER MATCHING REQUEST · '+(record.planner_name||record.destination)+' · '+inquiryId,
+        html:buildHtml(stored),
+        text:createRows(stored).map(row=>row.label+': '+row.value).join('\n')
+      });
+      emailPending=false;
+    } catch(err) {
+      console.error('Planner discovery notification failed:',inquiryId,err.message);
+    }
+  }
+  return {status:200,payload:{ok:true,stored:true,inquiryId,emailPending}};
+}
+
+
 async function processFeedback(body) {
   const { put } = await import('@vercel/blob');
   const { randomUUID } = await import('node:crypto');
@@ -218,6 +261,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
   const body = await readBody(req);
-  const result = body.formType === 'client_feedback' ? await processFeedback(body) : body.formType === 'planner_partnership' ? await processPlannerPartnership(body) : await processInquiry(body);
+  const result = body.formType === 'client_feedback' ? await processFeedback(body) : body.formType === 'planner_partnership' ? await processPlannerPartnership(body) : body.formType === 'planner_discovery_request' ? await processPlannerDiscovery(body) : await processInquiry(body);
   return res.status(result.status).json(result.payload);
 }
