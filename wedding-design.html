@@ -1,214 +1,91 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wedding Design — LIA ARMONÍA</title>
-<meta name="description" content="Private wedding design concierge, creative direction and spatial visualisation by Lia Armonia.">
-<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#251a19"><title>Private Wedding Inquiry — LIA ARMONÍA</title>
+<meta name="description" content="Share your wedding vision with Diana. Personal venue discovery, trusted local planner matching and bespoke design worldwide.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=venue-details">
-<link rel="stylesheet" href="preview.css?v=system-refresh-1">
-<link rel="stylesheet" href="editorial-refresh.css?v=20261103a">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lia-couture-edit.css?v=20261104e">
+<style>
+:root{--paper:#f7f4ef;--ink:#211b18;--line:rgba(45,33,29,.21);--accent:#684e43}
+body{margin:0;background:var(--paper);color:var(--ink)}
+.lia-intake{max-width:1240px;margin:0 auto;padding:94px 30px 105px;display:grid;grid-template-columns:minmax(290px,0.92fr) minmax(350px,1.08fr);gap:clamp(38px,6.5vw,112px);align-items:start}
+.lia-intake-intro{position:sticky;top:112px}
+.lia-eyebrow{text-transform:uppercase;letter-spacing:.2em;font:500 10px Inter,sans-serif;margin:0 0 22px;color:#75665d}
+.lia-intake h1{font:400 clamp(56px,6vw,91px)/.93 'Cormorant Garamond',serif;margin:0 0 26px;letter-spacing:-.045em}
+.lia-intake h1 em{font-weight:300}
+.lia-intake-intro>p:not(.lia-eyebrow){font:400 15px/1.85 Inter,sans-serif;max-width:425px;color:#5d514b}
+.lia-feature{border-top:1px solid var(--line);padding:19px 0;margin-top:28px;max-width:420px}
+.lia-feature h2{font:400 28px/1.05 'Cormorant Garamond',serif;margin:0 0 8px}
+.lia-feature p{font:400 13px/1.75 Inter,sans-serif;color:#6b5b54;margin:0}
+.lia-promos{margin-top:27px;padding-top:19px;border-top:1px solid var(--line);font:400 12px/1.9 Inter,sans-serif;color:#5d514b}
+.lia-promos b{font-weight:600;color:#382820}
+.lia-form-shell{background:#fffdf9;border:1px solid #ded3c9;padding:clamp(25px,3vw,43px);box-shadow:0 12px 40px rgba(37,28,22,.04)}
+.lia-form-shell h2{font:400 43px/1 'Cormorant Garamond',serif;margin:0 0 10px}
+.lia-form-shell>p{font:400 13px/1.75 Inter,sans-serif;color:#73645c;margin:0 0 23px}
+.lia-form{display:grid;grid-template-columns:1fr 1fr;gap:22px 18px}
+.lia-form .full{grid-column:1/-1}
+.lia-form label:not(.lia-option){display:block;font:500 11px/1.6 Inter,sans-serif;letter-spacing:.02em;color:#57463e}
+.lia-form label>span{display:block;margin-bottom:7px}
+.lia-form input:not([type=checkbox]),.lia-form select,.lia-form textarea{display:block;box-sizing:border-box;width:100%;padding:13px 11px;border:1px solid #d8cec5;border-radius:0;background:#fffdfa;color:#281e19;font:400 13px/1.5 Inter,sans-serif;outline-offset:3px}
+.lia-form textarea{min-height:100px;resize:vertical}
+.lia-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lia-option{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;background:#f7f2ec;border:1px solid #e5dad0;font:400 12px/1.45 Inter,sans-serif;color:#51443d;cursor:pointer}
+.lia-option input{accent-color:#62463c;margin:1px 0 0;flex-shrink:0}
+.lia-terms{font:400 11px/1.8 Inter,sans-serif;color:#6c615a;padding:15px 0 0;border-top:1px solid #e4dbd2}
+.lia-terms a{text-decoration:underline}
+.lia-terms .lia-option{background:transparent;border:0;padding:0}
+.lia-send{width:100%;min-height:52px;background:#30211e;color:#fff8f0;border:1px solid #30211e;padding:15px 18px;cursor:pointer;letter-spacing:.15em;text-transform:uppercase;font:600 11px Inter,sans-serif}
+.lia-send:hover{background:#543e36}.lia-send:disabled{opacity:.55;cursor:wait}
+.lia-status{font:400 12px/1.7 Inter,sans-serif;color:#6a554b;min-height:18px;margin:10px 0 0}
+.lia-success{padding:22px;border:1px solid #a9bba7;background:#f7f9f5;font:400 14px/1.8 Inter,sans-serif}
+.lia-success h3{font:400 32px 'Cormorant Garamond',serif;margin:0 0 10px}
+.lia-honeypot{position:absolute;left:-9999px;opacity:0}
+@media(max-width:850px){.lia-intake{grid-template-columns:1fr;gap:34px;padding:55px 22px 80px}.lia-intake-intro{position:static}.lia-intake h1{font-size:67px}.lia-form-shell{padding:26px 20px}}
+@media(max-width:540px){.lia-form{grid-template-columns:1fr}.lia-options{grid-template-columns:1fr}.lia-intake h1{font-size:58px}}
+</style>
 </head>
-<body class="editorial-refresh funnel-mode visual-atelier wedding-design-page system-refresh">
-<div class="grain"></div>
-<a class="er-skip" href="#main">Skip to content</a>
-<nav class="er-nav" aria-label="Main navigation" data-menu-open="false"><a class="er-brand" href="index.html" aria-label="Lia Armonía home">LIA ARMONÍA</a><button class="er-menu" type="button" aria-label="Open navigation" aria-controls="er-primary-links" aria-expanded="false"><span></span><span></span></button><div class="er-links" id="er-primary-links"><a href="services.html">Services</a><a href="about.html">About Me</a><a class="er-nav-inquire" href="inquiries.html">Inquiries ↗</a></div></nav>
-<main id="main">
-<section class="private-client-shell private-concierge">
-  <div class="private-client-intro">
-    <p class="eyebrow">Private Client Concierge</p>
-    <h1>Begin your private design inquiry.</h1>
-    <p>Share the setting, atmosphere and scope you are imagining. You will receive a non-binding design-fee indication before requesting a personal 30-minute phone consultation.</p>
-    <details class="private-launch-note private-venue-note" aria-label="Venue discovery">
-      <summary>No venue yet?</summary>
-      <p>You do not need to begin with one. If you are drawn to a Lia Armonía design concept, we can source and coordinate a real venue whose architecture, proportions, setting and atmosphere support that direction. From there, the concept is developed specifically around the selected venue, adapting the spatial design, scale, materials and visual language to the real setting. One direction. One suitable place. One cohesive celebration.</p>
-    </details>
-    <aside class="private-launch-note" aria-label="Private launch commissions">
-      <span>Private Launch Commissions</span>
-      <p>Ahead of the official Lia Armonía launch, three celebrations that feel especially aligned with the atelier are being selected for Private Launch Commissions. A private introductory commission rate may be offered after review; selection considers creative fit, venue, scope, timing and readiness.</p>
-    </aside>
-    <div class="private-client-notes">
-      <span>Wedding</span>
-      <span>Vision</span>
-      <span>Design scope</span>
-      <span>Consultation</span>
-    </div>
-  </div>
-  <section class="private-chat-panel" aria-label="Private wedding design chat">
-    <div class="private-chat-heading">
-      <span>Begin Here</span>
-      <h2>Private Design Consultation</h2>
-      <p>Move through four quiet chapters. At the end, review the published pricing guidance and request a preferred consultation time.</p>
-    </div>
-    <div class="concierge-progress" aria-label="Concierge chapters">
-      <button class="active" type="button" data-concierge-step="0">01 Wedding</button>
-      <button type="button" data-concierge-step="1">02 Vision</button>
-      <button type="button" data-concierge-step="2">03 Design</button>
-      <button type="button" data-concierge-step="3">04 Consultation</button>
-    </div>
-    <form name="private-design-consultation" class="private-chat-form concierge-form one-question-concierge" action="/api/private-design-consultation" method="POST">
-      <input type="hidden" name="form-name" value="private-design-consultation">
-      <input type="hidden" name="subject" value="NEW PRIVATE DESIGN INQUIRY">
-      <input type="hidden" name="inquiry_id" value="" data-inquiry-id>
-      <input type="hidden" name="submitted_at" value="" data-submitted-at>
-      <input class="hidden-field" name="website" tabindex="-1" autocomplete="off">
-      <div class="concierge-question active" data-chapter="0">
-        <span class="question-count">01 / 13</span>
-        <h3>Who is the celebration for?</h3>
-        <p>Start with the names I should hold in mind while reviewing the brief.</p>
-        <label>Names *<input name="names" required placeholder="Sofia & James"></label>
-      </div>
-      <div class="concierge-question" data-chapter="0">
-        <span class="question-count">02 / 13</span>
-        <h3>Where can the atelier reply?</h3>
-        <p>Your email keeps the consultation and brief in one place.</p>
-        <label>Email *<input type="email" name="email" required placeholder="you@email.com"></label>
-        <label>Phone<input name="phone" placeholder="+1 949 ..."></label>
-      </div>
-      <div class="concierge-question" data-chapter="0">
-        <span class="question-count">03 / 13</span>
-        <h3>When is the wedding imagined?</h3>
-        <p>A fixed date, preferred season or open window is enough.</p>
-        <label>Wedding date / season *<input name="season" required placeholder="October 2027 / Fall 2027 / not set"></label>
-      </div>
-      <div class="concierge-question" data-chapter="0">
-        <span class="question-count">04 / 13</span>
-        <h3>Where does the wedding live?</h3>
-        <p>The venue does not need to be booked yet. Architecture, region and light already tell me a lot.</p>
-        <label>Location / venue *<input name="location" required placeholder="Tuscany / Portugal / still searching"></label>
-      </div>
-      <div class="concierge-question" data-chapter="0">
-        <span class="question-count">05 / 13</span>
-        <h3>How intimate is the guest world?</h3>
-        <p>Choose the closest range.</p>
-        <div class="answer-chips">
-          <label><input type="radio" name="guest_count" value="Under 25" required><span>Under 25</span></label>
-          <label><input type="radio" name="guest_count" value="25-50"><span>25-50</span></label>
-          <label><input type="radio" name="guest_count" value="51-100"><span>51-100</span></label>
-          <label><input type="radio" name="guest_count" value="101-150"><span>101-150</span></label>
-          <label><input type="radio" name="guest_count" value="150+"><span>150+</span></label>
-        </div>
-      </div>
-      <div class="concierge-question" data-chapter="1">
-        <span class="question-count">06 / 13</span>
-        <h3>Describe the two of you.</h3>
-        <p>Three words, one sentence, or a feeling.</p>
-        <label>Your words<input name="couple_words" placeholder="Warm, intentional, architectural..."></label>
-      </div>
-      <div class="concierge-question" data-chapter="1">
-        <span class="question-count">07 / 13</span>
-        <h3>How should the day feel?</h3>
-        <p>Select up to five directions that feel close.</p>
-        <div class="answer-chips multi">
-          <label><input type="checkbox" name="feeling" value="Intimate"><span>Intimate</span></label>
-          <label><input type="checkbox" name="feeling" value="Architectural"><span>Architectural</span></label>
-          <label><input type="checkbox" name="feeling" value="Editorial"><span>Editorial</span></label>
-          <label><input type="checkbox" name="feeling" value="Romantic"><span>Romantic</span></label>
-          <label><input type="checkbox" name="feeling" value="Immersive"><span>Immersive</span></label>
-          <label><input type="checkbox" name="feeling" value="Sculptural"><span>Sculptural</span></label>
-          <label><input type="checkbox" name="feeling" value="Modern"><span>Modern</span></label>
-          <label><input type="checkbox" name="feeling" value="Timeless"><span>Timeless</span></label>
-        </div>
-      </div>
-      <div class="concierge-question" data-chapter="1">
-        <span class="question-count">08 / 13</span>
-        <h3>What should guests remember?</h3>
-        <p>This becomes the emotional north star of the direction.</p>
-        <label>Guest memory<textarea name="guest_memory" rows="4" placeholder="The entrance, the dinner atmosphere, the ceremony, the light..."></textarea></label>
-      </div>
-      <div class="concierge-question" data-chapter="2">
-        <span class="question-count">09 / 13</span>
-        <h3>Which moments need design?</h3>
-        <p>Choose the spaces Lia Armonía should visually develop.</p>
-        <div class="answer-chips multi" data-required-group="environments">
-          <label><input type="checkbox" name="environments" value="Ceremony"><span>Ceremony</span></label>
-          <label><input type="checkbox" name="environments" value="Cocktail hour"><span>Cocktail hour</span></label>
-          <label><input type="checkbox" name="environments" value="Reception"><span>Reception</span></label>
-          <label><input type="checkbox" name="environments" value="Dinner"><span>Dinner</span></label>
-          <label><input type="checkbox" name="environments" value="Arrival"><span>Arrival</span></label>
-          <label><input type="checkbox" name="environments" value="Lounge / bars"><span>Lounge / bars</span></label>
-        </div>
-      </div>
-      <div class="concierge-question" data-chapter="2">
-        <span class="question-count">10 / 13</span>
-        <h3>What kind of support feels right?</h3>
-        <p>This helps separate visual direction from production support.</p>
-        <div class="answer-chips" data-required-group="support">
-          <label><input type="checkbox" name="support" value="Creative Direction + Visual Design"><span>Creative direction</span></label>
-          <label><input type="checkbox" name="support" value="Full Design Development"><span>Full design development</span></label>
-          <label><input type="checkbox" name="support" value="Venue Discovery"><span>Venue discovery</span></label>
-          <label><input type="checkbox" name="support" value="Vendor / Specialist Sourcing"><span>Vendor sourcing</span></label>
-          <label><input type="checkbox" name="support" value="Production Direction"><span>Production direction</span></label>
-          <label><input type="checkbox" name="support" value="On-Site Creative Direction"><span>On-site direction</span></label>
-          <label><input type="checkbox" name="support" value="Not sure yet"><span>Not sure yet</span></label>
-        </div>
-      </div>
-      <div class="concierge-question" data-chapter="2">
-        <span class="question-count">11 / 13</span>
-        <h3>What production range should the design respect?</h3>
-        <p>This is the physical design and production investment, excluding the Lia Armonía fee, venue, catering, photography, entertainment and fashion.</p>
-        <div class="answer-chips">
-          <label><input type="radio" name="production_range" value="Not sure yet" required><span>Not sure yet</span></label>
-          <label><input type="radio" name="production_range" value="Under $10k"><span>Under $10k</span></label>
-          <label><input type="radio" name="production_range" value="$10k - $20k"><span>$10k - $20k</span></label>
-          <label><input type="radio" name="production_range" value="$20k - $40k"><span>$20k - $40k</span></label>
-          <label><input type="radio" name="production_range" value="$40k - $75k"><span>$40k - $75k</span></label>
-          <label><input type="radio" name="production_range" value="$75k - $150k"><span>$75k - $150k</span></label>
-          <label><input type="radio" name="production_range" value="$150k+"><span>$150k+</span></label>
-        </div>
-      </div>
-      <div class="concierge-question" data-chapter="3">
-        <span class="question-count">12 / 13</span>
-        <h3>Your preliminary design guidance.</h3>
-        <p>Based on the environments and support selected, this is the closest published starting point for the Lia Armonía design fee.</p>
-        <div class="pricing-guidance" data-pricing-guidance>
-          <span>Published guidance</span>
-          <strong data-pricing-total>Select your design scope</strong>
-          <p data-pricing-summary>Your indication will appear here before the consultation request.</p>
-          <ul data-pricing-breakdown></ul>
-          <small>This is published guidance only. Final scope and investment are confirmed by Lia Armonía after personal review. Third-party production costs are separate.</small>
-        </div>
-      </div>
-      <div class="concierge-question" data-chapter="3">
-        <span class="question-count">13 / 13</span>
-        <h3>Request your private phone consultation.</h3>
-        <p>Our first conversation is a dedicated, paid 30-minute phone consultation. I set aside this time to listen to your story and offer thoughtful, individual guidance on your vision, venue direction and next steps, rather than a generic sales pitch. If we work together, the consultation fee is credited toward your design booking. Share your preferred time below; the booking link and full fee will be confirmed before you reserve.</p><p>US clients receive a regular phone call. International clients can speak with me via WhatsApp voice call.</p>
-        <div class="consultation-request-grid">
-          <label>Preferred date *<input type="date" name="preferred_consultation_date" required></label>
-          <label>Preferred time *<input type="time" name="preferred_consultation_time" required></label>
-          <label>Timezone *<select name="timezone" required><option value="">Select timezone</option><option>Pacific Time (PT)</option><option>Mountain Time (MT)</option><option>Central Time (CT)</option><option>Eastern Time (ET)</option><option>Central European Time (CET)</option><option>Other / note below</option></select></label>
-          <label>Alternative date / time<input name="alternative_consultation_time" placeholder="Thursday afternoon / Friday after 11am"></label>
-        </div>
-        <label class="check flexible-check"><input type="checkbox" name="consultation_flexible" value="Yes"><span>I am flexible if another time is better for the atelier.</span></label>
-        <label>Final note<textarea name="call_note" rows="4" placeholder="Deadlines, planner details, venue links, priorities or questions."></textarea></label>
-        <div class="concierge-guidance review-send-card">
-          <b>Before sending</b>
-          <p>A short confirmation so the consultation request stays clear on both sides.</p>
-          <label class="check"><input type="checkbox" name="pricing_acknowledgement" value="Yes" required><span>The design guidance is preliminary; final scope is confirmed after atelier review.</span></label>
-          <label class="check"><input type="checkbox" name="separate_costs_acknowledgement" value="Yes" required><span>Venue, production, florals, rentals and third-party services are separate unless stated otherwise.</span></label>
-          <label class="check"><input type="checkbox" name="request_acknowledgement" value="Yes" required><span>I understand this is a request for a paid, 30-minute phone consultation, not a confirmed appointment or reserved wedding date. I will see the consultation fee before booking.</span></label>
-          <label class="check"><input type="checkbox" name="storage_consent" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a> and inquiry review.</span></label>
-        </div>
-      </div>
-      <div class="concierge-actions wide">
-        <button type="button" data-concierge-prev>Back</button>
-        <button type="button" data-concierge-next>Continue</button>
-        <button type="submit" data-concierge-submit>Send consultation request</button>
-      </div>
-      <div class="concierge-success wide" data-concierge-success hidden>
-        <span>Request submitted</span>
-        <h3>Your private design inquiry has been received.</h3>
-        <p>Diana will review your answers personally and reply from atelier@liaarmonia.com with the next steps and a private phone consultation booking link if the project is a fit.</p>
-        <small data-success-reference></small>
-      </div>
-      <p class="wide concierge-submit-note">Your complete inquiry is sent privately to atelier@liaarmonia.com. Diana reviews every submission personally and replies from the atelier inbox.</p>
-    </form>
+<body class="la4 couture-edit">
+<header class="ce-header"><a class="ce-brand" href="index.html">LIA ARMONÍA</a><nav class="ce-nav" aria-label="Primary navigation"><a href="services.html">Services</a><a href="about.html">About Us</a><a href="trends.html">The Edit</a><a href="venue-collection.html">Venues</a></nav><a class="ce-corner" href="inquiries.html">Inquiries ↗</a></header>
+<main id="main" class="lia-intake">
+  <section class="lia-intake-intro">
+   <p class="lia-eyebrow">A personal conversation / Worldwide</p>
+   <h1>Your wedding,<br><em>thoughtfully</em><br>considered.</h1>
+   <p>Tell me a little about what you're planning. Whether you are still looking for the perfect place or already have a venue in mind, I'd love to understand what matters most to you.</p>
+   <div class="lia-feature"><h2>The right place. The right people.</h2><p>I work with venues and trusted local wedding professionals across different destinations. I'll take the time to understand your priorities and help find a venue and local planner who are genuinely suited to your plans, with thoughtful introductions and support as you move forward.</p></div>
+   <div class="lia-feature"><h2>And a design that feels like you.</h2><p>If you'd like, we can create your wedding concept together, from creative direction to realistic visualizations tailored to your chosen venue.</p></div>
+   <div class="lia-promos"><b>Private consultation · $59 / 30 minutes</b><br>A dedicated conversation to understand your wedding and determine the right direction, venue and professional support. Fully credited toward a LIA ARMONÍA service booking.<br><br><b>Complete Wedding Design · $1,290</b> introductory rate through December 2026 (regularly $1,690). Creative design services are separate from local planning, venue and production costs.</div>
   </section>
-</section>
+  <section class="lia-form-shell" aria-label="Wedding inquiry">
+   <h2>A little about your plans</h2>
+   <p>No need to have everything figured out. Just share what you know so far, and I'll personally review it and get back to you by email with the best next steps.</p>
+   <form class="lia-form" id="liaWeddingInquiry" action="/api/private-design-consultation" method="POST">
+     <input type="text" class="lia-honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+     <label><span>Your name(s) *</span><input name="names" required maxlength="160" placeholder="Sofia & James" autocomplete="name"></label>
+     <label><span>Your email *</span><input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label>
+     <label><span>Wedding date or season *</span><input name="season" required maxlength="160" placeholder="October 2027 / Still flexible"></label>
+     <label><span>Destination or region *</span><input name="location" required maxlength="160" placeholder="Marrakech / Tuscany / Open to ideas"></label>
+     <label><span>Approximate guests</span><select name="guest_count"><option value="">Not sure yet</option><option>Under 30</option><option>30–60</option><option>60–100</option><option>100–150</option><option>150+</option></select></label>
+     <label><span>Approximate overall wedding budget</span><select name="overall_budget"><option value="">Still exploring</option><option>Under $25,000</option><option>$25,000–$50,000</option><option>$50,000–$100,000</option><option>$100,000–$200,000</option><option>$200,000+</option></select></label>
+     <div class="full"><label><span>How can I best help you? *</span></label><div class="lia-options">
+       <label class="lia-option"><input type="checkbox" name="support" value="Venue Discovery">Find the right venue</label>
+       <label class="lia-option"><input type="checkbox" name="support" value="Local Planner Matching">Find a local wedding planner</label>
+       <label class="lia-option"><input type="checkbox" name="support" value="Wedding Design">Wedding design & visualizations</label>
+       <label class="lia-option"><input type="checkbox" name="support" value="Guidance / Not sure">Not sure yet — I'd love guidance</label>
+     </div></div>
+     <label class="full"><span>Have you already found a venue?</span><select name="venue_status"><option value="">Select if known</option><option>Yes, booked</option><option>Considering a few</option><option>No, still searching</option></select></label>
+     <label class="full"><span>Anything you'd love me to know?</span><textarea name="vision" maxlength="3000" placeholder="The kind of setting, atmosphere or experience you're dreaming of..."></textarea></label>
+     <label class="full"><span>Phone / WhatsApp (optional)</span><input name="phone" autocomplete="tel" maxlength="100" placeholder="+1 ..."></label>
+     <div class="lia-terms full"><label class="lia-option"><input name="storage_consent" type="checkbox" value="Yes" required><span>I agree to the <a href="privacy.html" target="_blank" rel="noopener noreferrer">privacy policy</a> and to being contacted about my inquiry. *</span></label><p>Submitting this inquiry is free and does not book or charge you for a consultation. I'll email you the details of the optional $59 consultation and we can take it from there.</p></div>
+     <div class="full"><button class="lia-send" type="submit" id="liaSendInquiry">Send my inquiry</button><p class="lia-status" id="liaInquiryStatus" role="status" aria-live="polite"></p></div>
+   </form>
+   <div class="lia-success" id="liaInquirySuccess" hidden tabindex="-1"><h3>Thank you for sharing. 🤍</h3><p>Your inquiry is securely recorded. I'll personally review your plans and get back to you with the next steps.</p><p id="liaInquiryReference"></p><p>Warmly,<br>Diana</p></div>
+  </section>
 </main>
-<footer><p><strong>LIA ARMONÍA</strong><br><em>Wedding Design Atelier</em></p><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a class="footer-icon-link" href="mailto:atelier@liaarmonia.com" aria-label="Email"><span class="contact-icon mail-icon"></span>Email</a><a class="footer-icon-link" href="https://www.instagram.com/lia_armonia/" target="_blank" rel="noopener" aria-label="Instagram"><span class="contact-icon instagram-icon"></span>Instagram</a></div></footer>
-<script src="app.js"></script>
-<script src="editorial-refresh.js?v=20261103a" defer></script>
+<footer class="ce-footer"><span>© LIA ARMONÍA · Wedding Design Atelier · Worldwide</span><nav aria-label="Footer"><a href="services.html">Services</a><a href="about.html">About</a><a href="venue-collection.html">Venues</a><a href="mailto:atelier@liaarmonia.com">Email</a></nav></footer>
+<script>
+(()=>{const form=document.getElementById('liaWeddingInquiry'),send=document.getElementById('liaSendInquiry'),status=document.getElementById('liaInquiryStatus'),success=document.getElementById('liaInquirySuccess');form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const choices=[...form.querySelectorAll('input[name="support"]:checked')];if(!choices.length){status.textContent='Please select at least one way I can help.';choices.length=0;return;}const data={};new FormData(form).forEach((v,k)=>{if(data[k])data[k]=Array.isArray(data[k])?[...data[k],v]:[data[k],v];else data[k]=v;});send.disabled=true;send.textContent='Sending…';status.textContent='Securely sending your inquiry…';try{const response=await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json().catch(()=>({}));if(!response.ok||!result.ok)throw new Error(result.error||'The request could not be completed.');form.hidden=true;success.hidden=false;document.getElementById('liaInquiryReference').textContent='Your reference: '+(result.inquiryId||'');if(result.emailPending){status.textContent='';success.querySelector('p').textContent='Your inquiry is securely recorded, but our email notification needs attention. Please also email atelier@liaarmonia.com with your reference so I can respond promptly.';}success.focus();}catch(error){status.textContent=error.message+' You can also email atelier@liaarmonia.com directly.';}finally{send.disabled=false;send.textContent='Send my inquiry';}})})();
+</script>
 </body></html>
