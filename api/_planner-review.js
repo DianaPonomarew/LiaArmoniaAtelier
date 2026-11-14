@@ -32,14 +32,15 @@ export default async function handler(req,res){
  let record;try{record=await readJson(path(id))}catch(e){console.error('Review draft read failed',e.message)}
  if(!record)return res.status(404).json({ok:false,error:'Profile submission was not found'});
  if(req.method==='GET'){
-  if(req.query.action==='photo'){
-   const n=Number(req.query.number);if(!Number.isInteger(n)||n<0||n>5)return res.status(400).end();
-   try{const p=await get('planner-submissions/'+id+'/photo-'+n+'.jpg',{access:'private',token:blobToken()});if(!p?.stream)return res.status(404).end();
+  if(req.query.action==='photo'||req.query.action==='portrait'){
+   const isPortrait=req.query.action==='portrait';const n=Number(req.query.number);if(!isPortrait&&(!Number.isInteger(n)||n<0||n>5))return res.status(400).end();
+   try{const p=await get('planner-submissions/'+id+'/'+(isPortrait?'portrait.jpg':'photo-'+n+'.jpg'),{access:'private',token:blobToken()});if(!p?.stream)return res.status(404).end();
     res.setHeader('Content-Type','image/jpeg');res.setHeader('X-Content-Type-Options','nosniff');return res.status(200).send(Buffer.from(await new Response(p.stream).arrayBuffer()));
    }catch(e){return res.status(404).end()}
   }
   const images=await list({prefix:'planner-submissions/'+id+'/photo-',limit:12,token:blobToken()});
-  return res.status(200).json({ok:true,profile:{...record,contact_email:record.email},photoCount:images.blobs?.length||0});
+  let hasPortrait=false;try{const portrait=await get('planner-submissions/'+id+'/portrait.jpg',{access:'private',token:blobToken()});hasPortrait=!!portrait?.stream;}catch(e){if(!/not found|404|does not exist/i.test(String(e.message)))console.error('Private portrait lookup failed',e.message);}
+  return res.status(200).json({ok:true,profile:{...record,contact_email:record.email},photoCount:images.blobs?.length||0,hasPortrait});
  }
  let b;try{b=typeof req.body==='string'?JSON.parse(req.body):req.body||{}}catch{return res.status(400).json({ok:false,error:'Malformed request'})}
  const action=txt(b.action,20);
@@ -56,7 +57,8 @@ export default async function handler(req,res){
  if(!record.editorial_consent||!record.image_rights||!record.privacy_consent)return res.status(409).json({ok:false,error:'Submission permissions are incomplete'});
  if(!['submitted','published','unpublished'].includes(record.status))return res.status(409).json({ok:false,error:'Profile is not ready for publishing'});
  const images=await list({prefix:'planner-submissions/'+id+'/photo-',limit:12,token:blobToken()});
- if(!images.blobs?.some(x=>x.pathname.endsWith('/photo-0.jpg')))return res.status(409).json({ok:false,error:'The required lead image is missing'});
+ if((images.blobs?.length||0)<3||(images.blobs?.length||0)>6||!images.blobs?.some(x=>x.pathname.endsWith('/photo-0.jpg')))return res.status(409).json({ok:false,error:'Three to six portfolio images are required'});
+ try{const portrait=await get('planner-submissions/'+id+'/portrait.jpg',{access:'private',token:blobToken()});if(!portrait?.stream)return res.status(409).json({ok:false,error:'The required portrait or team photograph is missing'});}catch(e){if(/not found|404|does not exist/i.test(String(e.message)))return res.status(409).json({ok:false,error:'The required portrait or team photograph is missing'});console.error('Portrait lookup failed',e.message);return res.status(503).json({ok:false,error:'Could not verify portrait photo'});}
  const fields=b.profile||{};
  const profile={
   id,status:'approved',publication_consent:true,
@@ -71,9 +73,9 @@ export default async function handler(req,res){
   languages:listText(fields.languages||record.languages,10),
   styles:listText(fields.styles||record.styles,5),
   starting_fee:txt(fields.starting_fee??record.starting_fee,120),
-  instagram:validHref(fields.instagram||record.instagram)|| (record.instagram?.startsWith('@')? 'https://www.instagram.com/'+record.instagram.replace(/^@/,'')+'/':''),
-  website:validHref(fields.website||record.website),
+  // Direct contact and social links stay private in the submission; never expose them through the public directory.
   image:'/api/atelier-inquiry?plannerPhoto=1&id='+encodeURIComponent(id)+'&number=0',
+  portrait_image:'/api/atelier-inquiry?plannerPhoto=1&id='+encodeURIComponent(id)+'&number=portrait',
   image_alt:'Selected wedding portfolio of '+txt(fields.studio_name||record.studio_name,120),
   image_credit:txt(fields.image_credit??record.image_credit,260),
   image_count:images.blobs.length
