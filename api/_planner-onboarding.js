@@ -56,23 +56,24 @@ export default async function handler(req,res){
  try{existing=await readPrivate(detailPath(id));}catch(e){console.error('Submission read failed',e.message);}
  if(!existing)return res.status(404).json({ok:false,error:'Submission not found'});
  if(existing.status==='published')return res.status(409).json({ok:false,error:'Submission is already published'});
- if(action==='photo'){
+ if(action==='photo'||action==='portrait'){
   const n=Number(b.number),name=field(b.filename,180);
-  if(!Number.isInteger(n)||n<0||n>5)return res.status(400).json({ok:false,error:'Maximum six images'});
+  if(action==='photo'&&(!Number.isInteger(n)||n<0||n>5))return res.status(400).json({ok:false,error:'Maximum six portfolio images'});
   if(existing.status!=='uploading')return res.status(409).json({ok:false,error:'Uploads have already been finalized'});
   const payload=String(b.base64||'');
   if(payload.length>1350000)return res.status(413).json({ok:false,error:'Photo is too large after compression'});
   let bytes;try{bytes=Buffer.from(payload,'base64');}catch{return res.status(400).json({ok:false,error:'Invalid image data'})}
   if(bytes.length<100||bytes.length>1000000||bytes[0]!==0xff||bytes[1]!==0xd8||bytes[2]!==0xff)return res.status(400).json({ok:false,error:'Only compressed JPEG images up to 1MB are supported'});
-  try{await put('planner-submissions/'+id+'/photo-'+n+'.jpg',bytes,{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'image/jpeg',token:blobToken()});}
+  try{await put('planner-submissions/'+id+'/'+(action==='portrait'?'portrait.jpg':'photo-'+n+'.jpg'),bytes,{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'image/jpeg',token:blobToken()});}
   catch(e){console.error('Planner image upload failed:',e.message);return res.status(503).json({ok:false,error:'Photo upload failed'})}
-  return res.status(200).json({ok:true,number:n,originalFilename:name});
+  return res.status(200).json({ok:true,kind:action,number:action==='photo'?n:null,originalFilename:name});
  }
  if(action==='complete'){
   if(existing.status==='submitted')return res.status(200).json({ok:true,submissionId:id,alreadySubmitted:true});
   let photos;try{photos=await imageList(id);}catch(e){console.error('Photo listing failed',e.message);return res.status(503).json({ok:false,error:'Could not verify uploaded photos'})}
-  if(!photos.blobs?.length)return res.status(400).json({ok:false,error:'Please upload at least one portfolio image'});
-  const complete={...existing,status:'submitted',updated_at:new Date().toISOString(),image_count:photos.blobs.length};
+  if((photos.blobs?.length||0)<3||(photos.blobs?.length||0)>6)return res.status(400).json({ok:false,error:'Please upload 3 to 6 wedding portfolio images'});
+  try{const portrait=await get('planner-submissions/'+id+'/portrait.jpg',{access:'private',token:blobToken()});if(!portrait?.stream)return res.status(400).json({ok:false,error:'Please upload one portrait or team photo'});}catch(e){if(/not found|404|does not exist/i.test(String(e.message)))return res.status(400).json({ok:false,error:'Please upload one portrait or team photo'});console.error('Portrait verification failed',e.message);return res.status(503).json({ok:false,error:'Could not verify portrait upload'});}
+  const complete={...existing,status:'submitted',updated_at:new Date().toISOString(),image_count:photos.blobs.length,portrait_uploaded:true};
   try{await put(detailPath(id),JSON.stringify(complete),{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json',token:blobToken()})}
   catch(e){console.error('Profile completion failed',e.message);return res.status(503).json({ok:false,error:'Could not complete your profile'})}
   let emailPending=true;try{emailPending=!(await notify(complete));}catch(e){console.error('Planner review notification failed',id,e.message)}
