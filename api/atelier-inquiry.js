@@ -207,7 +207,32 @@ async function processPlannerDiscovery(body) {
       console.error('Planner discovery notification failed:',inquiryId,err.message);
     }
   }
-  return {status:200,payload:{ok:true,stored:true,inquiryId,emailPending}};
+  // Send only a minimal, non-identifying lead notice to a previously accepted partner.
+  // The studio retains the private client record and handles all introductions.
+  let partnerNoticePending=true;
+  if(record.planner_id && /^[a-f0-9-]{36}$/.test(record.planner_id) && process.env.RESEND_API_KEY) {
+    try {
+      const {get}=await import('@vercel/blob');
+      const tok=process.env.BLOB_READ_WRITE_TOKEN;
+      const indexBlob=await get('planner-directory/index.json',{access:'private',token:tok});
+      if(indexBlob?.stream) {
+        const directory=JSON.parse(await new Response(indexBlob.stream).text());
+        const listed=(directory.profiles||[]).some(p=>p.id===record.planner_id&&p.status==='approved'&&p.publication_consent===true);
+        if(listed){
+          const detail=await get('planner-submissions/'+record.planner_id+'/details.json',{access:'private',token:tok});
+          if(detail?.stream){
+            const partner=JSON.parse(await new Response(detail.stream).text());
+            if(partner.status==='published' && partner.referral_agreement===true && partner.referral_terms_version==='1.0-2026-11-14' && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(partner.email||'')){
+              const brief='Hello '+(partner.contact_name||partner.studio_name)+',\\n\\nYou have a new wedding enquiry through LIA ARMONÍA for your studio.\\n\\nReference: '+inquiryId+'\\nDestination: '+record.destination.slice(0,120)+'\\nWedding timeframe: '+record.wedding_date.slice(0,80)+'\\n\\nClient names, email addresses and private messages have not been shared. Please reply to atelier@liaarmonia.com with reference '+inquiryId+' to confirm your interest and general availability. We will arrange the introduction with the couple’s permission.\\n\\nAs agreed in your Referral Partnership Terms, a 15% commission applies to net planning service fees you actually receive from a qualifying LIA ARMONÍA referral. Please notify us when a referred client signs a booking and when payments arrive. Commission is due within 14 calendar days of receiving each client payment. If no qualifying booking is paid, no commission is due.\\n\\nLIA ARMONÍA';
+              await sendViaResend(process.env.RESEND_API_KEY,{from:process.env.RESEND_FROM||'LIA ARMONÍA <onboarding@resend.dev>',to:[partner.email],reply_to:STUDIO_FALLBACK,subject:'NEW WEDDING ENQUIRY · LIA ARMONÍA · '+inquiryId,text:brief});
+              partnerNoticePending=false;
+            }
+          }
+        }
+      }
+    }catch(err){console.error('Private partner lead notice failed',inquiryId,err.message);}
+  }
+  return {status:200,payload:{ok:true,stored:true,inquiryId,emailPending,partnerNoticePending}};
 }
 
 
