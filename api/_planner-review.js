@@ -54,7 +54,7 @@ export default async function handler(req,res){
   await put(path(id),JSON.stringify({...record,status:'unpublished',updated_at:new Date().toISOString()}),{access:'private',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json',token:blobToken()});
   return res.status(200).json({ok:true,status:'unpublished'});
  }
- if(!record.editorial_consent||!record.image_rights||!record.privacy_consent)return res.status(409).json({ok:false,error:'Submission permissions are incomplete'});
+ if(!record.editorial_consent||!record.image_rights||!record.privacy_consent||record.referral_agreement!==true||record.referral_terms_version!=='1.0-2026-11-14')return res.status(409).json({ok:false,error:'Submission permissions are incomplete'});
  if(!['submitted','published','unpublished'].includes(record.status))return res.status(409).json({ok:false,error:'Profile is not ready for publishing'});
  const images=await list({prefix:'planner-submissions/'+id+'/photo-',limit:12,token:blobToken()});
  if((images.blobs?.length||0)<3||(images.blobs?.length||0)>6||!images.blobs?.some(x=>x.pathname.endsWith('/photo-0.jpg')))return res.status(409).json({ok:false,error:'Three to six portfolio images are required'});
@@ -66,6 +66,7 @@ export default async function handler(req,res){
   category:txt(record.category,55),
   short_description:txt(fields.short_description||record.bio,140),
   bio:txt(fields.bio||record.bio,450),
+  passion:txt(record.passion,400),signature_focus:txt(record.signature_focus,330),
   city:txt(fields.city??record.city,90),
   countries:listText(fields.countries||record.countries,12),
   regions:listText(fields.regions??record.regions,16),
