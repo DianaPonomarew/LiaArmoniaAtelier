@@ -1,0 +1,96 @@
+/* Private consultation: a quiet homepage link and a considered services invitation. */
+body.la4.couture-edit.ce-home .ce-consultation-link {
+  font-size: .875rem;
+  line-height: 1.5;
+  letter-spacing: .06em;
+  min-height: 44px;
+}
+body.la4.couture-edit.ce-home .ce-consultation-note {
+  max-width: 31rem;
+  margin: 18px 0 0;
+  color: #eadccf;
+  font: 400 .8125rem/1.65 var(--sans);
+  letter-spacing: .01em;
+}
+body.la4.couture-edit .ce-service-list .ce-consultation-inline {
+  display: inline;
+  padding: 0;
+  border: 0;
+  font-size: .875rem;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+body.la4.couture-edit .ce-consultation-section {
+  padding: clamp(52px, 6vw, 84px) var(--edge);
+  background: var(--stone);
+}
+.ce-consultation-inner {
+  max-width: calc(var(--shell) - 2 * var(--gutter));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 88px);
+}
+.ce-consultation-copy .ce-kicker {
+  color: var(--inkSoft);
+  font-size: .875rem;
+  margin: 0 0 16px;
+}
+.ce-consultation-copy h2 {
+  margin: 0 0 18px;
+  color: var(--ink);
+  font: 500 clamp(42px, 4.6vw, 64px)/1.02 var(--display);
+  letter-spacing: -.025em;
+}
+.ce-consultation-copy > p:last-child {
+  max-width: 43ch;
+  margin: 0;
+  color: var(--inkSoft);
+  font: 400 1rem/1.75 var(--sans);
+}
+.ce-consultation-price {
+  margin: 0 0 17px;
+  color: var(--ink);
+  font: 500 .875rem/1.6 var(--sans);
+  letter-spacing: .035em;
+}
+.ce-consultation-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 52px;
+  padding: 16px 22px;
+  background: var(--wineDeep);
+  color: var(--oyster) !important;
+  font: 500 .875rem/1.5 var(--sans);
+  letter-spacing: .06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.ce-consultation-button:hover { background: #46302d; }
+.ce-consultation-credit,
+.ce-consultation-booking-note {
+  max-width: 43ch;
+  color: var(--inkSoft);
+  font: 400 .875rem/1.7 var(--sans);
+}
+.ce-consultation-credit { margin: 18px 0 0; }
+.ce-consultation-booking-note { margin: 9px 0 0; }
+.ce-consultation-button:focus-visible,
+.ce-consultation-link:focus-visible,
+.ce-consultation-inline:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+@media (max-width: 670px) {
+  .ce-consultation-inner { grid-template-columns: 1fr; gap: 30px; }
+  body.la4.couture-edit.ce-home .ce-consultation-note { max-width: 30ch; margin-top: 14px; }
+}
+@media (max-width: 360px) {
+  body.la4.couture-edit.ce-home .ce-hero h1 { font-size: clamp(48px, 15vw, 54px); }
+}
+@media (max-height: 760px) and (min-width: 671px) {
+  body.la4.couture-edit.ce-home .ce-hero-inner { padding-top: 110px; padding-bottom: 90px; }
+}
