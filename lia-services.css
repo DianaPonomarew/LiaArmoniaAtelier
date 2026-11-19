@@ -1,0 +1,152 @@
+/* Services: framed native accordions, with the offers taking visual priority. */
+body.la4.couture-edit.ce-services .sa-main {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: 36px var(--gutter) 56px;
+}
+.sa-intro { margin: 0 0 30px; }
+body.la4.couture-edit.ce-services .sa-intro h1 {
+  margin: 0 0 9px;
+  color: var(--ink);
+  font: 500 clamp(36px, 4vw, 48px)/1.1 var(--display);
+  letter-spacing: -.02em;
+}
+.sa-intro p {
+  margin: 0;
+  color: var(--inkSoft);
+  font: 400 1rem/1.7 var(--sans);
+}
+.sa-service-list { display: grid; gap: 14px; }
+.sa-service {
+  min-width: 0;
+  border: 1px solid rgba(66, 47, 38, .42);
+  background: transparent;
+}
+.sa-service[open] {
+  border-color: #6c5043;
+  background: rgba(255, 250, 243, .48);
+}
+.sa-service summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 96px;
+  padding: 24px 28px;
+  color: var(--ink);
+  list-style: none;
+  cursor: pointer;
+}
+.sa-service summary::-webkit-details-marker { display: none; }
+.sa-service summary::marker { content: ''; }
+.sa-service summary::after {
+  content: '';
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  background:
+    linear-gradient(currentColor, currentColor) center / 17px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1px 17px no-repeat;
+}
+.sa-service[open] > summary::after {
+  background: linear-gradient(currentColor, currentColor) center / 17px 1px no-repeat;
+}
+.sa-service summary:hover { color: #725141; }
+.sa-service summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+body.la4.couture-edit.ce-services .sa-service h2 {
+  min-width: 0;
+  margin: 0;
+  font: 500 clamp(28px, 3.2vw, 36px)/1.15 var(--display);
+  letter-spacing: -.018em;
+}
+.sa-service-content { padding: 0 28px 28px; }
+.sa-service-content > p {
+  max-width: 70ch;
+  margin: 0 0 18px;
+  color: var(--inkSoft);
+  font: 400 1rem/1.8 var(--sans);
+}
+.sa-service-content .sa-service-price { margin-bottom: 9px; color: var(--ink); }
+.sa-service-price strong { font-weight: 500; }
+.sa-service-content .sa-service-note {
+  max-width: 76ch;
+  font-size: .875rem;
+  line-height: 1.75;
+}
+.sa-service-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 24px;
+}
+body.la4.couture-edit .sa-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 14px 20px;
+  background: var(--wineDeep);
+  color: var(--oyster) !important;
+  font: 500 .875rem/1.5 var(--sans);
+  letter-spacing: .035em;
+  text-align: center;
+}
+body.la4.couture-edit .sa-button:hover { background: #49342e; }
+body.la4.couture-edit .sa-text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink) !important;
+  font: 400 .875rem/1.6 var(--sans);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+body.la4.couture-edit .sa-text-link:hover { color: #725141 !important; }
+.sa-button:focus-visible,
+.sa-text-link:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.sa-service-content .sa-credit { margin: 15px 0 0; }
+.sa-explore-link { margin-top: 10px; }
+.sa-consultation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px 32px;
+  margin-top: 38px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
+body.la4.couture-edit.ce-services .sa-consultation h2 {
+  margin: 0 0 8px;
+  color: var(--inkSoft);
+  font: 500 1.75rem/1.15 var(--display);
+  letter-spacing: -.01em;
+}
+.sa-consultation p {
+  margin: 0;
+  color: var(--inkSoft);
+  font: 400 .875rem/1.7 var(--sans);
+}
+.sa-consultation-action p { max-width: 34ch; margin-top: 10px; }
+.sa-consultation .sa-consultation-credit { grid-column: 1 / -1; }
+@media (max-width: 670px) {
+  body.la4.couture-edit.ce-services .sa-main { padding-top: 28px; padding-bottom: 38px; }
+  .sa-intro { margin-bottom: 24px; }
+  .sa-intro p { font-size: .875rem; }
+  .sa-service-list { gap: 12px; }
+  .sa-service summary { min-height: 92px; padding: 21px 20px; gap: 20px; }
+  .sa-service-content { padding: 0 20px 23px; }
+  .sa-service-actions { align-items: flex-start; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .sa-consultation { grid-template-columns: 1fr; gap: 19px; margin-top: 30px; padding-top: 24px; }
+  .sa-consultation .sa-consultation-credit { grid-column: auto; }
+}
+@media (max-width: 360px) {
+  body.la4.couture-edit.ce-services .sa-main { padding-inline: 18px; }
+  .sa-service summary { padding-inline: 17px; gap: 16px; }
+  .sa-service-content { padding-inline: 17px; }
+  body.la4.couture-edit.ce-services .sa-service h2 { font-size: 26px; }
+  body.la4.couture-edit .sa-button { padding-inline: 15px; }
+}
