@@ -1,5 +1,7 @@
-/* Restrained service frames: fine lines, compact type and native disclosure. */
+/* LIA ARMONÍA / an editorial index of private commissions. */
 body.la4.couture-edit.ce-services {
+  --service-line: rgba(65, 43, 38, .24);
+  --service-accent: #72584b;
   display: flex;
   flex-direction: column;
   min-height: 100svh;
@@ -9,92 +11,111 @@ body.la4.couture-edit.ce-services > .ce-footer { flex-shrink: 0; }
 body.la4.couture-edit.ce-services .sa-main {
   flex: 1 0 auto;
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
   margin-inline: auto;
-  padding: 28px var(--gutter) 38px;
+  padding: 35px var(--gutter) 40px;
 }
-.sa-intro { margin: 0 0 18px; }
-body.la4.couture-edit.ce-services .sa-intro h1 {
-  margin: 0;
-  color: var(--inkSoft);
-  font: 400 .875rem/1.6 var(--sans);
-  letter-spacing: .13em;
+.sa-intro { margin: 0 0 25px; }
+.sa-eyebrow {
+  margin: 0 0 10px;
+  color: var(--service-accent);
+  font: 400 .5625rem/1.6 var(--sans);
+  letter-spacing: .2em;
   text-transform: uppercase;
 }
-.sa-service-list { display: grid; gap: 8px; }
+body.la4.couture-edit.ce-services .sa-intro h1 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 2.125rem/1.2 var(--display);
+  letter-spacing: -.035em;
+  text-transform: none;
+  font-optical-sizing: auto;
+}
+.sa-intro h1 em { font-weight: 400; }
+.sa-service-list { display: grid; gap: 7px; }
 .sa-service {
   min-width: 0;
-  border: 1px solid rgba(66, 47, 38, .24);
-  background: transparent;
+  border: 1px solid var(--service-line);
+  background: rgba(255, 250, 243, .2);
+  transition: border-color .25s ease, background-color .25s ease;
 }
-.sa-service[open] { border-color: rgba(66, 47, 38, .42); }
+.sa-service[open] { border-color: rgba(65, 43, 38, .48); background: rgba(255, 250, 243, .48); }
 .sa-service summary {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) 10px;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  min-height: 60px;
-  padding: 16px 20px;
+  gap: 17px;
+  min-height: 65px;
+  padding: 17px 24px;
   color: var(--ink);
   list-style: none;
   cursor: pointer;
 }
 .sa-service summary::-webkit-details-marker { display: none; }
 .sa-service summary::marker { content: ''; }
+.sa-service-number {
+  color: var(--service-accent);
+  font: italic 400 .8125rem/1 var(--display);
+  font-variant-numeric: lining-nums;
+}
 .sa-service summary::after {
   content: '';
-  flex: 0 0 12px;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background:
-    linear-gradient(currentColor, currentColor) center / 12px 1px no-repeat,
-    linear-gradient(currentColor, currentColor) center / 1px 12px no-repeat;
+    linear-gradient(currentColor, currentColor) center / 10px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1px 10px no-repeat;
 }
 .sa-service[open] > summary::after {
-  background: linear-gradient(currentColor, currentColor) center / 12px 1px no-repeat;
+  background: linear-gradient(currentColor, currentColor) center / 10px 1px no-repeat;
 }
-.sa-service summary:hover { color: #725141; }
-.sa-service summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.sa-service summary:hover { color: var(--service-accent); }
+.sa-service summary:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
 body.la4.couture-edit.ce-services .sa-service h2 {
   min-width: 0;
   margin: 0;
-  font: 400 1.0625rem/1.45 var(--sans);
-  letter-spacing: .005em;
+  font: 400 1.4375rem/1.3 var(--display);
+  letter-spacing: -.025em;
+  font-optical-sizing: auto;
 }
-.sa-service-content { padding: 0 20px 21px; }
+.sa-service-content { padding: 3px 24px 25px 63px; }
 .sa-service-content > p {
-  max-width: 64ch;
-  margin: 0 0 13px;
+  max-width: 66ch;
+  margin: 0 0 14px;
   color: var(--inkSoft);
-  font: 400 1rem/1.7 var(--sans);
+  font: 400 .875rem/1.85 var(--sans);
 }
-.sa-service-content .sa-service-price { margin-bottom: 7px; color: var(--ink); }
+.sa-service-content .sa-service-price { margin: 20px 0 7px; color: var(--ink); font-size: .8125rem; }
 .sa-service-price strong { font-weight: 500; }
 .sa-service-content .sa-service-note {
-  max-width: 72ch;
-  font-size: .875rem;
-  line-height: 1.7;
+  max-width: 77ch;
+  font-size: .75rem;
+  line-height: 1.8;
 }
 .sa-service-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 20px;
-  margin-top: 17px;
+  gap: 8px 23px;
+  margin-top: 20px;
 }
 body.la4.couture-edit .sa-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   max-width: 100%;
   min-height: 44px;
-  padding: 10px 14px;
+  padding: 13px 17px;
+  border: 1px solid var(--wineDeep);
   background: var(--wineDeep);
   color: var(--oyster) !important;
-  font: 400 .875rem/1.5 var(--sans);
-  letter-spacing: .015em;
+  font: 400 .625rem/1.6 var(--sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
   text-align: center;
+  transition: background-color .25s ease;
 }
 body.la4.couture-edit .sa-button:hover { background: #49342e; }
 body.la4.couture-edit .sa-text-link {
@@ -102,58 +123,90 @@ body.la4.couture-edit .sa-text-link {
   align-items: center;
   min-height: 44px;
   color: var(--ink) !important;
-  font: 400 .875rem/1.6 var(--sans);
+  font: 400 .625rem/1.6 var(--sans);
+  letter-spacing: .09em;
+  text-transform: uppercase;
   text-decoration: underline;
-  text-underline-offset: .25em;
+  text-underline-offset: .5em;
+  text-decoration-thickness: 1px;
 }
-body.la4.couture-edit .sa-text-link:hover { color: #725141 !important; }
+body.la4.couture-edit .sa-text-link:hover { color: var(--service-accent) !important; }
 .sa-button:focus-visible,
-.sa-text-link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-.sa-service-content .sa-credit { margin: 12px 0 0; }
-.sa-explore-link { margin-top: 6px; }
+.sa-text-link:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+.sa-service-content .sa-credit { margin: 13px 0 0; }
+.sa-explore-link { margin-top: 5px; }
 .sa-invitation-process {
-  max-width: 64ch;
-  margin: 17px 0;
-  padding-left: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 23px;
+  margin: 23px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: invitation-step;
   color: var(--inkSoft);
-  font: 400 1rem/1.7 var(--sans);
+  font: 400 .8125rem/1.8 var(--sans);
 }
-.sa-invitation-process li { padding-left: 3px; margin-top: 12px; }
-.sa-invitation-process li::marker { color: var(--inkSoft); font-size: .875rem; }
-.sa-invitation-process strong { color: var(--ink); font-weight: 500; }
+.sa-invitation-process li { counter-increment: invitation-step; padding-top: 12px; border-top: 1px solid var(--service-line); }
+.sa-invitation-process li::before {
+  content: counter(invitation-step, decimal-leading-zero);
+  display: block;
+  margin-bottom: 8px;
+  color: var(--service-accent);
+  font: italic 400 .8125rem/1.2 var(--display);
+}
+.sa-invitation-process strong { display: block; margin-bottom: 5px; color: var(--ink); font-weight: 500; }
 .sa-consultation {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px 24px;
-  margin-top: 26px;
-  padding-top: 21px;
-  border-top: 1px solid var(--line);
+  gap: 12px 28px;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--service-line);
   scroll-margin-top: 24px;
 }
 body.la4.couture-edit.ce-services .sa-consultation h2 {
-  margin: 0 0 5px;
-  color: var(--inkSoft);
-  font: 400 1.25rem/1.25 var(--display);
+  margin: 0 0 7px;
+  color: var(--ink);
+  font: italic 400 1.4375rem/1.3 var(--display);
+  letter-spacing: -.025em;
 }
 .sa-consultation p {
   margin: 0;
   color: var(--inkSoft);
-  font: 400 .875rem/1.7 var(--sans);
+  font: 400 .75rem/1.8 var(--sans);
 }
-.sa-consultation-action p { max-width: 32ch; margin-top: 8px; }
-.sa-consultation .sa-consultation-credit { grid-column: 1 / -1; font-size: .8125rem; }
+body.la4.couture-edit .sa-consultation .sa-button {
+  background: transparent;
+  color: var(--ink) !important;
+}
+body.la4.couture-edit .sa-consultation .sa-button:hover { background: rgba(65, 43, 38, .06); }
+.sa-consultation-action p { max-width: 33ch; margin-top: 9px; font-size: .6875rem; }
+.sa-consultation .sa-consultation-credit { grid-column: 1 / -1; font-size: .6875rem; }
 @media (max-width: 670px) {
-  body.la4.couture-edit.ce-services .sa-main { padding-top: 22px; padding-bottom: 30px; }
-  .sa-service summary { min-height: 58px; padding: 15px 16px; gap: 14px; }
-  body.la4.couture-edit.ce-services .sa-service h2 { font-size: 1rem; }
-  .sa-service-content { padding: 0 16px 18px; }
-  .sa-service-actions { gap: 6px 16px; margin-top: 15px; }
-  .sa-consultation { grid-template-columns: 1fr; gap: 14px; margin-top: 23px; padding-top: 20px; }
+  body.la4.couture-edit.ce-services .sa-main { padding-top: 28px; padding-bottom: 30px; }
+  .sa-intro { margin-bottom: 22px; }
+  .sa-eyebrow { font-size: .5rem; margin-bottom: 9px; }
+  body.la4.couture-edit.ce-services .sa-intro h1 { font-size: 1.8125rem; }
+  .sa-service summary { grid-template-columns: 18px minmax(0, 1fr) 10px; min-height: 60px; padding: 14px 17px; gap: 12px; }
+  body.la4.couture-edit.ce-services .sa-service h2 { font-size: 1.15625rem; line-height: 1.35; }
+  .sa-service-number { font-size: .75rem; }
+  .sa-service-content { padding: 3px 17px 21px; }
+  .sa-service-actions { gap: 6px 16px; margin-top: 18px; }
+  .sa-invitation-process { grid-template-columns: 1fr; gap: 17px; margin: 21px 0; }
+  .sa-invitation-process li { position: relative; padding: 12px 0 0 26px; }
+  .sa-invitation-process li::before { position: absolute; left: 0; top: 16px; margin: 0; }
+  .sa-consultation { grid-template-columns: 1fr; gap: 15px; margin-top: 26px; padding-top: 22px; }
+  body.la4.couture-edit.ce-services .sa-consultation h2 { font-size: 1.3125rem; }
   .sa-consultation .sa-consultation-credit { grid-column: auto; }
 }
 @media (max-width: 360px) {
   body.la4.couture-edit.ce-services .sa-main { padding-inline: 18px; }
-  .sa-service summary { padding-inline: 14px; gap: 12px; }
-  .sa-service-content { padding-inline: 14px; }
+  body.la4.couture-edit.ce-services .sa-intro h1 { font-size: 1.625rem; }
+  .sa-service summary { padding-inline: 13px; gap: 8px; }
+  body.la4.couture-edit.ce-services .sa-service h2 { font-size: 1.0625rem; }
+  .sa-service-content { padding-inline: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sa-service, body.la4.couture-edit .sa-button { transition: none; }
 }
