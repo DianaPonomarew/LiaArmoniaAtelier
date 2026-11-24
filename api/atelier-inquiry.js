@@ -279,6 +279,14 @@ export default async function handler(req, res) {
   // Planner microsite functions share this existing endpoint to stay within
   // the Vercel Hobby deployment limit of 12 serverless functions.
   const route = req.query || {};
+  if (route.venueOnboarding === '1') {
+    const { default: serveVenueOnboarding } = await import('./_venue-showcase.js');
+    return serveVenueOnboarding(req, res);
+  }
+  if (route.venueReview === '1') {
+    const { venueReview } = await import('./_venue-showcase.js');
+    return venueReview(req, res);
+  }
   if (route.plannerDirectory === '1') {
     const { default: serveDirectory } = await import('./_planner-directory.js');
     return serveDirectory(req, res);
