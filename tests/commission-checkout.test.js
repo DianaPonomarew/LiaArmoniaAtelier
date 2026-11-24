@@ -31,21 +31,21 @@ test('collection checkout enforces the advertised amount and retains fulfillment
   assert.match(p.get('success_url'), /cinematic-save-the-date-thank-you\.html\?session_id=/);
 });
 
-test('consultation checkout enforces $149 and retains the active 30-minute calendar', async t => {
+test('wedding planning checkout enforces $149 and retains the active 30-minute calendar', async t => {
   mockCheckout(t);
   const res = response();
-  await handler(request({ product: 'private_design_consultation', name: 'Alex', email: 'review@example.com', accepted: true, unit_amount: 1 }), res);
+  await handler(request({ product: 'wedding_planning_consultation', name: 'Alex', email: 'review@example.com', accepted: true, unit_amount: 1 }), res);
   assert.equal(res.statusCode, 200);
   const p = mockCheckout.params;
   assert.equal(p.get('line_items[0][price_data][unit_amount]'), '14900');
-  assert.equal(p.get('metadata[product]'), 'private_design_consultation');
+  assert.equal(p.get('metadata[product]'), 'wedding_planning_consultation');
   assert.equal(p.get('success_url'), 'https://calendly.com/atelier-liaarmonia/lia-armonia-destination-wedding-consultation');
   assert.match(p.get('cancel_url'), /\/consultation\.html$/);
 });
 
 test('missing consent and invalid film dates cannot open a checkout', async t => {
   const network = t.mock.method(globalThis, 'fetch', () => { throw Error('Unexpected network call'); });
-  for (const body of [{ ...film, accepted: false }, { ...film, date: '2027-02-30' }, { product: 'private_design_consultation', name: 'Alex', email: 'review@example.com', accepted: false }]) {
+  for (const body of [{ ...film, accepted: false }, { ...film, date: '2027-02-30' }, { product: 'wedding_planning_consultation', name: 'Alex', email: 'review@example.com', accepted: false }]) {
     const res = response();
     await handler(request(body), res);
     assert.equal(res.statusCode, 400);
@@ -60,4 +60,14 @@ test('non-POST requests are rejected and the existing Design Edition route is pr
   const editionRes = response();
   await handler(request({}), editionRes);
   assert.equal(editionRes.body.url, 'https://buy.stripe.com/28E5kFbcwbBZ9lB0fNgfu06');
+});
+
+
+test('general service consultations cannot create a paid checkout', async t => {
+  const network = t.mock.method(globalThis, 'fetch', () => { throw Error('Unexpected network call'); });
+  const res = response();
+  await handler(request({ product: 'private_design_consultation', name: 'Alex', email: 'review@example.com', accepted: true }), res);
+  assert.equal(res.statusCode, 400);
+  assert.match(res.body.error, /complimentary/);
+  assert.equal(network.mock.callCount(), 0);
 });
