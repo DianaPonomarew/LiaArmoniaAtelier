@@ -78,7 +78,7 @@ export async function consultationCheckoutHandler(req,res){
       'managed_payments[enabled]':'false',
       'line_items[0][price_data][currency]':'usd',
       'line_items[0][price_data][unit_amount]':String(CONSULTATION_CENTS),
-      'line_items[0][price_data][product_data][name]':'Wedding Planning Consultation · 30 minutes',
+      'line_items[0][price_data][product_data][name]':'Wedding Planning Consultation',
       'line_items[0][quantity]':'1',
       customer_email:email,
       customer_creation:'always',
@@ -101,6 +101,6 @@ export default async function handler(req,res){
   if (req.method!=='POST') {res.setHeader('Allow','POST');return sendJson(res,405,{error:'Method not allowed.'})}
   if (req.body?.product==='cinematic_save_the_date') return cinematicCheckoutHandler(req,res);
   if (req.body?.product==='wedding_planning_consultation') return consultationCheckoutHandler(req,res);
-  if (req.body?.product==='private_design_consultation') return sendJson(res,400,{error:'Design and digital service consultations are complimentary. Please use the service calendar on our Services page.'});
+  if (req.body?.product==='private_design_consultation') return sendJson(res,400,{error:'Design and digital service conversations are complimentary. Please use the service calendar on our Services page.'});
   return sendJson(res,200,{url:'https://buy.stripe.com/28E5kFbcwbBZ9lB0fNgfu06'});
 }
