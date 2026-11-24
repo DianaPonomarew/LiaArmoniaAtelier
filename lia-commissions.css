@@ -46,7 +46,7 @@ body.la4.couture-edit .atelier-conversation h2 { margin: 0 0 14px; color: var(--
 body.la4.couture-edit .atelier-conversation .ce-kicker { font-size: .75rem; margin: 0 0 14px; }
 .atelier-conversation-action p { font-size: .875rem; }
 body.la4.couture-edit .atelier-consultation-button { display: inline-flex; justify-content: center; align-items: center; box-sizing: border-box; min-height: 48px; max-width: 100%; padding: 14px 19px; background: var(--wineDeep, #211819); color: var(--oyster, #f4efe7); text-align: center; font: 400 .875rem/1.5 var(--sans, Inter, sans-serif); }
-.atelier-conversation-action p a, .atelier-confirmed-calendar a { text-decoration: underline; text-underline-offset: 4px; color: inherit; }
+body.la4.couture-edit .atelier-conversation-action p a, body.la4.couture-edit .atelier-confirmed-calendar a { text-decoration: underline; text-underline-offset: 4px; color: inherit; }
 body.la4.couture-edit .atelier-inquiry-link { display: inline-block; min-height: 44px; padding-block: 8px; color: var(--inkSoft, #57463e); font: 400 .875rem/1.8 var(--sans, Inter, sans-serif); text-decoration: underline; text-underline-offset: 4px; }
 .atelier-conversation a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .atelier-conversation-compact { max-width: none; margin: 0 0 30px; padding: 24px 0; gap: 24px 36px; }
