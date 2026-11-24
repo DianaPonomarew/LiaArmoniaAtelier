@@ -2,7 +2,7 @@ import { getSiteUrl, readJsonBody, sendJson, stripeRequest } from './_design-edi
 
 // Server-owned prices; clients cannot supply the amount or a Stripe price ID.
 const COLLECTION_FILM_CENTS = 14900;
-const CONSULTATION_CENTS = 14900;
+const CONSULTATION_CENTS = 12900;
 const clean = (value, limit) => String(value || '').trim().slice(0, limit);
 const validEmail = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
@@ -78,7 +78,7 @@ export async function consultationCheckoutHandler(req,res){
       'managed_payments[enabled]':'false',
       'line_items[0][price_data][currency]':'usd',
       'line_items[0][price_data][unit_amount]':String(CONSULTATION_CENTS),
-      'line_items[0][price_data][product_data][name]':'Wedding Planning Consultation',
+      'line_items[0][price_data][product_data][name]':'Private Wedding Consultation & Curated Introductions',
       'line_items[0][quantity]':'1',
       customer_email:email,
       customer_creation:'always',
