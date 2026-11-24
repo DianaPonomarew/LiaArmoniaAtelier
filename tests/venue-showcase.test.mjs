@@ -116,3 +116,27 @@ test('expired review links and unconfigured storage fail without exposing privat
   assert.equal((await call(intake, fixture())).status, 503);
   process.env.BLOB_READ_WRITE_TOKEN = storedToken;
 });
+
+test('showcase profiles keep the chosen main image, separate gallery and short introduction together', async () => {
+  const profile = { ...fixture(), image_layout: 'hero_and_gallery', short_description: 'A coastal courtyard hotel in Comporta, with contemporary architecture and intimate spaces for private celebrations.', description: '', photo_names: ['main.jpg', 'terrace.jpg', 'dining.jpg', 'courtyard.jpg'] };
+  for (const invalid of [{ short_description: '' }, { short_description: 'word '.repeat(26).trim() }, { short_description: 'x'.repeat(161) }, { photo_names: ['a.jpg', 'b.jpg', 'c.jpg'] }, { photo_names: Array(8).fill('image.jpg') }]) assert.equal((await call(intake, { ...profile, ...invalid })).status, 400);
+  const created = (await call(intake, profile)).value;
+  for (const number of [1, 2, 3]) assert.equal((await upload(created, number)).status, 200);
+  assert.equal((await complete(created)).status, 400, 'Gallery images cannot replace the main image');
+  assert.equal((await upload(created, 0)).status, 200);
+  assert.equal((await complete(created)).status, 200);
+  const saved = JSON.parse(records.get('venue-submissions/' + created.submissionId + '/details.json'));
+  assert.equal(saved.short_description, profile.short_description);
+  assert.equal(saved.main_image_filename, 'main.jpg');
+  assert.deepEqual(saved.gallery_filenames, ['terrace.jpg', 'dining.jpg', 'courtyard.jpg']);
+  assert.equal(saved.main_image_uploaded, true); assert.equal(saved.gallery_image_count, 3); assert.equal(saved.image_count, 4);
+});
+
+test('one main image and the full six-image gallery can be uploaded and reviewed', async () => {
+  const created = (await call(intake, { ...fixture(), image_layout: 'hero_and_gallery', short_description: 'A private hotel with a courtyard for intimate celebrations and carefully considered guest accommodation.', photo_names: ['main.jpg', ...Array.from({ length: 6 }, (_, i) => 'gallery-' + i + '.jpg')] })).value;
+  for (let i = 0; i < 7; i++) assert.equal((await upload(created, i)).status, 200);
+  assert.equal((await upload(created, 7)).status, 400);
+  assert.equal((await complete(created)).status, 200);
+  const saved = JSON.parse(records.get('venue-submissions/' + created.submissionId + '/details.json'));
+  assert.equal(saved.gallery_image_count, 6); assert.equal(saved.image_count, 7);
+});

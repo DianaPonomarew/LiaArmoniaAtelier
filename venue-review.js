@@ -20,6 +20,12 @@
   }).then(profile => {
     document.getElementById('venueTitle').textContent = profile.venue_name;
     loading.textContent = [profile.city, profile.region, profile.country].filter(Boolean).join(', ');
+    document.getElementById('reviewMainImage').src = endpoint + '&action=photo&number=0';
+    document.getElementById('reviewMainImage').alt = profile.venue_name + ' · main image';
+    document.getElementById('reviewFeatureName').textContent = profile.venue_name;
+    document.getElementById('reviewDestination').textContent = [profile.city, profile.country].filter(Boolean).join(' · ');
+    document.getElementById('reviewShortIntro').textContent = profile.short_description || profile.description.slice(0, 160);
+    document.getElementById('reviewMainCaption').textContent = 'Main image' + (profile.image_filenames?.[0] ? ' · ' + profile.image_filenames[0] : '');
     const property = document.getElementById('propertyFacts'), contact = document.getElementById('privateFacts');
     for (const [label, key] of [['Property type', 'venue_type'], ['Experiences', 'experiences'], ['Seated capacity', 'seated_capacity'], ['Standing capacity', 'standing_capacity'], ['Capacity notes', 'capacity_notes'], ['On-site rooms', 'rooms'], ['On-site guests', 'sleeps'], ['Accommodation', 'accommodation_notes'], ['Exclusive use', 'exclusive_use'], ['Seasonality & restrictions', 'seasonality'], ['Property story', 'description'], ['Signature spaces', 'highlights']]) add(property, label, profile[key]);
     for (const [label, key] of [['Contact name', 'contact_name'], ['Business email', 'email'], ['Phone / WhatsApp', 'phone'], ['Instagram', 'instagram'], ['Indicative pricing', 'pricing_notes']]) add(contact, label, profile[key]);
@@ -29,11 +35,11 @@
     add(contact, 'Permissions', 'Property representation, image rights, editorial preparation and privacy consent confirmed.');
     document.getElementById('imageCredits').textContent = 'Photography credits: ' + profile.image_credit;
     const gallery = document.getElementById('reviewGallery');
-    for (let i = 0; i < profile.image_count; i++) {
+    for (let i = 1; i < profile.image_count; i++) {
       const figure = document.createElement('figure'), link = document.createElement('a'), image = document.createElement('img'), caption = document.createElement('figcaption');
       const source = endpoint + '&action=photo&number=' + i; link.href = source; image.src = source; image.alt = profile.venue_name + ' · photograph ' + (i + 1); image.loading = 'lazy';
       link.addEventListener('click', event => { event.preventDefault(); document.getElementById('largePhoto').src = source; dialog.showModal(); });
-      caption.textContent = (i === 0 ? 'Proposed lead image' : 'Property image ' + (i + 1)) + (profile.image_filenames?.[i] ? ' · ' + profile.image_filenames[i] : ''); link.append(image); figure.append(link, caption); gallery.append(figure);
+      caption.textContent = 'Gallery image ' + i + (profile.image_filenames?.[i] ? ' · ' + profile.image_filenames[i] : ''); link.append(image); figure.append(link, caption); gallery.append(figure);
     }
     document.getElementById('submissionMeta').textContent = 'Reference: ' + profile.id + ' · Submitted: ' + new Date(profile.submitted_at).toLocaleString() + ' · Permissions version: ' + profile.permissions_version;
     document.getElementById('submission').hidden = false;

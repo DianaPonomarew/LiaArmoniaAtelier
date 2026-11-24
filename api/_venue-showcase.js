@@ -41,7 +41,7 @@ function integer(value, label) {
 }
 function validate(b) {
   const data = {};
-  for (const [name, limit] of Object.entries({ venue_name: 150, contact_name: 120, email: 200, phone: 70, venue_type: 90, country: 90, region: 120, city: 100, instagram: 160, capacity_notes: 450, accommodation_notes: 400, exclusive_use: 50, seasonality: 400, pricing_notes: 500, description: 1200, highlights: 500, image_credit: 650 })) {
+  for (const [name, limit] of Object.entries({ venue_name: 150, contact_name: 120, email: 200, phone: 70, venue_type: 90, country: 90, region: 120, city: 100, instagram: 160, capacity_notes: 450, accommodation_notes: 400, exclusive_use: 50, seasonality: 400, pricing_notes: 500, short_description: 160, description: 1200, highlights: 500, image_credit: 650 })) {
     if (String(b[name] ?? '').length > limit) throw new Error('Please shorten ' + name.replaceAll('_', ' ') + '.');
     data[name] = clean(b[name], limit);
   }
@@ -52,12 +52,20 @@ function validate(b) {
   for (const key of ['seated_capacity', 'standing_capacity', 'rooms', 'sleeps']) data[key] = integer(b[key], key.replaceAll('_', ' '));
   if (!data.seated_capacity && !data.standing_capacity && data.capacity_notes.length < 5 && !data.experiences.includes('Guest accommodation')) throw new Error('Please add a capacity or a short capacity note.');
   if (!['Available', 'Partially available', 'Not available', 'Please discuss with us'].includes(data.exclusive_use)) throw new Error('Please select an exclusive-use option.');
-  if (data.description.length < 50) throw new Error('Please tell us a little more about the property (at least 50 characters).');
+  data.image_layout = b.image_layout === 'hero_and_gallery' ? 'hero_and_gallery' : 'legacy_gallery';
+  if (data.image_layout === 'hero_and_gallery') {
+    if (data.short_description.length < 20 || data.short_description.split(/\s+/).length > 25) throw new Error('Please introduce the property in one sentence, using 20–160 characters and no more than 25 words.');
+  } else if (data.description.length < 50) throw new Error('Please tell us a little more about the property (at least 50 characters).');
   if (data.image_credit.length < 3) throw new Error('Please include the photography credits.');
   data.website = url(b.website, 'your website');
   data.brochure_url = url(b.brochure_url, 'your brochure or floor plan');
   data.media_url = url(b.media_url, 'your additional image folder');
-  data.image_filenames = (Array.isArray(b.photo_names) ? b.photo_names : []).slice(0, 6).map(name => clean(name, 200));
+  data.image_filenames = (Array.isArray(b.photo_names) ? b.photo_names : []).slice(0, 7).map(name => clean(name, 200));
+  if (data.image_layout === 'hero_and_gallery') {
+    if (!Array.isArray(b.photo_names) || b.photo_names.length < 4 || b.photo_names.length > 7 || data.image_filenames.some(name => !name)) throw new Error('Please select one main image and 3–6 separate gallery images.');
+    data.main_image_filename = data.image_filenames[0];
+    data.gallery_filenames = data.image_filenames.slice(1);
+  }
   for (const key of ['image_rights', 'editorial_consent', 'privacy_consent', 'authorized_contact']) {
     if (b[key] !== true) throw new Error('Please confirm the required permissions before submitting.');
     data[key] = true;
@@ -81,7 +89,7 @@ async function save(record, overwrite = true) {
 }
 async function photosFor(id) {
   const result = await list({ prefix: folder(id) + 'photo-', limit: 10, token: blobToken() });
-  return (result.blobs || []).filter(b => new RegExp('^venue-submissions/' + id + '/photo-[0-5]\\.jpg$').test(b.pathname)).map(b => Number(b.pathname.match(/photo-(\d)/)[1])).sort();
+  return (result.blobs || []).filter(b => new RegExp('^venue-submissions/' + id + '/photo-[0-6]\\.jpg$').test(b.pathname)).map(b => Number(b.pathname.match(/photo-(\d)/)[1])).sort();
 }
 function headers(res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -121,7 +129,8 @@ export default async function venueOnboarding(req, res) {
     if (!record) return res.status(404).json({ ok: false, error: 'Submission not found' });
     if (b.action === 'photo') {
       if (record.status !== 'uploading') return res.status(409).json({ ok: false, error: 'This submission has already been finalized.' });
-      if (!Number.isInteger(b.number) || b.number < 0 || b.number > 5) return res.status(400).json({ ok: false, error: 'Please select 3 to 6 photographs.' });
+      const limit = record.image_layout === 'hero_and_gallery' ? record.image_filenames.length : 6;
+      if (!Number.isInteger(b.number) || b.number < 0 || b.number >= limit) return res.status(400).json({ ok: false, error: 'Please check your main image and gallery selection.' });
       const base64 = String(b.base64 || '');
       if (base64.length > 1350000) return res.status(413).json({ ok: false, error: 'The compressed photograph is too large.' });
       if (!/^[A-Za-z0-9+/]+={0,2}$/.test(base64) || base64.length % 4 !== 0) return res.status(400).json({ ok: false, error: 'Invalid photograph.' });
@@ -132,9 +141,10 @@ export default async function venueOnboarding(req, res) {
     }
     if (!['uploading', 'submitted'].includes(record.status)) return res.status(409).json({ ok: false, error: 'This submission cannot be changed.' });
     const photos = await photosFor(id);
-    if (photos.length < 3 || photos.length > 6 || photos.some((number, index) => number !== index)) return res.status(400).json({ ok: false, error: 'Please finish uploading 3 to 6 photographs, including the lead image.' });
+    const separateImages = record.image_layout === 'hero_and_gallery';
+    if (photos.length < (separateImages ? 4 : 3) || photos.length > (separateImages ? 7 : 6) || (separateImages && photos.length !== record.image_filenames.length) || photos.some((number, index) => number !== index)) return res.status(400).json({ ok: false, error: separateImages ? 'Please finish uploading your main image and all 3–6 gallery images.' : 'Please finish uploading 3 to 6 photographs, including the lead image.' });
     if (record.status === 'uploading') {
-      record = { ...record, status: 'submitted', image_count: photos.length, submitted_at: new Date().toISOString(), updated_at: new Date().toISOString() };
+      record = { ...record, status: 'submitted', image_count: photos.length, main_image_uploaded: true, gallery_image_count: photos.length - 1, submitted_at: new Date().toISOString(), updated_at: new Date().toISOString() };
       await save(record);
     }
     if (!record.notification_sent_at) {
