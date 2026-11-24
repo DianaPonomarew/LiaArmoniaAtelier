@@ -36,7 +36,8 @@ export default async function handler(req, res) {
     if (brief.checkoutSessionId) {
       const previous = await stripeRequest(`/v1/checkout/sessions/${encodeURIComponent(brief.checkoutSessionId)}`);
       if (previous.status === 'open') {
-        await saveBrief(owner.id, { ...brief, termsAcceptance });
+        // Preserve the price and accepted conditions of an existing open checkout.
+        // New commissions use the current package price. Existing offers remain valid.
         return sendJson(res, 200, { url: previous.url });
       }
       if (previous.status === 'complete') return sendJson(res, 409, { error: 'Your payment is already being confirmed.' });
@@ -104,7 +105,7 @@ async function handleSuccess(req, res) {
       event: 'lia_venue_visualization_purchase',
       transaction_id: String(session.payment_intent || session.id),
       currency: 'USD',
-      value: 299,
+      value: session.amount_total / 100,
       product: 'Wedding Venue Visualization'
     }).replace(/</g, '\\u003c');
 
@@ -138,7 +139,7 @@ footer{font-size:11px;color:#bfa9a0;margin-top:54px}
 <main><div class="eyebrow">Wedding Design Atelier · Private Commission</div>
 <h1>Your vision,<br><em>in motion.</em></h1>
 <div class="rule"></div>
-<p class="lead">Thank you. Your $299 Wedding Venue Visualization payment is confirmed. Your personal design brief has been received.</p>
+<p class="lead">Thank you. Your ${new Intl.NumberFormat('en-US', { style: 'currency', currency: session.currency || 'usd' }).format(session.amount_total / 100)} Wedding Venue Visualization payment is confirmed. Your personal design brief has been received.</p>
 <div class="details"><h2>What happens next</h2>
 <p>Our atelier will review your venue and references. Your five design images will arrive within seven calendar days after confirmed payment and receipt of a complete brief.</p>
 <p>Your two cinematic videos follow once you approve the image direction. We’ll contact you using the details supplied at checkout.</p>

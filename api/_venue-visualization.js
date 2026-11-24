@@ -3,7 +3,7 @@ import { getSiteUrl, sendJson, stripeRequest } from './_design-edition-stripe.js
 
 export const VENUE_VISUALIZATION = {
   product: 'wedding_venue_visualization',
-  priceCents: 29900,
+  priceCents: 79500,
   currency: 'usd',
   name: 'Wedding Venue Visualization',
   recordPath: sessionId => `venue-visualizations/${sessionId}/brief.json`

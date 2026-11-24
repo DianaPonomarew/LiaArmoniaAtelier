@@ -1,10 +1,10 @@
-export const BOOKING_TERMS_VERSION = '2026-10-15';
+export const BOOKING_TERMS_VERSION = '2026-11-23';
 export const BOOKING_PROVIDER = "Diana Ponomarew, trading as LIA ARMONIA, Georg-Schmitt-Weg 8, 96106 Ebern, Germany";
 export const EARLY_START_NOTICE = 'I expressly request that Lia Armonia begin the commissioned service before the 14-day withdrawal period ends. I understand that, for a service contract, my withdrawal right ends once the service has been fully performed. If I withdraw earlier, proportionate payment for work already provided is due only where legally permitted.';
 export const BOOKING_TERMS = [
   [
     "Your booking",
-    "Wedding Venue Visualization is an individually commissioned creative design service for one selected wedding area: Ceremony, Dinner or Ballroom. The total package price is USD 299, including applicable taxes. There is no subscription. Your card provider may apply its own currency-conversion charges. The contract is concluded when Stripe confirms successful payment and we confirm receipt of your complete brief."
+    "Wedding Venue Visualization is an individually commissioned creative design service for one selected wedding area: Ceremony, Dinner or Ballroom. The total package price is USD 795, including applicable taxes. There is no subscription. Your card provider may apply its own currency-conversion charges. The contract is concluded when Stripe confirms successful payment and we confirm receipt of your complete brief."
   ],
   [
     "What is included",

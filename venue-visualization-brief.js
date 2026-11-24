@@ -149,7 +149,7 @@ async function loadSavedBrief() {
         field.checked = data.brief.termsAcceptance?.version === BOOKING_TERMS_VERSION;
       }
       submitButton.disabled = false;
-      submitButton.textContent = 'Continue to payment - $299';
+      submitButton.textContent = 'Continue to payment - $795';
       setStatus('Your brief and files are saved. Complete payment to confirm your order.');
       if (sessionId.startsWith('cs_')) {
         submitButton.disabled = true;

@@ -1,0 +1,48 @@
+/* Luxury commissions: specialist AI practice, clear scope and considered typography. */
+body.la4.couture-edit .atelier-lead { max-width: 65ch; color: var(--inkSoft, #57463e); font: 400 1rem/1.8 var(--sans, Inter, sans-serif); }
+body.la4.couture-edit.ce-home .ce-kicker { max-width: 40rem; line-height: 1.7; }
+body.la4.couture-edit.ce-home .ce-hero p.ce-deck { max-width: 34rem; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.75; letter-spacing: .025em; text-transform: none; }
+.atelier-expertise { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 6vw, 80px); padding: clamp(45px, 7vw, 96px) var(--gutter, 28px); max-width: 1180px; margin: auto; border-top: 1px solid rgba(65,43,38,.24); }
+body.la4.couture-edit .atelier-expertise h2 { margin: 0 0 18px; font: 400 clamp(32px, 4vw, 52px)/1.08 var(--display, 'Cormorant Garamond', serif); letter-spacing: -.025em; }
+.atelier-expertise p, .atelier-scope p { font: 400 1rem/1.8 var(--sans, Inter, sans-serif); color: var(--inkSoft, #57463e); }
+body.la4.couture-edit.ce-services .sa-intro .atelier-lead { margin: 18px 0 28px; }
+body.la4.couture-edit.ce-services .sa-eyebrow { font-size: .75rem; }
+body.la4.couture-edit.ce-services .sa-service-content > p { font-size: 1rem; }
+body.la4.couture-edit.ce-services .sa-service-content .sa-service-note { font-size: .875rem; }
+body.la4.couture-edit.ce-services .sa-service-price { font-size: 1rem; }
+body.la4.couture-edit .sa-button, body.la4.couture-edit .sa-text-link { font-size: .75rem; letter-spacing: .065em; }
+body.la4.couture-edit .sa-consultation p { font-size: .875rem; }
+.atelier-price-list { margin: 22px 0; padding: 0; list-style: none; }
+.atelier-price-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 13px 0; border-top: 1px solid rgba(65,43,38,.2); font: 400 .9375rem/1.65 var(--sans, Inter, sans-serif); }
+.atelier-price-list strong { font-weight: 500; white-space: nowrap; }
+body.la4.couture-edit.ce-services .sa-service h2 .sa-summary-price { display: block; margin-top: 6px; font: 400 .8125rem/1.6 var(--sans, Inter, sans-serif); color: var(--service-accent); letter-spacing: 0; }
+.atelier-scope { margin-top: 28px; padding: 24px 0; border-top: 1px solid rgba(65,43,38,.24); }
+body.la4.couture-edit .atelier-scope h2 { margin: 0 0 12px; font: 400 28px/1.2 var(--display, 'Cormorant Garamond', serif); }
+.atelier-scope p { font-size: .875rem; margin: 10px 0; }
+.atelier-investment { max-width: 1180px; padding: 60px var(--gutter, 28px); margin: auto; border-top: 1px solid rgba(65,43,38,.24); scroll-margin-top: 110px; }
+body.la4.couture-edit .atelier-investment h2 { margin: 0 0 14px; font: 400 clamp(34px, 4vw, 50px)/1.1 var(--display, 'Cormorant Garamond', serif); }
+.atelier-packages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.atelier-package { border-top: 1px solid rgba(65,43,38,.3); padding-top: 22px; }
+body.la4.couture-edit .atelier-package h3 { font: 400 29px/1.15 var(--display, 'Cormorant Garamond', serif); margin: 0 0 14px; }
+.atelier-package p { font: 400 .9375rem/1.8 var(--sans, Inter, sans-serif); color: var(--inkSoft, #57463e); }
+.atelier-package .atelier-price { color: var(--ink, #211b18); font-weight: 500; }
+body.la4.couture-edit .atelier-package a { display: inline-block; min-height: 44px; padding: 10px 0; font: 400 .875rem/1.6 var(--sans, Inter, sans-serif); text-decoration: underline; text-underline-offset: 5px; }
+.atelier-booking { max-width: 720px; padding: 65px 26px 90px; margin: auto; }
+body.la4.couture-edit .atelier-booking h1 { font: 400 clamp(44px, 7vw, 72px)/1.05 var(--display, 'Cormorant Garamond', serif); margin: 20px 0; }
+.atelier-booking > p { font: 400 1rem/1.8 var(--sans, Inter, sans-serif); }
+.atelier-booking form { margin-top: 30px; display: grid; gap: 18px; }
+.atelier-booking label { display: grid; gap: 8px; font: 400 .9375rem/1.7 var(--sans, Inter, sans-serif); }
+.atelier-booking input:not([type=checkbox]) { box-sizing: border-box; width: 100%; border: 1px solid #baa99e; border-radius: 0; padding: 13px; background: #fffcf7; font: inherit; }
+.atelier-booking .atelier-consent { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; }
+.atelier-consent input { margin-top: 6px; }
+.atelier-booking button { cursor: pointer; }
+body.la4.couture-edit .atelier-booking .sa-button { min-height: 52px; padding: 14px 18px; border: 1px solid var(--wineDeep, #211819); background: var(--wineDeep, #211819); color: var(--oyster, #f4efe7); font: 400 .875rem/1.6 var(--sans, Inter, sans-serif); }
+body.la4.couture-edit .atelier-booking .sa-button:disabled { opacity: .65; cursor: wait; }
+body.la4.couture-edit .atelier-booking a { text-decoration: underline; text-underline-offset: 4px; }
+.atelier-booking [role=status] { font: 400 .9375rem/1.7 var(--sans, Inter, sans-serif); }
+@media(max-width: 700px) {
+  .atelier-expertise, .atelier-packages { grid-template-columns: 1fr; gap: 28px; }
+  .atelier-investment { padding-top: 40px; padding-bottom: 40px; }
+  .atelier-price-list li { grid-template-columns: 1fr; gap: 2px; }
+  body.la4.couture-edit.ce-home .ce-kicker { max-width: 28ch; font-size: 11px; }
+}

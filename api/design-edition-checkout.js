@@ -1,7 +1,8 @@
 import { getSiteUrl, readJsonBody, sendJson, stripeRequest } from './_design-edition-stripe.js';
 
-import { CINEMATIC_LINK_ID } from './_cinematic-save-date.js';
-const PRICE_ID = 'price_1URYB3QvMYgiBRBO7cXXvRa9';
+// Server-owned prices; clients cannot supply the amount or a Stripe price ID.
+const COLLECTION_FILM_CENTS = 14900;
+const CONSULTATION_CENTS = 14900;
 const clean = (value, limit) => String(value || '').trim().slice(0, limit);
 const validEmail = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
@@ -34,7 +35,9 @@ export async function cinematicCheckoutHandler(req, res) {
     const params = new URLSearchParams({
       mode: 'payment',
       'managed_payments[enabled]':'false',
-      'line_items[0][price]':PRICE_ID,
+      'line_items[0][price_data][currency]':'usd',
+      'line_items[0][price_data][unit_amount]':String(COLLECTION_FILM_CENTS),
+      'line_items[0][price_data][product]':'prod_VST7oOVVpCR5kg',
       'line_items[0][quantity]':'1',
       customer_email:email,
       success_url:`${site}/cinematic-save-the-date-thank-you.html?session_id={CHECKOUT_SESSION_ID}`,
@@ -63,8 +66,40 @@ export async function cinematicCheckoutHandler(req, res) {
   }
 }
 
+export async function consultationCheckoutHandler(req,res){
+  try {
+    const payload = await readJsonBody(req);
+    const name = clean(payload.name,120);
+    const email = clean(payload.email,200).toLowerCase();
+    if (name.length < 2 || !validEmail(email) || payload.accepted !== true) return sendJson(res,400,{error:'Please enter your name and email and accept the consultation terms.'});
+    const site = getSiteUrl(req);
+    const params = new URLSearchParams({
+      mode:'payment',
+      'managed_payments[enabled]':'false',
+      'line_items[0][price_data][currency]':'usd',
+      'line_items[0][price_data][unit_amount]':String(CONSULTATION_CENTS),
+      'line_items[0][price_data][product]':'prod_VJdoBkhqapJgzO',
+      'line_items[0][quantity]':'1',
+      customer_email:email,
+      customer_creation:'always',
+      success_url:'https://calendly.com/atelier-liaarmonia/lia-armonia-destination-wedding-consultation',
+      cancel_url:`${site}/consultation.html`,
+      'metadata[product]':'private_design_consultation',
+      'metadata[name]':name,
+      'metadata[terms_version]':'2026-11-23',
+      'payment_intent_data[metadata][product]':'private_design_consultation'
+    });
+    const session = await stripeRequest('/v1/checkout/sessions',{method:'POST',body:params});
+    if(!session?.url || !session.id) throw Error('Checkout could not be opened.');
+    return sendJson(res,200,{url:session.url});
+  } catch(error) {
+    return sendJson(res,error.statusCode || 500,{error:error.statusCode===503?'Payments are temporarily unavailable. Please contact the atelier.':error.message || 'Checkout could not be opened.'});
+  }
+}
+
 export default async function handler(req,res){
   if (req.method!=='POST') {res.setHeader('Allow','POST');return sendJson(res,405,{error:'Method not allowed.'})}
   if (req.body?.product==='cinematic_save_the_date') return cinematicCheckoutHandler(req,res);
+  if (req.body?.product==='private_design_consultation') return consultationCheckoutHandler(req,res);
   return sendJson(res,200,{url:'https://buy.stripe.com/28E5kFbcwbBZ9lB0fNgfu06'});
 }
