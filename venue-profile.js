@@ -6,6 +6,8 @@
   const next = document.getElementById('next'), back = document.getElementById('back'), submit = document.getElementById('submit');
   const mainImage = document.getElementById('main_image'), photos = document.getElementById('gallery_images'), gallery = document.getElementById('photoGallery');
   const labels = ['Property', 'Experiences', 'Profile & images', 'Review'];
+  const offerCode = new URLSearchParams(location.search).get('offer') || '';
+  let commercialOffer = null;
   let step = 0, sending = false, submission = null, selectedPhotos = [];
   const previews = [];
   let mainPreviewUrl = '', galleryPreviewUrls = [];
@@ -46,7 +48,40 @@
       if (photos.files.length < 3 || photos.files.length > 6) { focusInvalid(photos, 'Please choose 3–6 additional gallery images.'); return false; }
       for (const file of imageFiles()) if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 20 * 1024 * 1024) { focusInvalid(photos, 'Please use JPEG, PNG or WebP images up to 20 MB each.'); return false; }
     }
+    if (index === 3) {
+      if (!commercialOffer) { status.textContent = 'Your commercial schedule could not be loaded. Please reload before agreeing.'; return false; }
+      if (!form.querySelector('[name=eligible_categories][type=hidden]') && !form.querySelector('[name=eligible_categories]:checked')) { focusInvalid(document.getElementById('eligibleCategories').querySelector('input'), 'Please select at least one eligible revenue category in your offer.'); return false; }
+    }
     return true;
+  }
+  async function loadOffer() {
+    const note = document.getElementById('offerStatus');
+    try {
+      const response = await fetch('/api/atelier-inquiry?venueOffer=1' + (offerCode ? '&offer=' + encodeURIComponent(offerCode) : ''), { cache: 'no-store' });
+      const data = await response.json();
+      if (!response.ok || !data.ok) throw new Error(data.error || 'The commercial schedule could not be loaded.');
+      const offer = data.offer;
+      document.getElementById('offerRate').textContent = offer.rate + '% success-based referral fee';
+      document.getElementById('offerProperty').textContent = offer.property ? 'Your individual offer for ' + offer.property : 'Standard venue hire schedule for new partners';
+      if (offer.property && !form.elements.venue_name.value) form.elements.venue_name.value = offer.property;
+      const categories = document.getElementById('eligibleCategories'); categories.replaceChildren();
+      for (const category of offer.categories) {
+        const box = document.createElement('div'); box.className = 'eligible-category';
+        const label = document.createElement('label'), input = document.createElement('input'), text = document.createElement('span');
+        input.name = 'eligible_categories'; input.value = category.key; input.type = offer.categories.length === 1 ? 'hidden' : 'checkbox';
+        text.textContent = category.label;
+        label.className = 'consent'; label.append(input, text); box.append(label);
+        const detail = document.createElement('p'); detail.className = 'hint'; detail.textContent = category.description; box.append(detail); categories.append(box);
+      }
+      const exclusions = document.getElementById('offerExclusions'); exclusions.replaceChildren();
+      for (const value of offer.exclusions) { const item = document.createElement('li'); item.textContent = value; exclusions.append(item); }
+      for (const [id, value] of [['offerPayment', offer.payment], ['offerAttribution', offer.attribution], ['offerCancellation', offer.cancellation], ['offerFreeProfile', offer.freeProfile]]) document.getElementById(id).textContent = value;
+      document.getElementById('termsRead').href = offer.termsUrl; document.getElementById('termsDownload').href = offer.termsPdfUrl;
+      document.getElementById('termsVersion').textContent = 'Terms version: ' + offer.version + ' · Offer: ' + offer.reference;
+      document.getElementById('termsDeclaration').textContent = 'I am authorized to bind the legal operator named above. I have read and agree to the displayed ' + offer.rate + '% schedule, its selected eligible revenue categories and exclusions, and Venue Partnership Terms ' + offer.version + '. By selecting Submit profile and agree to terms, I confirm this agreement on behalf of the business. No listing fee is charged; referral commission arises only on qualifying paid bookings. *';
+      commercialOffer = offer; note.textContent = 'Your exact rate and eligible revenue are set out below.';
+      document.getElementById('commercialSchedule').hidden = false; form.elements.terms_acceptance.disabled = false; submit.disabled = false;
+    } catch (error) { note.textContent = error.message + ' Please contact atelier@liaarmonia.com if you need a current invitation.'; }
   }
   function summary() {
     const data = new FormData(form), list = document.getElementById('submissionSummary');
@@ -67,7 +102,10 @@
   form.addEventListener('keydown', event => { if (event.key === 'Enter' && event.target.tagName === 'INPUT' && !['checkbox', 'file'].includes(event.target.type) && step < 3) { event.preventDefault(); next.click(); } });
   form.elements.description.addEventListener('input', event => { document.getElementById('descriptionCount').textContent = event.target.value.length; });
   form.elements.short_description.addEventListener('input', event => { document.getElementById('introCount').textContent = event.target.value.length; document.getElementById('introWords').textContent = event.target.value.trim().split(/\s+/).filter(Boolean).length; });
-  form.addEventListener('input', event => { if (!sending && event.target !== photos && event.target !== mainImage && submission) submission = null; });
+  form.addEventListener('input', event => {
+    if (!sending && event.target !== photos && event.target !== mainImage && submission) submission = null;
+    if (['eligible_categories', 'legal_operator', 'business_address', 'signatory_name', 'signatory_role', 'invoice_currency', 'email', 'venue_name'].includes(event.target.name)) form.elements.terms_acceptance.checked = false;
+  });
   function updateImages() {
     submission = null; selectedPhotos = [];
     previews.splice(0).forEach(url => URL.revokeObjectURL(url)); gallery.replaceChildren();
@@ -108,10 +146,11 @@
     // Keep the submitted information and selected files fixed while uploads are in progress.
     const data = new FormData(form), body = Object.fromEntries(data.entries());
     body.experiences = data.getAll('experiences'); delete body.main_image; delete body.gallery_images;
+    body.eligible_categories = data.getAll('eligible_categories'); body.offer_code = offerCode; body.terms_version = commercialOffer.version;
     body.image_layout = 'hero_and_gallery';
     const chosenImages = imageFiles();
     body.photo_names = chosenImages.map(file => file.name);
-    for (const key of ['image_rights', 'editorial_consent', 'privacy_consent', 'authorized_contact', 'publish_pricing']) body[key] = data.get(key) === 'on';
+    for (const key of ['image_rights', 'editorial_consent', 'privacy_acknowledged', 'authorized_contact', 'publish_pricing', 'terms_acceptance']) body[key] = data.get(key) === 'on';
     const controls = [...form.querySelectorAll('input,textarea,select,button')]; controls.forEach(control => { control.disabled = true; });
     try {
       if (selectedPhotos.length !== chosenImages.length) {
@@ -127,10 +166,13 @@
       document.getElementById('wizard').hidden = true;
       document.getElementById('submissionReference').textContent = 'Submission reference: ' + result.submissionId;
       if (result.emailPending) { const note = document.getElementById('notificationNote'); note.hidden = false; note.textContent = 'Your profile is saved. Please email atelier@liaarmonia.com with this reference so we can confirm receipt with you.'; }
+      if (result.receiptUrl) { const copy = document.getElementById('agreementDownload'); copy.href = result.receiptUrl; copy.download = 'LIA_ARMONIA_Venue_Agreement.html'; copy.hidden = false; }
+      if (result.partnerReceiptPending) { const note = document.getElementById('receiptNote'); note.hidden = false; note.textContent = 'Your agreement is recorded. Email delivery could not be confirmed, so please save the downloadable agreement copy and contact the atelier if you need another copy.'; }
       const done = document.getElementById('done'); done.hidden = false; done.focus();
     } catch (error) {
       status.textContent = error.message + ' If you need help, email atelier@liaarmonia.com.';
-    } finally { sending = false; controls.forEach(control => { control.disabled = false; }); }
+    } finally { sending = false; controls.forEach(control => { control.disabled = false; }); form.elements.terms_acceptance.disabled = !commercialOffer; submit.disabled = !commercialOffer; }
   });
   show(false);
+  loadOffer();
 })();

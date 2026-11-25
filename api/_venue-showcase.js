@@ -1,5 +1,6 @@
 import { randomUUID, createHmac, timingSafeEqual } from 'node:crypto';
 import { get, put, list } from '@vercel/blob';
+import { commercialDeclaration, venueOffer, agreementHtml, agreementText } from './_venue-commercial.js';
 
 const ORIGIN = 'https://www.liaarmonia.com';
 const STUDIO = 'atelier@liaarmonia.com';
@@ -10,6 +11,7 @@ const blobToken = () => process.env.BLOB_READ_WRITE_TOKEN || '';
 const validId = id => /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(String(id || ''));
 const folder = id => 'venue-submissions/' + id + '/';
 const details = id => folder(id) + 'details.json';
+const agreementPath = id => folder(id) + 'agreement.json';
 const clean = (value, max = 250) => String(value ?? '').replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, max);
 const html = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -66,13 +68,14 @@ function validate(b) {
     data.main_image_filename = data.image_filenames[0];
     data.gallery_filenames = data.image_filenames.slice(1);
   }
-  for (const key of ['image_rights', 'editorial_consent', 'privacy_consent', 'authorized_contact']) {
+  for (const key of ['image_rights', 'editorial_consent', 'authorized_contact']) {
     if (b[key] !== true) throw new Error('Please confirm the required permissions before submitting.');
     data[key] = true;
   }
   data.publish_pricing = b.publish_pricing === true;
-  // A showcase submission must never accept or overwrite a referral agreement.
-  data.referral_status = 'individual_terms_to_be_confirmed_separately';
+  Object.assign(data, commercialDeclaration(b));
+  // Checking a box is recorded as pending until every upload and the final submission succeeds.
+  data.referral_status = 'pending_completed_submission';
   return data;
 }
 async function readJson(path) {
@@ -100,9 +103,56 @@ function configured() { return !!secret() && !!blobToken(); }
 async function notify(record) {
   if (!process.env.RESEND_API_KEY) return false;
   const link = ORIGIN + '/venue-review.html?id=' + encodeURIComponent(record.id) + '&token=' + encodeURIComponent(tokenFor('review', record.id, 30 * 86400));
-  const body = '<div style="font:16px/1.7 Arial,sans-serif;color:#302522;max-width:680px"><h1 style="font:36px Georgia,serif">A new place for the Edit.</h1><p><strong>' + html(record.venue_name) + '</strong><br>' + html([record.city, record.region, record.country].filter(Boolean).join(', ')) + '</p><p>' + html(record.experiences.join(' · ')) + '</p><p>Contact: ' + html(record.contact_name) + ' · ' + html(record.email) + '</p><p><a href="' + html(link) + '">Open the private venue submission</a></p><p>Nothing has been published. Referral terms remain separate. This private review link expires in 30 days.</p></div>';
-  const result = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'venue-profile-' + record.id }, body: JSON.stringify({ from: process.env.RESEND_FROM || 'LIA ARMONÍA <onboarding@resend.dev>', to: [process.env.PRIVATE_INQUIRY_TO || STUDIO], reply_to: record.email, subject: 'VENUE PROFILE READY FOR REVIEW · ' + record.venue_name, html: body, text: record.venue_name + '\n' + record.email + '\nPrivate review: ' + link + '\nNo publication or new referral agreement.' }) });
+  const commercial = record.commercial?.status === 'accepted' ? record.commercial.schedule.rate + '% · ' + record.commercial.schedule.eligible_categories.map(x => x.label).join(', ') + ' · Accepted ' + record.commercial.accepted_at + ' · ' + record.commercial.version : 'Legacy editorial-only submission. No new commercial terms accepted.';
+  const body = '<div style="font:16px/1.7 Arial,sans-serif;color:#302522;max-width:680px"><h1 style="font:36px Georgia,serif">A new place for the Edit.</h1><p><strong>' + html(record.venue_name) + '</strong><br>' + html([record.city, record.region, record.country].filter(Boolean).join(', ')) + '</p><p>' + html(record.experiences.join(' · ')) + '</p><p>Contact: ' + html(record.contact_name) + ' · ' + html(record.email) + '</p><p>Commercial record: ' + html(commercial) + '</p><p><a href="' + html(link) + '">Open the private venue submission</a></p><p>The profile has not been published. This private review link expires in 30 days.</p></div>';
+  const result = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'venue-profile-' + record.id }, body: JSON.stringify({ from: process.env.RESEND_FROM || 'LIA ARMONÍA <onboarding@resend.dev>', to: [process.env.PRIVATE_INQUIRY_TO || STUDIO], reply_to: record.email, subject: 'VENUE PROFILE READY FOR REVIEW · ' + record.venue_name, html: body, text: record.venue_name + '\n' + record.email + '\nCommercial record: ' + commercial + '\nPrivate review: ' + link + '\nThe profile awaits approval before publication.' }) });
   return result.ok;
+}
+
+async function acceptCompletedAgreement(record) {
+  if (!record.commercial) return null; // Earlier submissions are never converted into agreements.
+  let agreement = await readJson(agreementPath(record.id));
+  if (!agreement) {
+    agreement = { id: record.id, ...record.commercial, status: 'declaration_snapshot', declaration_recorded_at: new Date().toISOString(), acceptance_method: 'explicit_portal_checkbox_and_completed_submission', signatory_email_verified: false };
+    try {
+      await put(agreementPath(record.id), JSON.stringify(agreement), { access: 'private', addRandomSuffix: false, allowOverwrite: false, contentType: 'application/json', token: blobToken() });
+    } catch (error) {
+      const existing = await readJson(agreementPath(record.id));
+      if (!existing) throw error;
+      agreement = existing;
+    }
+  }
+  if (agreement.snapshot_sha256 !== record.commercial.snapshot_sha256) throw new Error('Agreement snapshot mismatch');
+  return agreement;
+}
+async function notifyPartner(record, agreement) {
+  if (!process.env.RESEND_API_KEY || !agreement) return false;
+  const response = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'venue-profile-receipt-' + record.id }, body: JSON.stringify({ from: process.env.RESEND_FROM || 'LIA ARMONÍA <onboarding@resend.dev>', to: [record.email], reply_to: STUDIO, subject: 'Your venue partnership agreement · ' + record.venue_name, html: agreementHtml(agreement), text: agreementText(agreement) }) });
+  return response.ok;
+}
+
+export function venueCommercialOffer(req, res) {
+  headers(res);
+  if (req.method !== 'GET') { res.setHeader('Allow', 'GET'); return res.status(405).json({ ok: false, error: 'Method not allowed' }); }
+  try { return res.status(200).json({ ok: true, offer: venueOffer(req.query?.offer || '') }); }
+  catch (error) { return res.status(error.status || 400).json({ ok: false, error: error.message }); }
+}
+
+export async function venueAgreementReceipt(req, res) {
+  headers(res);
+  if (req.method !== 'GET') { res.setHeader('Allow', 'GET'); return res.status(405).json({ ok: false, error: 'Method not allowed' }); }
+  if (!configured()) return res.status(503).json({ ok: false, error: 'Agreement receipts are temporarily unavailable.' });
+  const id = String(req.query?.id || ''), token = String(req.query?.token || '');
+  if (!authorized('agreement', id, token)) return res.status(403).json({ ok: false, error: 'This private agreement link is invalid or expired.' });
+  try {
+    const agreement = await readJson(agreementPath(id));
+    const record = await readJson(details(id));
+    if (!agreement || agreement.status !== 'declaration_snapshot' || record?.status !== 'submitted' || record.commercial?.status !== 'accepted' || record.commercial?.snapshot_sha256 !== agreement.snapshot_sha256) return res.status(404).json({ ok: false, error: 'No completed agreement was found.' });
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="LIA_ARMONIA_Venue_Agreement_' + id + '.html"');
+    res.setHeader('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'");
+    return res.status(200).send(agreementHtml({ ...agreement, status: 'accepted', accepted_at: record.commercial.accepted_at }));
+  } catch { return res.status(503).json({ ok: false, error: 'The private agreement could not be loaded. Please retry.' }); }
 }
 
 export default async function venueOnboarding(req, res) {
@@ -116,9 +166,9 @@ export default async function venueOnboarding(req, res) {
   try {
     if (b.action === 'create') {
       let data;
-      try { data = validate(b); } catch (error) { return res.status(400).json({ ok: false, error: error.message }); }
+      try { data = validate(b); } catch (error) { return res.status(error.status || 400).json({ ok: false, error: error.message }); }
       const now = new Date().toISOString();
-      const record = { id: randomUUID(), ...data, status: 'uploading', created_at: now, updated_at: now, permissions_version: 'venue-profile-2026-11-24', permissions_accepted_at: now };
+      const record = { id: randomUUID(), ...data, status: 'uploading', created_at: now, updated_at: now, permissions_version: 'venue-profile-2026-11-25-v2', permissions_accepted_at: now };
       await save(record, false);
       return res.status(200).json({ ok: true, submissionId: record.id, uploadToken: tokenFor('upload', record.id, 48 * 3600) });
     }
@@ -143,8 +193,14 @@ export default async function venueOnboarding(req, res) {
     const photos = await photosFor(id);
     const separateImages = record.image_layout === 'hero_and_gallery';
     if (photos.length < (separateImages ? 4 : 3) || photos.length > (separateImages ? 7 : 6) || (separateImages && photos.length !== record.image_filenames.length) || photos.some((number, index) => number !== index)) return res.status(400).json({ ok: false, error: separateImages ? 'Please finish uploading your main image and all 3–6 gallery images.' : 'Please finish uploading 3 to 6 photographs, including the lead image.' });
+    const agreement = await acceptCompletedAgreement(record);
+    const finalizedAt = record.status === 'submitted' ? record.submitted_at : new Date().toISOString();
+    if (agreement) {
+      record.commercial = { ...record.commercial, status: 'accepted', accepted_at: record.commercial.accepted_at || finalizedAt };
+      record.referral_status = 'expressly_accepted_displayed_schedule';
+    }
     if (record.status === 'uploading') {
-      record = { ...record, status: 'submitted', image_count: photos.length, main_image_uploaded: true, gallery_image_count: photos.length - 1, submitted_at: new Date().toISOString(), updated_at: new Date().toISOString() };
+      record = { ...record, status: 'submitted', image_count: photos.length, main_image_uploaded: true, gallery_image_count: photos.length - 1, submitted_at: finalizedAt, updated_at: finalizedAt };
       await save(record);
     }
     if (!record.notification_sent_at) {
@@ -155,7 +211,16 @@ export default async function venueOnboarding(req, res) {
         try { await save(record); } catch { console.error('Venue profile notification receipt could not be saved', id); }
       }
     }
-    return res.status(200).json({ ok: true, stored: true, submissionId: id, emailPending: !record.notification_sent_at });
+    if (agreement && !record.partner_receipt_sent_at) {
+      let sent = false;
+      try { sent = await notifyPartner(record, { ...agreement, status: 'accepted', accepted_at: record.commercial.accepted_at }); } catch { console.error('Venue agreement receipt delivery could not be confirmed', id); }
+      if (sent) {
+        record.partner_receipt_sent_at = new Date().toISOString();
+        try { await save(record); } catch { console.error('Venue agreement receipt delivery record could not be saved', id); }
+      }
+    }
+    const receiptUrl = agreement ? '/api/atelier-inquiry?venueAgreement=1&id=' + encodeURIComponent(id) + '&token=' + encodeURIComponent(tokenFor('agreement', id, 30 * 86400)) : null;
+    return res.status(200).json({ ok: true, stored: true, submissionId: id, emailPending: !record.notification_sent_at, agreementAccepted: !!agreement, receiptUrl, partnerReceiptPending: !!agreement && !record.partner_receipt_sent_at });
   } catch {
     console.error('Venue profile storage request failed');
     return res.status(503).json({ ok: false, error: 'We could not complete this step. Please retry, or email ' + STUDIO + '.' });
@@ -179,7 +244,8 @@ export async function venueReview(req, res) {
       res.setHeader('Content-Type', 'image/jpeg');
       return res.status(200).send(Buffer.from(await new Response(image.stream).arrayBuffer()));
     }
-    return res.status(200).json({ ok: true, profile: record });
+    const receiptUrl = record.commercial?.status === 'accepted' ? '/api/atelier-inquiry?venueAgreement=1&id=' + encodeURIComponent(id) + '&token=' + encodeURIComponent(tokenFor('agreement', id, 30 * 86400)) : null;
+    return res.status(200).json({ ok: true, profile: record, receiptUrl });
   } catch {
     return res.status(503).json({ ok: false, error: 'This private submission could not be loaded. Please retry.' });
   }

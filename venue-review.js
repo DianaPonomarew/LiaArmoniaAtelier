@@ -16,7 +16,7 @@
   document.getElementById('closePhoto').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
   fetch(endpoint, { cache: 'no-store' }).then(async response => {
-    const result = await response.json(); if (!response.ok || !result.ok) throw new Error(result.error || 'The submission could not be opened.'); return result.profile;
+    const result = await response.json(); if (!response.ok || !result.ok) throw new Error(result.error || 'The submission could not be opened.'); if (result.receiptUrl) document.getElementById('submission').dataset.receiptUrl = result.receiptUrl; return result.profile;
   }).then(profile => {
     document.getElementById('venueTitle').textContent = profile.venue_name;
     loading.textContent = [profile.city, profile.region, profile.country].filter(Boolean).join(', ');
@@ -31,8 +31,16 @@
     for (const [label, key] of [['Contact name', 'contact_name'], ['Business email', 'email'], ['Phone / WhatsApp', 'phone'], ['Instagram', 'instagram'], ['Indicative pricing', 'pricing_notes']]) add(contact, label, profile[key]);
     add(contact, 'Pricing permission', profile.publish_pricing ? 'May be proposed for publication, subject to final approval' : 'Private only');
     add(contact, 'Property website', profile.website, true); add(contact, 'Brochure / floor plan', profile.brochure_url, true); add(contact, 'Additional images', profile.media_url, true);
-    add(contact, 'Commercial terms', 'To be confirmed separately. This submission accepts no referral commission.');
-    add(contact, 'Permissions', 'Property representation, image rights, editorial preparation and privacy consent confirmed.');
+    if (profile.commercial?.status === 'accepted') {
+      const schedule = profile.commercial.schedule;
+      add(contact, 'Commercial terms', schedule.rate + '% · ' + schedule.eligible_categories.map(item => item.label).join(' · '));
+      for (const [label, key] of [['Legal operator', 'legal_operator'], ['Operator address', 'business_address'], ['Authorized signatory', 'signatory_name'], ['Signatory role', 'signatory_role'], ['Invoice currency', 'invoice_currency']]) add(contact, label, schedule[key]);
+      add(contact, 'Agreement accepted at', profile.commercial.accepted_at); add(contact, 'Terms version', profile.commercial.version); add(contact, 'Agreement integrity hash', profile.commercial.snapshot_sha256);
+      const receipt = document.getElementById('submission').dataset.receiptUrl;
+      if (receipt) add(contact, 'Download agreement copy', new URL(receipt, location.origin).href, true);
+      add(contact, 'Email confirmation', profile.partner_receipt_sent_at ? 'Receipt email sent' : 'Receipt email delivery pending; downloadable copy is available');
+    } else add(contact, 'Commercial terms', 'Earlier editorial-only submission. No commercial acceptance has been inferred.');
+    add(contact, 'Permissions', 'Property representation, image rights and editorial preparation confirmed. Final public presentation still requires approval.');
     document.getElementById('imageCredits').textContent = 'Photography credits: ' + profile.image_credit;
     const gallery = document.getElementById('reviewGallery');
     for (let i = 1; i < profile.image_count; i++) {
