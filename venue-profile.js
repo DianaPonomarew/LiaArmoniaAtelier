@@ -61,6 +61,9 @@
       const data = await response.json();
       if (!response.ok || !data.ok) throw new Error(data.error || 'The commercial schedule could not be loaded.');
       const offer = data.offer;
+      document.getElementById('offerOverviewRate').textContent = offer.rate + '% on ' + (offer.categories.length === 1 ? 'net venue hire' : 'expressly selected hospitality revenue');
+      document.getElementById('offerOverviewScope').textContent = (offer.property ? 'Individual offer for ' + offer.property + '. ' : '') + 'No listing fee. Nonexclusive. Commission applies only to qualifying paid bookings.';
+      document.getElementById('offerOverviewTerms').href = offer.termsUrl;
       document.getElementById('offerRate').textContent = offer.rate + '% success-based referral fee';
       document.getElementById('offerProperty').textContent = offer.property ? 'Your individual offer for ' + offer.property : 'Standard venue hire schedule for new partners';
       if (offer.property && !form.elements.venue_name.value) form.elements.venue_name.value = offer.property;
@@ -81,7 +84,7 @@
       document.getElementById('termsDeclaration').textContent = 'I am authorized to bind the legal operator named above. I have read and agree to the displayed ' + offer.rate + '% schedule, its selected eligible revenue categories and exclusions, and Venue Partnership Terms ' + offer.version + '. By selecting Submit profile and agree to terms, I confirm this agreement on behalf of the business. No listing fee is charged; referral commission arises only on qualifying paid bookings. *';
       commercialOffer = offer; note.textContent = 'Your exact rate and eligible revenue are set out below.';
       document.getElementById('commercialSchedule').hidden = false; form.elements.terms_acceptance.disabled = false; submit.disabled = false;
-    } catch (error) { note.textContent = error.message + ' Please contact atelier@liaarmonia.com if you need a current invitation.'; }
+    } catch (error) { note.textContent = error.message + ' Please contact atelier@liaarmonia.com if you need a current invitation.'; document.getElementById('offerOverviewScope').textContent = 'Your individual schedule could not be loaded. Please contact the atelier before completing the profile.'; }
   }
   function summary() {
     const data = new FormData(form), list = document.getElementById('submissionSummary');
